@@ -1,22 +1,18 @@
 {
-  "name": "sekkeikai-homepage",
+  "name": "sekkeikai-homepage-prototype",
   "private": true,
   "type": "module",
   "engines": {
     "node": ">=22.23.4"
   },
   "scripts": {
-    "setup": "node scripts/build-tokens.mjs && node scripts/copy-cms.mjs",
     "tokens": "node scripts/build-tokens.mjs",
-    "cms:check": "node scripts/check-cms-config.mjs",
-    "predev": "npm run setup",
+    "predev": "npm run tokens",
     "dev": "astro dev",
-    "prebuild": "npm run setup",
+    "prebuild": "npm run tokens",
     "build": "astro build",
-    "check": "npm run setup && npm run cms:check && astro check",
-    "preview": "wrangler dev",
-    "deploy": "npm run build && wrangler deploy",
-    "test": "playwright test",
+    "preview": "astro preview --ignore-lock",
+    "check": "npm run tokens && astro check",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -28,18 +24,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
-    "@playwright/test": "^1.64.1",
-    "@sveltia/cms": "0.250.1",
-    "@types/node": "^24.19.2",
-    "ajv": "^8.20.0",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.1",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.151.3",
-    "yaml": "^2.9.1"
+    "typescript": "^5.9.3"
   },
   "allowScripts": {
-    "esbuild": true,
-    "workerd": true
+    "esbuild": true
   }
 }

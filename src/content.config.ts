@@ -5,7 +5,7 @@ import { z } from "astro/zod";
 // エラーメッセージを日本語にする（CI のログで読めるように）
 z.config(z.locales.ja());
 
-// CMS（public/admin/config.yml）で入力された値をここで検証する。
+// 文章（src/content/）の値をここで検証する。本番では編集画面（CMS）から入力された値もここで検証される。
 // 文字数の上限などを超えるとビルドが失敗するので、デザインが崩れたまま公開されることはない。
 
 const news = defineCollection({
