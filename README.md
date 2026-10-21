@@ -77,4 +77,4 @@ Node.js は `.node-version` に書いてあるバージョン（24 系）を使�
 ## ライセンス
 
 - プログラム（`src/`, `scripts/` など）: [MIT License](LICENSE)
-- 文章・写真・ロゴ・デザインなどのコンテンツ: © 設計会。無断転載はご遠慮ください。
+- 文章・写真・ロゴ・デザインなどのコンテンツ（`src/content/`, `public/uploads/` など）: © 設計会。無断転載はご遠慮ください。詳しくは [CONTENT-LICENSE.md](CONTENT-LICENSE.md)
