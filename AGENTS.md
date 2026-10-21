@@ -2,6 +2,12 @@
 
 人間向けの説明は README.md と CONTRIBUTING.md。ここは AI（Claude Code、Copilot など）が守るべきルール。
 
+> **このリポジトリ（NS28cse/sekkeikai-homepage）はデザイン・中身を固めるための作業場です。本番の正本は [sekkeikai/sekkeikai-opu](https://github.com/sekkeikai/sekkeikai-opu)。**
+>
+> - ここで触ってよいのは `src/`、`tokens/`、`src/content/`、`public/uploads/` だけ。CI・CMS の設定（`public/admin/config.yml` の backend など）・手順書・依存パッケージなどの環境側は sekkeikai-opu の方が新しいので、ここでは変えない（セクションを足すときの `public/admin/config.yml` の入力欄の追加は可）
+> - 本番の準備（Cloudflare、OAuth、ruleset）はここでは行わない。進捗は sekkeikai-opu の Issue #7
+> - 完成したら、上のフォルダを sekkeikai-opu に PR で移す
+
 ## 概要
 
 - 大学サークル「設計会」のサイト。Astro 7（静的出力）+ Tailwind CSS 4 + GSAP/Lenis。Cloudflare Workers の静的アセットとして配信
