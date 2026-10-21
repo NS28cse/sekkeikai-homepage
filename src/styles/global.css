@@ -40,6 +40,22 @@
 }
 
 @layer components {
+  /* 濃い背景のセクションでは補足テキストと線の色を明るく切り替える。
+     その中の白いカード（.surface）は元の色に戻す */
+  :root {
+    --color-muted-base: var(--color-muted);
+    --color-grid-base: var(--color-grid);
+  }
+  .tone-dark {
+    --color-muted: var(--color-muted-on-dark);
+    --color-grid: var(--color-grid-on-dark);
+  }
+  .tone-dark .surface {
+    --color-muted: var(--color-muted-base);
+    --color-grid: var(--color-grid-base);
+    color: var(--color-ink);
+  }
+
   /* 設計図のような方眼背景 */
   .bg-blueprint-grid {
     background-image:
@@ -93,4 +109,11 @@
 .motion-ready [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
+}
+
+@media print {
+  .motion-ready [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

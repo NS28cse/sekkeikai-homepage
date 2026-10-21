@@ -11,7 +11,9 @@ interface Props {
 }
 
 const { tone, title, body } = Astro.props;
-const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+const projects = (await getCollection("projects", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
 ---
 
 <SectionShell tone={tone} title={title} eyebrow="Projects" id="projects">

@@ -52,13 +52,35 @@ for (const [group, ns] of Object.entries(NAMESPACE)) {
   }
 }
 
+// サイトが前提にしているトークン（消えると見た目が壊れる）
+const REQUIRED = [
+  "color-ink",
+  "color-paper",
+  "color-muted",
+  "color-grid",
+  "color-proposer",
+  "color-proposer-strong",
+  "color-partner",
+  "color-investor",
+  "font-sans",
+  "font-display",
+];
+for (const name of REQUIRED) {
+  if (!lines.some((line) => line.startsWith(`  --${name}:`)))
+    errors.push(`${name.replace("-", ".")} がありません（消さないでください）`);
+}
+if (lines.length === 0)
+  errors.push(
+    "トークンが 1 つも読めませんでした。Tokens Studio の設定で W3C DTCG 形式（$value / $type）になっているか確認してください",
+  );
+
 if (errors.length > 0) {
   console.error("tokens/tokens.json にエラーがあります:\n  " + errors.join("\n  "));
   process.exit(1);
 }
 
 const css = `/* 自動生成ファイル（Git 管理外）。tokens/tokens.json を編集してください。 */
-@theme {
+@theme static {
 ${lines.join("\n")}
 }
 `;

@@ -7,6 +7,8 @@ backend:
   name: github
   repo: NS28cse/sekkeikai-homepage
   branch: main
+  # 公開リポジトリなので、部員の非公開リポジトリには触れない最小の権限でログインする
+  auth_scope: public_repo
   # 本番のログイン用（docs/production-setup.md の手順2で作る Worker の URL に書き換える）
   # base_url: https://sveltia-cms-auth.<アカウント名>.workers.dev
   commit_messages:
@@ -17,7 +19,10 @@ backend:
     deleteMedia: "画像を削除: {{path}}"
 
 # 保存すると自動で PR（プルリクエスト）が作られ、プレビュー URL で確認してから公開できる
-publish_mode: preview
+# 必須の欄が空のまま保存すると CI が失敗するので、下書きでも必須欄は埋めてもらう
+publish_mode:
+  type: preview
+  allow_incomplete_drafts: false
 
 app_title: 設計会 編集画面
 logo:
@@ -62,7 +67,14 @@ collections:
         }
       - { name: summary, label: 概要（一覧に出る短い説明）, widget: text, required: false, maxlength: 140 }
       - { name: cover, label: カバー画像, widget: image, required: false }
-      - { name: draft, label: 下書き（オンにするとサイトに表示しない）, widget: boolean, default: false }
+      - &coverAlt {
+          name: coverAlt,
+          label: カバー画像の説明（目の見えない人向けの読み上げ用。例「ベイゴマを回している様子」）,
+          widget: string,
+          required: false,
+          maxlength: 100,
+        }
+      - &draft { name: draft, label: 下書き（オンにするとサイトに表示しない）, widget: boolean, default: false }
       - { name: body, label: 本文, widget: markdown }
 
   - name: projects
@@ -88,7 +100,9 @@ collections:
       - { name: summary, label: 概要, widget: text, maxlength: 140 }
       - { name: methods, label: 使う手法・ツール, widget: list, required: false }
       - { name: cover, label: カバー画像, widget: image, required: false }
-      - { name: order, label: 表示順, widget: number, value_type: int, default: 10 }
+      - *coverAlt
+      - { name: order, label: 表示順（小さいほど前）, widget: number, value_type: int, default: 10 }
+      - *draft
       - { name: body, label: 本文, widget: markdown }
 
   - name: pages
@@ -136,13 +150,25 @@ collections:
                     widget: object
                     fields:
                       - { name: label, label: ラベル, widget: string, maxlength: 20 }
-                      - { name: items, label: 項目, widget: list, max: 5 }
+                      - {
+                          name: items,
+                          label: 項目,
+                          widget: list,
+                          max: 5,
+                          field: { name: item, label: 項目, widget: string, maxlength: 20 },
+                        }
                   - name: right
                     label: 右側（強調される方）
                     widget: object
                     fields:
                       - { name: label, label: ラベル, widget: string, maxlength: 20 }
-                      - { name: items, label: 項目, widget: list, max: 5 }
+                      - {
+                          name: items,
+                          label: 項目,
+                          widget: list,
+                          max: 5,
+                          field: { name: item, label: 項目, widget: string, maxlength: 20 },
+                        }
               - name: flow
                 label: 工程の流れ
                 widget: object
@@ -152,7 +178,14 @@ collections:
                   - *eyebrow
                   - { name: title, label: 見出し, widget: string, maxlength: 40 }
                   - { name: body, label: 本文, widget: text, required: false, maxlength: 300 }
-                  - { name: steps, label: 工程（左から順に）, widget: list, min: 2, max: 6 }
+                  - {
+                      name: steps,
+                      label: 工程（左から順に）,
+                      widget: list,
+                      min: 2,
+                      max: 6,
+                      field: { name: step, label: 工程, widget: string, maxlength: 10 },
+                    }
                   - {
                       name: focusCount,
                       label: 先頭から何個を強調するか,
@@ -199,7 +232,13 @@ collections:
                   - *eyebrow
                   - { name: title, label: 見出し, widget: string, maxlength: 40 }
                   - { name: body, label: 本文, widget: text, required: false, maxlength: 200 }
-                  - { name: tags, label: タグ, widget: list, max: 20 }
+                  - {
+                      name: tags,
+                      label: タグ,
+                      widget: list,
+                      max: 20,
+                      field: { name: tag, label: タグ, widget: string, maxlength: 12 },
+                    }
               - name: cards
                 label: カード
                 widget: object

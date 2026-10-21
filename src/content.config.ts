@@ -2,6 +2,9 @@ import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+// エラーメッセージを日本語にする（CI のログで読めるように）
+z.config(z.locales.ja());
+
 // CMS（public/admin/config.yml）で入力された値をここで検証する。
 // 文字数の上限などを超えるとビルドが失敗するので、デザインが崩れたまま公開されることはない。
 
@@ -12,6 +15,7 @@ const news = defineCollection({
     date: z.coerce.date(),
     summary: z.string().max(140).optional(),
     cover: z.string().optional(),
+    coverAlt: z.string().max(100).optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -25,7 +29,9 @@ const projects = defineCollection({
     summary: z.string().max(140),
     methods: z.array(z.string()).default([]),
     cover: z.string().optional(),
-    order: z.number().default(0),
+    coverAlt: z.string().max(100).optional(),
+    order: z.number().default(10),
+    draft: z.boolean().default(false),
   }),
 });
 
@@ -49,16 +55,21 @@ const section = z.discriminatedUnion("type", [
     left: z.object({ label: z.string().max(20), items: z.array(z.string().max(20)).max(5) }),
     right: z.object({ label: z.string().max(20), items: z.array(z.string().max(20)).max(5) }),
   }),
-  z.object({
-    type: z.literal("flow"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
-    body: z.string().max(300).optional(),
-    steps: z.array(z.string().max(10)).min(2).max(6),
-    focusCount: z.number().int().min(1).max(6),
-    focusLabel: z.string().max(20),
-  }),
+  z
+    .object({
+      type: z.literal("flow"),
+      tone,
+      eyebrow: z.string().max(60).optional(),
+      title: z.string().max(40),
+      body: z.string().max(300).optional(),
+      steps: z.array(z.string().max(10)).min(2).max(6),
+      focusCount: z.number().int().min(1).max(6),
+      focusLabel: z.string().max(20),
+    })
+    .refine((s) => s.focusCount <= s.steps.length, {
+      message: "「先頭から何個を強調するか」が工程の数より多くなっています",
+      path: ["focusCount"],
+    }),
   z.object({
     type: z.literal("steps"),
     tone,
@@ -110,7 +121,9 @@ const section = z.discriminatedUnion("type", [
     type: z.literal("join"),
     title: z.string().max(40),
     body: z.string().max(300),
-    formUrl: z.string().optional(),
+    formUrl: z
+      .union([z.literal(""), z.url({ message: "入部フォームの URL は https:// から始まる形で入力してください" })])
+      .optional(),
     buttonLabel: z.string().max(20),
   }),
 ]);

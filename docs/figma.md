@@ -22,10 +22,15 @@ View 席のままだと Figma で編集できません。
 1. Figma で「設計会」チームにトークン用のファイルを作る（例: `Design Tokens`）
 2. プラグイン「**Tokens Studio for Figma**」を開く
 3. Settings → Sync providers →「Add new」→ **GitHub**
-   - Personal Access Token: 自分の GitHub で作る（Fine-grained、このリポジトリだけ、Contents: Read and write）
+   - Personal Access Token: 自分の GitHub で作る
+     - GitHub → Settings → Developer settings → Fine-grained tokens →「Generate new token」
+     - Resource owner: リポジトリの持ち主（Organization に移したらその Organization。承認待ちになったら管理者に承認してもらう）
+     - Repository access: このリポジトリだけ / Permissions: Contents を **Read and write**
+     - 有効期限は 1 年以内にする。切れたら作り直して Tokens Studio に貼り直す
    - Repository: `NS28cse/sekkeikai-homepage`（Organization に移したらその名前）
    - Branch: `main`
    - File path: `tokens/tokens.json`
+   - Token format（Settings の中）: **W3C DTCG**（`$value` / `$type` の形式）を選ぶ。旧形式だとサイトのビルドがエラーで止まります
 4. 「Pull from GitHub」→ トークンが読み込まれる
 5. Styles & Variables →「Export to Figma」→ Variables として使えるようになる
 
@@ -45,6 +50,10 @@ View 席のままだと Figma で編集できません。
 4. GitHub で、そのブランチから PR を作る → プレビュー URL の `/lab/` で確認 → マージ
 
 > main に直接 Push しようとすると、ruleset で拒否されます（それで正常です）。
+>
+> Tokens Studio の無料版で「新しいブランチに Push」が選べない場合は、
+> 先に GitHub のリポジトリ画面でブランチを作り（ブランチ一覧 →「New branch」）、
+> Tokens Studio の同期設定の Branch をそのブランチ名に変えてから Push してください。終わったら `main` に戻します。
 
 ### ぶつかったら
 

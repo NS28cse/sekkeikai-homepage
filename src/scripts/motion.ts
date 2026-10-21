@@ -6,10 +6,12 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
-function readMs(name: string, fallback: number): number {
+// CSS 変数の長さ（"700ms" や ".7s"）を秒に直す。読めなければ fallback（秒）
+function readSeconds(name: string, fallback: number): number {
   const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  const ms = parseFloat(raw);
-  return Number.isFinite(ms) ? ms / 1000 : fallback;
+  const value = parseFloat(raw);
+  if (!Number.isFinite(value)) return fallback;
+  return raw.endsWith("ms") ? value / 1000 : value;
 }
 
 export function initMotion(): void {
@@ -18,8 +20,8 @@ export function initMotion(): void {
   gsap.registerPlugin(ScrollTrigger);
   document.documentElement.classList.add("motion-ready");
 
-  const base = readMs("--motion-duration-base", 0.7);
-  const draw = readMs("--motion-duration-draw", 1.6);
+  const base = readSeconds("--motion-duration-base", 0.7);
+  const draw = readSeconds("--motion-duration-draw", 1.6);
   const ease = "power3.out";
 
   if (window.matchMedia("(pointer: fine)").matches) {

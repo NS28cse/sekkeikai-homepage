@@ -31,6 +31,9 @@
    - `public/admin/config.yml`（`backend.repo`）
    - `src/layouts/Base.astro`（フッターのリンク）
    - `CONTRIBUTING.md`（clone の URL）
+   - `.github/ISSUE_TEMPLATE/config.yml`（参加ガイドへのリンク）
+   - `docs/figma.md`（Tokens Studio の Repository）
+   - 探し方: `git grep NS28cse`
 
 ### 1-2. メンバーの追加
 
@@ -83,7 +86,9 @@
    | 環境変数（Build）                    | `NODE_VERSION` = `24.22.1`（`.node-version` と同じ。自動で読まれない場合の保険） |
 
 4. 「Deploy」。数分で `https://sekkeikai-homepage.<アカウント名>.workers.dev` に公開されます
-5. Settings → Builds で「**Pull request comments**」をオンにすると、PR にプレビュー URL が自動で書き込まれます
+5. Settings → Builds で次をオンにする
+   - 「**Builds for non-production branches**」… PR（main 以外のブランチ）でもビルドしてプレビュー URL を作る
+   - 「**Pull request comments**」… PR にプレビュー URL を自動で書き込む
 6. 他の管理者は Manage Account → Members から招待（パスワードを共有しない）
 
 > 手元から確かめる: `npm run build && npx wrangler deploy --dry-run`（アップロードせずに設定だけ検査）
@@ -112,11 +117,11 @@
 
 Cloudflare → 中継用 Worker → Settings → Variables and Secrets に追加（Secret として保存）
 
-| 名前                   | 値                                                                                                                    |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `GITHUB_CLIENT_ID`     | 3-2 の Client ID                                                                                                      |
-| `GITHUB_CLIENT_SECRET` | 3-2 の Client secret                                                                                                  |
-| `ALLOWED_DOMAINS`      | サイトのドメイン（例: `sekkeikai-homepage.<アカウント名>.workers.dev`。独自ドメインを使うならそれも、カンマ区切りで） |
+| 名前                   | 値                                                                                                                                                                                                                                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GITHUB_CLIENT_ID`     | 3-2 の Client ID                                                                                                                                                                                                                                                                      |
+| `GITHUB_CLIENT_SECRET` | 3-2 の Client secret                                                                                                                                                                                                                                                                  |
+| `ALLOWED_DOMAINS`      | サイトのドメイン（例: `sekkeikai-homepage.<アカウント名>.workers.dev`。独自ドメインを使うならそれも、カンマ区切りで）。プレビュー URL の `/admin` でもログインしたい場合は `*.sekkeikai-homepage.<アカウント名>.workers.dev` のようなワイルドカードも足す（使えるかは README で確認） |
 
 正確な変数名は sveltia-cms-auth の README に従ってください（変わることがあります）。
 

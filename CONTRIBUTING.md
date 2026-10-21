@@ -41,6 +41,7 @@
 4. 書き終わったら「保存」。自動で PR が作られます
 5. 数分待つと、PR に **プレビュー URL** が付きます。開いて見た目を確認
 6. 問題なければ編集画面で「公開」→ 本番サイトに反映（1〜2分）
+   - 自動チェック（check-and-build）が終わるまでは公開できません。数分待ってからもう一度押してください
 
 ポイント:
 
@@ -77,8 +78,14 @@
 **自分の PC で**
 
 1. [Node.js](https://nodejs.org/) 24 系と [Git](https://git-scm.com/) を入れる
-2. `git clone https://github.com/NS28cse/sekkeikai-homepage.git`
-3. `cd sekkeikai-homepage && npm ci && npm run dev`
+2. ターミナル（Mac は「ターミナル」、Windows は「PowerShell」）で、Git に名前を登録する
+   ```bash
+   git config --global user.name "GitHub のユーザー名"
+   git config --global user.email "GitHub の Settings → Emails に出ている ...@users.noreply.github.com のアドレス"
+   ```
+3. [GitHub CLI](https://cli.github.com/) を入れて `gh auth login` を実行し、画面の指示どおりにブラウザでログイン（push するときの認証に使います）
+4. `git clone https://github.com/NS28cse/sekkeikai-homepage.git`
+5. `cd sekkeikai-homepage && npm ci && npm run dev` → ブラウザで http://localhost:4321 を開く
 
 VS Code を使うなら、開いたときにおすすめ拡張機能（Astro、Tailwind など）のインストールを提案されます。
 
@@ -89,8 +96,10 @@ git switch -c feature/hero-animation   # 作業用ブランチを作る（名前
 # ……ファイルを編集……
 npm run check && npm run build && npm test   # 自動チェックと同じことを手元で
 git add -A && git commit -m "ヒーローの線画アニメーションを追加"
-git push -u origin feature/hero-animation    # → GitHub で PR を作る
+git push -u origin feature/hero-animation    # GitHub に送る
 ```
+
+push したら GitHub のリポジトリのページを開くと、黄色い帯に「**Compare & pull request**」ボタンが出ます。押して、何を変えたかを書いて「Create pull request」で PR の完成です。
 
 ### よく触る場所
 
@@ -123,13 +132,27 @@ AI（Claude Code、GitHub Copilot など）を使って構いません。`AGENTS
 
 ## 困ったとき
 
-| 症状                       | 対処                                                                                           |
-| -------------------------- | ---------------------------------------------------------------------------------------------- |
-| check-and-build が赤い     | PR の「Details」を開いて、日本語のエラーメッセージを読む。文字数オーバーなら該当の欄を短くする |
-| 編集画面にログインできない | 管理者に、GitHub のメンバー追加が済んでいるか確認してもらう                                    |
-| 編集画面が英語のまま       | 一度再読み込みする。ブラウザの言語設定を日本語にする                                           |
-| Figma で Push できない     | Figma の席が View のままかも。docs/figma.md の「席を Full にする」                             |
-| 何をすればいいかわからない | Issue の「good first issue」ラベルを探すか、チャットで聞く                                     |
+| 症状                       | 対処                                                                       |
+| -------------------------- | -------------------------------------------------------------------------- |
+| check-and-build が赤い     | PR の「Details」を開いて、エラーメッセージを読む（下の「エラーの読み方」） |
+| 編集画面にログインできない | 管理者に、GitHub のメンバー追加が済んでいるか確認してもらう                |
+| 編集画面が英語のまま       | 一度再読み込みする。ブラウザの言語設定を日本語にする                       |
+| Figma で Push できない     | Figma の席が View のままかも。docs/figma.md の「席を Full にする」         |
+| 何をすればいいかわからない | Issue の「good first issue」ラベルを探すか、チャットで聞く                 |
+
+### エラーの読み方
+
+例:
+
+```
+[InvalidContentEntryDataError] pages → home data does not match collection schema.
+  sections.2.steps.4: 大きすぎる値: stringは10文字以下である必要があります
+```
+
+- `pages → home` … 「ページ → トップページ」のこと（`news` ならお知らせ、`projects` ならプロジェクト）
+- `sections.2` … 上から **3 番目**のセクション（0 から数えます）
+- `steps.4` … その中の「工程」の **5 番目**
+- 最後が理由（string は「文字」のこと）。この例なら「工程の 5 番目を 10 文字以内にする」で直ります
 
 ---
 
@@ -147,3 +170,7 @@ AI（Claude Code、GitHub Copilot など）を使って構いません。`AGENTS
 | CMS / 編集画面       | ブラウザで記事を書ける画面（`/admin`）                                   |
 | デザイントークン     | 色・フォント・動きの長さなど、デザインの「値」に名前を付けたもの         |
 | セクション           | トップページを構成する部品（ヒーロー、カード、タイムライン……）           |
+| Issue                | 「こうしたい」「ここが変」を書き込む掲示板のようなもの                   |
+| CI / 自動チェック    | PR を作るたびに GitHub が自動で走らせる確認（壊れていないか）            |
+| Markdown             | `#` で見出し、`-` で箇条書き、のように記号で書式を付ける書き方           |
+| ターミナル           | 文字でコマンドを打ち込んでパソコンを操作する画面                         |

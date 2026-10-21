@@ -29,7 +29,7 @@ const dark = tone === "dark";
           class:list={[
             "rounded-md border-2 px-4 py-2 font-bold",
             i < focusCount
-              ? "border-proposer bg-proposer text-white"
+              ? "border-proposer-strong bg-proposer-strong text-white"
               : dark
                 ? "border-white/40 text-white/60"
                 : "border-grid text-muted",
@@ -45,7 +45,7 @@ const dark = tone === "dark";
       </li>
     ))}
   </ol>
-  <p class="annotation mt-6 text-proposer" data-reveal>
+  <p class:list={["annotation mt-6", dark ? "text-proposer" : "text-proposer-strong"]} data-reveal>
     ▲ {steps.slice(0, focusCount).join("・")} ＝ {focusLabel}
   </p>
 </SectionShell>

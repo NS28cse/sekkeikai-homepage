@@ -29,6 +29,14 @@ test("視差効果を減らす設定ではアニメーションなしで全文�
   await context.close();
 });
 
+test("スクロールすると要素が現れる（アニメーションが動いている）", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveClass(/motion-ready/);
+  await page.locator("#join").scrollIntoViewIfNeeded();
+  // 動きの長さは tokens.json の motion.duration-base（0.7 秒）なので、数秒以内に表示しきるはず
+  await expect(page.locator("#join-title")).toHaveCSS("opacity", "1", { timeout: 5000 });
+});
+
 test("CMS の編集画面 /admin/ が配信されている", async ({ page }) => {
   const res = await page.goto("/admin/");
   expect(res?.status()).toBe(200);
