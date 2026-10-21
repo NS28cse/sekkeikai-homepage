@@ -108,6 +108,17 @@ sections:
         body: 多様な価値観や知見をもつ人が意見をぶつけ合い、考えを深められる場。
       - title: 設計の場
         body: 設計の知見を持ち寄り、実際に応用できる場。
+  - type: info
+    tone: light
+    eyebrow: 07 / About
+    title: 団体概要
+    items:
+      - label: 団体名
+        value: 設計会
+      - label: 所属
+        value: 岡山県立大学
+      - label: 代表
+        value: 長岡 祥太郎
   - type: news
     tone: light
     title: お知らせ

@@ -258,6 +258,29 @@ collections:
                       - { name: title, label: 見出し, widget: string, maxlength: 20 }
                       - { name: body, label: 本文, widget: text, maxlength: 160 }
                       - { name: note, label: 注記（小さい文字）, widget: string, required: false, maxlength: 60 }
+              - name: info
+                label: 団体概要（項目と内容の表）
+                widget: object
+                summary: "{{title}}"
+                fields:
+                  - *tone
+                  - *eyebrow
+                  - { name: title, label: 見出し, widget: string, maxlength: 40 }
+                  - name: items
+                    label: 項目（代表者は年度が変わったら更新してください）
+                    label_singular: 項目
+                    widget: list
+                    min: 1
+                    max: 10
+                    summary: "{{label}}: {{value}}"
+                    fields:
+                      - { name: label, label: 項目名（例 代表）, widget: string, maxlength: 12 }
+                      - {
+                          name: value,
+                          label: 内容（学籍番号・個人のメールアドレスは書かない）,
+                          widget: string,
+                          maxlength: 60,
+                        }
               - name: news
                 label: お知らせ（自動で最新を表示）
                 widget: object

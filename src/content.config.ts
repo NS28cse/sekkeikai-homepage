@@ -106,6 +106,16 @@ const section = z.discriminatedUnion("type", [
       .max(6),
   }),
   z.object({
+    type: z.literal("info"),
+    tone,
+    eyebrow: z.string().max(60).optional(),
+    title: z.string().max(40),
+    items: z
+      .array(z.object({ label: z.string().max(12), value: z.string().max(60) }))
+      .min(1)
+      .max(10),
+  }),
+  z.object({
     type: z.literal("news"),
     tone,
     title: z.string().max(40),
