@@ -18,6 +18,15 @@ npm ci
 npm run dev      # → http://localhost:4321（トップ）と http://localhost:4321/lab/（デザイン確認用）
 ```
 
+**自分の PC の VS Code で、画面操作だけで見る場合**
+
+1. 初回だけ：メニューの **Terminal** → **Run Task...** → **npm** → **npm: install**
+2. メニューの **Terminal** → **Run Task...** → **npm** → **npm: dev**
+   （出力をスキャンするか聞かれたら **Continue without scanning the task output**）
+3. ターミナルに `Local http://localhost:4321/` と出たら、`Ctrl+Shift+P` → **Browser: Open Integrated Browser** を選び、アドレス欄に `http://localhost:4321/` を入れる（デザイン確認用は `http://localhost:4321/lab/`）
+4. タブを右端へドラッグすると、コードと並べて見られる。ファイルを保存すると表示も更新される
+5. 終わるときは、ターミナル右上のゴミ箱アイコンでサーバーを止める
+
 ## どこを触るか
 
 | 場所                          | 中身                                                       |
