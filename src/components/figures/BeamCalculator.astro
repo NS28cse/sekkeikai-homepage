@@ -26,7 +26,7 @@ const controls = [
   <div data-beam class="grid gap-6 md:grid-cols-[1fr_16rem]">
     <div>
       <svg viewBox="0 0 600 170" class="w-full" role="img" aria-label="たわんだ棚板の図（たわみは6倍に誇張）">
-        <g stroke="var(--color-proposer-strong)" stroke-width="1.5" fill="none" data-beam-load>
+        <g stroke="var(--color-accent-strong)" stroke-width="1.5" fill="none" data-beam-load>
           {Array.from({ length: 12 }, (_, i) => (
             <path d={`M${80 + i * 40} 18 V52 m-4 -6 l4 6 l4 -6`} />
           ))}
@@ -48,7 +48,7 @@ const controls = [
       <p class="mt-4 text-center">
         <span class="annotation text-muted">中央のたわみ</span>
         <br />
-        <output class="font-mono text-4xl font-bold text-investor" data-beam-result>
+        <output class="font-mono text-4xl font-bold text-link" data-beam-result>
           {initial.toFixed(1)}
         </output>
         <span class="font-mono text-lg">mm</span>
@@ -73,7 +73,7 @@ const controls = [
             max={c.max}
             step={c.step}
             value={c.value}
-            class="mt-1 w-full accent-investor"
+            class="mt-1 w-full accent-link"
           />
         </label>
       ))}

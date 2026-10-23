@@ -10,14 +10,14 @@ interface Props {
 const diamonds = [
   {
     cx: 205,
-    color: "var(--color-proposer)",
+    color: "var(--color-accent)",
     top: "正しい問題を見つける",
     halves: ["発見", "定義"],
     en: ["Discover", "Define"],
   },
   {
     cx: 515,
-    color: "var(--color-investor)",
+    color: "var(--color-link)",
     top: "正しい解を見つける",
     halves: ["展開", "提供"],
     en: ["Develop", "Deliver"],
@@ -33,7 +33,7 @@ const h = 100;
   compact={Astro.props.compact}
   title="ダブルダイヤモンド ― 発散と収束を二度"
   caption="左のひし形で「どの問題を解くべきか」を広げて絞り、右のひし形で「どう解くか」を広げて絞る。実際の設計では、右から左へ戻ることも珍しくない。"
-  source="Design Council (UK), The Double Diamond (2005) をもとに作図"
+  source="Design Council (UK), The Double Diamond（2000年代半ばに発表）をもとに作図"
   scroll
 >
   <svg
@@ -95,7 +95,7 @@ const h = 100;
               y="296"
               text-anchor="middle"
               font-size="14"
-              fill={i === 0 ? "var(--color-proposer-strong)" : "var(--color-investor)"}
+              fill={i === 0 ? "var(--color-accent-strong)" : "var(--color-link)"}
             >
               {i === 0 ? "発散" : "収束"}
             </text>

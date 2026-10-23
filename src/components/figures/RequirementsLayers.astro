@@ -47,11 +47,11 @@ const layers = [
   title="願いを、確かめられる約束にする"
   caption="上の層ほど「なぜ」に、下の層ほど「どれだけ」に近い。仕様の数値は、完成したものを試験するときの合格基準になる。例は架空の「部室の予約アプリ」。"
 >
-  <ol class="relative space-y-3 border-l-2 border-dashed border-investor/40 pl-5 sm:pl-6">
+  <ol class="relative space-y-3 border-l-2 border-dashed border-link/40 pl-5 sm:pl-6">
     {layers.map((l, i) => (
       <li class="grid gap-3 rounded-md border border-grid bg-paper p-4 sm:grid-cols-[10rem_1fr] sm:items-center">
         <div>
-          <p class="annotation text-investor">
+          <p class="annotation text-link">
             {String(i + 1).padStart(2, "0")} / {l.en}
           </p>
           <p class="font-display text-lg font-bold">{l.name}</p>

@@ -9,8 +9,8 @@ const designs = [
       [true, true],
       [true, true],
     ],
-    verdict: "連成設計",
-    note: "どちらを回しても、量と温度が同時に変わる",
+    verdict: "扱いにくい",
+    note: "どちらを回しても、量と温度が同時に変わる（連成設計）",
   },
   {
     name: "シングルレバー混合栓",
@@ -19,8 +19,8 @@ const designs = [
       [true, false],
       [false, true],
     ],
-    verdict: "非連成設計",
-    note: "上下で量、左右で温度。ひとつの操作がひとつの機能に対応する",
+    verdict: "扱いやすい",
+    note: "上下で量、左右で温度。ひとつの操作がひとつの機能に対応する（非連成設計）",
   },
 ];
 const frs = ["流量", "温度"];
@@ -50,7 +50,7 @@ const frs = ["流量", "温度"];
               </th>
               {d.matrix[r].map((x) => (
                 <td class="border border-grid py-2 font-mono text-lg">
-                  {x ? <span class="font-bold text-investor">X</span> : <span class="text-muted/60">0</span>}
+                  {x ? <span class="font-bold text-link">X</span> : <span class="text-muted/60">0</span>}
                 </td>
               ))}
             </tr>
@@ -60,8 +60,8 @@ const frs = ["流量", "温度"];
       <p class="mt-3 text-sm">
         <span
           class:list={[
-            "mr-2 rounded px-2 py-0.5 text-xs font-bold text-white",
-            d.matrix[0][1] ? "bg-proposer-strong" : "bg-partner",
+            "mr-2 rounded px-2 py-0.5 text-xs font-bold text-paper",
+            d.matrix[0][1] ? "bg-accent-strong" : "bg-positive",
           ]}
         >
           {d.verdict}
@@ -71,3 +71,7 @@ const frs = ["流量", "温度"];
     </div>
   ))}
 </div>
+<p class="mt-3 text-xs text-muted">
+  <span class="font-mono font-bold text-link">X</span> … その部分を動かすと、その機能が変わる ／
+  <span class="font-mono">0</span> … 変わらない
+</p>

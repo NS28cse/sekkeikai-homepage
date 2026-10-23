@@ -81,11 +81,11 @@ const sy = (v: number) => H - 20 - ((v - 2) / 12) * (H - 32);
           x2={sx(19)}
           y1={sy(set.s.a + set.s.b * 3)}
           y2={sy(set.s.a + set.s.b * 19)}
-          stroke="var(--color-investor)"
+          stroke="var(--color-link)"
           stroke-width="1.5"
         />
         {set.x.map((xv, i) => (
-          <circle cx={sx(xv)} cy={sy(set.y[i])} r="4.5" fill="var(--color-proposer-strong)" fill-opacity="0.8" />
+          <circle cx={sx(xv)} cy={sy(set.y[i])} r="4.5" fill="var(--color-accent-strong)" fill-opacity="0.8" />
         ))}
       </svg>
     ))}

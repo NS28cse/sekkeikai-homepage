@@ -3,6 +3,7 @@
 // 存在しないページの名前が書かれていたら、ビルドを止めて知らせる。
 import { getCollection } from "astro:content";
 import { parseInline } from "../lib/inline";
+import { layerLabel } from "../lib/design";
 
 interface Props {
   text: string;
@@ -26,12 +27,10 @@ for (const t of tokens) {
   if (t.kind === "strong") return <strong class="font-semibold">{t.value}</strong>;
   const el = bySlug.get(t.slug)!;
   return (
-    <a href={`/design/${t.slug}/`} class="term">
+    <a href={`/design/${t.slug}/${t.anchor ? `#${t.anchor}` : ""}`} class="term">
       {t.label ?? el.data.title}
       <span class="term-card" aria-hidden="true">
-        <span class="annotation block text-investor">
-          {el.data.layer === "process" ? "設計のプロセス" : `視点 / ${el.data.en}`}
-        </span>
+        <span class="annotation block text-link">{layerLabel(el)}</span>
         <span class="mt-1 block font-display text-base font-bold">{el.data.title}</span>
         <span class="mt-1 block text-muted">{el.data.summary}</span>
       </span>

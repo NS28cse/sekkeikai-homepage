@@ -8,6 +8,6 @@ const home = await getEntry("pages", "home");
 if (!home) throw new Error("src/content/pages/home.yaml が見つかりません");
 ---
 
-<Base title={home.data.title} description={home.data.description}>
+<Base title={home.data.title} description={home.data.description} progress>
   <SectionRenderer sections={home.data.sections} />
 </Base>

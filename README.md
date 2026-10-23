@@ -29,20 +29,21 @@ npm run dev      # → http://localhost:4321（トップ）と http://localhost:
 
 ## どこを触るか
 
-| 場所                          | 中身                                                       |
-| ----------------------------- | ---------------------------------------------------------- |
-| `src/components/sections/`    | セクションの見た目（Astro）                                |
-| `src/layouts/` / `src/pages/` | ページの枠・ページ                                         |
-| `src/scripts/motion.ts`       | アニメーション（GSAP / Lenis）                             |
-| `src/styles/global.css`       | 共通のスタイル                                             |
-| `tokens/tokens.json`          | 色・フォント・動きの値（デザイントークン）                 |
-| `src/content/`                | 文章（トップページの構成は `src/content/pages/home.yaml`） |
-| `src/content/design/`         | 「設計を知る」のページ（`/design/〇〇/`）の文章            |
-| `src/content/site/links.yaml` | GitHub・Discord のリンク                                   |
-| `src/components/figures/`     | 図（一覧は `/lab/`）                                       |
-| `docs/illustrations.md`       | イラストの指定書（描く人向け）                             |
-| `public/uploads/`             | 画像                                                       |
-| `src/content.config.ts`       | 文章の入力ルール（文字数の上限など）                       |
+| 場所                          | 中身                                                                   |
+| ----------------------------- | ---------------------------------------------------------------------- |
+| `src/components/sections/`    | セクションの見た目（Astro）                                            |
+| `src/layouts/` / `src/pages/` | ページの枠・ページ                                                     |
+| `src/scripts/motion.ts`       | アニメーション（GSAP / Lenis）                                         |
+| `src/styles/global.css`       | 共通のスタイル                                                         |
+| `tokens/tokens.json`          | 色・フォント・動きの値（デザイントークン）                             |
+| `src/content/`                | 文章（トップページの構成は `src/content/pages/home.yaml`）             |
+| `src/content/design/`         | 「設計を知る」のページ（`/design/〇〇/`）。YAML を足すとページが増える |
+| `src/content/site/links.yaml` | GitHub・Discord のリンク                                               |
+| `src/components/figures/`     | 図（一覧は `/lab/`）                                                   |
+| `docs/writing-guide.md`       | 文章の書き方（調べたことと、このサイトの決まり）                       |
+| `docs/illustrations.md`       | イラストの指定書（描く人向け）                                         |
+| `public/uploads/`             | 画像                                                                   |
+| `src/content.config.ts`       | 文章の入力ルール（文字数の上限など）                                   |
 
 ## コマンド
 

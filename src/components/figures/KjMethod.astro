@@ -62,12 +62,12 @@ const steps = [
           aria-hidden="true"
         >
           {s.islands && (
-            <g fill="none" stroke="var(--color-partner)" stroke-width="1.5">
+            <g fill="none" stroke="var(--color-positive)" stroke-width="1.5">
               <rect x="6" y="6" width="56" height="54" rx="8" />
               <rect x="72" y="32" width="56" height="48" rx="8" />
             </g>
           )}
-          {s.links && <path d="M62 34 L72 52" stroke="var(--color-proposer-strong)" stroke-width="2.5" />}
+          {s.links && <path d="M62 34 L72 52" stroke="var(--color-accent-strong)" stroke-width="2.5" />}
           {s.cards.map(([x, y]) => (
             <rect
               x={x}
@@ -81,7 +81,7 @@ const steps = [
             />
           ))}
           {s.islands && (
-            <g fill="var(--color-partner)">
+            <g fill="var(--color-positive)">
               <rect x="14" y="0" width="30" height="8" rx="2" />
               <rect x="84" y="26" width="30" height="8" rx="2" />
             </g>
@@ -93,7 +93,7 @@ const steps = [
           )}
         </svg>
         <div class="sm:mt-3">
-          <p class="annotation text-partner">{String(i + 1).padStart(2, "0")}</p>
+          <p class="annotation text-positive">{String(i + 1).padStart(2, "0")}</p>
           <p class="font-display font-bold">{s.title}</p>
           <p class="mt-1 text-sm text-ink/80">{s.body}</p>
         </div>

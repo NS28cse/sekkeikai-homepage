@@ -51,7 +51,7 @@ const fonts = Object.entries(tokens.font) as [string, { $value: string }][];
 
     <h2 class="mt-14 text-2xl font-bold">Figures</h2>
     <p class="mt-2 text-muted">
-      設計論と要素のページで使う図の一覧。YAML の <code>type: figure</code> の <code>name</code>{" "}
+      「設計を知る」とトップページで使う図の一覧。YAML の <code>type: figure</code> の <code>name</code>{" "}
       に、灰色の名前を書くと使えます。
     </p>
     {figureNames.map((name, i) => (
@@ -66,8 +66,8 @@ const fonts = Object.entries(tokens.font) as [string, { $value: string }][];
   </section>
 
   {sections.map((section) => (
-    <div class="border-t-4 border-dashed border-proposer">
-      <p class="annotation container-page py-2 text-proposer">type: {section.type}</p>
+    <div class="border-t-4 border-dashed border-accent">
+      <p class="annotation container-page py-2 text-accent">type: {section.type}</p>
       <SectionRenderer sections={[section]} />
     </div>
   ))}

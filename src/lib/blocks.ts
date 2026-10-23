@@ -20,9 +20,3 @@ export function numberChapters<T extends { blocks: Block[] }>(chapters: T[]): (T
     })),
   }));
 }
-
-// 日本語の文章を 1 分あたり 500 字として読了時間（分）を見積もる
-export function readingMinutes(texts: string[]): number {
-  const chars = texts.reduce((sum, t) => sum + t.length, 0);
-  return Math.max(1, Math.round(chars / 500));
-}

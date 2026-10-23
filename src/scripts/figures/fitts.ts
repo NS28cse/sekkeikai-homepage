@@ -6,6 +6,8 @@ const TRIALS = 20;
 const SIZES = [14, 20, 28, 40, 56, 76]; // 丸の直径（px）
 const PLOT = { left: 44, right: 290, top: 26, bottom: 184, maxId: 6, maxMt: 1500 };
 const SVG_NS = "http://www.w3.org/2000/svg";
+const HINT =
+  "オレンジの丸を、マウスや指でできるだけ速く正確に押してください。全 20 回（キーボードでは時間を正しく測れません）。";
 
 interface Trial {
   id: number;
@@ -62,6 +64,8 @@ export function initFitts(): void {
         if (!last || Math.hypot(x - last.x, y - last.y) > Math.min(rect.width, rect.height) * 0.35) break;
       }
       current = { x, y, w };
+      // 中身の文字は消すので、読み上げ用の名前を付け直す
+      target.setAttribute("aria-label", `目標（${trials.length + 1}回目）`);
       Object.assign(target.style, {
         left: `${x}px`,
         top: `${y}px`,
@@ -103,10 +107,11 @@ export function initFitts(): void {
       misses = 0;
       last = null;
       target.textContent = "開始";
+      target.removeAttribute("aria-label");
       target.hidden = false;
       Object.assign(target.style, { left: "50%", top: "50%", width: "64px", height: "64px" });
       current = { x: area.clientWidth / 2, y: area.clientHeight / 2, w: 64 };
-      hint.textContent = "オレンジの丸を、できるだけ速く正確にクリック（タップ）してください。全 20 回。";
+      hint.textContent = HINT;
       draw();
     };
 

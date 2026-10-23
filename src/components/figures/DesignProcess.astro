@@ -51,7 +51,7 @@ const steps = [
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="設計のプロセス ― 5つの工程"
-  caption="工程は左から右へ進むが、一方通行ではない。案を比べる段階で要件の見落としに気づけば、要件の工程に戻る。行き来しながら、少しずつ設計解を確かなものにしていく。"
+  caption="工程は順に進むが、一方通行ではない。案を比べる段階で要件の見落としに気づけば、要件の工程に戻る。行き来しながら、少しずつ設計解を確かなものにしていく。"
   source="G. Pahl & W. Beitz, Engineering Design の設計段階、英国デザイン・カウンシルのダブルダイヤモンドなどをもとに整理"
 >
   <ol class="grid gap-3 md:grid-cols-5">
@@ -59,8 +59,8 @@ const steps = [
       <li class="relative flex flex-col rounded-md border border-grid bg-paper">
         <p
           class:list={[
-            "rounded-t-md px-3 py-1 text-center text-xs font-bold text-white",
-            s.mode === "diverge" ? "bg-proposer-strong" : "bg-investor",
+            "rounded-t-md px-3 py-1 text-center text-xs font-bold text-paper",
+            s.mode === "diverge" ? "bg-accent-strong" : "bg-link",
           ]}
         >
           {s.mode === "diverge" ? "広げる" : "絞る"}
