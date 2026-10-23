@@ -37,8 +37,9 @@ npm run dev      # → http://localhost:4321（トップ）と http://localhost:
 | `src/styles/global.css`       | 共通のスタイル                                             |
 | `tokens/tokens.json`          | 色・フォント・動きの値（デザイントークン）                 |
 | `src/content/`                | 文章（トップページの構成は `src/content/pages/home.yaml`） |
-| `src/content/elements/`       | 設計の要素のページ（`/elements/〇〇/`）の文章              |
-| `src/components/figures/`     | 設計論・要素のページの図（一覧は `/lab/`）                 |
+| `src/content/design/`         | 「設計を知る」のページ（`/design/〇〇/`）の文章            |
+| `src/content/site/links.yaml` | GitHub・Discord のリンク                                   |
+| `src/components/figures/`     | 図（一覧は `/lab/`）                                       |
 | `docs/illustrations.md`       | イラストの指定書（描く人向け）                             |
 | `public/uploads/`             | 画像                                                       |
 | `src/content.config.ts`       | 文章の入力ルール（文字数の上限など）                       |

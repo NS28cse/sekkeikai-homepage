@@ -5,6 +5,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 // [価格（万円）, 重さ（kg）]
@@ -48,6 +49,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="パレート最適な案の集まり"
   caption={`架空の自転車の設計案 ${designs.length} 個。青い点は、価格と重さのどちらかを悪くしない限りもう改善できない「パレート最適」な案（${front.length} 個）。灰色の点は、少なくとも一つの青い点（または他の案）に、価格でも重さでも負けている。点線で囲んだ範囲の ${beaten} 個の案は、どれも価格 ${anchor[0]} 万円・${anchor[1]}kg の案に、価格でも重さでも負けている。`}
   scroll

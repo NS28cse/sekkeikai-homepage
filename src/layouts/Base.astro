@@ -1,6 +1,7 @@
 ---
 // 全ページ共通の枠（<head>、ヘッダー、フッター）
 import "../styles/global.css";
+import SocialLinks from "../components/SocialLinks.astro";
 
 interface Props {
   title: string;
@@ -14,10 +15,8 @@ const { title, description, noindex = false, progress = false } = Astro.props;
 const fullTitle = title === "設計会" ? "設計会 | 岡山県立大学 設計サークル" : `${title} | 設計会`;
 // mobile: false の項目は、スマホ幅ではヘッダーに出さない（フッターには全部出る）
 const nav = [
-  { href: "/#essay", label: "設計論", mobile: true },
-  { href: "/elements/", label: "設計の要素", mobile: true },
-  { href: "/#activities", label: "活動", mobile: false },
-  { href: "/projects/", label: "プロジェクト", mobile: false },
+  { href: "/#why", label: "設計会とは", mobile: false },
+  { href: "/design/", label: "設計を知る", mobile: true },
   { href: "/news/", label: "お知らせ", mobile: false },
   { href: "/#join", label: "入部", mobile: true },
 ];
@@ -59,17 +58,21 @@ const nav = [
           </svg>
           設計会
         </a>
-        <nav aria-label="メインメニュー">
-          <ul class="flex gap-4 text-sm sm:gap-6">
-            {nav.map((item) => (
-              <li class:list={[!item.mobile && "hidden md:block"]}>
-                <a href={item.href} class="hover:text-investor">
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div class="flex items-center gap-3 sm:gap-6">
+          <nav aria-label="メインメニュー">
+            <ul class="flex gap-4 text-sm sm:gap-6">
+              {nav.map((item) => (
+                <li class:list={[!item.mobile && "hidden md:block"]}>
+                  <a href={item.href} class="hover:text-investor">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <span class="hidden h-5 w-px bg-grid sm:block" aria-hidden="true"></span>
+          <SocialLinks />
+        </div>
       </div>
     </header>
 
@@ -77,27 +80,28 @@ const nav = [
       <slot />
     </main>
 
-    <footer class="border-t border-grid py-10 text-sm text-muted">
-      <nav aria-label="サイト内のページ" class="container-page mb-6">
-        <ul class="flex flex-wrap gap-x-6 gap-y-2">
-          {nav.map((item) => (
-            <li>
-              <a href={item.href} class="hover:text-ink">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div class="container-page flex flex-col gap-2 sm:flex-row sm:justify-between">
-        <p>© 設計会（岡山県立大学）</p>
-        <p>
-          このサイトは部員みんなで作っています。
-          <a class="underline" href="https://github.com/sekkeikai/sekkeikai-opu">
-            ソースコード（GitHub）
-          </a>
-        </p>
+    <footer class="border-t border-grid bg-paper-muted py-12 text-sm text-muted">
+      <div class="container-page flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p class="font-display text-lg font-bold tracking-widest text-ink">設計会</p>
+          <p class="mt-1">岡山県立大学 設計サークル</p>
+          <div class="-ml-2 mt-4">
+            <SocialLinks />
+          </div>
+        </div>
+        <nav aria-label="サイト内のページ">
+          <ul class="grid grid-cols-2 gap-x-10 gap-y-2">
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} class="hover:text-ink">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
+      <p class="container-page mt-10 text-xs">© 設計会（岡山県立大学）。このサイトは部員みんなで作っています。</p>
     </footer>
 
     <script>

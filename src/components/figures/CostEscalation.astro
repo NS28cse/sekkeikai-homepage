@@ -4,6 +4,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 // Stecklein ほか (2004) の結果。幅は推定方法による違い
@@ -26,6 +27,7 @@ const fmt = (v: number) => v.toLocaleString("ja-JP");
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="誤りは、見つけるのが遅いほど高くつく"
   caption="要求の段階で紛れ込んだ誤りを、どの工程で見つけて直すかによる修正コストの見積もり。要求の段階で直すコストを1としたときの倍率で、横軸は対数目盛（1目盛りで10倍）。帯の幅は推定方法による違い。"
   source="J. M. Stecklein ほか, Error Cost Escalation Through the Project Life Cycle, NASA Johnson Space Center (2004)"

@@ -1,0 +1,90 @@
+---
+// 設計のプロセスの全体図。5 つの工程と、それぞれの問い・代表的な手法を並べる。
+// 上の帯は、考えを広げる（発散）工程と、絞る（収束）工程の別を表す。
+import FigureFrame from "./FigureFrame.astro";
+
+interface Props {
+  number?: number;
+  compact?: boolean;
+}
+
+const steps = [
+  {
+    title: "問題を見つける",
+    sub: "問題発見",
+    q: "本当に解くべき問題は何か",
+    methods: "観察・インタビュー・KJ法",
+    mode: "diverge",
+  },
+  {
+    title: "要件を定める",
+    sub: "要件定義",
+    q: "何を満たせば成功か",
+    methods: "狩野モデル・QFD・仕様書",
+    mode: "converge",
+  },
+  {
+    title: "案を広げる",
+    sub: "構想設計",
+    q: "どんな解がありうるか",
+    methods: "ブレインストーミング・スケッチ",
+    mode: "diverge",
+  },
+  {
+    title: "比べて選ぶ",
+    sub: "評価・選定",
+    q: "どの案を、なぜ選ぶか",
+    methods: "ピューの選定法・AHP",
+    mode: "converge",
+  },
+  {
+    title: "形を詰める",
+    sub: "詳細設計",
+    q: "寸法や数値をどう決めるか",
+    methods: "CAD・CAE・実験計画法",
+    mode: "converge",
+  },
+] as const;
+---
+
+<FigureFrame
+  number={Astro.props.number}
+  compact={Astro.props.compact}
+  title="設計のプロセス ― 5つの工程"
+  caption="工程は左から右へ進むが、一方通行ではない。案を比べる段階で要件の見落としに気づけば、要件の工程に戻る。行き来しながら、少しずつ設計解を確かなものにしていく。"
+  source="G. Pahl & W. Beitz, Engineering Design の設計段階、英国デザイン・カウンシルのダブルダイヤモンドなどをもとに整理"
+>
+  <ol class="grid gap-3 md:grid-cols-5">
+    {steps.map((s, i) => (
+      <li class="relative flex flex-col rounded-md border border-grid bg-paper">
+        <p
+          class:list={[
+            "rounded-t-md px-3 py-1 text-center text-xs font-bold text-white",
+            s.mode === "diverge" ? "bg-proposer-strong" : "bg-investor",
+          ]}
+        >
+          {s.mode === "diverge" ? "広げる" : "絞る"}
+        </p>
+        <div class="flex-1 p-4">
+          <p class="font-mono text-xs text-muted">{String(i + 1).padStart(2, "0")}</p>
+          <p class="font-display text-lg leading-snug font-bold">{s.title}</p>
+          <p class="text-xs text-muted">{s.sub}</p>
+          <p class="mt-3 text-sm">「{s.q}」</p>
+          <p class="mt-3 text-xs text-ink/70">{s.methods}</p>
+        </div>
+        {i < steps.length - 1 && (
+          <span
+            class="absolute -bottom-3 left-1/2 z-10 -translate-x-1/2 text-muted md:top-1/2 md:-right-3 md:bottom-auto md:left-auto md:translate-x-0"
+            aria-hidden="true"
+          >
+            <span class="md:hidden">↓</span>
+            <span class="hidden md:inline">▶</span>
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+  <p class="mt-4 flex items-center justify-center gap-2 text-sm text-muted">
+    <span aria-hidden="true">↺</span> 必要に応じて、前の工程へ戻る
+  </p>
+</FigureFrame>

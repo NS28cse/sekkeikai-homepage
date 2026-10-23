@@ -1,0 +1,24 @@
+---
+// 図を一つ見せる章。図は src/components/figures/ のものを compact（番号・出典なし）で出す。
+import type { FigureName } from "../../lib/figures";
+import StoryShell from "../StoryShell.astro";
+import Figure from "../Figure.astro";
+
+interface Props {
+  number: string;
+  tone?: "light" | "dark";
+  eyebrow: string;
+  title: string;
+  lead: string;
+  body: string[];
+  figure: FigureName;
+  illustration?: { id: string; caption: string; alt: string; src?: string; ratio?: "21:9" | "16:9" | "4:3" | "1:1" };
+  link?: { label: string; href: string };
+}
+
+const { figure, ...story } = Astro.props;
+---
+
+<StoryShell {...story}>
+  <Figure name={figure} compact />
+</StoryShell>

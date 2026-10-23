@@ -1,0 +1,87 @@
+---
+// 「設計を知る」の入口（/design/）。設計のプロセス（工程）と、どの工程にも通じる視点を、階層がわかるように並べる。
+// 地図（工程 × 視点の表）はトップページの map セクションと同じデータ（home.yaml）を使う。
+import { getCollection, getEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import DesignMatrix from "../../components/DesignMatrix.astro";
+
+const pages = await getCollection("design");
+const process = pages.find((p) => p.data.layer === "process");
+const lenses = pages.filter((p) => p.data.layer === "lens").sort((a, b) => a.data.order - b.data.order);
+const home = await getEntry("pages", "home");
+const map = home?.data.sections.find((s) => s.type === "map");
+---
+
+<Base
+  title="設計を知る"
+  description="設計のプロセス（工程）と、どの工程にも通じる3つの視点（モデル化・ヒューマンインターフェース・データ分析）の解説。"
+>
+  <header class="bg-blueprint-grid border-b border-grid">
+    <div class="container-page py-16 sm:py-24">
+      <p class="annotation text-muted">Know Design</p>
+      <h1 class="mt-3 text-4xl font-black sm:text-6xl">設計を知る</h1>
+      <p class="mt-8 max-w-2xl font-serif text-lg leading-loose text-ink/85 sm:text-xl">
+        設計は、工程を順に進めながら、どの工程でも複数の視点で考える営みです。
+        まず全体の流れを知り、次にそれを支える視点を一つずつ深めてください。
+      </p>
+    </div>
+  </header>
+
+  <div class="container-page space-y-20 py-16 sm:py-24">
+    {process && (
+      <section aria-labelledby="process-title">
+        <p class="annotation text-proposer-strong">01 — 流れを知る</p>
+        <a
+          href={`/design/${process.id}/`}
+          class="group mt-4 block rounded-card border-2 border-ink p-6 transition hover:bg-ink hover:text-paper sm:p-10"
+        >
+          <p class="annotation text-investor group-hover:text-paper/70">{process.data.en}</p>
+          <h2 id="process-title" class="mt-2 text-3xl font-black sm:text-4xl">
+            {process.data.title}
+          </h2>
+          <p class="mt-4 max-w-2xl">{process.data.summary}</p>
+          <p class="mt-6 font-bold">
+            読む <span aria-hidden="true">→</span>
+          </p>
+        </a>
+      </section>
+    )}
+
+    <section aria-labelledby="lenses-title">
+      <p class="annotation text-proposer-strong">02 — 視点を深める</p>
+      <h2 id="lenses-title" class="mt-4 text-2xl font-bold sm:text-3xl">
+        どの工程にも通じる3つの視点
+      </h2>
+      <ul class="mt-8 grid gap-4 md:grid-cols-3">
+        {lenses.map((l) => (
+          <li>
+            <a
+              href={`/design/${l.id}/`}
+              class="group flex h-full flex-col rounded-card border border-grid bg-paper p-6 transition hover:border-investor"
+            >
+              <p class="annotation text-investor">
+                視点 {l.data.order} / {l.data.en}
+              </p>
+              <p class="mt-2 font-display text-2xl font-bold">{l.data.short}</p>
+              <p class="text-sm text-muted">{l.data.title}</p>
+              <p class="mt-4 flex-1 text-sm text-ink/85">{l.data.summary}</p>
+              <p class="mt-5 text-sm font-bold text-investor">
+                読む <span aria-hidden="true">→</span>
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {map && map.type === "map" && (
+      <section aria-labelledby="matrix-title">
+        <p class="annotation text-proposer-strong">03 — 組み合わせを見る</p>
+        <h2 id="matrix-title" class="mt-4 mb-8 text-2xl font-bold sm:text-3xl">
+          工程 × 視点の地図
+        </h2>
+        <DesignMatrix steps={map.steps} lenses={map.lenses} />
+      </section>
+    )}
+  </div>
+</Base>

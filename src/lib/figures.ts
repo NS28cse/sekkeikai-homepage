@@ -3,6 +3,8 @@
 // 図を足すときは：figures/ にコンポーネントを作る → ここに名前を足す → src/components/Figure.astro に登録する
 export const figureNames = [
   "design-mapping",
+  "faucet",
+  "design-process",
   "cost-escalation",
   "double-diamond",
   "requirements-layers",

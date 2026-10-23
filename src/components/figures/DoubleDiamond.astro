@@ -4,6 +4,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 const diamonds = [
@@ -29,6 +30,7 @@ const h = 100;
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="ダブルダイヤモンド ― 発散と収束を二度"
   caption="左のひし形で「どの問題を解くべきか」を広げて絞り、右のひし形で「どう解くか」を広げて絞る。実際の設計では、右から左へ戻ることも珍しくない。"
   source="Design Council (UK), The Double Diamond (2005) をもとに作図"

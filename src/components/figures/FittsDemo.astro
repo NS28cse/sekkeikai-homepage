@@ -5,6 +5,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 // グラフの座標（src/scripts/figures/fitts.ts と同じ値を使う）
@@ -17,6 +18,7 @@ const py = (mt: number) => plot.bottom - (mt / plot.maxMt) * (plot.bottom - plot
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="試してみる ― フィッツの法則"
   caption="ID（難しさ）＝ log₂(距離 ÷ 大きさ ＋ 1)。点が右上がりの直線に近く並ぶほど、法則がよく当てはまっている。MT（移動時間）の式の係数は人や機器によって違う。測った値はこのページの中だけで使い、どこにも送信しない。"
   source="P. M. Fitts (1954)、I. S. MacKenzie (1992) の定式化による"

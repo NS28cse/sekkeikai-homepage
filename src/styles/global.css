@@ -171,16 +171,6 @@
   .term:hover {
     color: var(--color-investor);
   }
-  .term-index {
-    font-family: var(--font-mono);
-    font-size: 0.62em;
-    font-weight: 500;
-    color: var(--color-investor);
-    vertical-align: super;
-    line-height: 0;
-    margin-left: 0.12em;
-    letter-spacing: 0;
-  }
   .term-card {
     display: none;
     position: absolute;
@@ -206,23 +196,10 @@
     }
   }
 
-  /* SVG の図の中のリンク（要素の地図） */
-  .map-node rect {
-    transition:
-      fill 0.2s,
-      stroke 0.2s;
-  }
-  .map-node:hover rect,
-  .map-node:focus-visible rect {
-    fill: var(--color-investor);
-    stroke: var(--color-investor);
-  }
-  .map-node:hover text,
-  .map-node:focus-visible text {
-    fill: var(--color-paper);
-  }
-  .map-node:focus-visible {
-    outline: none;
+  /* トップページの章の本文。読みやすさを優先して、少し大きめの文字と広い行間にする */
+  .story-body {
+    font-size: 1.0625rem;
+    line-height: 2;
   }
 
   /* 目次で、いま読んでいる章 */

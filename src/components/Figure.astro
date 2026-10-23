@@ -3,6 +3,8 @@
 // 図を足すときは：figures/ にコンポーネントを作る → src/lib/figures.ts に名前を足す → ここの map に登録する
 import type { FigureName } from "../lib/figures";
 import DesignMapping from "./figures/DesignMapping.astro";
+import Faucet from "./figures/Faucet.astro";
+import DesignProcess from "./figures/DesignProcess.astro";
 import CostEscalation from "./figures/CostEscalation.astro";
 import DoubleDiamond from "./figures/DoubleDiamond.astro";
 import RequirementsLayers from "./figures/RequirementsLayers.astro";
@@ -22,10 +24,14 @@ import AhpExample from "./figures/AhpExample.astro";
 interface Props {
   name: FigureName;
   number?: number;
+  // true にすると番号・題・説明・出典を出さない（トップページの章の中で使う）
+  compact?: boolean;
 }
 
-const components: Record<FigureName, (props: { number?: number }) => any> = {
+const components: Record<FigureName, (props: { number?: number; compact?: boolean }) => any> = {
   "design-mapping": DesignMapping,
+  faucet: Faucet,
+  "design-process": DesignProcess,
   "cost-escalation": CostEscalation,
   "double-diamond": DoubleDiamond,
   "requirements-layers": RequirementsLayers,
@@ -43,8 +49,8 @@ const components: Record<FigureName, (props: { number?: number }) => any> = {
   "ahp-example": AhpExample,
 };
 
-const { name, number } = Astro.props;
+const { name, number, compact } = Astro.props;
 const Component = components[name];
 ---
 
-<Component number={number} />
+<Component number={number} compact={compact} />

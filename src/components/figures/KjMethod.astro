@@ -4,6 +4,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 // 各段階の小さな図に置くカードの位置 [x, y]
@@ -47,6 +48,7 @@ const steps = [
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="KJ法 ― 散らばった事実から、構造を見つける"
   caption="大切なのは、最初から分類の枠を決めないこと。カードの方から「集まりたがっている」まとまりを探すことで、予想していなかった構造が見えてくる。"
   source="川喜田二郎『発想法』中公新書 (1967) をもとに作図"

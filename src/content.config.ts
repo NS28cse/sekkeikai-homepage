@@ -21,21 +21,6 @@ const news = defineCollection({
   }),
 });
 
-const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
-  schema: z.object({
-    title: z.string().max(40),
-    category: z.enum(["設計下流", "問題解決", "イノベーション"]),
-    stage: z.enum(["企画", "小プレゼン", "設計", "大プレゼン", "完了"]),
-    summary: z.string().max(140),
-    methods: z.array(z.string()).default([]),
-    cover: z.string().optional(),
-    coverAlt: z.string().max(100).optional(),
-    order: z.number().default(10),
-    draft: z.boolean().default(false),
-  }),
-});
-
 const tone = z.enum(["light", "dark"]).default("light");
 
 // 長文（設計論・要素のページ）は「ブロック」を上から並べて書く。
@@ -73,6 +58,23 @@ const block = z.discriminatedUnion("type", [
 
 export type Block = z.infer<typeof block>;
 
+// トップページは「説得の物語」として、番号付きの章（ストーリー）を上から並べる。
+// どの章にも、見出し（title）だけ読んでも話がつながるように一文の主張を書く。
+const story = {
+  tone,
+  // 見出しの上の小さな英語のラベル（例: Why）
+  eyebrow: z.string().max(20),
+  // 章の主張。見出しだけを順に読んでも話が通じるように書く
+  title: z.string().max(30),
+  // 見出しのすぐ下の一文（明朝体で大きく出る）
+  lead: z.string().max(80),
+  // 本文の段落。[[modeling]] で設計を知るページへのリンク、**強調** が書ける
+  body: z.array(z.string().max(300)).min(1).max(3),
+  illustration: z.object(illustration).optional(),
+  // 章の最後に出す「詳しく読む」リンク
+  link: z.object({ label: z.string().max(30), href: z.string() }).optional(),
+};
+
 const section = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("hero"),
@@ -82,87 +84,65 @@ const section = z.discriminatedUnion("type", [
     ctaLabel: z.string().max(20).optional(),
     ctaHref: z.string().optional(),
   }),
-  z.object({
-    type: z.literal("essay"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
-    lead: z.string().max(300),
-    chapters: z
-      .array(z.object({ heading: z.string().max(40), blocks: z.array(block).min(1).max(20) }))
-      .min(1)
-      .max(12),
-  }),
-  z.object({
-    type: z.literal("elements"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
-    body: z.string().max(300).optional(),
-  }),
+  // 左右の対比（「思いつき」→「よく考えられた設計」）
   z.object({
     type: z.literal("statement"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
-    body: z.string().max(400),
-    left: z.object({ label: z.string().max(20), items: z.array(z.string().max(20)).max(5) }),
-    right: z.object({ label: z.string().max(20), items: z.array(z.string().max(20)).max(5) }),
+    ...story,
+    compare: z.object({
+      fromLabel: z.string().max(20),
+      toLabel: z.string().max(20),
+      rows: z
+        .array(z.object({ from: z.string().max(20), to: z.string().max(20) }))
+        .min(1)
+        .max(5),
+    }),
   }),
+  // 図を一つ見せる章
+  z.object({ type: z.literal("figure"), ...story, figure: z.enum(figureNames) }),
+  // 設計の地図：横に工程、縦に視点を並べた表。cells は工程と同じ数だけ書く
   z
     .object({
-      type: z.literal("flow"),
-      tone,
-      eyebrow: z.string().max(60).optional(),
-      title: z.string().max(40),
-      body: z.string().max(300).optional(),
-      steps: z.array(z.string().max(10)).min(2).max(6),
-      focusCount: z.number().int().min(1).max(6),
-      focusLabel: z.string().max(20),
+      type: z.literal("map"),
+      ...story,
+      steps: z
+        .array(z.object({ title: z.string().max(10), sub: z.string().max(10) }))
+        .min(2)
+        .max(6),
+      lenses: z
+        .array(z.object({ design: reference("design"), cells: z.array(z.string().max(24)) }))
+        .min(1)
+        .max(5),
     })
-    .refine((s) => s.focusCount <= s.steps.length, {
-      message: "「先頭から何個を強調するか」が工程の数より多くなっています",
-      path: ["focusCount"],
+    .refine((s) => s.lenses.every((l) => l.cells.length === s.steps.length), {
+      message: "map の cells は、steps（工程）と同じ数だけ書いてください",
+      path: ["lenses"],
     }),
-  z.object({
-    type: z.literal("steps"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
-    items: z
-      .array(
-        z.object({
-          label: z.string().max(12),
-          title: z.string().max(20),
-          body: z.string().max(140),
-          role: z.enum(["proposer", "partner", "investor", "none"]).default("none"),
-        }),
-      )
-      .min(1)
-      .max(6),
-  }),
-  z.object({
-    type: z.literal("tags"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
-    body: z.string().max(200).optional(),
-    tags: z.array(z.string().max(12)).max(20),
-  }),
+  z.object({ type: z.literal("tags"), ...story, tags: z.array(z.string().max(12)).min(1).max(20) }),
   z.object({
     type: z.literal("cards"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
-    title: z.string().max(40),
+    ...story,
     items: z
       .array(z.object({ title: z.string().max(20), body: z.string().max(160), note: z.string().max(60).optional() }))
       .min(1)
-      .max(6),
+      .max(4),
+  }),
+  z.object({
+    type: z.literal("join"),
+    eyebrow: z.string().max(20).optional(),
+    title: z.string().max(30),
+    body: z.string().max(200),
+    traits: z
+      .array(z.object({ title: z.string().max(10), body: z.string().max(40) }))
+      .max(4)
+      .default([]),
+    closing: z.string().max(120).optional(),
+    formUrl: z
+      .union([z.literal(""), z.url({ message: "入部フォームの URL は https:// から始まる形で入力してください" })])
+      .optional(),
+    buttonLabel: z.string().max(20),
   }),
   z.object({
     type: z.literal("info"),
-    tone,
-    eyebrow: z.string().max(60).optional(),
     title: z.string().max(40),
     items: z
       .array(z.object({ label: z.string().max(12), value: z.string().max(60) }))
@@ -171,24 +151,8 @@ const section = z.discriminatedUnion("type", [
   }),
   z.object({
     type: z.literal("news"),
-    tone,
     title: z.string().max(40),
     limit: z.number().int().min(1).max(6).default(3),
-  }),
-  z.object({
-    type: z.literal("projects"),
-    tone,
-    title: z.string().max(40),
-    body: z.string().max(200).optional(),
-  }),
-  z.object({
-    type: z.literal("join"),
-    title: z.string().max(40),
-    body: z.string().max(300),
-    formUrl: z
-      .union([z.literal(""), z.url({ message: "入部フォームの URL は https:// から始まる形で入力してください" })])
-      .optional(),
-    buttonLabel: z.string().max(20),
   }),
 ]);
 
@@ -203,36 +167,70 @@ const pages = defineCollection({
   }),
 });
 
-// 設計の要素（/elements/〇〇/ のページ）。ファイル名がそのまま URL になる（例: modeling.yaml → /elements/modeling/）
-// どのページにも「設計との関係・使い方・歴史・いま・設計会では」の章をそろえる。
-const chapterKinds = ["concept", "relation", "method", "history", "now", "activity"] as const;
-const requiredKinds = ["relation", "method", "history", "now", "activity"] as const;
+// 「設計を知る」のページ（/design/〇〇/）。ファイル名がそのまま URL になる（例: modeling.yaml → /design/modeling/）
+// layer で階層を分ける：
+//   process … 設計のプロセス（工程）。章は工程ごと（kind: step）に書く
+//   lens    … どの工程にも通じる視点（モデル化・ヒューマンインターフェース・データ分析）。
+//             章は「設計との関係・使い方・歴史・いま・設計会では」をそろえる
+const chapterKinds = ["concept", "step", "relation", "method", "history", "now", "activity"] as const;
+const requiredKinds = {
+  process: ["concept", "step", "history", "now", "activity"],
+  lens: ["relation", "method", "history", "now", "activity"],
+} as const;
 
-const elements = defineCollection({
-  loader: glob({ pattern: "**/*.yaml", base: "./src/content/elements" }),
+const design = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/content/design" }),
+  schema: z
+    .object({
+      title: z.string().max(20),
+      en: z.string().max(30),
+      layer: z.enum(["process", "lens"]),
+      // 地図や一覧で並べる順番
+      order: z.number().int().min(1),
+      // 視点の短い言い方（例: モデルで考える）。地図の行の見出しになる
+      short: z.string().max(12),
+      question: z.string().max(40),
+      summary: z.string().max(120),
+      lead: z.string().max(300),
+      hero: z.object(illustration).optional(),
+      chapters: z
+        .array(
+          z.object({
+            kind: z.enum(chapterKinds),
+            // 章の見出しの上の小さなラベル（例: 工程 1）。省略すると kind から決まる
+            label: z.string().max(12).optional(),
+            heading: z.string().max(40),
+            blocks: z.array(block).min(1).max(20),
+          }),
+        )
+        .min(4)
+        .max(12),
+      references: z
+        .array(z.object({ text: z.string().max(240), url: z.url().optional() }))
+        .max(30)
+        .default([]),
+      related: z.array(reference("design")).max(4).default([]),
+    })
+    .superRefine((page, ctx) => {
+      const missing = requiredKinds[page.layer].filter((k) => !page.chapters.some((c) => c.kind === k));
+      if (missing.length > 0) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["chapters"],
+          message: `layer: ${page.layer} のページには kind が ${missing.join(" / ")} の章が必要です`,
+        });
+      }
+    }),
+});
+
+// サイト全体のリンク（ヘッダーのアイコンなど）
+const site = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/content/site" }),
   schema: z.object({
-    title: z.string().max(20),
-    en: z.string().max(30),
-    order: z.number().int().min(1),
-    question: z.string().max(40),
-    summary: z.string().max(120),
-    lead: z.string().max(300),
-    hero: z.object(illustration).optional(),
-    chapters: z
-      .array(
-        z.object({ kind: z.enum(chapterKinds), heading: z.string().max(40), blocks: z.array(block).min(1).max(20) }),
-      )
-      .min(requiredKinds.length)
-      .max(10)
-      .refine((chapters) => requiredKinds.every((k) => chapters.some((c) => c.kind === k)), {
-        message: `章（chapters）には kind が ${requiredKinds.join(" / ")} のものを 1 つずつ入れてください`,
-      }),
-    references: z
-      .array(z.object({ text: z.string().max(240), url: z.url().optional() }))
-      .max(30)
-      .default([]),
-    related: z.array(reference("elements")).max(4).default([]),
+    github: z.union([z.literal(""), z.url()]),
+    // Discord の招待リンク。空のあいだは「準備中」のアイコンになる
+    discord: z.union([z.literal(""), z.url()]),
   }),
 });
 
-export const collections = { news, projects, pages, elements };
+export const collections = { news, pages, design, site };

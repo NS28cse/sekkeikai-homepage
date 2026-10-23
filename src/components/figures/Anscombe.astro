@@ -5,6 +5,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 const x123 = [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5];
@@ -53,6 +54,7 @@ const sy = (v: number) => H - 20 - ((v - 2) / 12) * (H - 32);
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="数字は同じ、形はまったく違う"
   caption="4組とも、平均・分散・相関係数・回帰直線がほぼ同じ。しかしグラフにすると、I は素直な直線関係、II は曲線、III は一つの外れ値が直線を傾け、IV は一つの点だけが相関を生んでいる。要約の数字だけで判断する前に、まず見ること。"
   source="F. J. Anscombe, Graphs in Statistical Analysis, The American Statistician 27(1) (1973) のデータ"

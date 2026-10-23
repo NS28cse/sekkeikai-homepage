@@ -1,6 +1,6 @@
 ---
-// 見出し＋本文のカードを並べる汎用セクション。
-import SectionShell from "../SectionShell.astro";
+// 見出し＋本文のカードを縦に並べる章（「設計会がつくる3つの場」など）。
+import StoryShell from "../StoryShell.astro";
 
 interface Item {
   title: string;
@@ -8,30 +8,43 @@ interface Item {
   note?: string;
 }
 interface Props {
+  number: string;
   tone?: "light" | "dark";
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
+  lead: string;
+  body: string[];
   items: Item[];
+  illustration?: { id: string; caption: string; alt: string; src?: string; ratio?: "21:9" | "16:9" | "4:3" | "1:1" };
+  link?: { label: string; href: string };
 }
 
-const { tone, eyebrow, title, items } = Astro.props;
-const dark = tone === "dark";
+const { items, ...story } = Astro.props;
+const dark = story.tone === "dark";
 ---
 
-<SectionShell tone={tone} eyebrow={eyebrow} title={title}>
-  <ul class="grid gap-6 md:grid-cols-3">
+<StoryShell id="place" {...story}>
+  <ol class="space-y-4">
     {items.map((item, i) => (
       <li
-        class:list={["rounded-card p-6", dark ? "border border-white/20 bg-white/5" : "border border-grid bg-paper"]}
+        class:list={[
+          "grid grid-cols-[3rem_1fr] gap-4 rounded-card p-6",
+          dark ? "border border-white/20 bg-white/5" : "border border-grid bg-paper",
+        ]}
         data-reveal
-        data-reveal-delay={String(i * 0.1)}
+        data-reveal-delay={String(i * 0.08)}
       >
-        <h3 class="text-xl font-bold">{item.title}</h3>
-        <p class:list={["mt-3", dark && "text-white/85"]}>{item.body}</p>
-        {item.note && (
-          <p class:list={["annotation mt-5 normal-case", dark ? "text-white/60" : "text-muted"]}>{item.note}</p>
-        )}
+        <span class:list={["font-mono text-2xl", dark ? "text-proposer" : "text-proposer-strong"]}>
+          {String(i + 1).padStart(2, "0")}
+        </span>
+        <div>
+          <h3 class="text-xl font-bold">{item.title}</h3>
+          <p class:list={["mt-2", dark ? "text-white/85" : "text-ink/85"]}>{item.body}</p>
+          {item.note && (
+            <p class:list={["annotation mt-3 normal-case", dark ? "text-white/60" : "text-muted"]}>{item.note}</p>
+          )}
+        </div>
       </li>
     ))}
-  </ul>
-</SectionShell>
+  </ol>
+</StoryShell>

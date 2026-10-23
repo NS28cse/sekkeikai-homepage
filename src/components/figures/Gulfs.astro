@@ -4,11 +4,13 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 ---
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="二つの淵に、橋を架ける"
   caption="人は「何をすればよいか」がわからないとき（実行の淵）と、「どうなったか」がわからないとき（評価の淵）に迷う。操作の手がかりと、すぐに返ってくる結果の表示が、それぞれの淵に架ける橋になる。"
   source="E. L. Hutchins, J. D. Hollan, D. A. Norman (1985)、D. A. Norman, The Design of Everyday Things (2013) をもとに作図"

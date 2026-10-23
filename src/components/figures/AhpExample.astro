@@ -5,6 +5,7 @@ import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
   number?: number;
+  compact?: boolean;
 }
 
 const criteria = ["価格", "造形の精度", "扱いやすさ", "造形できる大きさ"];
@@ -34,6 +35,7 @@ const fmt = (v: number) => (v >= 1 ? String(Math.round(v)) : `1/${Math.round(1 /
 
 <FigureFrame
   number={Astro.props.number}
+  compact={Astro.props.compact}
   title="AHP で基準の重みを求める"
   caption="左の表は「行の基準は、列の基準に比べてどれだけ重要か」をチームで話し合って決めた値。右の重みは、この表からプログラムで計算したもの。設計案どうしも、基準ごとに同じ方法で比べて点数を付け、重みを掛けて合計する。"
   source="T. L. Saaty, The Analytic Hierarchy Process (1980) の方法による。例は架空"

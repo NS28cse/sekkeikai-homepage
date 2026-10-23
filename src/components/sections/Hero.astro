@@ -1,5 +1,7 @@
 ---
-// トップの大見出し。背景に「設計図」の線が描かれていく。
+// トップの大見出し。画面いっぱいに主張を一つだけ置き、背景で「設計図」の線が描かれていく。
+import { getEntry } from "astro:content";
+
 interface Props {
   eyebrow?: string;
   title: string;
@@ -9,54 +11,92 @@ interface Props {
 }
 
 const { eyebrow, title, lead, ctaLabel, ctaHref } = Astro.props;
+const site = await getEntry("site", "links");
+const discord = site?.data.discord ?? "";
+// 「、」の後ろで改行して、見出しを二行に組む
+const lines = title.split(/(?<=、)/);
 ---
 
 <section class="bg-blueprint-grid relative overflow-hidden border-b border-grid">
   <svg
-    class="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-    viewBox="0 0 1200 640"
-    preserveAspectRatio="xMidYMid slice"
+    class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[52%] md:block"
+    viewBox="0 0 600 640"
+    preserveAspectRatio="xMidYMid meet"
     aria-hidden="true"
   >
-    <g fill="none" stroke-width="2">
-      <path data-draw d="M760 120 h320 v220 h-320 z" stroke="var(--color-ink)" stroke-opacity="0.35"></path>
-      <path data-draw d="M760 120 L1080 340 M1080 120 L760 340" stroke="var(--color-ink)" stroke-opacity="0.15"></path>
-      <circle data-draw cx="920" cy="230" r="70" stroke="var(--color-proposer)"></circle>
-      <path data-draw d="M760 380 h320" stroke="var(--color-investor)"></path>
-      <path data-draw d="M760 372 v16 M1080 372 v16" stroke="var(--color-investor)"></path>
-      <path data-draw d="M720 120 v220" stroke="var(--color-partner)"></path>
-      <path data-draw d="M712 120 h16 M712 340 h16" stroke="var(--color-partner)"></path>
+    <g fill="none" stroke-width="2" stroke-linecap="round">
+      <!-- 椅子の側面図 -->
+      <path data-draw d="M210 200 V470" stroke="var(--color-ink)" stroke-opacity="0.55"></path>
+      <path data-draw d="M210 340 H400 V470" stroke="var(--color-ink)" stroke-opacity="0.55"></path>
+      <path data-draw d="M200 330 H410" stroke="var(--color-ink)" stroke-width="5" stroke-opacity="0.7"></path>
+      <path data-draw d="M210 230 Q 230 215 250 230 V300" stroke="var(--color-ink)" stroke-opacity="0.3"></path>
+      <!-- 寸法線 -->
+      <path data-draw d="M200 520 H410 M200 510 V530 M410 510 V530" stroke="var(--color-investor)"></path>
+      <path data-draw d="M460 330 V470 M450 330 H470 M450 470 H470" stroke="var(--color-partner)"></path>
+      <!-- 力の矢印（荷重） -->
+      <path
+        data-draw
+        d="M305 230 V318 M297 306 L305 318 L313 306"
+        stroke="var(--color-proposer)"
+        stroke-width="2.5"
+      ></path>
+      <circle data-draw cx="305" cy="330" r="46" stroke="var(--color-proposer)" stroke-dasharray="4 6"></circle>
     </g>
-    <text x="900" y="410" class="annotation" fill="var(--color-investor)" font-size="14">
-      W 320
-    </text>
-    <text x="660" y="236" class="annotation" fill="var(--color-partner)" font-size="14">
-      H 220
-    </text>
+    <g font-family="var(--font-mono)" font-size="14">
+      <text x="282" y="550" fill="var(--color-investor)">
+        W 420
+      </text>
+      <text x="478" y="405" fill="var(--color-partner)">
+        H 450
+      </text>
+      <text x="318" y="222" fill="var(--color-proposer-strong)">
+        F = 600 N
+      </text>
+      <text x="356" y="392" fill="var(--color-muted)">
+        FR1 / DP1
+      </text>
+    </g>
   </svg>
 
-  <div class="container-page relative py-24 sm:py-36">
+  <div class="container-page relative flex min-h-[min(calc(100svh-3.5rem),56rem)] flex-col justify-center py-20">
     {eyebrow && (
-      <p class="annotation mb-6 text-muted" data-reveal>
+      <p class="annotation mb-8 text-muted" data-reveal>
         {eyebrow}
       </p>
     )}
-    <h1 class="max-w-3xl text-5xl font-black sm:text-7xl" data-reveal data-reveal-delay="0.1">
-      {title}
+    <h1 class="text-[2.75rem] leading-[1.15] font-black sm:text-7xl lg:text-8xl" data-reveal data-reveal-delay="0.1">
+      {lines.map((line) => (
+        <span class="block">{line}</span>
+      ))}
     </h1>
-    <p class="mt-8 max-w-xl text-lg text-ink/80" data-reveal data-reveal-delay="0.2">
+    <p
+      class="mt-10 max-w-xl font-serif text-lg leading-loose text-ink/85 sm:text-xl"
+      data-reveal
+      data-reveal-delay="0.2"
+    >
       {lead}
     </p>
-    {ctaLabel && ctaHref && (
-      <a
-        href={ctaHref}
-        class="mt-10 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-bold text-paper transition hover:bg-proposer-strong"
-        data-reveal
-        data-reveal-delay="0.3"
-      >
-        {ctaLabel}
-        <span aria-hidden="true">→</span>
-      </a>
-    )}
+    <div class="mt-12 flex flex-wrap items-center gap-4" data-reveal data-reveal-delay="0.3">
+      {ctaLabel && ctaHref && (
+        <a
+          href={ctaHref}
+          class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-bold text-paper transition hover:bg-proposer-strong"
+        >
+          {ctaLabel}
+          <span aria-hidden="true">↓</span>
+        </a>
+      )}
+      {discord && (
+        <a
+          href={discord}
+          rel="noopener"
+          target="_blank"
+          class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-3 font-bold transition hover:bg-ink hover:text-paper"
+        >
+          Discord で話を聞く
+          <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
   </div>
 </section>

@@ -12,10 +12,13 @@
 - 文章は `src/content/`（トップページの構成は `src/content/pages/home.yaml`）。入力ルールの検証は `src/content.config.ts`（zod）
 - デザイントークンの正本は `tokens/tokens.json`（DTCG 形式）。`src/styles/tokens.css` は生成物で Git 管理外
 - `/lab/` はデザイン確認用ページ（トークン、図、全セクションの一覧）
-- トップの長文「設計論」は `home.yaml` の `essay` セクション。本文中の `[[modeling]]` や `[[modeling|モデル]]` は設計の要素のページへのリンク、`**強調**` は強調になる（`src/lib/inline.ts`）
-- 設計の要素のページは `src/content/elements/*.yaml`（ファイル名が URL）。章は「設計との関係・使い方・歴史・いま・設計会では」をそろえる（zod で検証）
-- 長文は「ブロック」（段落 `p`・`figure`・`illustration`・`steps`・`timeline`）を並べて書く。図は `src/components/figures/`（名前の一覧は `src/lib/figures.ts`）
+- トップページは入部を考える人への**説得の物語**。番号付きの章（statement / figure / map / tags / cards）を並べ、見出しだけ読んでも話がつながるように書く。出典や人名の注はトップに置かず、「設計を知る」のページに回す
+- 本文中の `[[modeling]]` や `[[modeling|モデル]]` は「設計を知る」のページへのリンク、`**強調**` は強調になる（`src/lib/inline.ts`）
+- 「設計を知る」（`/design/`）は `src/content/design/*.yaml`（ファイル名が URL）。**階層を混ぜない**：`layer: process` は設計のプロセス（5つの工程。章は `kind: step`）、`layer: lens` はどの工程にも通じる視点（モデル化・ヒューマンインターフェース・データ分析。章は「設計との関係・使い方・歴史・いま・設計会では」）。工程を視点と同じ並びに置かない
+- 長文は「ブロック」（段落 `p`・`figure`・`illustration`・`steps`・`timeline`）を並べて書く。図は `src/components/figures/`（名前の一覧は `src/lib/figures.ts`）。トップページでは図を `compact`（番号・出典なし）で出す
 - イラストは学生に描いてもらう。指定は `docs/illustrations.md`、画像ができるまでは「制作中」の枠が出る
+- GitHub と Discord のリンクは `src/content/site/links.yaml`（ヘッダーとフッターのアイコン、入部の章の Discord ボタン）
+- 活動の段階（なんでもプレゼン〜大プレゼン）、発案者・設計仲間・投資家の役割、プロジェクト紹介は古い情報なので使わない
 
 ## コマンド
 

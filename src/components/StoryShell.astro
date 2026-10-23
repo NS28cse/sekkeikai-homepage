@@ -1,0 +1,81 @@
+---
+// トップページの章（ストーリー）の共通の枠。
+// 広い画面では左に「番号・見出し・一文」を固定し、右に本文と図を流す。見出しだけ追っても話が通じる作り。
+// wide を付けると、見出しを上に置いて、図を横いっぱいに使う（設計の地図など）。
+import InlineText from "./InlineText.astro";
+import Illustration from "./Illustration.astro";
+
+interface Props {
+  id?: string;
+  number: string;
+  tone?: "light" | "dark";
+  eyebrow: string;
+  title: string;
+  lead: string;
+  body: string[];
+  illustration?: { id: string; caption: string; alt: string; src?: string; ratio?: "21:9" | "16:9" | "4:3" | "1:1" };
+  link?: { label: string; href: string };
+  wide?: boolean;
+}
+
+const { id, number, tone = "light", eyebrow, title, lead, body, illustration, link, wide = false } = Astro.props;
+const dark = tone === "dark";
+const titleId = `${id ?? `story-${number}`}-title`;
+---
+
+<section
+  id={id}
+  class:list={["scroll-mt-14 py-24 sm:py-32", dark ? "bg-blueprint-grid-dark tone-dark text-white" : "bg-paper"]}
+  aria-labelledby={titleId}
+>
+  <div class:list={["container-page", !wide && "lg:grid lg:grid-cols-12 lg:gap-16"]}>
+    <header class:list={[wide ? "max-w-3xl" : "lg:col-span-5"]}>
+      <div class:list={[!wide && "lg:sticky lg:top-28"]}>
+        <p class="flex items-center gap-3" data-reveal>
+          <span class:list={["font-mono text-sm", dark ? "text-proposer" : "text-proposer-strong"]}>{number}</span>
+          <span class:list={["h-px w-10", dark ? "bg-white/40" : "bg-ink/30"]} aria-hidden="true"></span>
+          <span class:list={["annotation", dark ? "text-white/70" : "text-muted"]}>{eyebrow}</span>
+        </p>
+        <h2 id={titleId} class="mt-5 text-[2rem] leading-tight font-black sm:text-5xl" data-reveal>
+          {title}
+        </h2>
+        <p
+          class:list={["mt-6 font-serif text-lg leading-relaxed sm:text-xl", dark ? "text-white/90" : "text-ink/85"]}
+          data-reveal
+        >
+          {lead}
+        </p>
+      </div>
+    </header>
+
+    <div class:list={[wide ? "mt-10" : "mt-10 lg:col-span-7 lg:mt-0"]}>
+      <div class:list={["story-body space-y-5", wide && "max-w-3xl", dark ? "text-white/85" : "text-ink/85"]}>
+        {body.map((text) => (
+          <p data-reveal>
+            <InlineText text={text} />
+          </p>
+        ))}
+      </div>
+      {illustration && <Illustration {...illustration} />}
+      <div class="mt-10">
+        <slot />
+      </div>
+      {link && (
+        <p class="mt-8" data-reveal>
+          <a
+            href={link.href}
+            class:list={[
+              "group inline-flex items-center gap-2 border-b-2 pb-1 font-bold",
+              dark ? "border-white/60 hover:border-white" : "border-investor text-investor",
+            ]}
+          >
+            {link.label}
+            <span class="transition group-hover:translate-x-1" aria-hidden="true">
+              →
+            </span>
+          </a>
+        </p>
+      )}
+    </div>
+  </div>
+</section>

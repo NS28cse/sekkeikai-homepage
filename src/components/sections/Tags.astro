@@ -1,33 +1,41 @@
 ---
-// キーワードをタグ状に並べるセクション。
-import SectionShell from "../SectionShell.astro";
+// 言葉を札（タグ）にして並べる章。「設計の対象は『もの』だけではない」などに使う。
+import StoryShell from "../StoryShell.astro";
 
 interface Props {
+  number: string;
   tone?: "light" | "dark";
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
-  body?: string;
+  lead: string;
+  body: string[];
   tags: string[];
+  illustration?: { id: string; caption: string; alt: string; src?: string; ratio?: "21:9" | "16:9" | "4:3" | "1:1" };
+  link?: { label: string; href: string };
 }
 
-const { tone, eyebrow, title, body, tags } = Astro.props;
+const { tags, ...story } = Astro.props;
+const dark = story.tone === "dark";
 ---
 
-<SectionShell tone={tone} eyebrow={eyebrow} title={title}>
-  {body && (
-    <p class="max-w-3xl text-lg" data-reveal>
-      {body}
-    </p>
-  )}
-  <ul class="mt-10 flex flex-wrap gap-3">
+<StoryShell {...story}>
+  <p class:list={["annotation mb-4", dark ? "text-white/60" : "text-muted"]} data-reveal>
+    設計できるものの例
+  </p>
+  <ul class="flex flex-wrap gap-2.5" data-reveal>
     {tags.map((tag, i) => (
       <li
-        class="rounded-full border border-ink/20 px-5 py-2 text-base"
-        data-reveal
-        data-reveal-delay={String((i % 6) * 0.05)}
+        class:list={[
+          "rounded-full border px-4 py-2 text-sm font-bold sm:text-base",
+          i % 4 === 0
+            ? "border-proposer-strong text-proposer-strong"
+            : dark
+              ? "border-white/30 text-white"
+              : "border-grid text-ink",
+        ]}
       >
         {tag}
       </li>
     ))}
   </ul>
-</SectionShell>
+</StoryShell>

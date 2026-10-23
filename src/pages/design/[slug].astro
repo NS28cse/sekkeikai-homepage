@@ -1,5 +1,6 @@
 ---
-// 設計の要素のページ（/elements/〇〇/）。中身は src/content/elements/〇〇.yaml。
+// 「設計を知る」のページ（/design/〇〇/）。中身は src/content/design/〇〇.yaml。
+// 階層（layer）を見出しの上に出し、「設計のプロセス」と「どの工程にも通じる視点」の関係がわかるようにする。
 // 広い画面では左に目次、本文の右に注を出す。
 import { getCollection, getEntries } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -9,55 +10,62 @@ import Illustration from "../../components/Illustration.astro";
 import { numberChapters } from "../../lib/blocks";
 
 export async function getStaticPaths() {
-  const elements = (await getCollection("elements")).sort((a, b) => a.data.order - b.data.order);
-  return elements.map((element, i) => ({
-    params: { slug: element.id },
-    props: { element, prev: elements[i - 1], next: elements[i + 1], total: elements.length },
+  // プロセスを先頭に、視点を order の順に並べる（前後のページへのリンクに使う）
+  const pages = (await getCollection("design")).sort((a, b) =>
+    a.data.layer === b.data.layer ? a.data.order - b.data.order : a.data.layer === "process" ? -1 : 1,
+  );
+  return pages.map((page, i) => ({
+    params: { slug: page.id },
+    props: { page, prev: pages[i - 1], next: pages[i + 1] },
   }));
 }
 
 interface Props {
-  element: CollectionEntry<"elements">;
-  prev?: CollectionEntry<"elements">;
-  next?: CollectionEntry<"elements">;
-  total: number;
+  page: CollectionEntry<"design">;
+  prev?: CollectionEntry<"design">;
+  next?: CollectionEntry<"design">;
 }
 
-const { element, prev, next, total } = Astro.props;
-const { title, en, order, question, summary, lead, hero, chapters, references } = element.data;
-const related = await getEntries(element.data.related);
-const numbered = numberChapters(chapters);
+const { page, prev, next } = Astro.props;
+const { title, en, layer, order, short, question, summary, lead, hero, chapters, references } = page.data;
+const related = await getEntries(page.data.related);
 
-// 章の種類ごとの見出しの上の小さなラベル
+// 章の種類ごとの、見出しの上の小さなラベル（label を書いた章はそちらを使う）
 const kindLabel = {
-  concept: "考え方",
+  concept: "全体像",
+  step: "工程",
   relation: "設計との関係",
   method: "設計での使い方",
   history: "歴史",
   now: "いま",
   activity: "設計会では",
 } as const;
+
+// 目次とリンクの行き先になる章の id。工程の章は step-1, step-2…（トップページの地図からリンクされる）
+let stepCount = 0;
+const withIds = numberChapters(chapters).map((c) => {
+  const id = c.kind === "step" ? `step-${++stepCount}` : c.kind;
+  const label = c.label ?? (c.kind === "step" ? `${kindLabel.step} ${stepCount}` : kindLabel[c.kind]);
+  return { ...c, id, label };
+});
+const layerLabel = layer === "process" ? "設計のプロセス" : `視点 ${order}`;
 const pad = (n: number) => String(n).padStart(2, "0");
 ---
 
-<Base title={`${title}（設計の要素 E${order}）`} description={summary} progress>
+<Base title={title} description={summary} progress>
   <header class="bg-blueprint-grid border-b border-grid">
     <div class="container-page py-16 sm:py-24">
       <p class="annotation text-muted">
-        <a href="/elements/" class="underline hover:text-investor">
-          設計の要素
+        <a href="/design/" class="underline hover:text-investor">
+          設計を知る
         </a>{" "}
-        / E{order} of {total}
+        / {layerLabel}
       </p>
-      <div class="mt-6 flex items-end gap-4 sm:gap-5">
-        <span class="font-mono text-5xl leading-none text-investor/25 sm:text-8xl" aria-hidden="true">
-          {pad(order)}
-        </span>
-        <div class="min-w-0">
-          <p class="annotation text-investor">{en}</p>
-          <h1 class="text-3xl font-black sm:text-6xl">{title}</h1>
-        </div>
-      </div>
+      <p class="annotation mt-8 text-investor">
+        {en}
+        {layer === "lens" && ` — ${short}`}
+      </p>
+      <h1 class="mt-2 text-4xl font-black sm:text-6xl">{title}</h1>
       <p class="mt-8 font-serif text-xl font-semibold sm:text-2xl">「{question}」</p>
       <p class="longform mt-6 max-w-[36em] text-ink/85">{lead}</p>
     </div>
@@ -68,10 +76,11 @@ const pad = (n: number) => String(n).padStart(2, "0");
       <div class="sticky top-24">
         <p class="annotation mb-3 text-muted">Contents</p>
         <ol class="space-y-1 text-sm">
-          {chapters.map((c, i) => (
+          {withIds.map((c) => (
             <li>
-              <a href={`#${c.kind}`} class="toc-link block border-l-2 border-grid py-1 pl-3 text-muted hover:text-ink">
-                <span class="font-mono text-xs text-investor">{pad(i + 1)}</span> {kindLabel[c.kind]}
+              <a href={`#${c.id}`} class="toc-link block border-l-2 border-grid py-1 pl-3 text-muted hover:text-ink">
+                {c.kind === "step" && <span class="block text-[0.7rem] text-investor">{c.label}</span>}
+                {c.kind === "step" ? c.heading : c.label}
               </a>
             </li>
           ))}
@@ -81,8 +90,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
             </a>
           </li>
         </ol>
-        <a href="/#essay" class="mt-8 block text-xs text-muted underline hover:text-investor">
-          ← 設計論に戻る
+        <a href="/#map" class="mt-8 block text-xs text-muted underline hover:text-investor">
+          ← 設計の地図に戻る
         </a>
       </div>
     </nav>
@@ -90,18 +99,18 @@ const pad = (n: number) => String(n).padStart(2, "0");
     <article class="max-w-[57rem]">
       {hero && <Illustration {...hero} />}
       <div class="longform">
-        {numbered.map((chapter, i) => (
+        {withIds.map((chapter) => (
           <section
-            id={chapter.kind}
+            id={chapter.id}
             class="scroll-mt-20 pt-10 first:pt-0"
-            aria-labelledby={`${chapter.kind}-title`}
+            aria-labelledby={`${chapter.id}-title`}
             data-toc-section
           >
             <p class="annotation text-investor" data-reveal>
-              {pad(i + 1)} — {kindLabel[chapter.kind]}
+              {chapter.label}
             </p>
             <h2
-              id={`${chapter.kind}-title`}
+              id={`${chapter.id}-title`}
               class="mt-2 max-w-[36em] text-2xl leading-snug font-bold sm:text-3xl"
               data-reveal
             >
@@ -114,7 +123,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
       <section
         id="references"
-        class="scroll-mt-20 mt-20 border-t border-grid pt-10"
+        class="mt-20 scroll-mt-20 border-t border-grid pt-10"
         aria-labelledby="references-title"
         data-toc-section
       >
@@ -150,11 +159,11 @@ const pad = (n: number) => String(n).padStart(2, "0");
             {related.map((r) => (
               <li>
                 <a
-                  href={`/elements/${r.id}/`}
+                  href={`/design/${r.id}/`}
                   class="block h-full rounded-card border border-grid p-5 transition hover:border-investor"
                 >
                   <p class="annotation text-investor">
-                    E{r.data.order} / {r.data.en}
+                    {r.data.layer === "process" ? "設計のプロセス" : `視点 ${r.data.order} — ${r.data.short}`}
                   </p>
                   <p class="mt-1 font-display text-xl font-bold">{r.data.title}</p>
                   <p class="mt-2 text-sm text-muted">{r.data.summary}</p>
@@ -167,23 +176,23 @@ const pad = (n: number) => String(n).padStart(2, "0");
     </article>
   </div>
 
-  <nav aria-label="前後の要素" class="border-t border-grid">
+  <nav aria-label="前後のページ" class="border-t border-grid">
     <div class="container-page grid gap-4 py-10 sm:grid-cols-3 sm:items-center">
       <div>
         {prev && (
-          <a href={`/elements/${prev.id}/`} class="group block">
-            <span class="annotation text-muted">← E{prev.data.order}</span>
+          <a href={`/design/${prev.id}/`} class="group block">
+            <span class="annotation text-muted">← 前へ</span>
             <span class="block font-display text-lg font-bold group-hover:text-investor">{prev.data.title}</span>
           </a>
         )}
       </div>
-      <a href="/#essay" class="text-center text-sm text-muted underline hover:text-investor">
-        設計論（トップページ）に戻る
+      <a href="/design/" class="text-center text-sm text-muted underline hover:text-investor">
+        設計を知る（一覧）
       </a>
       <div class="sm:text-right">
         {next && (
-          <a href={`/elements/${next.id}/`} class="group block">
-            <span class="annotation text-muted">E{next.data.order} →</span>
+          <a href={`/design/${next.id}/`} class="group block">
+            <span class="annotation text-muted">次へ →</span>
             <span class="block font-display text-lg font-bold group-hover:text-investor">{next.data.title}</span>
           </a>
         )}
