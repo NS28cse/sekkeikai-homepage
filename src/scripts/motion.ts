@@ -55,7 +55,8 @@ export function initMotion(): void {
         strokeDashoffset: 0,
         duration: draw,
         ease: "power2.inOut",
-        scrollTrigger: { trigger: path.closest("section") ?? path, start: "top 75%", once: true },
+        // 図の中の線は図が見えたときに、それ以外はセクションが見えたときに描く
+        scrollTrigger: { trigger: path.closest("figure, section") ?? path, start: "top 75%", once: true },
       },
     );
   });

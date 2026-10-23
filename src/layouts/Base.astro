@@ -6,15 +6,20 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  // true にすると、ヘッダーの下に「どこまで読んだか」の細い線を出す（長文のページ用）
+  progress?: boolean;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, progress = false } = Astro.props;
 const fullTitle = title === "設計会" ? "設計会 | 岡山県立大学 設計サークル" : `${title} | 設計会`;
+// mobile: false の項目は、スマホ幅ではヘッダーに出さない（フッターには全部出る）
 const nav = [
-  { href: "/#activities", label: "活動" },
-  { href: "/projects/", label: "プロジェクト" },
-  { href: "/news/", label: "お知らせ" },
-  { href: "/#join", label: "入部" },
+  { href: "/#essay", label: "設計論", mobile: true },
+  { href: "/elements/", label: "設計の要素", mobile: true },
+  { href: "/#activities", label: "活動", mobile: false },
+  { href: "/projects/", label: "プロジェクト", mobile: false },
+  { href: "/news/", label: "お知らせ", mobile: false },
+  { href: "/#join", label: "入部", mobile: true },
 ];
 ---
 
@@ -34,7 +39,7 @@ const nav = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=JetBrains+Mono:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=JetBrains+Mono:wght@500&display=swap"
     />
   </head>
   <body class="min-h-dvh">
@@ -45,6 +50,7 @@ const nav = [
       本文へスキップ
     </a>
     <header class="sticky top-0 z-40 border-b border-grid bg-paper/85 backdrop-blur">
+      {progress && <div class="absolute -bottom-px left-0 h-0.5 w-0 bg-proposer" data-progress aria-hidden="true" />}
       <div class="container-page flex h-14 items-center justify-between gap-4">
         <a href="/" class="flex items-center gap-2 font-display text-lg font-bold tracking-widest">
           <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
@@ -56,7 +62,7 @@ const nav = [
         <nav aria-label="メインメニュー">
           <ul class="flex gap-4 text-sm sm:gap-6">
             {nav.map((item) => (
-              <li>
+              <li class:list={[!item.mobile && "hidden md:block"]}>
                 <a href={item.href} class="hover:text-investor">
                   {item.label}
                 </a>
@@ -72,6 +78,17 @@ const nav = [
     </main>
 
     <footer class="border-t border-grid py-10 text-sm text-muted">
+      <nav aria-label="サイト内のページ" class="container-page mb-6">
+        <ul class="flex flex-wrap gap-x-6 gap-y-2">
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} class="hover:text-ink">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <div class="container-page flex flex-col gap-2 sm:flex-row sm:justify-between">
         <p>© 設計会（岡山県立大学）</p>
         <p>
@@ -85,7 +102,9 @@ const nav = [
 
     <script>
       import { initMotion } from "../scripts/motion";
+      import { initReading } from "../scripts/reading";
       initMotion();
+      initReading();
     </script>
   </body>
 </html>

@@ -1,0 +1,50 @@
+---
+// 名前（YAML の「type: figure」の name）から図のコンポーネントを選んで表示する。
+// 図を足すときは：figures/ にコンポーネントを作る → src/lib/figures.ts に名前を足す → ここの map に登録する
+import type { FigureName } from "../lib/figures";
+import DesignMapping from "./figures/DesignMapping.astro";
+import CostEscalation from "./figures/CostEscalation.astro";
+import DoubleDiamond from "./figures/DoubleDiamond.astro";
+import RequirementsLayers from "./figures/RequirementsLayers.astro";
+import VModel from "./figures/VModel.astro";
+import KanoModel from "./figures/KanoModel.astro";
+import KjMethod from "./figures/KjMethod.astro";
+import AbstractionLadder from "./figures/AbstractionLadder.astro";
+import BeamCalculator from "./figures/BeamCalculator.astro";
+import FittsDemo from "./figures/FittsDemo.astro";
+import Gulfs from "./figures/Gulfs.astro";
+import HcdCycle from "./figures/HcdCycle.astro";
+import Anscombe from "./figures/Anscombe.astro";
+import AnalysisCycle from "./figures/AnalysisCycle.astro";
+import ParetoFront from "./figures/ParetoFront.astro";
+import AhpExample from "./figures/AhpExample.astro";
+
+interface Props {
+  name: FigureName;
+  number?: number;
+}
+
+const components: Record<FigureName, (props: { number?: number }) => any> = {
+  "design-mapping": DesignMapping,
+  "cost-escalation": CostEscalation,
+  "double-diamond": DoubleDiamond,
+  "requirements-layers": RequirementsLayers,
+  "v-model": VModel,
+  "kano-model": KanoModel,
+  "kj-method": KjMethod,
+  "abstraction-ladder": AbstractionLadder,
+  "beam-calculator": BeamCalculator,
+  "fitts-demo": FittsDemo,
+  gulfs: Gulfs,
+  "hcd-cycle": HcdCycle,
+  anscombe: Anscombe,
+  "analysis-cycle": AnalysisCycle,
+  "pareto-front": ParetoFront,
+  "ahp-example": AhpExample,
+};
+
+const { name, number } = Astro.props;
+const Component = components[name];
+---
+
+<Component number={number} />

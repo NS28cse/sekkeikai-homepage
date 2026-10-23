@@ -1,0 +1,43 @@
+---
+// 文章の中の [[要素]] リンクと **強調** を表示する（書き方は src/lib/inline.ts）。
+// 存在しない要素の名前が書かれていたら、ビルドを止めて知らせる。
+import { getCollection } from "astro:content";
+import { parseInline } from "../lib/inline";
+
+interface Props {
+  text: string;
+}
+
+const tokens = parseInline(Astro.props.text);
+const elements = await getCollection("elements");
+const bySlug = new Map(elements.map((e) => [e.id, e]));
+
+for (const t of tokens) {
+  if (t.kind === "element" && !bySlug.has(t.slug)) {
+    throw new Error(
+      `文章の中の [[${t.slug}]] に対応する要素がありません（src/content/elements/${t.slug}.yaml を確認してください）`,
+    );
+  }
+}
+---
+
+{tokens.map((t) => {
+  if (t.kind === "text") return t.value;
+  if (t.kind === "strong") return <strong class="font-semibold">{t.value}</strong>;
+  const el = bySlug.get(t.slug)!;
+  return (
+    <a href={`/elements/${t.slug}/`} class="term">
+      {t.label ?? el.data.title}
+      <span class="term-index" aria-hidden="true">
+        E{el.data.order}
+      </span>
+      <span class="term-card" aria-hidden="true">
+        <span class="annotation block text-investor">
+          E{el.data.order} / {el.data.en}
+        </span>
+        <span class="mt-1 block font-display text-base font-bold">{el.data.title}</span>
+        <span class="mt-1 block text-muted">{el.data.summary}</span>
+      </span>
+    </a>
+  );
+})}

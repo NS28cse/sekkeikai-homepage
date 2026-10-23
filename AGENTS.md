@@ -11,7 +11,11 @@
 - 大学サークル「設計会」のサイト。Astro 7（静的出力）+ Tailwind CSS 4 + GSAP/Lenis
 - 文章は `src/content/`（トップページの構成は `src/content/pages/home.yaml`）。入力ルールの検証は `src/content.config.ts`（zod）
 - デザイントークンの正本は `tokens/tokens.json`（DTCG 形式）。`src/styles/tokens.css` は生成物で Git 管理外
-- `/lab/` はデザイン確認用ページ（トークンと全セクションの一覧）
+- `/lab/` はデザイン確認用ページ（トークン、図、全セクションの一覧）
+- トップの長文「設計論」は `home.yaml` の `essay` セクション。本文中の `[[modeling]]` や `[[modeling|モデル]]` は設計の要素のページへのリンク、`**強調**` は強調になる（`src/lib/inline.ts`）
+- 設計の要素のページは `src/content/elements/*.yaml`（ファイル名が URL）。章は「設計との関係・使い方・歴史・いま・設計会では」をそろえる（zod で検証）
+- 長文は「ブロック」（段落 `p`・`figure`・`illustration`・`steps`・`timeline`）を並べて書く。図は `src/components/figures/`（名前の一覧は `src/lib/figures.ts`）
+- イラストは学生に描いてもらう。指定は `docs/illustrations.md`、画像ができるまでは「制作中」の枠が出る
 
 ## コマンド
 

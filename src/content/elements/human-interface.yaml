@@ -1,0 +1,158 @@
+title: ヒューマンインターフェース
+en: Human Interface
+order: 4
+question: 人と人工物の境界を、どう設計するか
+summary: 人がどう見て、考え、手を動かすかを理解し、使い手にとって自然で誤りにくい「境界面」を設計する。
+lead: 人が使うものを設計するなら、人もまた設計の一部です。ヒューマンインターフェースとは、人と機械や情報、サービスが出会う境界面のこと。ボタンの形や画面の配置から、手順の流れや言葉づかいまで、人が迷うか、誤るかは、その境界の設計で決まります。
+hero:
+  id: E4-01
+  caption: 見る、触れる、聞く。人の感覚と、ものの手がかりが出会うところ。
+  alt: 人の手がつまみに触れ、目が表示を見て、耳がスピーカーからの音を聞いている様子を、一つの機器を囲むように描いた絵
+chapters:
+  - kind: concept
+    heading: 人を知ることから始まる
+    blocks:
+      - type: p
+        text: |-
+          人の知覚や記憶、手の動きには、科学的に調べられた特性と限界があります。たとえば、手を動かして目標を指し示すのにかかる時間は、目標までの距離が遠いほど、目標が小さいほど長くなります。心理学者ポール・フィッツが1954年に定式化したこの関係は「フィッツの法則」と呼ばれ、のちにマウスなどで画面上の目標を指す操作にも当てはまることが確かめられて、ボタンの大きさや配置を決める根拠として使われています。
+        note: |-
+          P. M. Fitts, "The information capacity of the human motor system in controlling the amplitude of movement", Journal of Experimental Psychology, 47(6), 1954。
+      - type: p
+        text: |-
+          下のデモで、実際に試してみてください。表示される丸を次々にクリック（タップ）すると、丸の大きさと距離から計算した「難しさ」と、かかった時間の関係がグラフに描かれていきます。
+      - type: figure
+        name: fitts-demo
+      - type: p
+        text: |-
+          認知科学者ドナルド・ノーマンらは、人がものを使うときに越えなければならない二つの「淵」を示しました。何をすればよいかわからない「実行の淵」と、結果がどうなったのかわからない「評価の淵」です。よいインターフェースは、操作の手がかり（シグニファイア）を示し、結果をすぐに返すことで、この二つの淵に橋を架けます。
+        note: |-
+          E. L. Hutchins, J. D. Hollan, D. A. Norman, "Direct Manipulation Interfaces", Human-Computer Interaction, 1(4), 1985。D. A. Norman, The Design of Everyday Things, 2013。
+      - type: figure
+        name: gulfs
+  - kind: relation
+    heading: 誤りの多くは、設計から生まれる
+    blocks:
+      - type: p
+        text: |-
+          使い手が操作を誤ったとき、それは使い手の責任でしょうか。第二次世界大戦中のB-17爆撃機などでは、フラップと着陸装置の操作レバーがよく似た形で並んでいたために、着陸したあと車輪を格納してしまう事故が繰り返されました。心理学者たちがそれぞれのつまみに違う形を付けると、取り違えは大きく減ったと伝えられています。「操縦士の不注意」とされていた事故の多くは、設計の問題でもあったのです。
+        note: |-
+          P. M. Fitts & R. E. Jones による操縦ミスの分析（1947年）と、A. Chapanis の回想による。逸話の細部（レバーかスイッチか、改良の効果など）は資料によって異なる。
+      - type: illustration
+        id: E4-02
+        ratio: "16:9"
+        caption: よく似た形のレバー（左）と、触っただけで区別できるつまみ（右）。
+        alt: 左側によく似た形の二本のレバーが並ぶ操縦席の一部、右側に先端が車輪の形とくさびの形になった二本のレバーを描いた比較の絵
+      - type: p
+        text: |-
+          1979年に米国スリーマイル島の原子力発電所で起きた事故でも、制御室の計器や警報の設計が、運転員の状況の判断を難しくしたことが、事故調査で指摘されました。たくさんの警報が一度に鳴り、本当に大事な情報が埋もれてしまったのです。この事故の後、原子力発電所の制御室の設計では、人間工学の検討が重視されるようになりました。
+        note: |-
+          Report of the President's Commission on the Accident at Three Mile Island（ケメニー委員会報告）, 1979。
+      - type: p
+        text: |-
+          ヒューマンインターフェースは、見た目を整える最後の仕上げではありません。人がどう使うかを考えずに決めた機能や構造は、あとから画面を整えても直せないことが多いのです。だから人の特性は、[[requirements]]の段階から設計に組み込む必要があります。
+  - kind: method
+    heading: 人間中心設計の進め方
+    blocks:
+      - type: p
+        text: |-
+          国際規格 ISO 9241-210 は、人間中心設計を次の活動の繰り返しとして定めています。設計会でも、この流れを基本にしています。
+        note: |-
+          ISO 9241-210:2019。使いやすさ（ユーザビリティ）は ISO 9241-11:2018 で、特定の利用者が特定の利用状況で特定の目標を達成するときの、有効さ、効率、満足度の度合いとして定義されている。
+      - type: figure
+        name: hcd-cycle
+      - type: steps
+        items:
+          - title: 利用状況を理解する
+            body: 誰が、どこで、何のために、どんな道具を持って使うのか。観察やインタビューで明らかにします。
+          - title: 利用者の要求を明らかにする
+            body: 理解した利用状況から、満たすべき要求を書き出します。使いやすさも「3回以内の操作で予約が完了する」のように、確かめられる形にします。
+          - title: 解決案をつくる
+            body: スケッチや紙の試作から始め、少しずつ本物に近づけます。
+          - title: 評価する
+            body: 実際の利用者に試してもらい、どこでつまずくかを観察します。ヤコブ・ニールセンは、5人ほどの利用者で試すだけでも主な問題の多くが見つかると述べました（ただし製品や利用者の多様さによって必要な人数は変わる、という反論もあります）。
+      - type: p
+        text: |-
+          専門家が設計を点検するための指針としては、ニールセンの「10のユーザビリティ・ヒューリスティクス」がよく知られています。システムの状態を見えるようにする、現実の世界の言葉に合わせる、誤りを防ぐ、覚えさせるより見てわかるようにする、などの原則です。
+        note: |-
+          J. Nielsen, "Enhancing the explanatory power of usability heuristics", CHI '94, 1994。最初の版は J. Nielsen & R. Molich, 1990。
+      - type: p
+        text: |-
+          色の違いだけで情報を伝えない、文字を十分な大きさと濃さで表示する、キーボードだけでも操作できるようにする。こうしたアクセシビリティへの配慮は、障害のある人のためだけでなく、明るい屋外でスマートフォンを見る人や、片手がふさがっている人にとっての使いやすさにもつながります。
+  - kind: history
+    heading: 機械を人に合わせる、という発想
+    blocks:
+      - type: timeline
+        items:
+          - year: 1940年代
+            title: 人間工学の誕生
+            body: 戦時中の航空機の操縦ミスの研究から、機械を人に合わせて設計するという考え方が生まれる。
+          - year: "1954"
+            title: フィッツの法則
+            body: 指し示す動作の速さと正確さの関係が定式化される。
+          - year: "1956"
+            title: マジカルナンバー7±2
+            body: ジョージ・ミラーが、人が一度に覚えておける量の限界を論じる（現在は、より少ない4つ前後とする研究が有力）。
+          - year: "1963"
+            title: Sketchpad
+            body: ペンで画面上の図形を直接操作できるシステムが登場する。
+          - year: "1968"
+            title: すべてのデモの母
+            body: ダグラス・エンゲルバートが、マウス、ウィンドウ、ハイパーテキスト、離れた場所との共同編集を一度に実演する。
+          - year: "1973"
+            title: Xerox Alto
+            body: ゼロックスのパロアルト研究所で、画面上の絵やウィンドウを操作するコンピュータがつくられる。
+          - year: "1984"
+            title: Macintosh
+            body: グラフィカルなユーザーインターフェースを備えたパソコンが一般向けに発売される。
+          - year: "1988"
+            title: 『誰のためのデザイン？』の原著
+            body: ノーマンが The Psychology of Everyday Things（のちに The Design of Everyday Things と改題。邦訳は1990年）で、日用品の使いにくさを通して人間中心の設計を説く。
+          - year: "1997"
+            title: ユニバーサルデザインの7原則
+            body: ロナルド・メイスらが、できるだけ多くの人が使える設計の原則をまとめる。
+          - year: "2007"
+            title: マルチタッチの普及
+            body: 指で画面を直接操作するスマートフォンが登場し、インターフェースの前提が大きく変わる。
+  - kind: now
+    heading: 画面の外へ広がる境界
+    blocks:
+      - type: p
+        text: |-
+          スマートフォン、音声アシスタント、車の運転支援、そして対話型のAI。人と人工物の境界は、画面やボタンだけではなくなりました。音声や身ぶり、さらには人の意図を推し量って先回りするシステムが増えるほど、「いまシステムが何をしようとしているのか」を人が理解できるように設計することが重要になっています。
+      - type: p
+        text: |-
+          アクセシビリティは、配慮から義務へと変わりつつあります。日本では2024年4月に改正障害者差別解消法が施行され、事業者による「合理的配慮の提供」が義務になりました。ウェブについては、W3C の WCAG 2.2（2023年）や日本産業規格 JIS X 8341-3 が、設計の基準として参照されています。
+        note: |-
+          障害を理由とする差別の解消の推進に関する法律（2021年改正、2024年4月1日施行）。WCAG 2.2 は2023年10月に W3C 勧告となった。
+      - type: p
+        text: |-
+          このサイト自体も、見出しの階層を守り、画像に代わりの文章を付け、端末で「視差効果を減らす」設定をしている人にはアニメーションを止めるようにつくっています。
+  - kind: activity
+    heading: 部員どうしで、試して、観察する
+    blocks:
+      - type: p
+        text: |-
+          設計会のプロジェクトの多くは、最終的に人が使うものです。設計段階では、ペルソナを立てて利用状況を想定し、紙の試作品を部員どうしで試して、どこで迷うかを観察します。説明しないと使えない部分は、設計を見直す候補です。
+      - type: p
+        text: |-
+          大学には、デザインを専門に学ぶ学生もいます。設計会では、見た目の美しさと使いやすさ、技術的に実現できるかどうかを一緒に考えられるよう、分野の違う学生が意見を交わすことを大切にしています。
+references:
+  - text: P. M. Fitts, "The information capacity of the human motor system in controlling the amplitude of movement", Journal of Experimental Psychology, 47(6), pp.381–391, 1954.
+    url: https://doi.org/10.1037/h0055392
+  - text: I. S. MacKenzie, "Fitts' law as a research and design tool in human-computer interaction", Human-Computer Interaction, 7(1), 1992.
+    url: https://doi.org/10.1207/s15327051hci0701_3
+  - text: D. A. Norman, The Design of Everyday Things, Revised and Expanded Edition, Basic Books, 2013（邦訳『誰のためのデザイン？ 増補・改訂版』新曜社, 2015年）.
+  - text: E. L. Hutchins, J. D. Hollan, D. A. Norman, "Direct Manipulation Interfaces", Human-Computer Interaction, 1(4), 1985.
+  - text: ISO 9241-210:2019 Ergonomics of human-system interaction — Part 210, ISO 9241-11:2018 — Part 11.
+  - text: J. Nielsen, "10 Usability Heuristics for User Interface Design", Nielsen Norman Group.
+    url: https://www.nngroup.com/articles/ten-usability-heuristics/
+  - text: J. Nielsen, "Why You Only Need to Test with 5 Users", Nielsen Norman Group, 2000.
+    url: https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/
+  - text: W3C, Web Content Accessibility Guidelines (WCAG) 2.2, 2023.
+    url: https://www.w3.org/TR/WCAG22/
+  - text: 内閣府「障害を理由とする差別の解消の推進」.
+    url: https://www8.cao.go.jp/shougai/suishin/sabekai.html
+related:
+  - requirements
+  - ideation
+  - data-analysis

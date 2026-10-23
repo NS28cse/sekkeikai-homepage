@@ -23,8 +23,10 @@
     line-height: 1.35;
     letter-spacing: 0.04em;
     text-wrap: balance;
-    /* 日本語を文節で改行する（対応ブラウザのみ） */
+    /* 日本語を文節で改行する（対応ブラウザのみ）。
+       「ヒューマンインターフェース」のような長い語が画面からはみ出すときだけ、語の途中でも改行する */
     word-break: auto-phrase;
+    overflow-wrap: anywhere;
   }
 
   :focus-visible {
@@ -102,6 +104,131 @@
   .prose-ja :where(a) {
     color: var(--color-investor);
     text-decoration: underline;
+  }
+
+  /* ── 長文（設計論・要素のページ） ──
+     本文は明朝体で、1 行を 36 字前後に抑えて読みやすくする。
+     広い画面では本文の右に注（.sidenote）を並べ、狭い画面では段落の下に出す */
+  .longform {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    line-height: 2.05;
+    letter-spacing: 0.04em;
+    text-wrap: pretty;
+    line-break: strict;
+  }
+  @media (min-width: 640px) {
+    .longform {
+      font-size: 1.125rem;
+    }
+  }
+  .longform-row {
+    display: grid;
+    gap: 0.5rem;
+    margin-block: 1.4em;
+  }
+  @media (min-width: 1024px) {
+    .longform-row {
+      grid-template-columns: minmax(0, 36em) minmax(0, 13rem);
+      column-gap: 2.5rem;
+      align-items: start;
+    }
+  }
+
+  .sidenote {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+    color: var(--color-muted);
+    border-left: 2px solid var(--color-grid);
+    padding-left: 0.875rem;
+  }
+  @media (min-width: 1024px) {
+    .sidenote {
+      margin-top: 0.45rem;
+    }
+  }
+  .note-ref {
+    font-family: var(--font-mono);
+    font-size: 0.68em;
+    color: var(--color-investor);
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.15em;
+  }
+
+  /* 本文中の「設計の要素」へのリンク。マウスを乗せると要素の概要が出る */
+  .term {
+    position: relative;
+    font-weight: 600;
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-investor);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.32em;
+    transition: color 0.2s;
+  }
+  .term:hover {
+    color: var(--color-investor);
+  }
+  .term-index {
+    font-family: var(--font-mono);
+    font-size: 0.62em;
+    font-weight: 500;
+    color: var(--color-investor);
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.12em;
+    letter-spacing: 0;
+  }
+  .term-card {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 0.6rem);
+    z-index: 30;
+    width: 17rem;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    border: 1px solid var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-grid);
+  }
+  @media (hover: hover) {
+    .term:hover .term-card,
+    .term:focus-visible .term-card {
+      display: block;
+    }
+  }
+
+  /* SVG の図の中のリンク（要素の地図） */
+  .map-node rect {
+    transition:
+      fill 0.2s,
+      stroke 0.2s;
+  }
+  .map-node:hover rect,
+  .map-node:focus-visible rect {
+    fill: var(--color-investor);
+    stroke: var(--color-investor);
+  }
+  .map-node:hover text,
+  .map-node:focus-visible text {
+    fill: var(--color-paper);
+  }
+  .map-node:focus-visible {
+    outline: none;
+  }
+
+  /* 目次で、いま読んでいる章 */
+  .toc-link[aria-current="true"] {
+    color: var(--color-ink);
+    border-color: var(--color-investor);
   }
 }
 

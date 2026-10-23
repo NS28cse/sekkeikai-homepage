@@ -7,6 +7,8 @@
 //   4. 本番（sekkeikai-opu）に移すときに、public/admin/config.yml の sections.types に入力欄を足す
 import type { Section } from "../content.config";
 import Hero from "./sections/Hero.astro";
+import Essay from "./sections/Essay.astro";
+import Elements from "./sections/Elements.astro";
 import Statement from "./sections/Statement.astro";
 import Flow from "./sections/Flow.astro";
 import Steps from "./sections/Steps.astro";
@@ -23,6 +25,8 @@ interface Props {
 
 const components = {
   hero: Hero,
+  essay: Essay,
+  elements: Elements,
   statement: Statement,
   flow: Flow,
   steps: Steps,

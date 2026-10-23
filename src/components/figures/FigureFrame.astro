@@ -1,0 +1,28 @@
+---
+// 図の共通の枠（番号・題・説明・出典）。
+// scroll を付けると、スマホ幅では図を縮めすぎずに横スクロールで見せる（文字が小さくなりすぎないように）。
+interface Props {
+  number?: number;
+  title: string;
+  caption?: string;
+  source?: string;
+  scroll?: boolean;
+}
+
+const { number, title, caption, source, scroll = false } = Astro.props;
+---
+
+<figure class="my-14 font-sans text-base leading-relaxed tracking-normal" data-reveal>
+  <figcaption class="mb-4 flex items-baseline gap-3">
+    <span class="annotation shrink-0 text-investor">Fig. {number ?? "–"}</span>
+    <span class="font-display text-lg font-bold">{title}</span>
+  </figcaption>
+  <div class:list={["rounded-card border border-grid bg-paper p-4 sm:p-6", scroll && "overflow-x-auto"]}>
+    <div class:list={[scroll && "min-w-[34rem]"]}>
+      <slot />
+    </div>
+  </div>
+  {scroll && <p class="annotation mt-2 text-muted normal-case sm:hidden">← 図は横にスクロールできます →</p>}
+  {caption && <p class="mt-3 text-sm text-muted">{caption}</p>}
+  {source && <p class="mt-1 text-xs text-muted">出典：{source}</p>}
+</figure>

@@ -1,6 +1,7 @@
-import { defineCollection } from "astro:content";
+import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { figureNames } from "./lib/figures";
 
 // エラーメッセージを日本語にする（CI のログで読めるように）
 z.config(z.locales.ja());
@@ -37,6 +38,41 @@ const projects = defineCollection({
 
 const tone = z.enum(["light", "dark"]).default("light");
 
+// 長文（設計論・要素のページ）は「ブロック」を上から並べて書く。
+// 段落の text には [[要素の名前]] でリンク、**強調** が書ける（src/lib/inline.ts）。
+const illustration = {
+  // イラスト指定書（docs/illustrations.md）の番号。例: E3-01
+  id: z.string().regex(/^[A-Z0-9]+-\d{2}$/, { message: "イラストの番号は E3-01 のような形で書いてください" }),
+  caption: z.string().max(80),
+  alt: z.string().max(120),
+  // 画像ができたら public/uploads/illustrations/ に置いてパスを書く。空のあいだは「制作中」の枠が出る
+  src: z.string().optional(),
+  ratio: z.enum(["21:9", "16:9", "4:3", "1:1"]).default("16:9"),
+};
+
+const block = z.discriminatedUnion("type", [
+  // 段落。note は欄外の注（出典や補足）
+  z.object({ type: z.literal("p"), text: z.string().max(600), note: z.string().max(300).optional() }),
+  z.object({ type: z.literal("figure"), name: z.enum(figureNames) }),
+  z.object({ type: z.literal("illustration"), ...illustration }),
+  z.object({
+    type: z.literal("steps"),
+    items: z
+      .array(z.object({ title: z.string().max(30), body: z.string().max(240) }))
+      .min(1)
+      .max(8),
+  }),
+  z.object({
+    type: z.literal("timeline"),
+    items: z
+      .array(z.object({ year: z.string().max(14), title: z.string().max(40), body: z.string().max(200) }))
+      .min(1)
+      .max(16),
+  }),
+]);
+
+export type Block = z.infer<typeof block>;
+
 const section = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("hero"),
@@ -45,6 +81,24 @@ const section = z.discriminatedUnion("type", [
     lead: z.string().max(160),
     ctaLabel: z.string().max(20).optional(),
     ctaHref: z.string().optional(),
+  }),
+  z.object({
+    type: z.literal("essay"),
+    tone,
+    eyebrow: z.string().max(60).optional(),
+    title: z.string().max(40),
+    lead: z.string().max(300),
+    chapters: z
+      .array(z.object({ heading: z.string().max(40), blocks: z.array(block).min(1).max(20) }))
+      .min(1)
+      .max(12),
+  }),
+  z.object({
+    type: z.literal("elements"),
+    tone,
+    eyebrow: z.string().max(60).optional(),
+    title: z.string().max(40),
+    body: z.string().max(300).optional(),
   }),
   z.object({
     type: z.literal("statement"),
@@ -149,4 +203,36 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { news, projects, pages };
+// 設計の要素（/elements/〇〇/ のページ）。ファイル名がそのまま URL になる（例: modeling.yaml → /elements/modeling/）
+// どのページにも「設計との関係・使い方・歴史・いま・設計会では」の章をそろえる。
+const chapterKinds = ["concept", "relation", "method", "history", "now", "activity"] as const;
+const requiredKinds = ["relation", "method", "history", "now", "activity"] as const;
+
+const elements = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/content/elements" }),
+  schema: z.object({
+    title: z.string().max(20),
+    en: z.string().max(30),
+    order: z.number().int().min(1),
+    question: z.string().max(40),
+    summary: z.string().max(120),
+    lead: z.string().max(300),
+    hero: z.object(illustration).optional(),
+    chapters: z
+      .array(
+        z.object({ kind: z.enum(chapterKinds), heading: z.string().max(40), blocks: z.array(block).min(1).max(20) }),
+      )
+      .min(requiredKinds.length)
+      .max(10)
+      .refine((chapters) => requiredKinds.every((k) => chapters.some((c) => c.kind === k)), {
+        message: `章（chapters）には kind が ${requiredKinds.join(" / ")} のものを 1 つずつ入れてください`,
+      }),
+    references: z
+      .array(z.object({ text: z.string().max(240), url: z.url().optional() }))
+      .max(30)
+      .default([]),
+    related: z.array(reference("elements")).max(4).default([]),
+  }),
+});
+
+export const collections = { news, projects, pages, elements };

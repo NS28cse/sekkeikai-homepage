@@ -1,0 +1,83 @@
+---
+// 「設計」を中心に、設計の要素を六角形に並べた地図。各要素はそのページへのリンク。
+// 中心からの線は「どれも設計の一部」、外周の点線は「要素どうしも影響しあう」ことを表す。
+import { getCollection } from "astro:content";
+
+const elements = (await getCollection("elements")).sort((a, b) => a.data.order - b.data.order);
+const cx = 410;
+const cy = 250;
+const rx = 290;
+const ry = 180;
+const nodes = elements.map((el, i) => {
+  const a = -Math.PI / 2 + (i * 2 * Math.PI) / elements.length;
+  return { el, x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) };
+});
+const ring = nodes.map((n, i) => `${i === 0 ? "M" : "L"}${n.x.toFixed(1)} ${n.y.toFixed(1)}`).join(" ") + " Z";
+const w = 256;
+const h = 68;
+---
+
+<svg viewBox="0 0 820 500" class="w-full" role="group" aria-label="設計の要素の地図">
+  <path d={ring} fill="none" stroke="var(--color-grid)" stroke-width="2" stroke-dasharray="6 6" />
+  {nodes.map((n) => (
+    <path
+      data-draw
+      d={`M${cx} ${cy} L${n.x.toFixed(1)} ${n.y.toFixed(1)}`}
+      stroke="var(--color-investor)"
+      stroke-width="1.5"
+      stroke-opacity="0.6"
+    />
+  ))}
+  <circle cx={cx} cy={cy} r="74" fill="var(--color-ink)" />
+  <circle data-draw cx={cx} cy={cy} r="86" fill="none" stroke="var(--color-proposer)" stroke-width="2" />
+  <text
+    x={cx}
+    y={cy + 4}
+    text-anchor="middle"
+    font-size="34"
+    font-weight="900"
+    fill="var(--color-paper)"
+    font-family="var(--font-display)"
+  >
+    設計
+  </text>
+  <text
+    x={cx}
+    y={cy + 30}
+    text-anchor="middle"
+    font-size="12"
+    fill="var(--color-paper)"
+    fill-opacity="0.7"
+    font-family="var(--font-mono)"
+    letter-spacing="3"
+  >
+    DESIGN
+  </text>
+  {nodes.map((n) => (
+    <a href={`/elements/${n.el.id}/`} class="map-node">
+      <rect
+        x={n.x - w / 2}
+        y={n.y - h / 2}
+        width={w}
+        height={h}
+        rx="10"
+        fill="var(--color-paper)"
+        stroke="var(--color-ink)"
+        stroke-width="1.5"
+      />
+      <text x={n.x - w / 2 + 14} y={n.y - 8} font-size="12" font-family="var(--font-mono)" fill="var(--color-investor)">
+        E{n.el.data.order} / {n.el.data.en}
+      </text>
+      <text
+        x={n.x - w / 2 + 14}
+        y={n.y + 19}
+        font-size="18"
+        font-weight="700"
+        font-family="var(--font-display)"
+        fill="var(--color-ink)"
+      >
+        {n.el.data.title}
+      </text>
+    </a>
+  ))}
+</svg>
