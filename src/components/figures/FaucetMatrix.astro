@@ -1,0 +1,77 @@
+---
+// 蛇口の二つの設計案を「設計マトリクス」で比べる部品（図 design-mapping と faucet の中で使う）。
+// X … その設計パラメータ（列）を動かすと、その機能（行）が変わる
+const designs = [
+  {
+    name: "2ハンドル混合栓",
+    dps: ["湯のハンドル", "水のハンドル"],
+    matrix: [
+      [true, true],
+      [true, true],
+    ],
+    verdict: "扱いにくい",
+    note: "どちらを回しても、量と温度が同時に変わる（連成設計）",
+  },
+  {
+    name: "シングルレバー混合栓",
+    dps: ["レバーの上下", "レバーの左右"],
+    matrix: [
+      [true, false],
+      [false, true],
+    ],
+    verdict: "扱いやすい",
+    note: "上下で量、左右で温度。ひとつの操作がひとつの機能に対応する（非連成設計）",
+  },
+];
+const frs = ["流量", "温度"];
+---
+
+<div class="grid gap-4 md:grid-cols-2">
+  {designs.map((d) => (
+    <div class="rounded-md border border-grid p-4">
+      <p class="font-display font-bold">{d.name}</p>
+      <table class="mt-3 w-full border-collapse text-center text-sm">
+        <caption class="sr-only">{d.name}の設計マトリクス</caption>
+        <thead>
+          <tr>
+            <td />
+            {d.dps.map((dp) => (
+              <th scope="col" class="px-2 pb-2 font-normal text-muted">
+                {dp}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {frs.map((fr, r) => (
+            <tr>
+              <th scope="row" class="pr-2 text-left font-normal text-muted">
+                {fr}
+              </th>
+              {d.matrix[r].map((x) => (
+                <td class="border border-grid py-2 font-mono text-lg">
+                  {x ? <span class="font-bold text-link">X</span> : <span class="text-muted/60">0</span>}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p class="mt-3 text-sm">
+        <span
+          class:list={[
+            "mr-2 rounded px-2 py-0.5 text-xs font-bold text-paper",
+            d.matrix[0][1] ? "bg-accent-strong" : "bg-positive",
+          ]}
+        >
+          {d.verdict}
+        </span>
+        {d.note}
+      </p>
+    </div>
+  ))}
+</div>
+<p class="mt-3 text-xs text-muted">
+  <span class="font-mono font-bold text-link">X</span> … その部分を動かすと、その機能が変わる ／
+  <span class="font-mono">0</span> … 変わらない
+</p>

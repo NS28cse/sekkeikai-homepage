@@ -1,0 +1,23 @@
+---
+// 同じ要求（量と温度を調節したい）に対する二つの蛇口を、設計マトリクスで比べる図。
+import FigureFrame from "./FigureFrame.astro";
+import FaucetMatrix from "./FaucetMatrix.astro";
+
+interface Props {
+  number?: number;
+  compact?: boolean;
+}
+---
+
+<FigureFrame
+  number={Astro.props.number}
+  compact={Astro.props.compact}
+  title="同じ要求、二つの設計"
+  caption="行は満たしたい機能、列は設計で決める部分。X は「その部分を動かすと、その機能が変わる」ことを表す。X が斜めに並ぶほど、操作と機能が一対一に対応した、使いやすく直しやすい設計になる。"
+  source="N. P. Suh, The Principles of Design (1990) の例をもとに作図"
+>
+  <p class="mb-4 text-sm text-muted">
+    要求：<span class="font-bold text-ink">お湯の量と温度を、好きなように調節したい</span>
+  </p>
+  <FaucetMatrix />
+</FigureFrame>

@@ -38,6 +38,7 @@ export const figureNames = [
   "er-state",
   "confounder",
   "methods-timeline",
+  "faucet",
 ] as const;
 
 export type FigureName = (typeof figureNames)[number];
