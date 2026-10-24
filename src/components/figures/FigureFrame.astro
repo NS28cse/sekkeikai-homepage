@@ -2,6 +2,7 @@
 // 図の共通の枠（番号・題・説明・出典）。
 // scroll を付けると、スマホ幅では図を縮めすぎずに横スクロールで見せる（文字が小さくなりすぎないように）。
 // compact を付けると、番号・題・説明・出典を出さず図だけにする（トップページの章の中で使う）。
+// wide を付けると、横スクロールのときの最小幅を広くする（文字の多い横長の図用）。
 interface Props {
   number?: number;
   compact?: boolean;
@@ -9,9 +10,10 @@ interface Props {
   caption?: string;
   source?: string;
   scroll?: boolean;
+  wide?: boolean;
 }
 
-const { number, compact = false, title, caption, source, scroll = false } = Astro.props;
+const { number, compact = false, title, caption, source, scroll = false, wide = false } = Astro.props;
 ---
 
 <figure
@@ -26,7 +28,7 @@ const { number, compact = false, title, caption, source, scroll = false } = Astr
     </figcaption>
   )}
   <div class:list={["rounded-card border border-grid bg-paper p-4 sm:p-6", scroll && "overflow-x-auto"]}>
-    <div class:list={[scroll && "min-w-[34rem]"]}>
+    <div class:list={[scroll && (wide ? "min-w-[44rem]" : "min-w-[34rem]")]}>
       <slot />
     </div>
   </div>
