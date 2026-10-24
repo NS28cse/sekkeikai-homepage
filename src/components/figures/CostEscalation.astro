@@ -1,5 +1,5 @@
 ---
-// 要求の誤りを直すコストが、工程が進むほどどれだけ増えるか（NASA の見積もり）。横軸は対数目盛。
+// 要求の誤りを直すコストが、開発の段階が進むほどどれだけ増えるか（NASA の見積もり）。横軸は対数目盛。
 // スマホでも横スクロールせずに読めるよう、SVG ではなく HTML の帯で描く（帯の位置は % で計算）。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -28,12 +28,12 @@ const fmt = (v: number) => v.toLocaleString("ja-JP");
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="誤りは、見つけるのが遅いほど高くつく"
-  caption="要求の段階で紛れ込んだ誤りを、どの工程で見つけて直すかによる修正コストの見積もり。要求の段階で直すコストを1としたときの倍率で、横軸は対数目盛（1目盛りで10倍）。帯の幅は推定方法による違い。"
+  caption="要求の段階で紛れ込んだ誤りを、どの段階で見つけて直すかによる修正コストの見積もり。要求の段階で直すコストを1としたときの倍率で、横軸は対数目盛（1目盛りで10倍）。帯の幅は推定方法による違い。"
   source="J. M. Stecklein ほか, Error Cost Escalation Through the Project Life Cycle, NASA Johnson Space Center (2004)"
 >
   <div
     role="img"
-    aria-label="修正コストの倍率。要求1倍、設計3〜8倍、製造7〜16倍、統合・試験21〜78倍、運用29〜1500倍以上。"
+    aria-label="修正コストの倍率。要求1倍、設計3〜8倍、製造7〜16倍、統合・試験21〜78倍、運用29〜1,500倍以上。"
   >
     <p class="mb-4 text-xs text-muted">要求の段階で直すコストを 1 としたとき（1目盛りで10倍）</p>
     <ol class="space-y-4">

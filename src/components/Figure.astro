@@ -1,9 +1,7 @@
 ---
 // 名前（YAML の「type: figure」の name）から図のコンポーネントを選んで表示する。
-// 図を足すときは：figures/ にコンポーネントを作る → src/lib/figures.ts に名前を足す → ここの map に登録する
+// 図を足すときは：figures/ にコンポーネントをつくる → src/lib/figures.ts に名前を足す → ここの map に登録する
 import type { FigureName } from "../lib/figures";
-import DesignMapping from "./figures/DesignMapping.astro";
-import Faucet from "./figures/Faucet.astro";
 import DesignProcess from "./figures/DesignProcess.astro";
 import CostEscalation from "./figures/CostEscalation.astro";
 import DoubleDiamond from "./figures/DoubleDiamond.astro";
@@ -20,6 +18,7 @@ import Anscombe from "./figures/Anscombe.astro";
 import AnalysisCycle from "./figures/AnalysisCycle.astro";
 import ParetoFront from "./figures/ParetoFront.astro";
 import AhpExample from "./figures/AhpExample.astro";
+import DoorSignifier from "./figures/DoorSignifier.astro";
 
 interface Props {
   name: FigureName;
@@ -29,8 +28,6 @@ interface Props {
 }
 
 const components: Record<FigureName, (props: { number?: number; compact?: boolean }) => any> = {
-  "design-mapping": DesignMapping,
-  faucet: Faucet,
   "design-process": DesignProcess,
   "cost-escalation": CostEscalation,
   "double-diamond": DoubleDiamond,
@@ -47,6 +44,7 @@ const components: Record<FigureName, (props: { number?: number; compact?: boolea
   "analysis-cycle": AnalysisCycle,
   "pareto-front": ParetoFront,
   "ahp-example": AhpExample,
+  "door-signifier": DoorSignifier,
 };
 
 const { name, number, compact } = Astro.props;

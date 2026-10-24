@@ -1,12 +1,15 @@
 ---
-// 「設計を知る」の入口（/design/）。設計のプロセス（工程）と、どの工程にも通じる視点を、階層がわかるように並べる。
-// どの一覧も src/content/design/ のページ（YAML）から作るので、ページを足せば自動で増える。
-// 地図（工程 × 視点の表）は、工程の章と各視点の perStep から作る（src/components/DesignMatrix.astro）。
+// 「設計を知る」の入口（/design/）。階層がわかるように、次の順に並べる：
+//   流れ（プロセスの全体 → 5 つの工程）→ 例（事例のページ）→ 視点 → 工程 × 視点の地図 → そのほかのテーマ
+// どの一覧も src/content/design/ のページ（YAML）からつくるので、ページを足せば自動で増える。
+// 地図（工程 × 視点の表）は、工程のページと各視点の perStep からつくる（src/components/DesignMatrix.astro）。
 import Base from "../../layouts/Base.astro";
 import DesignMatrix from "../../components/DesignMatrix.astro";
-import { getDesignPages } from "../../lib/design";
+import { getDesignPages, getProcessSteps } from "../../lib/design";
 
 const [process] = await getDesignPages("process");
+const steps = await getProcessSteps();
+const cases = await getDesignPages("case");
 const lenses = await getDesignPages("lens");
 const topics = await getDesignPages("topic");
 ---
@@ -19,8 +22,8 @@ const topics = await getDesignPages("topic");
     <div class="container-page py-16 sm:py-24">
       <h1 class="text-4xl font-black sm:text-6xl">設計を知る</h1>
       <p class="mt-8 max-w-2xl font-serif text-lg leading-loose text-ink/85 sm:text-xl">
-        設計は、工程を順に進めながら、どの工程でも複数の視点で考える営みです。
-        まず全体の流れを知り、次にそれを支える視点を一つずつ深めてください。
+        設計は、五つの工程を行き来しながら進みます。
+        どの工程でも、人から、データから、モデルから、といういくつかの視点で考えます。
       </p>
     </div>
   </header>
@@ -39,9 +42,51 @@ const topics = await getDesignPages("topic");
           </h2>
           <p class="mt-4 max-w-2xl">{process.data.summary}</p>
           <p class="mt-6 font-bold">
-            読む <span aria-hidden="true">→</span>
+            全体を読む <span aria-hidden="true">→</span>
           </p>
         </a>
+        <ol class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {steps.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                class="group flex h-full flex-col rounded-card border border-grid bg-paper p-5 transition hover:border-link"
+              >
+                <p class="annotation text-accent-strong">
+                  工程 {s.n} / {s.sub}
+                </p>
+                <p class="mt-1 font-display text-xl font-bold group-hover:text-link">{s.title}</p>
+                <p class="mt-2 text-sm text-ink/80">「{s.question}」</p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
+    {cases.length > 0 && (
+      <section aria-labelledby="cases-title">
+        <p class="annotation text-accent-strong">例で見る</p>
+        <h2 id="cases-title" class="mt-4 text-2xl font-bold sm:text-3xl">
+          設計の流れの例
+        </h2>
+        <p class="mt-3 max-w-2xl text-ink/85">
+          一つのテーマを、五つの工程で最後までたどった例です。設計会の活動も、この流れで進みます。
+        </p>
+        <ul class="mt-8 grid gap-4 md:grid-cols-2">
+          {cases.map((c) => (
+            <li>
+              <a
+                href={`/design/${c.id}/`}
+                class="group flex h-full flex-col rounded-card border border-grid bg-paper p-6 transition hover:border-link"
+              >
+                <p class="annotation text-link">{c.data.short}</p>
+                <p class="mt-2 font-display text-2xl font-bold group-hover:text-link">{c.data.title}</p>
+                <p class="mt-4 flex-1 text-sm text-ink/85">{c.data.summary}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     )}
 
@@ -74,6 +119,14 @@ const topics = await getDesignPages("topic");
       </section>
     )}
 
+    <section aria-labelledby="matrix-title">
+      <p class="annotation text-accent-strong">組み合わせを見る</p>
+      <h2 id="matrix-title" class="mt-4 mb-8 text-2xl font-bold sm:text-3xl">
+        工程 × 視点の地図
+      </h2>
+      <DesignMatrix />
+    </section>
+
     {topics.length > 0 && (
       <section aria-labelledby="topics-title">
         <p class="annotation text-accent-strong">そのほかのテーマ</p>
@@ -96,13 +149,5 @@ const topics = await getDesignPages("topic");
         </ul>
       </section>
     )}
-
-    <section aria-labelledby="matrix-title">
-      <p class="annotation text-accent-strong">組み合わせを見る</p>
-      <h2 id="matrix-title" class="mt-4 mb-8 text-2xl font-bold sm:text-3xl">
-        工程 × 視点の地図
-      </h2>
-      <DesignMatrix />
-    </section>
   </div>
 </Base>

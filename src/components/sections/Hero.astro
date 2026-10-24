@@ -1,7 +1,6 @@
 ---
-// トップの大見出し。画面いっぱいに主張を一つだけ置き、背景で「設計図」の線が描かれていく。
+// トップの大見出し。方眼の背景に、主張を一つだけ大きく置く。
 import { getEntry } from "astro:content";
-import HeroDrawing from "../HeroDrawing.astro";
 
 interface Props {
   eyebrow?: string;
@@ -21,8 +20,6 @@ const lines = title.split(/(?<=、)/);
 ---
 
 <section class="bg-blueprint-grid relative overflow-hidden border-b border-grid">
-  <HeroDrawing class="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[52%] md:block" />
-
   <div class="container-page relative flex flex-col justify-center pt-14 pb-10 md:min-h-[min(calc(100svh-3.5rem),56rem)] md:py-20">
     {eyebrow && (
       <p class="annotation mb-8 text-muted" data-reveal>
@@ -72,6 +69,5 @@ const lines = title.split(/(?<=、)/);
         </a>
       )}
     </div>
-    <HeroDrawing class="pointer-events-none mx-auto mt-10 w-full max-w-[16rem] md:hidden" viewBox="180 190 380 380" />
   </div>
 </section>

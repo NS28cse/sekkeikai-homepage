@@ -2,8 +2,6 @@
 // 文章（YAML）の「type: figure」の name にはここにある名前だけを書ける。ほかの名前を書くとビルドが止まる。
 // 図を足すときは：figures/ にコンポーネントを作る → ここに名前を足す → src/components/Figure.astro に登録する
 export const figureNames = [
-  "design-mapping",
-  "faucet",
   "design-process",
   "cost-escalation",
   "double-diamond",
@@ -20,6 +18,7 @@ export const figureNames = [
   "analysis-cycle",
   "pareto-front",
   "ahp-example",
+  "door-signifier",
 ] as const;
 
 export type FigureName = (typeof figureNames)[number];

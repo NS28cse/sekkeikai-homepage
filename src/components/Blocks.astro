@@ -1,17 +1,18 @@
 ---
 // 長文のブロックを上から順に表示する（ブロックの種類と書き方は src/content.config.ts）。
-// 読む人が「拾い読み」できるように、要点・問いかけ・身近な例・補足は見た目をはっきり分けている：
-//   要点（point）  … オレンジの線。ここだけ読めば話の筋がわかる
-//   問いかけ       … 「？」の印。答えは開いて見られる
-//   身近な例       … 灰色の箱
-//   補足（aside）  … 折りたたみ。「読み飛ばしてもOK」と書いておく
+// 読む人が拾い読みできるように、ブロックの種類ごとに見た目をはっきり分けている（読者に「読み方」を説明する文は書かない）：
+//   要点（point）  … オレンジの線。ここだけ拾っても話の筋が通る
+//   問いかけ       … 「？」の印。答えは隠さずにすぐ下に出す
+//   例             … 灰色の箱（身近な例も、実際にあった例も。どちらかは題に書く）
+//   短い補足・出典 … 段落の note。本文の右（スマホでは段落の下）
+//   長い補足・事例 … 折りたたみ（aside）
 // 注と図の番号は src/lib/blocks.ts の numberChapters で付けたものを使う。
 import type { NumberedBlock } from "../lib/blocks";
 import InlineText from "./InlineText.astro";
 import Figure from "./Figure.astro";
-import Illustration from "./Illustration.astro";
 import DesignMatrix from "./DesignMatrix.astro";
 import PerStep from "./PerStep.astro";
+import Idef0 from "./figures/Idef0.astro";
 
 interface Props {
   blocks: NumberedBlock[];
@@ -57,8 +58,7 @@ const { blocks, lens, compactFigures = false } = Astro.props;
     case "point":
       return (
         <div class="my-8 max-w-[38em] rounded-r-card border-l-4 border-accent bg-accent/6 px-5 py-4" data-reveal>
-          <p class="annotation text-accent-strong">要点</p>
-          <p class="mt-1 text-[1.1em] leading-relaxed font-semibold text-ink">
+          <p class="text-[1.1em] leading-relaxed font-semibold text-ink">
             <InlineText text={block.text} />
           </p>
         </div>
@@ -79,12 +79,9 @@ const { blocks, lens, compactFigures = false } = Astro.props;
               <InlineText text={block.text} />
             </p>
             {block.answer && (
-              <details class="mt-3 font-sans text-[0.95rem]" open={block.open}>
-                <summary class="cursor-pointer text-link underline underline-offset-4">答えを見る</summary>
-                <p class="mt-2 leading-relaxed text-ink/85">
-                  <InlineText text={block.answer} />
-                </p>
-              </details>
+              <p class="mt-3 border-l-2 border-link/40 pl-4 text-[0.98em] leading-relaxed text-ink/85">
+                <InlineText text={block.answer} />
+              </p>
             )}
           </div>
         </div>
@@ -95,7 +92,8 @@ const { blocks, lens, compactFigures = false } = Astro.props;
         <div class="my-8 max-w-[38em] rounded-card border border-grid bg-paper-muted p-5 font-sans sm:p-6" data-reveal>
           <p class="flex items-center gap-2 text-sm font-bold text-ink/75">
             <span class="h-2.5 w-2.5 rounded-full bg-positive" aria-hidden="true" />
-            身近な例{block.title && `：${block.title}`}
+            {/* 題は YAML の title（「実際にあった例：〇〇」「部室の予約なら」など）。無ければ「例」 */}
+            {block.title ?? "例"}
           </p>
           <p class="mt-2 text-[0.98rem] leading-loose tracking-normal">
             <InlineText text={block.text} />
@@ -110,8 +108,7 @@ const { blocks, lens, compactFigures = false } = Astro.props;
             <span class="font-mono text-base text-muted transition group-open:rotate-45" aria-hidden="true">
               ＋
             </span>
-            <span class="font-bold text-ink/75">補足：{block.title}</span>
-            <span class="ml-auto shrink-0 text-xs text-muted">読み飛ばしてもOK</span>
+            <span class="font-bold text-ink/80">{block.title}</span>
           </summary>
           <div class="space-y-3 px-5 pb-5 text-[0.95rem] leading-relaxed tracking-normal text-ink/80">
             {block.body.map((text) => (
@@ -143,8 +140,86 @@ const { blocks, lens, compactFigures = false } = Astro.props;
         <Figure name={block.name} number={figure} />
       );
 
-    case "illustration":
-      return <Illustration {...block} />;
+    case "idef0":
+      return (
+        <Idef0
+          number={figure}
+          title={block.title}
+          caption={block.caption}
+          fn={block.function}
+          inputs={block.inputs}
+          controls={block.controls}
+          outputs={block.outputs}
+          mechanisms={block.mechanisms}
+          steps={block.steps}
+        />
+      );
+
+    case "image":
+      return (
+        <figure class="my-10 font-sans" data-reveal>
+          <!-- 縦長の写真が画面を埋めないように、高さに上限を付ける -->
+          <img
+            src={block.src}
+            alt={block.alt}
+            loading="lazy"
+            class="mx-auto max-h-[30rem] w-auto max-w-full rounded-card border border-grid bg-paper"
+          />
+          <figcaption class="mt-3 text-sm text-ink/80">
+            {block.caption}
+            <span class="mt-1 block text-xs text-muted">
+              出典：
+              <a href={block.sourceUrl} class="underline" rel="noopener">
+                {block.credit}
+              </a>
+              （
+              {block.licenseUrl ? (
+                <a href={block.licenseUrl} class="underline" rel="noopener license">
+                  {block.license}
+                </a>
+              ) : (
+                block.license
+              )}
+              ）
+            </span>
+          </figcaption>
+        </figure>
+      );
+
+    case "table":
+      return (
+        <div class="my-10 overflow-x-auto font-sans" data-reveal>
+          <table class="w-full min-w-[32rem] border-collapse text-left text-[0.95rem] leading-relaxed tracking-normal">
+            <caption class="mb-3 text-left font-display font-bold">{block.caption}</caption>
+            <thead>
+              <tr class="border-b-2 border-ink">
+                {block.head.map((h) => (
+                  <th scope="col" class="px-3 py-2 align-bottom text-sm">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row) => (
+                <tr class="border-b border-grid">
+                  {row.map((cell, i) =>
+                    i === 0 ? (
+                      <th scope="row" class="px-3 py-2.5 align-top font-bold">
+                        <InlineText text={cell} />
+                      </th>
+                    ) : (
+                      <td class="px-3 py-2.5 align-top">
+                        <InlineText text={cell} />
+                      </td>
+                    ),
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
 
     case "steps":
       return (

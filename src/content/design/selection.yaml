@@ -1,0 +1,98 @@
+title: 比べて選ぶ
+en: Evaluation & Selection
+layer: step
+order: 4
+stepName: 評価・選定
+mode: converge
+tools: ピューの概念選定法・AHP
+short: 比べて選ぶ
+question: どの案を、なぜ選ぶか
+summary: 目的どうしがぶつかる中で、案を比べて一つを選ぶ。基準は案を見る前に決め、選んだ理由と選ばなかった理由を残す。
+lead: たくさんの案から一つを選びます。軽さと値段のように、設計の目的はたいていぶつかり合います。この工程では、何をどれだけ大切にするかを、話し合える形にして選びます。
+chapters:
+  - id: tradeoff
+    heading: すべてでいちばんの案は、たいていない
+    blocks:
+      - type: point
+        text: 設計の目的はぶつかり合うので、どの案にも長所と短所があります。どれを選ぶかは、何をどれだけ大切にするかという判断で決まります。
+      - type: question
+        text: 自転車を選ぶとき、軽くて、丈夫で、安いものを探したことはありませんか？ 三つともいちばんのものは、見つかったでしょうか。
+        answer: たいてい見つかりません。軽くて丈夫な素材は高く、安くて丈夫なものは重くなりがちです。どれかを少し譲って、ほかを取ることになります。
+      - type: p
+        text: 設計の目的は一つではなく、たいていぶつかり合います。ほかの目的を犠牲にしなければ、どの目的ももう改善できない案を「**パレート最適**」と呼びます。パレート最適な案はたいてい複数あり、その中からどれを選ぶかには、価値の判断が要ります。
+      - type: figure
+        name: pareto-front
+
+  - id: criteria
+    heading: 基準は、案を見る前に決める
+    blocks:
+      - type: point
+        text: 評価の基準は、案を見る前に要件から決めます。案を見てから決めると、好きな案に有利な基準を選びがちだからです。
+      - type: steps
+        ordered: false
+        items:
+          - title: ピューの概念選定法
+            body: 基準となる案を一つ決め、ほかの案を基準ごとに「よい（＋）」「同じ（S）」「悪い（－）」で比べます。長所と短所を一覧でき、よいところを組み合わせた新しい案のきっかけにもなります。
+          - title: 階層分析法（AHP）
+            body: 基準どうしを二つずつ比べて「どちらがどれくらい大事か」を答え、そこから各基準の重みを計算します。判断の食い違いの度合いも数値で確かめられます。
+          - title: 重み付きの評価
+            body: 各案を基準ごとに採点し、重みを掛けて合計します。点差が小さいときは、重みを少し変えても順位が入れ替わらないか（感度分析）を確かめます。
+          - title: 選んだ理由を残す
+            body: 選んだ案だけでなく、選ばなかった案とその理由も記録します。条件が変わったときに、判断を見直せるからです。
+        # AHPの計算の例
+      - type: figure
+        name: ahp-example
+      - type: p
+        text: 人の直感的な判断には、最初に見た数字に引きずられるといった偏りがあることが、心理学の研究で知られています。数値で評価する目的は、計算に判断を任せることではありません。どこで意見が分かれているのかを見えるようにして、話し合いを具体的にすることです。
+        note: 'T. L. Saaty, The Analytic Hierarchy Process, McGraw-Hill, 1980。S. Pugh, Total Design, Addison-Wesley, 1991。A. Tversky & D. Kahneman, "Judgment under Uncertainty: Heuristics and Biases", Science, 185(4157), 1974。'
+
+  - id: example
+    heading: 新しくつくらない案が、いちばんになることもある
+    blocks:
+      - type: point
+        text: 要件を満たすなら、いちばん手間のかからない案が最良のこともあります。つくること自体を目的にしないのが、よい選び方です。
+      - type: table
+        caption: 部室の予約の案を、ピューの概念選定法で比べる（基準の案は「紙の予約表」）
+        head:
+          - 基準
+          - 専用の予約アプリ
+          - 曜日で使う人を決める
+          - 無料の共有カレンダー
+        rows:
+          - - スマートフォンから3操作以内
+            - ＋
+            - S
+            - ＋
+          - - 費用
+            - －
+            - S
+            - S
+          - - 準備の手間
+            - －
+            - ＋
+            - S
+          - - 重なりの防ぎやすさ
+            - ＋
+            - ＋
+            - ＋
+          - - 外から空きを確かめられる
+            - ＋
+            - －
+            - ＋
+          - - 合計（＋の数 − －の数）
+            - "+1"
+            - "+1"
+            - "+3"
+      - type: example
+        title: 部室の予約なら（架空の例）
+        text: 専用アプリは重なりを防げても、費用と準備の手間がかかりすぎます。選んだのは、無料の共有カレンダーを予約表として使う案でした。選ばなかった案と、その理由も記録に残しました。
+
+references:
+  - text: 'S. Pugh, Total Design: Integrated Methods for Successful Product Engineering, Addison-Wesley, 1991.'
+  - text: T. L. Saaty, The Analytic Hierarchy Process, McGraw-Hill, 1980.
+  - text: 'A. Tversky & D. Kahneman, "Judgment under Uncertainty: Heuristics and Biases", Science, 185(4157), pp.1124–1131, 1974.'
+    url: https://doi.org/10.1126/science.185.4157.1124
+related:
+  - ideation
+  - detailing
+  - data-analysis

@@ -22,38 +22,23 @@ const news = defineCollection({
   }),
 });
 
-const illustration = {
-  // イラスト指定書（docs/illustrations.md）の番号。例: PR-01
-  id: z.string().regex(/^[A-Z0-9]+-\d{2}$/, { message: "イラストの番号は PR-01 のような形で書いてください" }),
-  caption: z.string().max(80),
-  alt: z.string().max(120),
-  // 画像ができたら public/uploads/illustrations/ に置いてパスを書く。空のあいだは「制作中」の枠が出る
-  src: z.string().optional(),
-  ratio: z.enum(["21:9", "16:9", "4:3", "1:1"]).default("16:9"),
-};
-
 // ── ブロック ──
 // 長文は「ブロック」を上から並べて書く。トップページの章と「設計を知る」のページで同じブロックが使える。
-// 文章の中には [[modeling]]（ページへのリンク）、[[process#step-2|要件を定める工程]]（章へのリンク）、
+// 文章の中には [[modeling]]（ページへのリンク）、[[process#loop|工程の行き来]]（章へのリンク）、
 // **強調** が書ける（src/lib/inline.ts）。表示は src/components/Blocks.astro。
 const block = z.discriminatedUnion("type", [
-  // 段落。note は欄外の注（出典や補足）。トップページではなるべく使わない
+  // 段落。note は本文の右（スマホでは段落の下）に出る短い注。出典や一言の補足を書く
   z.object({ type: z.literal("p"), text: z.string().max(600), note: z.string().max(300).optional() }),
   // 章の中の小見出し。見出しだけ拾い読みしても話がわかるように、主張の形で書く
   z.object({ type: z.literal("heading"), text: z.string().max(40) }),
-  // 要点。その部分でいちばん言いたいことを一、二文で。拾い読みする人はここだけ読む
+  // 要点。その部分でいちばん言いたいことを一、二文で。見た目で目立たせるので、ここだけ拾い読みしても筋が通るように書く
   z.object({ type: z.literal("point"), text: z.string().max(160) }),
-  // 読者への問いかけ。answer を書くと「答えを見る」で開ける
-  // open: true にすると答えを最初から開いておく（拾い読みする人にも見せたい答えのとき）
-  z.object({
-    type: z.literal("question"),
-    text: z.string().max(100),
-    answer: z.string().max(240).optional(),
-    open: z.boolean().default(false),
-  }),
+  // 読者への問いかけ。答え（answer）は隠さず、すぐ下に出す（折りたたみは読み飛ばされやすいため）
+  z.object({ type: z.literal("question"), text: z.string().max(100), answer: z.string().max(240).optional() }),
   // 身近な例。抽象的な話の前後に、具体的な場面を一つ置く
   z.object({ type: z.literal("example"), title: z.string().max(30).optional(), text: z.string().max(400) }),
-  // 補足。折りたたんで出す。読み飛ばしても本筋がわかる内容（数字の出どころ、細かい事情など）だけを書く
+  // 折りたたみの補足。本題ではないが分量の多い補足や、詳しい事例を入れる。
+  // 短い補足や出典は、折りたたみではなく段落の note（本文の右）に書く
   z.object({
     type: z.literal("aside"),
     title: z.string().max(40),
@@ -62,7 +47,46 @@ const block = z.discriminatedUnion("type", [
   // 箇条書き
   z.object({ type: z.literal("list"), items: z.array(z.string().max(160)).min(1).max(8) }),
   z.object({ type: z.literal("figure"), name: z.enum(figureNames) }),
-  z.object({ type: z.literal("illustration"), ...illustration }),
+  // IDEF0（機能の図）。function の箱に、左から入力・上から制御・下から機構が入り、右へ出力が出る。
+  // steps を書くと、機能を細かく分けた図（分解図）も描く（前の機能の出力が、次の機能の入力になる）
+  z.object({
+    type: z.literal("idef0"),
+    title: z.string().max(40),
+    caption: z.string().max(200).optional(),
+    function: z.string().max(24),
+    inputs: z.array(z.string().max(14)).min(1).max(3),
+    controls: z.array(z.string().max(14)).max(3).default([]),
+    outputs: z.array(z.string().max(14)).min(1).max(3),
+    mechanisms: z.array(z.string().max(14)).max(3).default([]),
+    steps: z
+      .array(z.object({ name: z.string().max(16), output: z.string().max(14) }))
+      .min(2)
+      .max(4)
+      .optional(),
+  }),
+  // 外部の画像。著作権を必ず確認し、パブリックドメインか再利用が許されたライセンスの画像だけを使う。
+  // 画像は public/uploads/ に置き、credit（作者・出典）と license を必ず書く。
+  // sourceUrl は画像の元のページ。CC BY などのライセンスでは、licenseUrl（ライセンスの本文へのリンク）も書く
+  z.object({
+    type: z.literal("image"),
+    src: z.string(),
+    alt: z.string().max(160),
+    caption: z.string().max(200),
+    credit: z.string().max(160),
+    license: z.string().max(60),
+    licenseUrl: z.url().optional(),
+    sourceUrl: z.url(),
+  }),
+  // 表（要件の一覧や、案の比べ方など）。head は見出しの行、rows は本文の行
+  z.object({
+    type: z.literal("table"),
+    caption: z.string().max(80),
+    head: z.array(z.string().max(30)).min(2).max(6),
+    rows: z
+      .array(z.array(z.string().max(80)).min(2).max(6))
+      .min(1)
+      .max(12),
+  }),
   z.object({
     type: z.literal("steps"),
     // true … 順番のある手順（手順 1, 2…と番号が付く）／ false … 順番の無い手法の一覧（番号なし）
@@ -114,7 +138,7 @@ const block = z.discriminatedUnion("type", [
 export type Block = z.infer<typeof block>;
 
 // ── トップページ ──
-// 章（chapter）を上から並べた長文。先頭の summary は、各章の見出しと要点から自動で作る「拾い読み用のまとめ」。
+// 章（chapter）を上から並べた長文。先頭の summary は、各章の見出しと要点から自動で作る全体の見取り図。
 const section = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("hero"),
@@ -127,7 +151,7 @@ const section = z.discriminatedUnion("type", [
     cta2Label: z.string().max(20).optional(),
     cta2Href: z.string().optional(),
   }),
-  // 拾い読み用のまとめ。後ろに続く章の見出しと要点を並べる（中身は自動）
+  // 全体の見取り図。後ろに続く章の見出しと要点を並べる（中身は自動）
   z.object({ type: z.literal("summary"), title: z.string().max(30), lead: z.string().max(120).optional() }),
   // 長文の章。見出し（title）は主張、eyebrow は読者の問い、point はこの章の要点（まとめにも出る）
   z.object({
@@ -150,8 +174,16 @@ const section = z.discriminatedUnion("type", [
       .array(z.object({ title: z.string().max(10), body: z.string().max(40) }))
       .max(4)
       .default([]),
+    // 入部フォーム（Microsoft Forms）の URL。空のあいだは「準備中」と出る
     formUrl: z
-      .union([z.literal(""), z.url({ message: "入部フォームの URL は https:// から始まる形で入力してください" })])
+      .union([
+        z.literal(""),
+        z
+          .url({ message: "入部フォームの URL は https:// から始まる形で入力してください" })
+          .refine((u) => /^https:\/\/(forms\.office\.com|forms\.microsoft\.com)\//.test(u), {
+            message: "入部フォームは Microsoft Forms の URL（https://forms.office.com/…）を入力してください",
+          }),
+      ])
       .optional(),
     buttonLabel: z.string().max(20),
   }),
@@ -183,30 +215,38 @@ const pages = defineCollection({
 
 // ── 「設計を知る」のページ（/design/〇〇/） ──
 // ファイル名がそのまま URL になる（例: modeling.yaml → /design/modeling/）。ファイルを足せばページが増える。
+// 1 ページで伝えたいことは 1 つにする。長くなったら、ページを分ける。
 // layer で階層を分ける（混ぜない）：
-//   process … 設計のプロセス（工程）。工程の章には step（正式な呼び名）を書く。地図の列になる
+//   process … 設計のプロセスの全体像（1 ページだけ）
+//   step    … 工程 1 つにつき 1 ページ。order が工程の順番。stepName に正式な呼び名（例: 要件定義）を書く。地図の列になる
 //   lens    … どの工程にも通じる視点（モデル化・ヒューマンインターフェース・データ分析…）。地図の行になる
-//   topic   … 工程にも視点にも当てはまらないテーマ（一覧の「そのほかのテーマ」に出る）
+//   case    … 実際の設計の流れの例（イベント、ロボットなど）。章ごとに、どの工程の話かを step に書く
+//   topic   … それ以外のテーマ（一覧の「そのほかのテーマ」に出る）
 // 章の並びや中身は決めていない。そのテーマがいちばん伝わる組み立てで書く。
 const design = defineCollection({
   loader: glob({ pattern: "**/*.yaml", base: "./src/content/design" }),
   schema: z
     .object({
-      title: z.string().max(20),
+      title: z.string().max(24),
       en: z.string().max(30),
-      layer: z.enum(["process", "lens", "topic"]),
-      // 地図や一覧で並べる順番（同じ layer の中で）
+      layer: z.enum(["process", "step", "lens", "case", "topic"]),
+      // 並べる順番（同じ layer の中で）。工程（step）では、これが工程の番号になる
       order: z.number().int().min(1),
       // 短い言い方（例: モデルで考える）。地図の行の見出しや一覧のカードに出る
-      short: z.string().max(12),
+      short: z.string().max(14),
+      // 工程（step）のページだけ：正式な呼び名（例: 要件定義）
+      stepName: z.string().max(10).optional(),
+      // 工程（step）のページだけ：考えを広げる工程か（diverge）、絞る工程か（converge）。全体図の色分けに使う
+      mode: z.enum(["diverge", "converge"]).optional(),
+      // 工程（step）のページだけ：代表的な手法（全体図に出す。例: 観察・インタビュー・KJ法）
+      tools: z.string().max(24).optional(),
       question: z.string().max(40),
       summary: z.string().max(120),
       lead: z.string().max(300),
-      hero: z.object(illustration).optional(),
       chapters: z
         .array(
           z.object({
-            // 章へのリンク用の名前（省略すると自動。工程の章は step-1, step-2…）
+            // 章へのリンク用の名前（省略すると ch-1, ch-2…）
             id: z
               .string()
               .regex(/^[a-z0-9-]+$/)
@@ -214,8 +254,8 @@ const design = defineCollection({
             // 見出しの上の小さなラベル（省略可）
             label: z.string().max(20).optional(),
             heading: z.string().max(40),
-            // 工程の章だけ：正式な呼び名（例: 要件定義）。これがある章が「工程」として地図に並ぶ
-            step: z.string().max(10).optional(),
+            // 事例（case）のページだけ：この章がどの工程の話か（工程の番号）。ラベルと工程のページへのリンクが付く
+            step: z.number().int().min(1).optional(),
             blocks: z.array(block).min(1).max(30),
           }),
         )
@@ -226,7 +266,7 @@ const design = defineCollection({
         .max(30)
         .default([]),
       related: z.array(reference("design")).max(4).default([]),
-      // 視点（lens）のページ：設計のプロセスの各工程で、この視点をどう使うか（工程の順に、工程の数だけ書く）。
+      // 視点（lens）のページ：各工程で、この視点をどう使うか（工程の順に、工程の数だけ書く）。
       // cell は地図の表のマスに、body は「工程ごとの使い方」（ブロック type: per-step）に出る。
       // まだ書けていなければ省略してよい（地図では空欄になる）
       perStep: z
@@ -235,12 +275,16 @@ const design = defineCollection({
         .optional(),
     })
     .superRefine((page, ctx) => {
-      if (page.layer === "process" && !page.chapters.some((c) => c.step)) {
-        ctx.addIssue({
-          code: "custom",
-          path: ["chapters"],
-          message: "設計のプロセス（layer: process）のページには、step を書いた工程の章が必要です",
-        });
+      if (page.layer === "step") {
+        for (const key of ["stepName", "mode", "tools"] as const) {
+          if (!page[key]) {
+            ctx.addIssue({
+              code: "custom",
+              path: [key],
+              message: `工程（layer: step）のページには ${key} を書いてください`,
+            });
+          }
+        }
       }
       if (page.layer !== "lens" && page.perStep) {
         ctx.addIssue({
@@ -256,9 +300,12 @@ const design = defineCollection({
 const site = defineCollection({
   loader: glob({ pattern: "**/*.yaml", base: "./src/content/site" }),
   schema: z.object({
-    github: z.union([z.literal(""), z.url()]),
-    // Discord の招待リンク。空のあいだは「準備中」のアイコンになる
+    // Discord の招待リンク。空のあいだは出さない
     discord: z.union([z.literal(""), z.url()]),
+    // TimeTree（活動予定のカレンダー）の共有リンク。空のあいだは出さない
+    timetree: z.union([z.literal(""), z.url()]),
+    // 問い合わせ用のメールアドレス。団体で共有しているアドレスにする（個人や大学の個人用アドレスは書かない）
+    email: z.union([z.literal(""), z.email({ message: "メールアドレスの形で書いてください" })]),
   }),
 });
 

@@ -1,0 +1,66 @@
+title: 案を広げる
+en: Ideation
+layer: step
+order: 3
+stepName: 発想
+mode: diverge
+tools: ブレインライティング・スケッチ
+short: 案を広げる
+question: どんな解き方がありうるか
+summary: 要件を満たす案を、できるだけ多く、違った方向に考える。最初の思いつきで決めないことが、設計の天井を上げる。
+lead: 要件が決まったら、それを満たす案をできるだけ多く考えます。最初に思いついた案に決めてしまうと、その後どれだけ丁寧に設計しても、よくなる幅は限られます。
+chapters:
+  - id: why
+    heading: 案の幅が、設計の天井を決める
+    blocks:
+      - type: point
+        text: 要件を満たす案を、できるだけ多く、違った方向に考えます。この工程ではよしあしの判断をあとまわしにし、数と幅を優先します。
+      - type: question
+        text: 部室の予約の問題。「予約アプリをつくる」以外に、どんな解き方があるでしょう？
+        answer: 部室の前に紙の予約表を貼る、曜日ごとに使う人を決める、無料の共有カレンダーを予約表にする、部室の空き具合をランプで知らせる。アプリをつくらない案も、立派な案です。
+      - type: p
+        text: 最初に思いついた案の延長でしか考えないと、その後どれだけ丁寧に設計しても、よくなる幅は限られます。この工程では、案のよしあしの判断をあとまわしにして、できるだけ違った方向に案を広げます。
+        note: 機械設計では、この工程と次の「比べて選ぶ」工程を合わせて、構想設計（概念設計）と呼ぶ。
+
+  - id: methods
+    heading: 案を広げる道具
+    blocks:
+      - type: point
+        text: 一人ずつ黙って書き出してから持ち寄ると、話し合いだけで出すより多くの案が集まります。
+      - type: steps
+        ordered: false
+        items:
+          - title: ブレインストーミング
+            body: 批判しない、自由奔放を歓迎する、質より量、他人の案に便乗する。広告会社のアレックス・オズボーンが考えた四つの規則で、短い時間に多くの案を出します。
+          - title: ブレインライティング
+            body: まず各自が黙って案を書き出し、それから紙を回して書き足します。話し合う前に一人ずつ書くので、声の大きい人に流されにくい進め方です。
+          - title: SCAMPER
+            body: 置き換える、組み合わせる、応用する、修正する、ほかの使い道を考える、取り除く、逆にする。七つの問いを当てて、今ある案を変形させます。
+          - title: スケッチと簡単な模型
+            body: 頭の中の案を、紙や段ボールで手早く形にします。形にすると、言葉だけでは気づかなかった問題や可能性が見えてきます。
+      - type: p
+        text: ブレインストーミングには限界も指摘されています。グループで同時に話すと、発言を待つあいだに案を忘れたり、評価を気にして控えたりします。そのため、同じ人数が一人ずつ考えた案を合わせたほうが数が多くなる、という実験結果があります。まず各自で書き出してから共有するのは、そのためです。
+        note: M. Diehl & W. Stroebe, "Productivity Loss in Brainstorming Groups", Journal of Personality and Social Psychology, 53(3), 1987。
+
+  - id: keep
+    heading: 一つに決めず、いくつかの案を並べて進める
+    blocks:
+      - type: point
+        text: 専門の違う人が案を持ち寄ると、問題の捉え方そのものが変わることがあります。案は早く一つに絞らず、比べられる形で並べておきます。
+      - type: p
+        text: トヨタの製品開発を調べた研究者たちは、一つの案に早く決めず、いくつかの案を並べて検討し、根拠をもって少しずつ絞り込む進め方が、結果として開発を速く確かなものにしていると報告しました。「セットベース設計」と呼ばれる考え方です。
+        note: A. Ward ほか, "The Second Toyota Paradox", Sloan Management Review, 36(3), 1995。
+      - type: example
+        title: 部室の予約なら（架空の例）
+        text: 専用の予約アプリをつくる案のほかに、「部室の前に紙の予約表を貼る」「曜日ごとに使う人を決める」「無料の共有カレンダーを予約表にする」など、アプリをつくらない案も並べました。案の数は、全部で九つになりました。
+
+references:
+  - text: A. F. Osborn, Applied Imagination, Charles Scribner's Sons, 1953.
+  - text: M. Diehl & W. Stroebe, "Productivity Loss in Brainstorming Groups", Journal of Personality and Social Psychology, 53(3), pp.497–509, 1987.
+    url: https://doi.org/10.1037/0022-3514.53.3.497
+  - text: A. Ward, J. K. Liker, J. J. Cristiano, D. K. Sobek II, "The Second Toyota Paradox", Sloan Management Review, 36(3), 1995.
+  - text: 'G. Pahl & W. Beitz, Engineering Design: A Systematic Approach, Springer, 1984（原著 Konstruktionslehre, 1977）.'
+related:
+  - requirements
+  - selection
+  - modeling

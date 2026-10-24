@@ -1,7 +1,7 @@
 ---
-// 入部の呼びかけ。歓迎する人の特徴と、入部フォーム・Discord への入り口を並べる。
-// formUrl が空なら入部フォームは「準備中」、Discord の URL（src/content/site/links.yaml）が空なら Discord は出さない。
-import { getEntry } from "astro:content";
+// 入部の呼びかけ。身につく力と、入部フォーム（Microsoft Forms）・Discord・TimeTree・メールへの入り口を並べる。
+// formUrl が空なら入部フォームは「準備中」。Discord などは src/content/site/links.yaml が空なら出さない。
+import { getSiteLinks } from "../../lib/site";
 
 interface Props {
   eyebrow?: string;
@@ -14,8 +14,7 @@ interface Props {
 }
 
 const { eyebrow = "入部する", title, body, traitsTitle, traits, formUrl, buttonLabel } = Astro.props;
-const site = await getEntry("site", "links");
-const discord = site?.data.discord ?? "";
+const contacts = (await getSiteLinks()).filter((c) => c.href);
 ---
 
 <section id="join" class="scroll-mt-14 bg-ink py-24 text-paper sm:py-32" aria-labelledby="join-title">
@@ -69,17 +68,17 @@ const discord = site?.data.discord ?? "";
           </a>
         </>
       )}
-      {discord && (
+      {contacts.map((c) => (
         <a
-          href={discord}
+          href={c.href}
           class="inline-flex items-center gap-2 rounded-full border-2 border-paper px-8 py-3.5 font-bold transition hover:bg-paper hover:text-ink"
-          rel="noopener"
-          target="_blank"
+          rel={c.external ? "noopener" : undefined}
+          target={c.external ? "_blank" : undefined}
         >
-          まずは Discord で話を聞く
-          <span aria-hidden="true">↗</span>
+          {c.action}
+          <span aria-hidden="true">{c.external ? "↗" : "→"}</span>
         </a>
-      )}
+      ))}
     </div>
   </div>
 </section>

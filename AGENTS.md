@@ -13,13 +13,13 @@
 - デザイントークンの正本は `tokens/tokens.json`（DTCG 形式）。`src/styles/tokens.css` は生成物で Git 管理外
 - `/lab/` はデザイン確認用ページ（トークン、図、全セクションの一覧）
 - **文章を書く前に `docs/writing-guide.md` を読む**（Web の読まれ方と読みやすい文章について調べたことと、このサイトの決まり）
-- トップページは「なぜ今、設計が大事なのか」を伝える長文。`home.yaml` の章（`type: chapter`）を並べ、各章は「読者の問い（eyebrow）→ 主張の見出し → 要点（point）→ 本文」。先頭の「3分で読むなら」は各章の見出しと要点から自動で作られる。人名や出典の注は本文に置かず、必要なら補足（`aside`）に入れる
-- 長文は「ブロック」を並べて書く（`src/content.config.ts` の `block`、表示は `src/components/Blocks.astro`）。要点 `point`・問いかけ `question`・身近な例 `example`・補足 `aside`（折りたたみ）・小見出し `heading`・段落 `p` などを、大事さに合わせて使い分ける。トップページと「設計を知る」で同じブロックが使える
-- 本文中の `[[modeling]]`、`[[modeling|モデル]]`、`[[process#step-2|要件を定める工程]]` は「設計を知る」のページ（や章）へのリンク、`**強調**` は強調になる（`src/lib/inline.ts`）
-- 「設計を知る」（`/design/`）は `src/content/design/*.yaml`（ファイル名が URL）。**YAML を一つ足せば、一覧・地図・リンクに自動で加わる**。決まった章立ては無く、テーマが一番伝わる組み立てで書く。**階層は混ぜない**：`layer: process` は設計のプロセス（工程の章に `step` を書く）、`layer: lens` はどの工程にも通じる視点（`perStep` を書くと地図の表に出る）、`layer: topic` はそれ以外のテーマ
+- トップページは「なぜ今、設計が大事なのか」を伝える長文。`home.yaml` の章（`type: chapter`）を並べ、各章は「読者の問い（eyebrow）→ 主張の見出し → 要点（point）→ 本文」。先頭の「設計会の考え方」は各章の見出しと要点から自動で作られる。章は前の章が次の章の前提になる順に並べる。主張には実際にあった例を添え、短い出典は段落の `note`（本文の右）に入れる。AI の話から始めない
+- 長文は「ブロック」を並べて書く（`src/content.config.ts` の `block`、表示は `src/components/Blocks.astro`）。要点 `point`・問いかけ `question`・身近な例 `example`・補足 `aside`（折りたたみ）・小見出し `heading`・段落 `p`・表 `table`・画像 `image`・機能の図 `idef0` などを、大事さに合わせて使い分ける。トップページと「設計を知る」で同じブロックが使える。**問いかけの答えは隠さない。折りたたみは、本題でない長い補足や詳しい事例だけに使う**。読者に「読み飛ばしてよい」「3分で読める」などの読み方は書かない（拾い読みしやすさは見た目と構成でつくる）
+- 本文中の `[[modeling]]`、`[[modeling|モデル]]`、`[[process#loop|工程の行き来]]` は「設計を知る」のページ（や章）へのリンク、`**強調**` は強調になる（`src/lib/inline.ts`）
+- 「設計を知る」（`/design/`）は `src/content/design/*.yaml`（ファイル名が URL）。**YAML を一つ足せば、一覧・地図・リンクに自動で加わる**。決まった章立てはなく、テーマがいちばん伝わる組み立てで書く。**1 ページで伝えたいことは 1 つ**。長くなったらページを分ける。**階層は混ぜない**：`layer: process` は設計のプロセスの全体（1 ページ）、`layer: step` は工程 1 つにつき 1 ページ（`order` が工程の番号。上に工程の帯 `StepNav` が出る）、`layer: lens` はどの工程にも通じる視点（`perStep` を書くと地図の表に出る）、`layer: case` は実際の設計の流れの例（章に `step: 番号` を書くと工程のページへのリンクが付く。架空の例であることを lead に書く）、`layer: topic` はそれ以外のテーマ
 - 図は `src/components/figures/`（名前の一覧は `src/lib/figures.ts`）。トップページでは図を番号・出典なしで出す
-- イラストは学生に描いてもらう。指定は `docs/illustrations.md`、画像ができるまでは「制作中」の枠が出る
-- GitHub と Discord のリンクは `src/content/site/links.yaml`（ヘッダーとフッターのアイコン、入部の章の Discord ボタン）
+- イラストは使わない。わかりにくいところは図（`src/components/figures/`）で示す。外部の画像は必要最低限にし、パブリックドメインか再利用が許されたライセンスのものだけを `public/uploads/` に置いて、`image` ブロックに作者・ライセンス・元のページを書く（一覧は `docs/image-credits.md`）
+- Discord・TimeTree・問い合わせメールは `src/content/site/links.yaml`（ヘッダーのアイコン、フッター、入部の章のボタン。空の項目は出ない）。入部フォームは Microsoft Forms の URL を `home.yaml` の join の `formUrl` に書く。メールは団体で共有しているアドレスだけ（個人や大学の個人用アドレスは書かない）。GitHub のリンクと「サイトをみんなでつくっている」という文言は載せない
 - 活動の段階（なんでもプレゼン〜大プレゼン）、発案者・設計仲間・投資家の役割、プロジェクト紹介は古い情報なので使わない
 
 ## コマンド

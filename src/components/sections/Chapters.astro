@@ -1,6 +1,6 @@
 ---
 // トップページの長文。続けて並んだ章（chapter）をまとめて表示する。
-// 広い画面では左に章の目次を固定し、いま読んでいる章に印を付ける（src/scripts/reading.ts）。
+// 広い画面では左に章の目次を固定し、今読んでいる章に印を付ける（src/scripts/reading.ts）。
 // 章ごとに「読者の問い（eyebrow）→ 主張の見出し → 要点 → 本文」の順に並べ、要点だけ拾い読みしても筋が通るようにする。
 import type { Block } from "../../content.config";
 import { numberChapters } from "../../lib/blocks";
@@ -59,8 +59,7 @@ const numbered = numberChapters(Astro.props.chapters);
         </h2>
         <div class="longform mt-8">
           <div class="my-8 max-w-[38em] rounded-r-card border-l-4 border-accent bg-accent/6 px-5 py-4" data-reveal>
-            <p class="annotation text-accent-strong">この章の要点</p>
-            <p class="mt-1 text-[1.1em] leading-relaxed font-semibold text-ink">{c.point}</p>
+            <p class="text-[1.1em] leading-relaxed font-semibold text-ink">{c.point}</p>
           </div>
           <Blocks blocks={c.numbered} compactFigures />
         </div>
