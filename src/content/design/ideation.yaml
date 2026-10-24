@@ -20,7 +20,7 @@ chapters:
         answer: 部室の前に紙の予約表を貼る、曜日ごとに使う人を決める、無料の共有カレンダーを予約表にする、部室の空き具合をランプで知らせる。アプリをつくらない案も、立派な案です。
       - type: p
         text: 最初に思いついた案の延長でしか考えないと、その後どれだけ丁寧に設計しても、よくなる幅は限られます。この工程では、案のよしあしの判断をあとまわしにして、できるだけ違った方向に案を広げます。
-        note: 機械設計では、この工程と次の「比べて選ぶ」工程を合わせて、構想設計（概念設計）と呼ぶ。
+        note: 機械設計では、この工程と次の「比べて選ぶ」工程を合わせて、構想設計（概念設計）と呼ぶ（[G. Pahl ほか, Engineering Design 第3版, Springer, 2007](https://doi.org/10.1007/978-1-84628-319-2)）。
 
   - id: methods
     heading: 案を広げる道具
@@ -39,8 +39,8 @@ chapters:
           - title: スケッチと簡単な模型
             body: 頭の中の案を、紙や段ボールで手早く形にします。形にすると、言葉だけでは気づかなかった問題や可能性が見えてきます。
       - type: p
-        text: ブレインストーミングには限界も指摘されています。グループで同時に話すと、発言を待つあいだに案を忘れたり、評価を気にして控えたりします。そのため、同じ人数が一人ずつ考えた案を合わせたほうが数が多くなる、という実験結果があります。まず各自で書き出してから共有するのは、そのためです。
-        note: M. Diehl & W. Stroebe, "Productivity Loss in Brainstorming Groups", Journal of Personality and Social Psychology, 53(3), 1987。
+        text: ブレインストーミングには限界も指摘されています。グループで同時に話すと、発言の順番を待つあいだに案を忘れたり（発言のブロッキング）、評価を気にして控えたりします。そのため、同じ人数が一人ずつ考えた案を合わせたほうが数が多くなる、という実験結果があります。ディールとシュトレーベの実験では、最も大きく効いていたのは順番待ちでした。まず各自で書き出してから共有するのは、そのためです。
+        note: '[M. Diehl & W. Stroebe, "Productivity Loss in Brainstorming Groups", Journal of Personality and Social Psychology, 53(3), 1987](https://doi.org/10.1037/0022-3514.53.3.497)。'
       - type: figure
         name: brainstorm-lanes
 
@@ -52,11 +52,11 @@ chapters:
       - type: example
         title: 実際にあった例：カップを上からかぶせる
         text: 1971年に発売された日清食品のカップヌードルでは、乾いた麺をカップの中ほどに止める方法が課題でした。麺をカップに入れるのではなく、麺の塊にカップを上からかぶせるという、手順を逆にした発想で解決しました。麺がカップの中ほどで止まり、下にすき間ができるので、運ぶときに麺が割れにくくなりました。
-        source: 安藤百福『魔法のラーメン発明物語 ― 私の履歴書』日本経済新聞社, 2002年など。
+        source: "[安藤百福『魔法のラーメン発明物語 ― 私の履歴書』日本経済新聞社, 2002年](https://ndlsearch.ndl.go.jp/books/R100000002-I000003066073)など。"
       - type: example
         title: 実際にあった例：天ぷらから借りた乾燥法
         text: その13年前、1958年に発売された日清食品のチキンラーメンでは、麺を長く保存でき、お湯ですぐ戻せる方法を探していました。創業者の安藤百福は、天ぷらを揚げる様子から、味を付けた麺を油で揚げて水分を抜く「瞬間油熱乾燥法」を思いつきました。揚げたときにできる細かな穴から、お湯がしみ込みます。
-        source: 安藤百福『魔法のラーメン発明物語 ― 私の履歴書』日本経済新聞社, 2002年など。
+        source: "[安藤百福『魔法のラーメン発明物語 ― 私の履歴書』日本経済新聞社, 2002年](https://ndlsearch.ndl.go.jp/books/R100000002-I000003066073)など。"
       - type: p
         text: よその分野から借りるには、自分の問題を、分野の言葉を外して言い直すのが近道です。「麺を保存する」を「食べ物から水分を抜く」と言い直せば、揚げ物も干物も手がかりになります。部室の予約も「限られた場所を、重ならないように割り当てる」と言い直せば、病院の予約や会議室、駐輪場の仕組みを参考にできます。
         note: 言い直すときは、[[requirements#functions|要件の工程]]でIDEF0の箱に書いた機能の名前が、そのまま使える。
@@ -68,7 +68,7 @@ chapters:
         text: 機能を分け、機能ごとの解き方を並べた表をつくります。各行から一つずつ選んで組み合わせれば、思いつきだけに頼らず、抜けの少ない案の一覧ができます。
       - type: p
         text: この表は**形態分析表**（モルフォロジカル・チャート）と呼ばれます。天文学者のフリッツ・ツビッキーが考えた形態分析を、機械設計のパールとバイツが、案を組み立てる道具として紹介しました。行には要件の工程でIDEF0に描いた機能を、横にはそれぞれの解き方を並べます。
-        note: F. Zwicky, Discovery, Invention, Research through the Morphological Approach, Macmillan, 1969。G. Pahl & W. Beitz, Engineering Design (1984) は、機能ごとの解を組み合わせる表を構想設計の道具として示した。
+        note: "[F. Zwicky, Discovery, Invention, Research through the Morphological Approach, Macmillan, 1969](https://ci.nii.ac.jp/ncid/BA30257280)。[G. Pahl & W. Beitz, Engineering Design (1984)](https://ci.nii.ac.jp/ncid/BA07271699) は、機能ごとの解を組み合わせる表を構想設計の道具として示した。"
       - type: figure
         name: morphological-chart
       - type: p
@@ -83,8 +83,8 @@ chapters:
       - type: point
         text: 案は早く一つに絞らず、比べられる形でいくつか並べたまま進めます。根拠をもって少しずつ絞るほうが、やり直しが少なく済みます。
       - type: p
-        text: トヨタの製品開発を調べた研究者たちは、一つの案に早く決めず、いくつかの案を並べて検討し、根拠をもって少しずつ絞り込む進め方が、結果として開発を速く確かなものにしていると報告しました。「セットベース設計」と呼ばれる考え方です。
-        note: A. Ward ほか, "The Second Toyota Paradox", Sloan Management Review, 36(3), 1995。
+        text: トヨタの製品開発を調べた研究者たちは、一つの案に早く決めず、いくつかの案を並べて検討し、根拠をもって少しずつ絞り込む進め方が、結果として開発を速く確かなものにしていると報告しました。「セットベース設計」と呼ばれる考え方です。一つに決めて進めると、あとで条件に合わないとわかったときに大きく戻ることになります。いくつか並べておけば、合わない案を外すだけで済みます。遠回りに見える進め方が速いことを、研究者たちは「第二のトヨタのパラドックス」と呼びました。
+        note: '[A. Ward ほか, "The Second Toyota Paradox", Sloan Management Review, 36(3), 1995](https://sloanreview.mit.edu/article/the-second-toyota-paradox-how-delaying-decisions-can-make-better-cars-faster/)。'
       - type: figure
         name: set-based
       - type: example
@@ -93,12 +93,17 @@ chapters:
 
 references:
   - text: A. F. Osborn, Applied Imagination, Charles Scribner's Sons, 1953.
+    url: https://ci.nii.ac.jp/ncid/BA69218505
   - text: M. Diehl & W. Stroebe, "Productivity Loss in Brainstorming Groups", Journal of Personality and Social Psychology, 53(3), pp.497–509, 1987.
     url: https://doi.org/10.1037/0022-3514.53.3.497
   - text: A. Ward, J. K. Liker, J. J. Cristiano, D. K. Sobek II, "The Second Toyota Paradox", Sloan Management Review, 36(3), 1995.
+    url: https://sloanreview.mit.edu/article/the-second-toyota-paradox-how-delaying-decisions-can-make-better-cars-faster/
   - text: 'G. Pahl & W. Beitz, Engineering Design: A Systematic Approach, Springer, 1984（原著 Konstruktionslehre, 1977）.'
+    url: https://ci.nii.ac.jp/ncid/BA07271699
   - text: F. Zwicky, Discovery, Invention, Research through the Morphological Approach, Macmillan, 1969.
+    url: https://ci.nii.ac.jp/ncid/BA30257280
   - text: 安藤百福『魔法のラーメン発明物語 ― 私の履歴書』日本経済新聞社, 2002年.
+    url: https://ndlsearch.ndl.go.jp/books/R100000002-I000003066073
 related:
   - requirements
   - selection

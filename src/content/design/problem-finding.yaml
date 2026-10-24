@@ -31,11 +31,13 @@ chapters:
       - type: example
         title: 実際にあった例：電気がなくても温める
         text: 2007年、スタンフォード大学の授業で、学生のチームが「安い保育器をつくる」という課題に取り組みました。ネパールを訪ねると、多くの出産は、病院から遠く電気の安定しない村で行われていました。寄付された保育器が、病院で使われずに置かれていることもありました。チームは問題を「電気なしで赤ちゃんを温める」に置き直し、温めたワックスの保温パックを入れる寝袋の形にしました。一度温めると、4〜6時間ほど温度を保ちます。
-        source: The Stanford Daily, "At-risk babies kept warm by Stanford innovation", 2010年11月18日。製品名は Embrace。
+        source: '[The Stanford Daily, "At-risk babies kept warm by Stanford innovation", 2010年11月18日](https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/)。製品名は Embrace。'
+      - type: p
+        text: 決め手になったのは、性能の工夫より先に「安い保育器」という問いの立て方を疑ったことでした。問いのまま保育器を安くしても、電気のない村では使えなかったはずです。
       - type: example
         title: 実際にあった例：「行動」を見せる動物園
         text: 北海道旭川市の旭山動物園は、1990年代に入園者が年間26万人ほどまで減りました。職員たちは、動物の姿をただ見せるのではなく、泳ぐ、飛ぶ、木に登るといった、その動物らしい行動が見える展示に変えていきました。ペンギンが頭の上を泳ぐ水中トンネルなどが評判になり、2004年には、月によっては入園者数で上野動物園を上回りました。
-        source: 政府広報オンライン「Highlighting Japan」2011年11月号（坂東元園長へのインタビュー）など。
+        source: "[政府広報オンライン「Highlighting Japan」2011年11月号（坂東元園長へのインタビュー）](https://www.gov-online.go.jp/eng/publicity/book/hlj/html/201111/201111_03j.html)など。"
       - type: p
         text: 二つの例に共通するのは、「何をつくるか」から考え始めず、使う人や来る人が本当は何に困り、何を求めているのかを、現場で確かめ直したことです。
 
@@ -58,7 +60,7 @@ chapters:
             to: いちばん困ったのはどんなとき？
       - type: p
         text: もう一つのこつは、「はい」「いいえ」で終わらない、開いた質問をすることです。「不便ですか」と聞くと、相手は「はい」と答えて話が終わります。「そのとき、どうしましたか」と聞けば、こちらが想像していなかった工夫や回り道が出てきます。
-        note: 意見や予想ではなく、過去の具体的な行動を聞くという助言は、R. Fitzpatrick, The Mom Test (2013) などに見られる。
+        note: 意見や予想ではなく、過去の具体的な行動を聞くという助言は、[R. Fitzpatrick, The Mom Test (2013)](https://www.momtestbook.com/) などに見られる。
       - type: heading
         text: 見たことと、読み取ったことを分けて書く
       - type: p
@@ -84,7 +86,7 @@ chapters:
         text: 集めた事実はカードに書き、似たものどうしを集めて名前を付けます。最初から枠を決めないので、予想していなかった問題の形が見えてきます。
       - type: p
         text: 集めた事実を整理するには、文化人類学者の川喜田二郎が考案した**KJ法**が役立ちます。一つの事実を一枚のカードに書き、似たものを集めて名前（表札）を付け、集まりどうしの関係を図にして、最後に文章にまとめます。
-        note: 川喜田二郎『発想法 ― 創造性開発のために』中公新書, 1967年。
+        note: "[川喜田二郎『発想法 ― 創造性開発のために』中公新書, 1967年](https://ndlsearch.ndl.go.jp/books/R100000002-I000001091965)。"
       - type: figure
         name: kj-method
 
@@ -95,7 +97,7 @@ chapters:
         text: 目に見えた困りごとは、問題の入り口にすぎないことがあります。「なぜ」を繰り返して原因をたどると、本当に手を打つべきところが見えてきます。
       - type: p
         text: トヨタ自動車で生産方式を築いた大野耐一は、問題が起きたときに「なぜ」を5回繰り返して、本当の原因をつきとめる方法を紹介しています。一度目の「なぜ」で出てくる答えは、たいてい表面の理由です。
-        note: 大野耐一『トヨタ生産方式 ― 脱規模の経営をめざして』ダイヤモンド社, 1978年。
+        note: "[大野耐一『トヨタ生産方式 ― 脱規模の経営をめざして』ダイヤモンド社, 1978年](https://ndlsearch.ndl.go.jp/books/R100000002-I000001376735)。"
       - type: example
         title: 部室の予約なら（架空の例）
         text: なぜ部室の取り合いが起きるのか。同じ時間に何人も来るから。なぜ同じ時間に来るのか。空いているかわからず、とりあえず行ってみるから。なぜわからないのか。予定を書いておく場所がなく、部室の前まで行かないと確かめられないから。ここまでたどると、問題は「予約の手段がない」ことより「空き状況を前もって確かめられない」ことにあるとわかります。
@@ -114,12 +116,15 @@ chapters:
 
 references:
   - text: 川喜田二郎『発想法 ― 創造性開発のために』中公新書, 1967年.
+    url: https://ndlsearch.ndl.go.jp/books/R100000002-I000001091965
   - text: The Stanford Daily, "At-risk babies kept warm by Stanford innovation", 2010.
     url: https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/
   - text: 政府広報オンライン「Highlighting Japan」2011年11月号.
     url: https://www.gov-online.go.jp/eng/publicity/book/hlj/html/201111/201111_03j.html
   - text: R. Fitzpatrick, The Mom Test, 2013.
+    url: https://www.momtestbook.com/
   - text: 大野耐一『トヨタ生産方式 ― 脱規模の経営をめざして』ダイヤモンド社, 1978年.
+    url: https://ndlsearch.ndl.go.jp/books/R100000002-I000001376735
 related:
   - requirements
   - human-interface

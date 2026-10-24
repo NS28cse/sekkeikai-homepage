@@ -75,7 +75,7 @@ const isPicked = (r: number, c: number) => paths.find((p) => p.pick[r] === c);
   compact={Astro.props.compact}
   title="機能ごとの解き方を、表で組み合わせる"
   caption={`行は機能、マスはその解き方。各行から一つずつ選んでつなぐと一つの案になる。この表だけで ${combos} 通りの組み合わせがあり、筋の通るものを選んで案にする。例は部室の予約（架空の例）。`}
-  source="F. Zwicky (1969) の形態分析、G. Pahl & W. Beitz, Engineering Design (1984) をもとに作図"
+  source="[F. Zwicky (1967)](https://doi.org/10.1007/978-3-642-87617-2_14) の形態分析、[G. Pahl & W. Beitz ほか, Engineering Design 第3版 (2007)](https://doi.org/10.1007/978-1-84628-319-2) をもとに作図"
   scroll
 >
   <svg

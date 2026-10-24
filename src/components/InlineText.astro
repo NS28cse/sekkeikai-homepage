@@ -1,5 +1,5 @@
 ---
-// 文章の中の [[modeling]] のようなリンク（設計を知るページへ）と **強調** を表示する（書き方は src/lib/inline.ts）。
+// 文章の中の [[modeling]] のようなリンク（設計を知るページへ）、**強調**、[出典](https://…) のリンクを表示する（書き方は src/lib/inline.ts）。
 // 存在しないページの名前が書かれていたら、ビルドを止めて知らせる。
 import { getCollection } from "astro:content";
 import { parseInline } from "../lib/inline";
@@ -25,6 +25,12 @@ for (const t of tokens) {
 {tokens.map((t) => {
   if (t.kind === "text") return t.value;
   if (t.kind === "strong") return <strong class="font-semibold">{t.value}</strong>;
+  if (t.kind === "link")
+    return (
+      <a href={t.href} class="underline underline-offset-2 hover:text-link" rel="noopener">
+        {t.label}
+      </a>
+    );
   const el = bySlug.get(t.slug)!;
   return (
     <a href={`/design/${t.slug}/${t.anchor ? `#${t.anchor}` : ""}`} class="term">

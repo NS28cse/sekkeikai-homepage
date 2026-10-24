@@ -1,5 +1,5 @@
 ---
-// 図の共通の枠（番号・題・説明・出典）。
+// 図の共通の枠（番号・題・説明・出典）。出典（source）には [名前](https://…) の形でリンクを書く。
 // scroll を付けると、スマホ幅では図を縮めすぎずに横スクロールで見せる（文字が小さくなりすぎないように）。
 // compact を付けると、番号・題・説明・出典を出さず図だけにする（トップページの章の中で使う）。
 // wide を付けると、横スクロールのときの最小幅を広くする（文字の多い横長の図用）。
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const { number, compact = false, title, caption, source, scroll = false, wide = false } = Astro.props;
+import InlineText from "../InlineText.astro";
 ---
 
 <figure
@@ -34,5 +35,10 @@ const { number, compact = false, title, caption, source, scroll = false, wide = 
   </div>
   {scroll && <p class="annotation mt-2 text-muted normal-case sm:hidden">← 図は横にスクロールできます →</p>}
   {!compact && caption && <p class="mt-3 text-sm text-muted">{caption}</p>}
-  {!compact && source && <p class="mt-1 text-xs text-muted">出典：{source}</p>}
+  {!compact && source && (
+    <p class="mt-1 text-xs text-muted">
+      出典：
+      <InlineText text={source} />
+    </p>
+  )}
 </figure>

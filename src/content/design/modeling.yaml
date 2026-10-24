@@ -19,9 +19,9 @@ chapters:
         name: route-map
       - type: p
         text: |-
-          この描き方は、1933年にロンドンの地下鉄でハリー・ベックが始めました。駅の本当の位置を捨て、線を縦・横・斜めの直線だけで描いた図は、今では多くの都市の路線図の手本になっています。
+          この描き方は、1933年にロンドンの地下鉄で広まりました。描いたのは、地下鉄の信号の図面を描く仕事をしていたハリー・ベックです。駅の本当の位置を捨て、線を縦・横・斜めの直線だけで描きました。地理に正確な地図より乗り換えがずっとわかりやすく、今では多くの都市の路線図がこの考え方で描かれています。
         note: |-
-          K. Garland, Mr Beck's Underground Map, Capital Transport, 1994。
+          [K. Garland, Mr Beck's Underground Map, Capital Transport, 1994](https://ci.nii.ac.jp/ncid/BA27096263)。
       - type: p
         text: |-
           設計で使うモデルには、いくつもの種類があります。スケッチや三面図のような**図のモデル**、縮尺模型や試作品のような**物理モデル**、方程式で表す**数理モデル**、コンピューターの中で動かす**シミュレーション**、そして要素どうしの関係を表す**概念モデル**や**データモデル**です。どれを使うかは、何を確かめたいかによって決まります。
@@ -29,7 +29,7 @@ chapters:
         text: |-
           統計学者ジョージ・ボックスは「すべてのモデルは間違っている」と書きました。モデルは必ず何かを捨てているので、現実と完全に一致することはありません。問うべきなのは、モデルが正しいかどうかではなく、目的に対して十分に役に立つかどうかです。
         note: |-
-          G. E. P. Box, "Science and Statistics", Journal of the American Statistical Association, 71(356), 1976。のちに「しかし、役に立つものもある」と続けた形で広く引用される。
+          [G. E. P. Box, "Science and Statistics", Journal of the American Statistical Association, 71(356), 1976](https://doi.org/10.1080/01621459.1976.10480949)。のちに「しかし、役に立つものもある」と続けた形で広く引用される。
       - type: figure
         name: abstraction-ladder
 
@@ -49,13 +49,13 @@ chapters:
       - type: example
         title: 実際にあった例：明石海峡大橋の模型
         text: |-
-          1940年、米国のタコマナローズ橋は、それほど強くない風で大きくねじれて落ちました。それ以来、長いつり橋は、風を当てた模型で揺れを確かめてから建てます。明石海峡大橋（1998年開通）では、長さ40m、実物の約100分の1の全橋模型を大きな風洞に入れ、本物には当てられない強い風を何度も当てて確かめました。この模型は今も神戸市の橋の科学館に展示されています。
-        source: 本州四国連絡高速道路「橋の科学館」の展示と解説による。
+          1940年、米国のタコマナローズ橋は、完成から4か月ほどで、それほど強くない風で大きくねじれて落ちました。それ以来、長いつり橋は、風を当てた模型で揺れを確かめてから建てます。明石海峡大橋（1998年開通）は、それまでのつり橋の規模を大きく超える橋でした。そこで、長さ40m、実物の約100分の1の全橋模型を大きな風洞に入れ、本物には当てられない強い風を何度も当てて確かめました。この模型は今も神戸市の橋の科学館に展示されています。
+        source: 本州四国連絡高速道路「橋の科学館」の[展示の解説](https://www.hashinokagakukan.jp/exhibition/build)と[館の紹介](https://www.hashinokagakukan.jp/about)による。
       - type: p
         text: |-
           モデルは、人と人が設計について話すための共通の言葉でもあります。同じ図面を見ていれば、言葉だけでは伝わらない形や寸法を、誤解なく共有できます。逆に、関係者がそれぞれ違うモデルを頭に描いていると、議論はかみ合いません。1999年に失われた火星探査機マーズ・クライメート・オービターの事故は、二つのソフトウェアのあいだで、数値の単位についての取り決めが守られていなかったことが原因でした。
         note: |-
-          NASA, Mars Climate Orbiter Mishap Investigation Board Phase I Report, 1999。地上のソフトウェアが、インターフェース仕様で定められたニュートン秒ではなく、ポンド重秒で値を出力していた。
+          [NASA, Mars Climate Orbiter Mishap Investigation Board Phase I Report, 1999](https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf)。地上のソフトウェアが、インターフェース仕様で定められたニュートン秒ではなく、ポンド重秒で値を出力していた。
 
   - id: how
     heading: モデルをつくり、使い、直す
@@ -83,7 +83,7 @@ chapters:
         text: |-
           情報系の設計でよく使われるのは、構造や振る舞いを図で表すモデルです。データどうしの関係を表す実体関連図（ER図）は、1976年にピーター・チェンが提案しました。システムの部品とその関係を表すクラス図や、状態の移り変わりを表す状態機械図などは、統一モデリング言語（UML）として標準化されています。機能のつながりを箱と矢印で表すIDEF0は、要件を定める工程で機能を整理するのに役立ちます。
         note: |-
-          UML は1997年にオブジェクト・マネジメント・グループ（OMG）が標準として採択した。IDEF0 は米空軍のICAM計画の中で開発され、1993年に米国の連邦情報処理規格（FIPS PUB 183）となった。
+          UML は1997年にオブジェクト・マネジメント・グループ（OMG）が[標準（UML 1.1）](https://www.omg.org/spec/UML/1.1/)として採択した。IDEF0 は米空軍のICAM計画の中で開発され、1993年に米国の連邦情報処理規格（[FIPS PUB 183](https://nvlpubs.nist.gov/nistpubs/Legacy/FIPS/fipspub183.pdf)）となった。
       - type: figure
         name: er-state
       - type: p
@@ -165,15 +165,21 @@ references:
   - text: G. E. P. Box, "Science and Statistics", Journal of the American Statistical Association, 71(356), pp.791–799, 1976.
     url: https://doi.org/10.1080/01621459.1976.10480949
   - text: NASA, Mars Climate Orbiter Mishap Investigation Board Phase I Report, 1999.
+    url: https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf
   - text: M. J. Turner, R. W. Clough, H. C. Martin, L. J. Topp, "Stiffness and Deflection Analysis of Complex Structures", Journal of the Aeronautical Sciences, 23(9), 1956.
-  - text: 'I. E. Sutherland, "Sketchpad: A Man-Machine Graphical Communication System", MIT, 1963.'
+    url: https://doi.org/10.2514/8.3664
+  - text: 'I. E. Sutherland, "Sketchpad: A Man-Machine Graphical Communication System", MIT, 1963（ケンブリッジ大学による2003年の電子版）.'
+    url: https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-574.pdf
   - text: P. P. Chen, "The Entity-Relationship Model — Toward a Unified View of Data", ACM Transactions on Database Systems, 1(1), 1976.
     url: https://doi.org/10.1145/320434.320440
-  - text: Object Management Group, Unified Modeling Language (UML).
-    url: https://www.omg.org/
+  - text: Object Management Group, Unified Modeling Language (UML) 1.1, 1997.
+    url: https://www.omg.org/spec/UML/1.1/
   - text: FIPS PUB 183, Integration Definition for Function Modeling (IDEF0), 1993.
+    url: https://nvlpubs.nist.gov/nistpubs/Legacy/FIPS/fipspub183.pdf
   - text: K. Garland, Mr Beck's Underground Map, Capital Transport, 1994.
+    url: https://ci.nii.ac.jp/ncid/BA27096263
   - text: 本州四国連絡高速道路「橋の科学館」（明石海峡大橋の全橋模型の展示）.
+    url: https://www.hashinokagakukan.jp/exhibition/build
 related:
   - process
   - human-interface

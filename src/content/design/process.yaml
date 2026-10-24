@@ -16,7 +16,7 @@ chapters:
         name: design-process
       - type: p
         text: 経済学者であり認知科学の開拓者でもあったハーバート・サイモンは、今の状態をより好ましい状態に変えようとして行動の道筋を考える人は、誰もが設計をしているのだと述べました。設計とは、まだないものについて「どうあるべきか」を考えることです。
-        note: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）。邦訳『システムの科学』。
+        note: "[H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）](https://ndlsearch.ndl.go.jp/books/R100000002-I000006331276)。邦訳[『システムの科学』](https://ndlsearch.ndl.go.jp/books/R100000002-I000002864619)。"
 
   - id: fields
     heading: 分野が違っても、骨格は共通
@@ -54,7 +54,7 @@ chapters:
             - 提供（小さく試して改良）
       - type: p
         text: 同じ「基本設計」という言葉でも、建築では実施設計の前の段階を、ソフトウェアでは画面や外から見た動きを決める段階を指すことが多く、意味が違います。ほかの学部の人と話すときは、言葉より「今、何を決めているのか」をそろえるのが近道です。
-        note: 建築は令和6年国土交通省告示第8号、ソフトウェアはIPA「共通フレーム2013」による。
+        note: 機械は[Pahl & Beitz, Konstruktionslehre（1977）](https://ci.nii.ac.jp/ncid/BA62999351)、建築は[令和6年国土交通省告示第8号](https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html)、ソフトウェアは[IPA「共通フレーム2013」](https://www.ipa.go.jp/publish/secbooks20130304.html)による。ソフトウェアの「基本設計」「詳細設計」は、日本の現場での慣用の呼び方。
 
   - id: modes
     heading: 広げる工程と、絞る工程が交互に来る
@@ -65,6 +65,8 @@ chapters:
         text: 工程には、考えを**広げる**ものと**絞る**ものがあります。広げるときによしあしを言い始めると、案が出なくなります。絞るときにまた広げ始めると、いつまでも決まりません。英国デザイン・カウンシルは、この切り替えを二つのひし形（ダブルダイヤモンド）で表しました。五つの工程を重ねると、工程1と2が左のひし形に、工程3から5が右のひし形に入ります。
       - type: figure
         name: steps-on-double-diamond
+      - type: p
+        text: どの工程も、終わりに形のあるものを一つ残し、それが次の工程の出発点になります。問題の一文、要件の表、案の一覧、選んだ案とその理由、仕様書です。要件の表は、左のひし形の答えであり、右のひし形で案を比べるときの物差しにもなります。
 
   - id: loop
     heading: 工程は、行き来しながら確かになる
@@ -73,9 +75,13 @@ chapters:
         text: 案を考えてはじめて、要件の見落としに気づくことはよくあります。そのときは前の工程に戻ります。ただし、見落としは早く見つけるほど、直す手間は小さく済みます。
       - type: p
         text: 1973年、リッテルとウェバーは、設計や計画が扱う問題の多くは、問題をどう定義するかに解き方が含まれてしまう「厄介な問題」だと指摘しました。問題と答えは、行き来しながら一緒に確かになっていくのです。
-        note: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973。
+        note: '[H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973](https://doi.org/10.1007/BF01405730)。[D. A. Schön, The Reflective Practitioner, 1983](https://ndlsearch.ndl.go.jp/books/R100000136-I1970304959840662912) も、設計する人が状況と「対話」しながら問題の捉え方を組み替えていく姿を描いた。'
       - type: p
         text: ソフトウェアの世界では、すべての要件を最初に決めきらず、小さくつくって使ってもらい、要件そのものを学びながら更新していく進め方が広く使われています。工程を一度だけ通るのではなく、短い周期で何度も回すのです。一方、自動車や医療機器のように安全が重要な分野では、要件から設計、試験までのつながりを漏れなくたどれることが求められます。
+        note: 見落としを見つけるのが後の工程になるほど、直す手間は大きくなる。NASAの見積もりでは、要件の段階の誤りを運用の段階で直すと、数十倍から千倍以上の手間がかかる（[J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA, 2004](https://ntrs.nasa.gov/citations/20100036670)）。
+      - type: p
+        text: 五つの工程に入りきらない仕事もあります。できたものが要件を満たすかを確かめる検証、建築や福祉用具での法令や安全規格の確認、イベントの当日の運営とふり返りです。分野によっては、これらも設計と同じくらい大切です。設計会では、仕様書の中に「どう確かめるか」まで書くことで、次につなげます。
+        note: ドイツ技術者協会の指針 [VDI 2221](https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung) は2019年の改訂で、決まった順番を示すのをやめ、どの製品開発にも通じる「活動」を定めて、並べ方は状況に応じて決める形にした。
 
   - id: examples
     heading: 例で、五つの工程をたどる
@@ -99,11 +105,23 @@ chapters:
 
 references:
   - text: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）.
+    url: https://ndlsearch.ndl.go.jp/books/R100000002-I000006331276
   - text: 'G. Pahl & W. Beitz, Engineering Design: A Systematic Approach, Springer, 1984（原著 Konstruktionslehre, 1977）.'
+    url: https://ci.nii.ac.jp/ncid/BA07271699
+  - text: 国土交通省「設計、工事監理等に係る業務報酬基準について」（令和6年国土交通省告示第8号）.
+    url: https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html
+  - text: 情報処理推進機構（IPA）『共通フレーム2013』2013年.
+    url: https://www.ipa.go.jp/publish/secbooks20130304.html
+  - text: VDI 2221 Blatt 1:2019 Entwicklung technischer Produkte und Systeme — Modell der Produktentwicklung.
+    url: https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung
   - text: Design Council (UK), "The Double Diamond".
-    url: https://www.designcouncil.org.uk/our-resources/the-double-diamond/
+    url: https://www.designcouncil.org.uk/resources/the-double-diamond/
   - text: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), pp.155–169, 1973.
     url: https://doi.org/10.1007/BF01405730
+  - text: D. A. Schön, The Reflective Practitioner, Basic Books, 1983（邦訳『省察的実践とは何か』鳳書房, 2007年）.
+    url: https://ndlsearch.ndl.go.jp/books/R100000136-I1970304959840662912
+  - text: J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004.
+    url: https://ntrs.nasa.gov/citations/20100036670
 related:
   - problem-finding
   - design-methods-history

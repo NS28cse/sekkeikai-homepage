@@ -19,19 +19,19 @@ chapters:
         text: |-
           統計学者ジョン・テューキーは、データをまず眺め、意外な形や外れた値から問いを見つける「探索的データ分析」の大切さを説きました。仮説を確かめる前に、データそのものに語らせる段階が必要だという考え方です。
         note: |-
-          J. W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977。
+          [J. W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977](https://archive.org/details/exploratorydataa0000tuke_7616)。
       - type: p
         text: |-
           1973年、統計学者フランシス・アンスコムは、平均、分散、相関係数、回帰直線がほとんど同じなのに、グラフにするとまったく違う形をした4組のデータを示しました。数字の要約だけを見て判断すると、データの本当の姿を見誤ることがあります。下の図と表は、アンスコムのデータから、このサイトのプログラムが計算して描いたものです。
         note: |-
-          F. J. Anscombe, "Graphs in Statistical Analysis", The American Statistician, 27(1), 1973。
+          [F. J. Anscombe, "Graphs in Statistical Analysis", The American Statistician, 27(1), 1973](https://doi.org/10.1080/00031305.1973.10478966)。
       - type: figure
         name: anscombe
       - type: p
         text: |-
           データを見るときには、そのデータがどのように集められたかにも気をつける必要があります。たとえば、戦闘から帰ってきた飛行機の弾の跡だけを調べて補強する場所を決めると、撃ち落とされて帰ってこなかった機体の情報が抜け落ちてしまいます。この「生存者バイアス」の例は、統計学者エイブラハム・ウォールドが第二次世界大戦中に行った研究にちなんで語られることの多いものです。
         note: |-
-          A. Wald, "A Method of Estimating Plane Vulnerability Based on Damage of Survivors", 1943（米国コロンビア大学統計研究グループの報告。1980年に再刊）。よく語られる逸話は、実際の研究を単純化したものである。
+          [A. Wald, "A Method of Estimating Plane Vulnerability Based on Damage of Survivors", 1943](https://www.cna.org/analyses/1980/a-method-of-estimating-plane-vulnerability)（米国コロンビア大学統計研究グループの報告。1980年に再刊）。よく語られる逸話は、実際の研究を単純化したものである。
 
   - id: pictures
     heading: 図にすると、決め方が変わる
@@ -63,9 +63,20 @@ chapters:
         text: 設計は未来についての判断ですが、その根拠の多くは過去のデータにあります。統計学そのものが、実験を「設計」する学問として育ってきました。
       - type: p
         text: |-
+          今ある製品はどのように使われ、どこで壊れ、どこで人がつまずいたのか。データは、設計する人の思い込みを確かめ、ときにくつがえしてくれます。
+      - type: p
+        text: |-
           設計とデータの結びつきは、統計学の歴史そのものにも刻まれています。ロナルド・フィッシャーが1935年に著した『実験計画法（The Design of Experiments）』は、何をどう比べれば偶然に惑わされずに結論を出せるかを、実験を「設計」する問題として論じました。無作為化、反復（繰り返し）、局所管理といった原則は、農業試験場で生まれ、医療の臨床試験やウェブサービスのA/Bテストにまで受け継がれています。
         note: |-
-          R. A. Fisher, The Design of Experiments, Oliver and Boyd, 1935。フィッシャーは英国ロザムステッド農業試験場での研究を通じて、これらの方法を発展させた。
+          [R. A. Fisher, The Design of Experiments, Oliver and Boyd, 1935](https://ci.nii.ac.jp/ncid/BA60729447)。フィッシャーは英国ロザムステッド農業試験場での研究を通じて、これらの方法を発展させた。
+      - type: example
+        title: 実際にあった例：検診の案内の文面を比べる
+        text: |-
+          東京都八王子市は2016年度、前の年に大腸がん検診を受けた人のうち、まだ受けていない人に送る案内の文面を2通り用意し、1,761人と1,767人に分けて送って比べました。一方は「検診を受けてもらえれば、来年も検査キットを送ります」と得の形で、もう一方は「受診しないと来年は検査キットは送付されなくなります」と損の形で伝えます。受けた人の割合は、得の形が22.7%、損の形が29.9%でした。中身が同じでも、伝え方の設計で人の行動が変わり、その差を数字で確かめられます。
+        source: 八王子市の取り組みを紹介した[環境省の掲載資料](https://www.env.go.jp/content/000047406.pdf)と[日本版ナッジ・ユニットの資料](https://www.env.go.jp/content/900447977.pdf)による。
+      - type: p
+        text: |-
+          日本では、田口玄一が品質工学（タグチメソッド）を体系化しました。使われる環境や部品のばらつきが変わっても性能が安定する「ロバストな」設計を、直交表を使った少ない実験から導く方法です。データ分析は、設計案を評価するだけでなく、設計そのものをよくしていく道具にもなるのです。
 
   - id: how
     heading: 問いから始めて、設計に返す
@@ -76,9 +87,12 @@ chapters:
         text: |-
           データ分析を設計に生かす流れは、データ分析の標準的な進め方として知られるCRISP-DMなどを参考に、次のように整理できます。
         note: |-
-          CRISP-DM（Cross-Industry Standard Process for Data Mining）は、1990年代の終わりに欧州の企業の共同プロジェクトによってまとめられた。
+          CRISP-DM（Cross-Industry Standard Process for Data Mining）は、データ分析にかかわる企業の共同プロジェクトがまとめ、[2000年に1.0版が公開された](https://www.kdnuggets.com/news/2000/n17/17i.html)。
       - type: figure
         name: analysis-cycle
+      - type: p
+        text: |-
+          問いを決めずに集めたデータからは、何も決められません。「どの学年の利用者が、どの画面で使うのをやめているのか」のように、設計の判断に結びつく問いを先に決めます。また実際の分析では、欠けた値や入力の誤り、単位の違いを直す「整える」作業に、いちばん時間がかかることも珍しくありません。
       - type: p
         text: |-
           気をつけたいのは、**相関は因果を意味しない**ということです。二つの数値が一緒に動いていても、一方が他方の原因とは限りません。設計の判断に使うときは、比べる条件をそろえた実験や、ほかの説明の可能性を検討することが欠かせません。
@@ -96,6 +110,8 @@ chapters:
             body: 「部室の予約が不便だと思いませんか？」は「はい」に誘います。「部室の予約について、困ったことはありますか。あればどんなことですか」のように、どちらにも答えやすく書きます。
           - title: 一つの質問で、一つのことを聞く
             body: 「予約は簡単で速いですか？」には、簡単だが遅い人が答えられません。「簡単か」と「速いか」は、別の質問に分けます。
+          - title: 目盛りをそろえる
+            body: 「とても不満」から「とても満足」までのように、よい側と悪い側を同じ数だけ並べます。真ん中の「どちらでもない」を置くかどうかも、前もって決めます。
           - title: 答えていない人を考える
             body: 部室によく来る人だけに聞くと、来なくなった人の不満は集まりません。誰に届き、誰が答えなかったかを書き留めます。
       - type: per-step
@@ -111,8 +127,8 @@ chapters:
       - type: example
         title: 実際にあった例：コンビニのPOS
         text: |-
-          セブン-イレブン・ジャパンは1982年、売れた商品をレジで記録するPOSシステムを本格的に取り入れました。店ごとに「明日は暑いから冷たい麺が売れるはず」と仮説を立てて注文し、売れ方のデータで確かめる。この繰り返しで、品ぞろえを直し続けています。
-        source: セブン-イレブン・ジャパンの沿革や、経営者の著書・取材記事による。
+          セブン-イレブン・ジャパンは1982年、レジで売れた商品をその場で記録するPOSシステムを本格的に取り入れました。「明日は暑くなるから、冷たい麺がよく売れるはず」のように店ごとに仮説を立てて注文し、商品一つずつ（単品）の売れ方のデータで確かめる。この繰り返しが、品ぞろえを少しずつ直していく仕組みになりました。データは、仮説を持って見るときに、いちばん役に立ちます。
+        source: '[セブン&アイ・ホールディングスの解説](https://www.7andi.com/company/challenge/2989/2.html)と[沿革](https://www.7andi.com/company/history.html)による。'
       - type: p
         text: |-
           一方で、データには個人に関する情報が含まれることも多く、プライバシーへの配慮は、それ自体が設計の要件になっています。日本の個人情報保護法や欧州の一般データ保護規則（GDPR）のような規制に従うことはもちろん、本当に必要なデータだけを集めるという姿勢が求められます。
@@ -126,7 +142,7 @@ chapters:
         text: |-
           設計会では、データ分析に**Deepnote**を使っています。Deepnoteはブラウザーで動くデータ分析用のノートブックで、Jupyterと互換性があり、PythonやSQLのコードと、グラフ、説明の文章を一つのページにまとめられます。インストールの手間がなく、複数人がリアルタイムに同じノートブックを編集できるので、プログラミングに慣れていない部員も、画面を共有しながら一緒に分析に参加できます。
         note: |-
-          Deepnote は2025年に、ノートブックの形式などをオープンソースとして公開した。機能や料金は変わることがあるので、最新の情報は公式サイト（deepnote.com）で確認してほしい。
+          Deepnote は2025年に、ノートブックの形式などを[オープンソースとして公開](https://github.com/deepnote/deepnote)した。機能や料金は変わることがあるので、最新の情報は[公式サイト](https://deepnote.com/)で確認してほしい。
       - type: p
         text: |-
           たとえば要件を定める工程では、アンケートの結果をDeepnoteに読み込み、回答の分布をグラフにしながら「この不満は本当に多いのか」「どの層に偏っているのか」をチームで確かめます。分析の過程がノートブックに残るので、発表のときに、結論だけでなく、その根拠まで示すことができます。
@@ -179,16 +195,31 @@ perStep:
     body: 実験計画法や品質工学で、少ない試行から、ばらつきに強い条件を探します。
 references:
   - text: J. W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977.
+    url: https://archive.org/details/exploratorydataa0000tuke_7616
   - text: F. J. Anscombe, "Graphs in Statistical Analysis", The American Statistician, 27(1), pp.17–21, 1973.
     url: https://doi.org/10.1080/00031305.1973.10478966
   - text: R. A. Fisher, The Design of Experiments, Oliver and Boyd, 1935.
+    url: https://ci.nii.ac.jp/ncid/BA60729447
   - text: A. Wald, A Method of Estimating Plane Vulnerability Based on Damage of Survivors, 1943（Center for Naval Analyses, CRC 432, 1980 再刊）.
+    url: https://www.cna.org/analyses/1980/a-method-of-estimating-plane-vulnerability
   - text: W. A. Shewhart, Economic Control of Quality of Manufactured Product, Van Nostrand, 1931.
+    url: https://ci.nii.ac.jp/ncid/BA11774525
   - text: 田口玄一『品質工学講座』日本規格協会, 1988年.
+    url: https://ci.nii.ac.jp/ncid/BN02521393
   - text: J. Snow, On the Mode of Communication of Cholera, 2nd ed., John Churchill, 1855.
+    url: https://archive.org/details/b28985266
   - text: F. Nightingale, Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army, 1858.
-  - text: P. Chapman ほか, CRISP-DM 1.0 Step-by-step data mining guide, 2000.
-  - text: W. Playfair, The Commercial and Political Atlas, London, 1786.
+    url: https://archive.org/details/b20387118
+  - text: SPSS, NCR, DaimlerChrysler による CRISP-DM 1.0 の公開の告知（KDnuggets News, 2000年8月）.
+    url: https://www.kdnuggets.com/news/2000/n17/17i.html
+  - text: W. Playfair, The Commercial and Political Atlas, 1786.
+    url: https://archive.org/details/bim_eighteenth-century_the-commercial-and-polit_corry-james_1786
+  - text: 環境省 掲載資料「社会の課題解決のために行動科学を活用した取組事例 東京都八王子市／（株）キャンサースキャンの取組」.
+    url: https://www.env.go.jp/content/000047406.pdf
+  - text: 日本版ナッジ・ユニット BEST「「おもてなし」フレームの活用例 八王子市の取組（大腸がん検診受診率向上策）」, 2020年.
+    url: https://www.env.go.jp/content/900447977.pdf
+  - text: セブン&アイ・ホールディングス「今、さらなる「近くて便利」へ。進化の原動力を読み解く5つの視点。」, 2018年.
+    url: https://www.7andi.com/company/challenge/2989/2.html
   - text: 'N. C. Schaeffer & S. Presser, "The Science of Asking Questions", Annual Review of Sociology, 29, 2003.'
     url: https://doi.org/10.1146/annurev.soc.29.110702.110112
   - text: Deepnote（公式サイト）.

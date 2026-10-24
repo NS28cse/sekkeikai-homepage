@@ -2,6 +2,7 @@ import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { figureNames } from "./lib/figures";
+import { hasAnyLink, hasExternalLink } from "./lib/inline";
 
 // エラーメッセージを日本語にする（CI のログで読めるように）
 z.config(z.locales.ja());
@@ -42,8 +43,18 @@ const course = z.object({
 // 文章の中には [[modeling]]（ページへのリンク）、[[process#loop|工程の行き来]]（章へのリンク）、
 // **強調** が書ける（src/lib/inline.ts）。表示は src/components/Blocks.astro。
 const block = z.discriminatedUnion("type", [
-  // 段落。note は本文の右（スマホでは段落の下）に出る短い注。出典や一言の補足を書く
-  z.object({ type: z.literal("p"), text: z.string().max(600), note: z.string().max(300).optional() }),
+  // 段落。note は本文の右（スマホでは段落の下）に出る短い注。出典や一言の補足を書く。
+  // 注には出典のリンク [表示名](https://…) を必ず書く（URL のない出典は使わない）。
+  // 出典ではなく、このサイトのほかのページへの案内だけの注なら [[…]] のリンクでもよい
+  z.object({
+    type: z.literal("p"),
+    text: z.string().max(600),
+    note: z
+      .string()
+      .max(300)
+      .refine(hasAnyLink, { message: "注には出典のリンク [表示名](https://…) を書いてください" })
+      .optional(),
+  }),
   // 章の中の小見出し。見出しだけ拾い読みしても話がわかるように、主張の形で書く
   z.object({ type: z.literal("heading"), text: z.string().max(40) }),
   // 要点。その部分でいちばん言いたいことを一、二文で。見た目で目立たせるので、ここだけ拾い読みしても筋が通るように書く
@@ -56,7 +67,12 @@ const block = z.discriminatedUnion("type", [
     type: z.literal("example"),
     title: z.string().max(30).optional(),
     text: z.string().max(400),
-    source: z.string().max(200).optional(),
+    // 文字数には URL も入るので、上限を広めにしている
+    source: z
+      .string()
+      .max(400)
+      .refine(hasExternalLink, { message: "例の出典には [表示名](https://…) の形でリンクを書いてください" })
+      .optional(),
   }),
   // 折りたたみの補足。本題ではないが分量の多い補足や、詳しい事例を入れる。
   // 短い補足や出典は、折りたたみではなく段落の note（本文の右）に書く
@@ -285,7 +301,8 @@ const design = defineCollection({
         .min(1)
         .max(16),
       references: z
-        .array(z.object({ text: z.string().max(240), url: z.url().optional() }))
+        // 参考文献には必ず URL を書く（URL のない出典は使わない）
+        .array(z.object({ text: z.string().max(240), url: z.url() }))
         .max(30)
         .default([]),
       // 岡山県立大学の関連授業（補足）。ページの終わりに小さな枠で出す

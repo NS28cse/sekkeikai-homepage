@@ -18,10 +18,10 @@ chapters:
       - type: example
         title: 実際にあった例：ハッブル宇宙望遠鏡の鏡
         text: 1990年に打ち上げられたハッブル宇宙望遠鏡は、最初に届いた画像がぼやけていました。直径2.4mの主鏡が、縁のあたりで設計より約2.2µm平らに磨かれていたのです。髪の毛の太さの数十分の一のずれでした。原因は、鏡の形を測る検査の道具の中で、レンズの位置が1.3mmずれていたことでした。
-        source: 'L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report" (Allen Report), NASA, 1990。'
+        source: '[L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report" (Allen Report), NASA, 1990](https://ntrs.nasa.gov/citations/19910003124)。'
       - type: p
         text: 別の検査の道具は、この誤りを示していました。けれど、その結果は「そちらの道具のほうが不正確なのだろう」と見過ごされました。1993年、宇宙飛行士が補正の光学装置を取り付けて、ようやく設計どおりの像が得られました。細部の数字は、決めるだけでなく、**確かめ方まで設計しておく**必要があります。
-        note: 補正は1993年12月の最初の修理ミッション（スペースシャトルSTS-61）で行われた。調査報告は、検査の結果を独立した立場で確かめる仕組みが弱かったことも指摘した。
+        note: 補正は1993年12月の最初の修理ミッション（[スペースシャトルSTS-61](https://www.nasa.gov/mission/sts-61/)）で行われた。[調査報告](https://ntrs.nasa.gov/citations/19910003124)は、検査の結果を独立した立場で確かめる仕組みが弱かったことも指摘した。
 
   - id: steps
     heading: 詳細設計の進め方
@@ -41,7 +41,7 @@ chapters:
       - type: figure
         name: tolerance-fit
       - type: p
-        text: 形と性能を確かめるには、CADや、構造・流れ・熱をコンピューターで解析するCAEといった[[modeling|モデル]]が欠かせません。条件の組み合わせを効率よく試すには、実験計画法などの[[data-analysis|データ分析]]の手法が使えます。画面や操作の細部は、[[human-interface|ヒューマンインターフェース]]の原則に照らして詰めます。
+        text: 形と性能を確かめるには、CADや、構造・流れ・熱をコンピューターで解析するCAEといった[[modeling|モデル]]が欠かせません。条件の組み合わせを効率よく試すには、実験計画法や、ばらつきに強い条件を探す品質工学（タグチメソッド）といった[[data-analysis|データ分析]]の手法が使えます。画面や操作の細部は、[[human-interface|ヒューマンインターフェース]]の原則に照らして詰めます。
 
   - id: review
     heading: 仕様書を固める前に、違う目で確かめる
@@ -79,10 +79,10 @@ chapters:
             - 重なったら、先に書いた人を優先と決める
       - type: p
         text: FMEAは、1949年にアメリカ軍の手順書として始まり、宇宙開発や自動車の開発に広がりました。大きな表をつくらなくても、「どこが・どう壊れる・何が起きる・どう防ぐ」の四つの列を埋めるだけで、見落としがぐっと減ります。
-        note: 'MIL-P-1629, "Procedures for Performing a Failure Mode, Effects and Criticality Analysis", U.S. Department of Defense, 1949。'
+        note: '[MIL-P-1629, "Procedures for Performing a Failure Mode, Effects and Criticality Analysis", U.S. Department of Defense, 1949](https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=86479)。'
       - type: p
         text: 粗い試作には、見た人が遠慮なく意見を言いやすいという利点もあります。きれいにつくり込んだ見本ほど、「もう決まったもの」に見えて、直す意見が出にくくなります。
-        note: 'M. Rettig, "Prototyping for Tiny Fingers", Communications of the ACM, 37(4), 1994。'
+        note: '[M. Rettig, "Prototyping for Tiny Fingers", Communications of the ACM, 37(4), 1994](https://doi.org/10.1145/175276.175288)。'
 
   - id: output
     heading: 「なぜこの形か」まで残す
@@ -97,11 +97,15 @@ chapters:
         name: spec-anatomy
       - type: p
         text: 前の工程で書いたものが、ここで一つにつながります。逆に言えば、仕様書を書こうとして手が止まるところは、前の工程で決めきれていないところです。そのときは、その工程に戻って決め直します。
+      - type: example
+        title: 部室の予約なら（架空の例）
+        text: 共有カレンダーへの予約の書き方（名前・用件・時間）、予約の締め切り、重なったときの決め方を一枚の仕様書にまとめました。何人かに試してもらって書き方を直してから、部全体で使い始めました。
 
 references:
   - text: 'L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report", NASA, 1990.'
-    url: https://research.ssl.berkeley.edu/~mlampton/AllenReportHST.pdf
+    url: https://ntrs.nasa.gov/citations/19910003124
   - text: 'MIL-P-1629, "Procedures for Performing a Failure Mode, Effects and Criticality Analysis", U.S. Department of Defense, 1949.'
+    url: https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=86479
   - text: 'M. Rettig, "Prototyping for Tiny Fingers", Communications of the ACM, 37(4), pp.21–27, 1994.'
     url: https://doi.org/10.1145/175276.175288
 related:

@@ -99,7 +99,12 @@ const { blocks, lens, compactFigures = false } = Astro.props;
           <p class="mt-2 text-[0.98rem] leading-loose tracking-normal">
             <InlineText text={block.text} />
           </p>
-          {block.source && <p class="mt-2 text-xs text-muted">出典：{block.source}</p>}
+          {block.source && (
+            <p class="mt-2 text-xs text-muted">
+              出典：
+              <InlineText text={block.source} />
+            </p>
+          )}
         </div>
       );
 

@@ -57,7 +57,7 @@ const sy = (v: number) => H - 20 - ((v - 2) / 12) * (H - 32);
   compact={Astro.props.compact}
   title="数字は同じ、形はまったく違う"
   caption="4組とも、平均・分散・相関係数・回帰直線がほぼ同じ。しかしグラフにすると、I は素直な直線関係、II は曲線、III は一つの外れ値が直線を傾け、IV は一つの点だけが相関を生んでいる。要約の数字だけで判断する前に、まず見ること。"
-  source="F. J. Anscombe, Graphs in Statistical Analysis, The American Statistician 27(1) (1973) のデータ"
+  source="[F. J. Anscombe, Graphs in Statistical Analysis, The American Statistician 27(1) (1973)](https://doi.org/10.1080/00031305.1973.10478966) のデータ"
 >
   <div class="grid grid-cols-2 gap-3 lg:grid-cols-4">
     {computed.map((set) => (
