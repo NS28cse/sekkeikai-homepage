@@ -51,7 +51,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="パレート最適な案の集まり"
-  caption={`架空の自転車の設計案 ${designs.length} 個。青い点は、価格と重さのどちらかを悪くしない限りもう改善できない「パレート最適」な案（${front.length} 個）。灰色の点は、少なくとも一つの青い点（または他の案）に、価格でも重さでも負けている。点線で囲んだ範囲の ${beaten} 個の案は、どれも価格 ${anchor[0]} 万円・${anchor[1]}kg の案に、価格でも重さでも負けている。`}
+  caption={`架空の自転車の設計案${designs.length}個。青い点は、価格と重さの一方をよくすると、もう一方が必ず悪くなる「パレート最適」な案（${front.length}個）。灰色の点は、少なくとも一つの青い点（または他の案）に、価格でも重さでも負けている。点線で囲んだ範囲の${beaten}個の案は、どれも価格${anchor[0]}万円・${anchor[1]}kgの案に、価格でも重さでも負けている。`}
   scroll
 >
   <svg
@@ -127,8 +127,8 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
       <span class="h-3 w-3 rounded-full border-2 border-muted" aria-hidden="true"></span>ほかの案に負けている案
     </li>
     <li class="flex items-center gap-2">
-      <span class="h-3 w-5 border border-dashed border-muted bg-muted/10" aria-hidden="true"></span>価格 {anchor[0]}{" "}
-      万円・{anchor[1]}kg の案に負けている範囲
+      <span class="h-3 w-5 border border-dashed border-muted bg-muted/10" aria-hidden="true"></span>価格{anchor[0]}
+      万円・{anchor[1]}kgの案に負けている範囲
     </li>
   </ul>
 </FigureFrame>

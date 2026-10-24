@@ -26,7 +26,7 @@ const start = { x: 85, y: 288 };
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="押しやすさは、計算で予測できる"
-  caption="ボタンまでの距離が遠く、ボタンが小さいほど「難しさ」が上がり、押すのにかかる時間も長くなる。Aの難しさはBの約2倍。どちらを押しやすくするかは、好みではなく計算で比べられる。"
+  caption="ボタンまでの距離が遠く、ボタンが小さいほど「難しさ」が上がり、押すのにかかる時間も長くなる。Aの難しさはBの約2倍。どちらが押しやすいかは、計算で比べられる。"
   source="[P. M. Fitts (1954)](https://doi.org/10.1037/h0055392)、[I. S. MacKenzie (1992)](https://doi.org/10.1207/s15327051hci0701_3) の式による。距離と大きさは説明のための例"
   scroll
 >
@@ -118,7 +118,7 @@ const start = { x: 85, y: 288 };
           />
           <rect x={ox + 170} y="216" width="120" height="12" rx="2" fill="none" stroke={ink} stroke-opacity="0.2" />
           <text x={ox + 170} y="252" font-size="12" fill={muted}>
-            {i === 0 ? "押しにくい" : "押しやすい"}
+            {i === 0 ? "押すのに時間がかかる" : "すぐ押せる"}
           </text>
         </g>
       );

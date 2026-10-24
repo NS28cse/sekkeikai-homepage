@@ -11,7 +11,7 @@ interface Props {
 
 const ink = "var(--color-ink)";
 const panels = [
-  { ox: 0, hole: [52, 62], shaft: [48, 58], ok: false, label: "ずれを見込まない" },
+  { ox: 0, hole: [52, 62], shaft: [48, 58], ok: false, label: "帯が重なる" },
   { ox: 320, hole: [58, 66], shaft: [44, 52], ok: true, label: "すき間を見込む" },
 ];
 const cy = 150;
@@ -21,7 +21,7 @@ const cy = 150;
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="ずれを見込んで、寸法を決める"
-  caption="帯は、つくった結果がばらつく範囲（公差）。左は穴と軸の帯が重なっていて、大きめにできた軸と小さめにできた穴が組み合わさると入らない。右は帯の間にすき間を見込んでいるので、どの組み合わせでも入る。"
+  caption="帯は、つくった寸法が収まればよい範囲（公差域）で、帯の幅が公差。左は穴と軸の帯が重なっていて、大きめにできた軸と小さめにできた穴が組み合わさると入らない。右は帯の間にすき間を見込んでいるので、どの組み合わせでも入る。"
   scroll
 >
   <svg

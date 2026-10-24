@@ -87,7 +87,7 @@ const accent = "var(--color-accent-strong)";
     viewBox={`0 0 ${W} ${H}`}
     class="w-full"
     role="img"
-    aria-label={`IDEF0 の全体図。機能「${fn}」。入力は${inputs.join("、")}。制御は${controls.join("、") || "なし"}。出力は${outputs.join("、")}。機構は${mechanisms.join("、") || "なし"}。`}
+    aria-label={`IDEF0の全体図。機能「${fn}」。入力は${inputs.join("、")}。制御は${controls.join("、") || "なし"}。出力は${outputs.join("、")}。機構は${mechanisms.join("、") || "なし"}。`}
   >
     <rect
       x={box.x}
@@ -179,7 +179,7 @@ const accent = "var(--color-accent-strong)";
         viewBox={`0 0 ${SW} ${SH}`}
         class="w-full"
         role="img"
-        aria-label={`IDEF0 の分解図。${stepBoxes.map((s, i) => `A${i + 1}「${s.name}」が「${s.output}」を出す`).join("。")}。`}
+        aria-label={`IDEF0の分解図。${stepBoxes.map((s, i) => `A${i + 1}「${s.name}」が「${s.output}」を出す`).join("。")}。`}
       >
         <line
           x1="12"

@@ -10,7 +10,7 @@ interface Props {
 
 // Stecklein ほか (2004) の結果。幅は推定方法による違い
 const phases = [
-  { label: "要求", min: 1, max: 1 },
+  { label: "要件定義", min: 1, max: 1 },
   { label: "設計", min: 3, max: 8 },
   { label: "製造", min: 7, max: 16 },
   { label: "統合・試験", min: 21, max: 78 },
@@ -28,14 +28,14 @@ const fmt = (v: number) => v.toLocaleString("ja-JP");
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="誤りは、見つけるのが遅いほど高くつく"
-  caption="要求の段階で紛れ込んだ誤りを、どの段階で見つけて直すかによる修正コストの見積もり。要求の段階で直すコストを1としたときの倍率で、横軸は対数目盛（1目盛りで10倍）。帯の幅は推定方法による違い。"
+  caption="要件定義の段階で紛れ込んだ誤りを、どの段階で見つけて直すかによる修正コストの見積もり。要件定義の段階で直すコストを1としたときの倍率で、横軸は対数目盛（1目盛りで10倍）。帯の幅は推定方法による違い。"
   source="[J. M. Stecklein ほか, Error Cost Escalation Through the Project Life Cycle, NASA Johnson Space Center (2004)](https://ntrs.nasa.gov/citations/20100036670)"
 >
   <div
     role="img"
-    aria-label="修正コストの倍率。要求1倍、設計3〜8倍、製造7〜16倍、統合・試験21〜78倍、運用29〜1,500倍以上。"
+    aria-label="修正コストの倍率。要件定義1倍、設計3〜8倍、製造7〜16倍、統合・試験21〜78倍、運用29〜1,500倍以上。"
   >
-    <p class="mb-4 text-xs text-muted">要求の段階で直すコストを 1 としたとき（1目盛りで10倍）</p>
+    <p class="mb-4 text-xs text-muted">要件定義の段階で直すコストを1としたとき（1目盛りで10倍）</p>
     <ol class="space-y-4">
       {phases.map((p, i) => {
         const late = i >= 3;
