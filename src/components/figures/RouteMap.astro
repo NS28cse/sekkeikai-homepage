@@ -23,17 +23,18 @@ const geo = {
     { name: "大学前", x: 96, y: 112, dx: 10, dy: 4 },
     // 中央駅は乗り換えの駅なので、あとで別の印で描く
     { name: "中央", x: 150, y: 196, dx: 0, dy: 0 },
-    { name: "港", x: 262, y: 270, dx: -26, dy: 4 },
+    { name: "港", x: 262, y: 270, dx: 10, dy: 4 },
   ],
   b: [
     { name: "西口", x: 34, y: 222, dx: -6, dy: 20 },
     { name: "中央", x: 150, y: 196, dx: 0, dy: 0 },
-    { name: "市役所", x: 186, y: 206, dx: -8, dy: 22 },
+    { name: "市役所", x: 186, y: 206, dx: -12, dy: 24 },
     { name: "東山", x: 270, y: 120, dx: -40, dy: 0 },
   ],
 };
 // 曲がった線路（2次ベジェ曲線で、駅と駅のあいだを結ぶ）
-const curveA = "M 70 66 Q 74 92 96 112 Q 110 170 150 196 Q 230 222 262 270";
+// A線は中央からいったん真下へ下りてから港へ向かい、市役所の駅名と重ならないようにしている
+const curveA = "M 70 66 Q 74 92 96 112 Q 110 170 150 196 Q 150 260 262 270";
 const curveB = "M 34 222 Q 90 190 150 196 Q 168 210 186 206 Q 250 196 270 120";
 
 // 右の路線図：駅の順番だけを残し、等間隔に並べる
@@ -84,7 +85,8 @@ const pts = (list: { x: number; y: number }[]) => list.map((p) => `${p.x},${p.y}
       stroke-opacity="0.2"
       stroke-width="12"
     />
-    <text x="250" y="168" font-size="11" fill={muted}>
+    <!-- 「川」の文字は、線路と交わらない左側の川の上に置く -->
+    <text x="40" y="151" font-size="11" fill={muted}>
       川
     </text>
     <path d={curveA} fill="none" stroke={lineA} stroke-width="4" stroke-linecap="round" />

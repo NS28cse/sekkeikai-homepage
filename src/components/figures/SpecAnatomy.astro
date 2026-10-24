@@ -2,6 +2,7 @@
 // 仕様書の中身と、それぞれの項目がどの工程から来たか。
 // 例は「部室の予約」の一枚の仕様書（架空の例）。数字や案の名前は、工程のページの文章と同じ値にしている。
 // 右の札の色は、考えを広げる工程（オレンジ）か、絞る工程（青）かを表す（設計のプロセスの全体図と同じ色分け）。
+// 広げる工程と絞る工程の両方にまたがる項目（工程3・4）は、どちらでもない灰色にする。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -15,7 +16,13 @@ const accent = "var(--color-accent-strong)";
 const muted = "var(--color-muted)";
 
 // 仕様書の項目。lines は本文（一行 32 字まで）、from はその項目のもとになった工程、mode は札の色
-const sections: { head: string; lines: string[]; from: string; step: string; mode: "diverge" | "converge" }[] = [
+const sections: {
+  head: string;
+  lines: string[];
+  from: string;
+  step: string;
+  mode: "diverge" | "converge" | "both";
+}[] = [
   {
     head: "目的",
     lines: ["部員が、部室の空き状況を前もって確かめられるようにする"],
@@ -35,7 +42,7 @@ const sections: { head: string; lines: string[]; from: string; step: string; mod
     lines: ["カレンダーを開く → 空いた枠を押す → 名前・用件を書く", "時間は30分単位。部員全員がカレンダーを見られる"],
     step: "工程3・4",
     from: "広げて、選んだ案",
-    mode: "diverge",
+    mode: "both",
   },
   {
     head: "決まりと、数字の理由",
@@ -70,13 +77,16 @@ const top = 92;
 const secH = 62;
 const secY = (i: number) => top + i * secH;
 const paperH = secY(sections.length) - 40 + 12;
+// 札の色：広げる工程はオレンジ、絞る工程は青、両方にまたがるものは灰色
+const tagColor = (mode: "diverge" | "converge" | "both") =>
+  mode === "diverge" ? accent : mode === "converge" ? link : muted;
 ---
 
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="仕様書の中身は、前の工程の答え"
-  caption="部室の予約の仕様書（架空の例）。目的は工程1、要件と確かめ方は工程2、判断の記録は工程4の答えをそのまま写す。工程5で新しく決めるのは、決まりや数字と、その理由。右の札の色は、オレンジが考えを広げる工程、青が絞る工程。"
+  caption="部室の予約の仕様書（架空の例）。目的は工程1、要件と確かめ方は工程2、判断の記録は工程4の答えをそのまま写す。工程5で新しく決めるのは、決まりや数字と、その理由。右の札の色は、オレンジが考えを広げる工程、青が絞る工程、灰色はその両方にまたがるもの。"
   scroll
 >
   <svg
@@ -120,7 +130,7 @@ const paperH = secY(sections.length) - 40 + 12;
           x2="492"
           y1={secY(i) + 8}
           y2={secY(i) + 8}
-          stroke={s.mode === "diverge" ? accent : link}
+          stroke={tagColor(s.mode)}
           stroke-dasharray="3 4"
         />
         <rect
@@ -129,17 +139,11 @@ const paperH = secY(sections.length) - 40 + 12;
           width="208"
           height="44"
           rx="4"
-          fill={s.mode === "diverge" ? accent : link}
+          fill={tagColor(s.mode)}
           fill-opacity="0.12"
-          stroke={s.mode === "diverge" ? accent : link}
+          stroke={tagColor(s.mode)}
         />
-        <text
-          x="504"
-          y={secY(i) + 11}
-          font-family="var(--font-mono)"
-          font-size="11"
-          fill={s.mode === "diverge" ? accent : link}
-        >
+        <text x="504" y={secY(i) + 11} font-family="var(--font-mono)" font-size="11" fill={tagColor(s.mode)}>
           {s.step}
         </text>
         <text x="504" y={secY(i) + 29} font-size="13" fill={ink}>

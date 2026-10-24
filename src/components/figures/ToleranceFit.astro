@@ -89,10 +89,11 @@ const cy = 150;
             fill="var(--color-link)"
             fill-opacity="0.45"
           />
-          <text x={cx} y={cy + 5} text-anchor="middle" font-size="13" fill={ink}>
+          <text x={cx} y={cy + 5} text-anchor="middle" font-size="15" font-weight="700" fill={ink}>
             軸
           </text>
-          <text x={cx + 104} y={cy - p.hole[1] - 10} font-size="12" fill={ink}>
+          <!-- 「穴」の文字は、穴の中で軸の左のすき間（壁と軸のあいだ）に置く -->
+          <text x={cx - 105} y={cy + 5} text-anchor="middle" font-size="15" font-weight="700" fill={ink}>
             穴
           </text>
           <text

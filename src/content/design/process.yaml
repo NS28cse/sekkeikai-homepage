@@ -17,9 +17,6 @@ chapters:
       - type: p
         text: 経済学者であり認知科学の開拓者でもあったハーバート・サイモンは、今の状態をより好ましい状態に変えようとして行動の道筋を考える人は、誰もが設計をしているのだと述べました。設計とは、まだないものについて「どうあるべきか」を考えることです。
         note: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）。邦訳『システムの科学』。
-      - type: p
-        text: 設計の進め方を示したモデルは数多くありますが、多くは同じ骨格を持っています。このサイトでは、その骨格を五つの工程に分けて紹介しています。
-        note: G. Pahl & W. Beitz, Konstruktionslehre, Springer, 1977（英語版 Engineering Design, 1984）は、課題の明確化・構想設計・実体設計・詳細設計の段階を示した。英国デザイン・カウンシルのダブルダイヤモンドは、発見・定義・展開・提供の4段階で示す。
 
   - id: fields
     heading: 分野が違っても、骨格は共通
@@ -57,10 +54,7 @@ chapters:
             - 提供（小さく試して改良）
       - type: p
         text: 同じ「基本設計」という言葉でも、建築では実施設計の前の段階を、ソフトウェアでは画面や外から見た動きを決める段階を指すことが多く、意味が違います。ほかの学部の人と話すときは、言葉より「今、何を決めているのか」をそろえるのが近道です。
-        note: 建築の段階は、令和6年国土交通省告示第8号（建築士事務所の業務報酬基準）による。ソフトウェアは情報処理推進機構（IPA）「共通フレーム2013」、ソフトウェアの「基本設計」「詳細設計」は日本の現場での慣用の呼び方。
-      - type: p
-        text: 五つの工程に入りきらない仕事もあります。できたものが要件を満たすかを確かめる検証、建築や福祉用具での法令や安全規格の確認、イベントの当日の運営とふり返りです。これらは、分野によっては設計と同じくらい大切な仕事です。設計会では、仕様書の中に「どう確かめるか」まで書くことで、次につなげます。
-        note: ドイツ技術者協会の指針 VDI 2221 は2019年の改訂で、決まった順番を示すのをやめ、どの製品開発にも通じる「活動」を定めて、並べ方は状況に応じて決める形にした。
+        note: 建築は令和6年国土交通省告示第8号、ソフトウェアはIPA「共通フレーム2013」による。
 
   - id: modes
     heading: 広げる工程と、絞る工程が交互に来る
@@ -68,11 +62,7 @@ chapters:
       - type: point
         text: 問題を見つけるときと案を考えるときは、評価をあとまわしにして広げる。要件を定めるときと案を選ぶときは、根拠をもって絞る。今どちらなのかを意識すると、話し合いが進めやすくなります。
       - type: p
-        text: 工程には、考えを**広げる**ものと**絞る**ものがあります。広げるときによしあしを言い始めると、案が出なくなります。絞るときにまた広げ始めると、いつまでも決まりません。英国デザイン・カウンシルは、この切り替えを二つのひし形で表しました。
-      - type: figure
-        name: double-diamond
-      - type: p
-        text: 五つの工程をこのひし形に重ねると、工程1（問題を見つける）と工程2（要件を定める）が左のひし形に、工程3から5が右のひし形に入ります。どの工程も、終わりに形のあるものを一つ残し、それが次の工程の出発点になります。要件の表は、左のひし形の答えであり、右のひし形で案を比べるときの物差しにもなります。
+        text: 工程には、考えを**広げる**ものと**絞る**ものがあります。広げるときによしあしを言い始めると、案が出なくなります。絞るときにまた広げ始めると、いつまでも決まりません。英国デザイン・カウンシルは、この切り替えを二つのひし形（ダブルダイヤモンド）で表しました。五つの工程を重ねると、工程1と2が左のひし形に、工程3から5が右のひし形に入ります。
       - type: figure
         name: steps-on-double-diamond
 
@@ -83,12 +73,7 @@ chapters:
         text: 案を考えてはじめて、要件の見落としに気づくことはよくあります。そのときは前の工程に戻ります。ただし、見落としは早く見つけるほど、直す手間は小さく済みます。
       - type: p
         text: 1973年、リッテルとウェバーは、設計や計画が扱う問題の多くは、問題をどう定義するかに解き方が含まれてしまう「厄介な問題」だと指摘しました。問題と答えは、行き来しながら一緒に確かになっていくのです。
-        note: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973。D. A. Schön, The Reflective Practitioner, 1983 も、設計する人が状況と「対話」しながら問題の捉え方を組み替えていく姿を描いた。
-      - type: p
-        text: それでも、早い工程で考え抜く価値は大きいのです。NASAが過去の大規模な開発をもとにまとめた見積もりでは、要求の段階で紛れ込んだ誤りを運用に入ってから直すと、その場で直す場合の数十倍から千倍以上の手間がかかりました。
-        note: J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004。宇宙機のような大規模なシステムでの見積もりで、倍率そのものは分野や規模によって大きく変わる。
-      - type: figure
-        name: cost-escalation
+        note: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973。
       - type: p
         text: ソフトウェアの世界では、すべての要件を最初に決めきらず、小さくつくって使ってもらい、要件そのものを学びながら更新していく進め方が広く使われています。工程を一度だけ通るのではなく、短い周期で何度も回すのです。一方、自動車や医療機器のように安全が重要な分野では、要件から設計、試験までのつながりを漏れなくたどれることが求められます。
 
@@ -119,9 +104,6 @@ references:
     url: https://www.designcouncil.org.uk/our-resources/the-double-diamond/
   - text: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), pp.155–169, 1973.
     url: https://doi.org/10.1007/BF01405730
-  - text: D. A. Schön, The Reflective Practitioner, Basic Books, 1983（邦訳『省察的実践とは何か』鳳書房, 2007年）.
-  - text: J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004.
-    url: https://ntrs.nasa.gov/citations/20100036670
 related:
   - problem-finding
   - design-methods-history

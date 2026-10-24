@@ -90,11 +90,17 @@ const fmt = (v: number) => (v >= 1 ? String(Math.round(v)) : `1/${Math.round(1 /
           </li>
         ))}
       </ul>
-      <p class="mt-4 font-mono text-xs text-muted">
-        λmax = {lambda.toFixed(3)} / CI = {ci.toFixed(3)} / CR = {cr.toFixed(3)}
-        <span class:list={["ml-1 font-sans font-bold", cr < 0.1 ? "text-positive" : "text-accent-strong"]}>
-          {cr < 0.1 ? "整合している（CR < 0.1）" : "判断を見直す（CR ≥ 0.1）"}
-        </span>
+      <!-- 整合度の数値は一行に一つずつ並べ、狭い幅でも途中で折り返さないようにする -->
+      <dl class="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 font-mono text-sm text-muted">
+        <dt>λmax</dt>
+        <dd>{lambda.toFixed(3)}</dd>
+        <dt>CI</dt>
+        <dd>{ci.toFixed(3)}</dd>
+        <dt>CR</dt>
+        <dd>{cr.toFixed(3)}</dd>
+      </dl>
+      <p class:list={["mt-2 text-sm font-bold", cr < 0.1 ? "text-positive" : "text-accent-strong"]}>
+        {cr < 0.1 ? "整合している（CR < 0.1）" : "判断を見直す（CR ≥ 0.1）"}
       </p>
     </div>
   </div>

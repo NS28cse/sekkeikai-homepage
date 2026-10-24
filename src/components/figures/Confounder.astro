@@ -16,9 +16,10 @@ const warm = "var(--color-accent-strong)";
 const cool = "var(--color-link)";
 
 // 架空のデータ：月ごとの平均気温（℃）。売り上げと事故は、気温に少しのばらつきを足してつくった
+// （1月・2月・12月の点が同じ場所に重ならないよう、ばらつきを少し大きめにしている）
 const temp = [5, 6, 10, 15, 20, 23, 27, 28, 24, 18, 12, 7];
-const noiseIce = [0.6, -0.4, 0.8, -0.5, 1.0, -0.8, 0.5, -0.3, 0.9, -0.6, 0.2, -0.2];
-const noiseAcc = [0.4, 0.1, -0.5, 0.6, -0.4, 0.7, -0.6, 0.5, -0.2, 0.3, -0.3, 0.2];
+const noiseIce = [0.6, -1.0, 0.8, -0.5, 1.0, -0.8, 0.5, -0.3, 0.9, -0.6, 0.2, 0.8];
+const noiseAcc = [0.4, -0.1, -0.5, 0.6, -0.4, 0.7, -0.6, 0.5, -0.2, 0.3, -0.3, 0.2];
 const data = temp.map((t, i) => ({
   month: i + 1,
   t,
@@ -143,14 +144,15 @@ const py = (v: number) => 270 - (v / 9) * 210;
     <text x="425" y="237" text-anchor="middle" font-size="13" fill={ink}>
       アイスが売れる
     </text>
-    <rect x="520" y="210" width="110" height="44" rx="6" fill="var(--color-paper)" stroke={ink} stroke-width="2" />
-    <text x="575" y="237" text-anchor="middle" font-size="13" fill={ink}>
+    <!-- 「水の事故が増える」は字数が多いので、箱を少し広くしている -->
+    <rect x="512" y="210" width="124" height="44" rx="6" fill="var(--color-paper)" stroke={ink} stroke-width="2" />
+    <text x="574" y="237" text-anchor="middle" font-size="13" fill={ink}>
       水の事故が増える
     </text>
     <line x1="470" y1="130" x2="432" y2="206" stroke={ink} stroke-width="2" marker-end="url(#cf-arrow)" />
-    <line x1="530" y1="130" x2="568" y2="206" stroke={ink} stroke-width="2" marker-end="url(#cf-arrow)" />
+    <line x1="530" y1="130" x2="572" y2="206" stroke={ink} stroke-width="2" marker-end="url(#cf-arrow)" />
     <!-- アイスと事故のあいだには、直接の矢印が無い -->
-    <line x1="484" x2="516" y1="232" y2="232" stroke={muted} stroke-width="2" stroke-dasharray="4 4" />
+    <line x1="486" x2="506" y1="232" y2="232" stroke={muted} stroke-width="2" stroke-dasharray="4 4" />
     <text x="500" y="280" text-anchor="middle" font-size="12" fill={muted}>
       この二つのあいだに、
     </text>
