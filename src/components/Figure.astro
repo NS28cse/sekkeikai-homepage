@@ -19,6 +19,15 @@ import AnalysisCycle from "./figures/AnalysisCycle.astro";
 import ParetoFront from "./figures/ParetoFront.astro";
 import AhpExample from "./figures/AhpExample.astro";
 import DoorSignifier from "./figures/DoorSignifier.astro";
+import FittsLaw from "./figures/FittsLaw.astro";
+import DesignScope from "./figures/DesignScope.astro";
+import InterfaceMismatch from "./figures/InterfaceMismatch.astro";
+import SubtitleUsers from "./figures/SubtitleUsers.astro";
+import RobotDimensions from "./figures/RobotDimensions.astro";
+import SessionTimeline from "./figures/SessionTimeline.astro";
+import SetBased from "./figures/SetBased.astro";
+import ToleranceFit from "./figures/ToleranceFit.astro";
+import BrainstormLanes from "./figures/BrainstormLanes.astro";
 
 interface Props {
   name: FigureName;
@@ -45,6 +54,15 @@ const components: Record<FigureName, (props: { number?: number; compact?: boolea
   "pareto-front": ParetoFront,
   "ahp-example": AhpExample,
   "door-signifier": DoorSignifier,
+  "fitts-law": FittsLaw,
+  "design-scope": DesignScope,
+  "interface-mismatch": InterfaceMismatch,
+  "subtitle-users": SubtitleUsers,
+  "robot-dimensions": RobotDimensions,
+  "session-timeline": SessionTimeline,
+  "set-based": SetBased,
+  "tolerance-fit": ToleranceFit,
+  "brainstorm-lanes": BrainstormLanes,
 };
 
 const { name, number, compact } = Astro.props;

@@ -19,6 +19,15 @@ export const figureNames = [
   "pareto-front",
   "ahp-example",
   "door-signifier",
+  "fitts-law",
+  "design-scope",
+  "interface-mismatch",
+  "subtitle-users",
+  "robot-dimensions",
+  "session-timeline",
+  "set-based",
+  "tolerance-fit",
+  "brainstorm-lanes",
 ] as const;
 
 export type FigureName = (typeof figureNames)[number];

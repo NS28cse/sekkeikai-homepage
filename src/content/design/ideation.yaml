@@ -41,6 +41,8 @@ chapters:
       - type: p
         text: ブレインストーミングには限界も指摘されています。グループで同時に話すと、発言を待つあいだに案を忘れたり、評価を気にして控えたりします。そのため、同じ人数が一人ずつ考えた案を合わせたほうが数が多くなる、という実験結果があります。まず各自で書き出してから共有するのは、そのためです。
         note: M. Diehl & W. Stroebe, "Productivity Loss in Brainstorming Groups", Journal of Personality and Social Psychology, 53(3), 1987。
+      - type: figure
+        name: brainstorm-lanes
 
   - id: keep
     heading: 一つに決めず、いくつかの案を並べて進める
@@ -50,6 +52,8 @@ chapters:
       - type: p
         text: トヨタの製品開発を調べた研究者たちは、一つの案に早く決めず、いくつかの案を並べて検討し、根拠をもって少しずつ絞り込む進め方が、結果として開発を速く確かなものにしていると報告しました。「セットベース設計」と呼ばれる考え方です。
         note: A. Ward ほか, "The Second Toyota Paradox", Sloan Management Review, 36(3), 1995。
+      - type: figure
+        name: set-based
       - type: example
         title: 部室の予約なら（架空の例）
         text: 専用の予約アプリをつくる案のほかに、「部室の前に紙の予約表を貼る」「曜日ごとに使う人を決める」「無料の共有カレンダーを予約表にする」など、アプリをつくらない案も並べました。案の数は、全部で九つになりました。
