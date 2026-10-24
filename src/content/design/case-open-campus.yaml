@@ -207,3 +207,17 @@ related:
   - case-delivery-robot
   - process
   - requirements
+
+courses:
+  - name: 子育て支援プロジェクト研究A
+    dept: 子ども学科
+    relation: 地域や団体と協力して子育て支援を計画・実践し、ふり返る
+    path: 0117/0117_17007301
+  - name: プロジェクト演習
+    dept: 工芸工業デザイン学科
+    relation: 行政や企業と連携し、グループで長期のプロジェクトに取り組む
+    path: 0336/0336_36004901
+  - name: 地域デザイン演習
+    dept: デザイン学部共通
+    relation: 地域の資源や課題をフィールドワークで探し、発想の方法を学ぶ
+    path: 03/03_30532501

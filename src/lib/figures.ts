@@ -28,6 +28,16 @@ export const figureNames = [
   "set-based",
   "tolerance-fit",
   "brainstorm-lanes",
+  "fact-vs-interpretation",
+  "morphological-chart",
+  "must-filter-funnel",
+  "spec-anatomy",
+  "steps-on-double-diamond",
+  "shape-coding",
+  "route-map",
+  "er-state",
+  "confounder",
+  "methods-timeline",
 ] as const;
 
 export type FigureName = (typeof figureNames)[number];

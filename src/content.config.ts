@@ -22,6 +22,21 @@ const news = defineCollection({
   }),
 });
 
+// ── 関連授業 ──
+// 岡山県立大学のシラバスにある授業。授業名はシラバスの表記どおりに書き、担当教員の名前は書かない（年度ごとに変わるため）。
+// path はシラバスのページの場所（例: 0222/0222_22147401）。年度は src/lib/syllabus.ts で一か所にまとめている
+const course = z.object({
+  name: z.string().max(40),
+  // 学科名（例: 人間情報工学科）。全学共通の授業は「共通教育」
+  dept: z.string().max(24),
+  // このページとのつながりを一言で
+  relation: z.string().max(80),
+  path: z
+    .string()
+    .regex(/^\d{2,4}\/\d{2,4}_[0-9A-Z]{8}$/, { message: "path は 0222/0222_22147401 の形で書いてください" })
+    .optional(),
+});
+
 // ── ブロック ──
 // 長文は「ブロック」を上から並べて書く。トップページの章と「設計を知る」のページで同じブロックが使える。
 // 文章の中には [[modeling]]（ページへのリンク）、[[process#loop|工程の行き来]]（章へのリンク）、
@@ -36,7 +51,13 @@ const block = z.discriminatedUnion("type", [
   // 読者への問いかけ。答え（answer）は隠さず、すぐ下に出す（折りたたみは読み飛ばされやすいため）
   z.object({ type: z.literal("question"), text: z.string().max(100), answer: z.string().max(240).optional() }),
   // 身近な例。抽象的な話の前後に、具体的な場面を一つ置く
-  z.object({ type: z.literal("example"), title: z.string().max(30).optional(), text: z.string().max(400) }),
+  // source … 実際にあった例の出どころ（例の枠の下に小さく出す）
+  z.object({
+    type: z.literal("example"),
+    title: z.string().max(30).optional(),
+    text: z.string().max(400),
+    source: z.string().max(200).optional(),
+  }),
   // 折りたたみの補足。本題ではないが分量の多い補足や、詳しい事例を入れる。
   // 短い補足や出典は、折りたたみではなく段落の note（本文の右）に書く
   z.object({
@@ -131,6 +152,8 @@ const block = z.discriminatedUnion("type", [
   z.object({ type: z.literal("map"), variant: z.enum(["compact", "full"]).default("compact") }),
   // 視点（lens）のページで、その視点を工程ごとにどう使うか（ページの perStep から作る）
   z.object({ type: z.literal("per-step") }),
+  // 岡山県立大学の関連授業（トップページの章などで使う）
+  z.object({ type: z.literal("courses"), items: z.array(course).min(1).max(8) }),
   // ほかのページへの「詳しく読む」リンク
   z.object({ type: z.literal("link"), label: z.string().max(40), href: z.string() }),
 ]);
@@ -265,6 +288,8 @@ const design = defineCollection({
         .array(z.object({ text: z.string().max(240), url: z.url().optional() }))
         .max(30)
         .default([]),
+      // 岡山県立大学の関連授業（補足）。ページの終わりに小さな枠で出す
+      courses: z.array(course).max(8).default([]),
       related: z.array(reference("design")).max(4).default([]),
       // 視点（lens）のページ：各工程で、この視点をどう使うか（工程の順に、工程の数だけ書く）。
       // cell は地図の表のマスに、body は「工程ごとの使い方」（ブロック type: per-step）に出る。

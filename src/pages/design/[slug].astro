@@ -8,6 +8,7 @@ import type { CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Blocks from "../../components/Blocks.astro";
 import StepNav from "../../components/StepNav.astro";
+import Courses from "../../components/Courses.astro";
 import { numberChapters } from "../../lib/blocks";
 import { getProcessSteps, layerLabel } from "../../lib/design";
 
@@ -30,7 +31,8 @@ interface Props {
 }
 
 const { page, prev, next } = Astro.props;
-const { title, en, layer, order, short, stepName, question, summary, lead, chapters, references, perStep } = page.data;
+const { title, en, layer, order, short, stepName, question, summary, lead, chapters, references, perStep, courses } =
+  page.data;
 const related = await getEntries(page.data.related);
 const steps = await getProcessSteps();
 
@@ -156,6 +158,8 @@ const crumb =
           </section>
         ))}
       </div>
+
+      {courses.length > 0 && <Courses courses={courses} />}
 
       {references.length > 0 && (
         <section

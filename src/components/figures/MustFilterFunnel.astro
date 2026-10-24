@@ -1,0 +1,197 @@
+---
+// 案を選ぶ順番：まず「なくてはならない要件」でふるいにかけ、残った案だけをピューの概念選定法で比べる。
+// 例は「部室の予約」（架空の例）。九つの案・要件・ピューの合計は、工程のページの文章と同じ値にしている
+// （案の一覧は ideation.yaml、要件は requirements.yaml、ピューの表は selection.yaml）。
+import FigureFrame from "./FigureFrame.astro";
+
+interface Props {
+  number?: number;
+  compact?: boolean;
+}
+
+const ink = "var(--color-ink)";
+const link = "var(--color-link)";
+const accent = "var(--color-accent-strong)";
+const muted = "var(--color-muted)";
+
+// 九つの案。fail に書いた要件を満たさない案は、ふるいで外れる。score はピューの合計（基準の案との比べ）
+const plans: { name: string; fail?: string; score?: string }[] = [
+  { name: "専用の予約アプリ", score: "+1" },
+  { name: "紙の予約表", fail: "3操作以内" },
+  { name: "曜日で使う人を決める", score: "+1" },
+  { name: "無料の共有カレンダー", score: "+3" },
+  { name: "空きをランプで知らせる", fail: "費用0円" },
+  { name: "有料の予約サービス", fail: "費用0円" },
+  { name: "チャットで声をかける", fail: "重なり0件" },
+  { name: "ホワイトボードに書く", fail: "3操作以内" },
+  { name: "受付係にメッセージで頼む", fail: "3操作以内" },
+];
+
+// 並べ方（左の列の行の位置）
+const rowTop = 72;
+const rowGap = 36;
+const rowH = 28;
+const rowY = (i: number) => rowTop + i * rowGap;
+
+// ふるいを通った案は、右の列に縦に並べる
+const passed = plans.map((p, i) => ({ ...p, row: i })).filter((p) => !p.fail);
+const boxH = 44;
+const boxTop = 128;
+const boxGap = 70;
+const boxY = (j: number) => boxTop + j * boxGap;
+// ピューの合計がいちばん高い案が、選んだ案になる
+const best = passed.reduce((a, b) => (Number(b.score) > Number(a.score) ? b : a));
+const bestIndex = passed.indexOf(best);
+const failedCount = plans.filter((p) => p.fail).length;
+// 「〜つ」の数は漢数字で書く（docs/writing-guide.md の表記の決まり）
+const kanji = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+---
+
+<FigureFrame
+  number={Astro.props.number}
+  compact={Astro.props.compact}
+  title="先にふるいにかけ、残った案だけを比べる"
+  caption={`部室の予約（架空の例）。九つの案のうち${kanji[failedCount]}つは、なくてはならない要件か制約を一つでも満たさないので、点数を付ける前に外す。残った${kanji[passed.length]}つをピューの概念選定法で比べ、合計がいちばん高い案を選ぶ。比べる基準には、要件は満たさないが今のやり方に近い「紙の予約表」を使った。`}
+  scroll
+>
+  <svg
+    viewBox="0 0 800 420"
+    class="w-full"
+    role="img"
+    aria-label={`九つの案のうち${kanji[failedCount]}つが、3操作以内・重なり0件・費用0円のどれかを満たさずに外れ、残った${kanji[passed.length]}つをピューの方法で比べて、無料の共有カレンダーを選んだ図。`}
+  >
+    <defs>
+      <marker id="mf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill={muted} />
+      </marker>
+    </defs>
+
+    <!-- 列の見出し -->
+    <text x="16" y="30" font-size="14" font-weight="700" fill={ink}>
+      ① 九つの案
+    </text>
+    <text x="214" y="30" font-size="14" font-weight="700" fill={ink}>
+      ② 要件でふるいにかける
+    </text>
+    <text x="214" y="50" font-size="11" fill={muted}>
+      3操作以内・重なり0件・費用0円
+    </text>
+    <text x="440" y="30" font-size="14" font-weight="700" fill={ink}>
+      ③ 残った案を比べる
+    </text>
+    <text x="440" y="50" font-size="11" fill={muted}>
+      ピューの概念選定法の合計
+    </text>
+    <text x="650" y="30" font-size="14" font-weight="700" fill={ink}>
+      ④ 選んだ案
+    </text>
+
+    <!-- ①と② 九つの案と、ふるいの結果 -->
+    {plans.map((p, i) => (
+      <g>
+        <rect
+          x="16"
+          y={rowY(i)}
+          width="182"
+          height={rowH}
+          rx="4"
+          fill={p.fail ? "var(--color-paper-muted)" : "var(--color-paper)"}
+          stroke={p.fail ? "var(--color-grid)" : link}
+          stroke-width={p.fail ? 1 : 1.5}
+        />
+        <text x="26" y={rowY(i) + 19} font-size="13" fill={p.fail ? muted : ink}>
+          {p.name}
+        </text>
+        {p.fail ? (
+          <text x="214" y={rowY(i) + 19} font-size="12" fill={accent}>
+            ✕ {p.fail}を満たさない
+          </text>
+        ) : (
+          <text x="214" y={rowY(i) + 19} font-size="12" fill={link}>
+            ○ すべて満たす
+          </text>
+        )}
+      </g>
+    ))}
+
+    <!-- ③ ふるいを通った案と、ピューの合計 -->
+    {passed.map((p, j) => (
+      <g>
+        <path
+          d={`M310 ${rowY(p.row) + rowH / 2} C 380 ${rowY(p.row) + rowH / 2}, 380 ${boxY(j) + boxH / 2}, 434 ${boxY(j) + boxH / 2}`}
+          fill="none"
+          stroke={link}
+          stroke-opacity="0.6"
+          marker-end="url(#mf-arrow)"
+        />
+        <rect
+          x="440"
+          y={boxY(j)}
+          width="176"
+          height={boxH}
+          rx="4"
+          fill={link}
+          fill-opacity={j === bestIndex ? 0.15 : 0}
+          stroke={link}
+          stroke-width={j === bestIndex ? 2 : 1}
+        />
+        <text x="450" y={boxY(j) + 19} font-size="13" fill={ink}>
+          {p.name}
+        </text>
+        <text
+          x="450"
+          y={boxY(j) + 36}
+          font-size="12"
+          font-weight={j === bestIndex ? 700 : 400}
+          fill={j === bestIndex ? link : muted}
+        >
+          合計 {p.score}
+        </text>
+      </g>
+    ))}
+    <text x="440" y={boxY(passed.length - 1) + boxH + 26} font-size="11" fill={muted}>
+      比べる基準：紙の予約表
+    </text>
+    <text x="440" y={boxY(passed.length - 1) + boxH + 42} font-size="11" fill={muted}>
+      （今のやり方に近い案）
+    </text>
+
+    <!-- ④ 選んだ案 -->
+    <line
+      x1="616"
+      x2="644"
+      y1={boxY(bestIndex) + boxH / 2}
+      y2={boxY(bestIndex) + boxH / 2}
+      stroke={ink}
+      stroke-width="1.5"
+      marker-end="url(#mf-arrow)"
+    />
+    <rect x="650" y={boxY(bestIndex) - 8} width="140" height={boxH + 16} rx="6" fill={link} />
+    <text
+      x="720"
+      y={boxY(bestIndex) + 18}
+      text-anchor="middle"
+      font-size="13"
+      font-weight="700"
+      fill="var(--color-paper)"
+    >
+      無料の共有
+    </text>
+    <text
+      x="720"
+      y={boxY(bestIndex) + 36}
+      text-anchor="middle"
+      font-size="13"
+      font-weight="700"
+      fill="var(--color-paper)"
+    >
+      カレンダー
+    </text>
+    <text x="650" y={boxY(bestIndex) + boxH + 30} font-size="11" fill={muted}>
+      外した案と理由も
+    </text>
+    <text x="650" y={boxY(bestIndex) + boxH + 46} font-size="11" fill={muted}>
+      記録に残す
+    </text>
+  </svg>
+</FigureFrame>

@@ -7,11 +7,45 @@ question: 設計の進め方は、いつ、誰が方法にしたのか
 summary: 設計の進め方そのものを研究し、方法としてまとめる試みは、20世紀の半ばから大きく進んだ。工程のページで紹介した手法が生まれた順に並べる。
 lead: 工程のページで紹介した手法には、それぞれ生まれた時代と、考えた人がいます。設計の進め方そのものを研究し、誰でも使える方法にまとめる試みは、20世紀の半ばから大きく進みました。
 chapters:
+  - id: why
+    heading: 一人の勘では、設計しきれなくなった
+    blocks:
+      - type: question
+        text: 設計の進め方には、昔から決まった手順があったのでしょうか？
+        answer: いいえ。長いあいだ、設計は親方から弟子へ、やりながら身につけるものでした。進め方を書き出し、誰でも使える方法にしようとする動きが大きく進んだのは、1960年代のことです。
+      - type: point
+        text: ものやシステムが大きく複雑になり、一人の勘と経験では設計しきれなくなりました。そこで、設計の進め方を書き出し、教えられる「方法」にしようとする動きが生まれました。
+      - type: p
+        text: |-
+          第二次世界大戦のあと、航空機や宇宙開発のような巨大なシステムが現れ、何千人もの技術者が一つのものを設計するようになりました。コンピューターも使われ始め、作戦の分析から生まれたオペレーションズ・リサーチのように、問題を手順で解く考え方も広がっていました。設計も、勘と経験だけに頼らず、手順として書き出せるのではないか。そう考える人たちが現れました。
+      - type: p
+        text: |-
+          1962年9月、ロンドンのインペリアル・カレッジで「設計方法会議（Conference on Design Methods）」が開かれました。建築、機械、工業デザインなど、分野の違う人たちが集まり、設計の進め方そのものを研究の対象として論じました。設計の方法を一つの分野として扱った、最初の会議とされています。この会議の委員会が中心となって、1966年に英国のデザイン・リサーチ・ソサエティが生まれました。
+        note: |-
+          J. C. Jones & D. G. Thornley (eds.), Conference on Design Methods, Pergamon Press, 1963。会議は1962年9月19〜21日に開かれた。
+      - type: p
+        text: |-
+          会議を開いた一人、ジョン・クリストファー・ジョーンズは、1970年に『Design Methods』を著しました。それまでに考えられた設計の手法を集め、どんな場面で、何のために使うかを整理した本で、設計の方法を学ぶ人の基本の一冊になりました。
+        note: |-
+          J. C. Jones, Design Methods: Seeds of Human Futures, Wiley-Interscience, 1970。1980年と1992年に改訂版が出ている。
+      - type: p
+        text: |-
+          一方で、方法への期待が大きすぎたことへの反省も、早くから出ました。この流れの中心にいた建築家クリストファー・アレグザンダーは、1971年に、設計の方法を設計の実践から切り離して研究することを強く批判し、距離を置きました。そこから、手順で設計を置き換えるのではなく、設計する人が考えるのを助ける道具として方法を使う、という見方が広がっていきます。
+        note: |-
+          C. Alexander, Notes on the Synthesis of Form, ペーパーバック版の序文, 1971。同じ年の雑誌のインタビューでも、設計の方法の研究を「忘れてしまえ」と語った。N. Cross, "Designerly Ways of Knowing", Design Studies, 3(4), 1982 も参照。
+      - type: p
+        text: |-
+          設計会が工程ごとに手法を学ぶのも、手法に設計を任せるためではありません。手法は、考え落としを防ぎ、考えたことをほかの人に見せて話し合うための道具です。
+
   - id: timeline
     heading: 設計を「方法」にした人たち
     blocks:
       - type: point
         text: 設計の手法の多くは、1950年代から1990年代にかけて生まれました。日本で生まれた手法（KJ法、品質機能展開、狩野モデル、一般設計学）も少なくありません。
+      - type: figure
+        name: methods-timeline
+      - type: heading
+        text: 1950〜70年代：手法が次々に生まれる
       - type: timeline
         items:
           - year: 紀元前1世紀
@@ -20,18 +54,30 @@ chapters:
           - year: "1953"
             title: ブレインストーミング
             body: アレックス・オズボーンが著書『Applied Imagination』で、批判をしない発想会議の方法を広める。
+          - year: "1962"
+            title: 設計方法会議
+            body: ロンドンで、設計の進め方そのものを論じる会議が開かれる。設計の方法の研究の始まりとされる。
           - year: "1964"
             title: 『形の合成に関するノート』
             body: 建築家クリストファー・アレグザンダーが、設計の問題を要素に分けて形を導く方法を論じる。
           - year: "1966"
             title: 品質機能展開の源流
             body: 赤尾洋二が、使う人の求める品質を設計に展開する考え方を提唱する。
+          - year: "1966"
+            title: 形態分析
+            body: 天文学者フリッツ・ツビッキーが、要素ごとの選択肢を表に並べ、その組み合わせで案を広げる方法を著書にまとめる。ジェット推進の研究などで使っていた方法。
           - year: "1967"
             title: KJ法
             body: 川喜田二郎が『発想法』で、集めた事実から構造を見つける方法を紹介する。
           - year: "1969"
             title: 『システムの科学』
             body: ハーバート・サイモンが、設計を「どうあるべきか」を扱う独自の知として論じる（原題The Sciences of the Artificial）。
+          - year: "1970"
+            title: 『Design Methods』
+            body: ジョン・クリストファー・ジョーンズが、設計の手法を集めて、使う場面ごとに整理する。
+          - year: "1971"
+            title: SCAMPER
+            body: ボブ・エバールが、オズボーンの発想のチェックリストをもとに、「置き換える」「組み合わせる」など七つの問いかけにまとめる。もとは子どもの想像力を育てる本。
           - year: "1973"
             title: 厄介な問題
             body: リッテルとウェバーが、設計や計画が扱う問題の特殊な性質を指摘する。
@@ -41,9 +87,16 @@ chapters:
           - year: 1977〜1980
             title: 階層分析法（AHP）
             body: トーマス・サーティが、一対比較から重みを求める方法を発表する。
+      - type: heading
+        text: 1980年代から：つなぐ、そろえる、人に合わせる
+      - type: timeline
+        items:
           - year: "1979"
             title: 一般設計学
             body: 吉川弘之が、設計を「機能の空間から属性の空間への写像」として数学の言葉で捉える理論を発表する。
+          - year: "1981"
+            title: IDEF0
+            body: 米空軍のICAM計画で、機能を箱と矢印で描く方法の手引きがまとめられる。1993年には米国の連邦の標準になる。
           - year: "1981"
             title: ピューの概念選定法
             body: スチュアート・ピューが、案を基準ごとに比べて選ぶ方法を発表する。
@@ -59,19 +112,38 @@ chapters:
           - year: "1995"
             title: セットベース設計
             body: トヨタの開発の研究から、いくつかの案を並べて絞り込む進め方が注目される。
+          - year: "1999"
+            title: ISO 13407
+            body: 使う人を中心に置いた設計（人間中心設計）の進め方が、国際規格になる。2010年からはISO 9241-210に引き継がれる。
+          - year: "2000"
+            title: CRISP-DM
+            body: 欧州の企業の共同プロジェクトが、データ分析の進め方を六つの段階にまとめ、無料で公開する。
           - year: 2005ごろ
             title: ダブルダイヤモンド
             body: 英国デザイン・カウンシルが、広げると絞るを二度繰り返す進め方を図で示す。
 
 references:
   - text: A. F. Osborn, Applied Imagination, Charles Scribner's Sons, 1953.
-  - text: C. Alexander, Notes on the Synthesis of Form, Harvard University Press, 1964.
+  - text: J. C. Jones & D. G. Thornley (eds.), Conference on Design Methods, Pergamon Press, 1963.
+    url: https://dl.designresearchsociety.org/design_methods_conference_1962
+  - text: C. Alexander, Notes on the Synthesis of Form, Harvard University Press, 1964（ペーパーバック版の序文, 1971）.
+  - text: F. Zwicky, Entdecken, Erfinden, Forschen im morphologischen Weltbild, Droemer Knaur, 1966（英訳 Discovery, Invention, Research Through the Morphological Approach, Macmillan, 1969）.
   - text: 川喜田二郎『発想法 ― 創造性開発のために』中公新書, 1967年.
   - text: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969.
+  - text: 'J. C. Jones, Design Methods: Seeds of Human Futures, Wiley-Interscience, 1970.'
+  - text: 'B. Eberle, SCAMPER: Games for Imagination Development, D.O.K. Publishers, 1971.'
   - text: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973.
     url: https://doi.org/10.1007/BF01405730
   - text: 吉川弘之「一般設計学序説」『精密機械』45巻536号, pp.906–912, 1979年.
-  - text: N. P. Suh, The Principles of Design, Oxford University Press, 1990.
+  - text: Air Force Wright Aeronautical Laboratories, ICAM Architecture Part II, Volume IV — Function Modeling Manual (IDEF0), 1981. FIPS PUB 183, 1993.
+    url: https://nvlpubs.nist.gov/nistpubs/Legacy/FIPS/fipspub183.pdf
+  - text: N. Cross, "Designerly Ways of Knowing", Design Studies, 3(4), 1982.
   - text: 狩野紀昭・瀬楽信彦・高橋文夫・辻新一「魅力的品質と当り前品質」『品質』14巻2号, 1984年.
+  - text: N. P. Suh, The Principles of Design, Oxford University Press, 1990.
+  - text: ISO 13407:1999 Human-centred design processes for interactive systems（ISO 9241-210:2010 に置き換え）.
+  - text: P. Chapman ほか, CRISP-DM 1.0 Step-by-step data mining guide, 2000.
 related:
   - process
+  - ideation
+  - requirements
+  - selection

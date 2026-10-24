@@ -13,6 +13,7 @@ import Figure from "./Figure.astro";
 import DesignMatrix from "./DesignMatrix.astro";
 import PerStep from "./PerStep.astro";
 import Idef0 from "./figures/Idef0.astro";
+import Courses from "./Courses.astro";
 
 interface Props {
   blocks: NumberedBlock[];
@@ -98,6 +99,7 @@ const { blocks, lens, compactFigures = false } = Astro.props;
           <p class="mt-2 text-[0.98rem] leading-loose tracking-normal">
             <InlineText text={block.text} />
           </p>
+          {block.source && <p class="mt-2 text-xs text-muted">出典：{block.source}</p>}
         </div>
       );
 
@@ -154,6 +156,9 @@ const { blocks, lens, compactFigures = false } = Astro.props;
           steps={block.steps}
         />
       );
+
+    case "courses":
+      return <Courses courses={block.items} inline />;
 
     case "image":
       return (
