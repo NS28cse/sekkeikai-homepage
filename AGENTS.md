@@ -1,0 +1,45 @@
+# AGENTS.md — AI コーディングツール向けのプロジェクト説明
+
+> **このリポジトリ（NS28cse/sekkeikai-homepage）はプロトタイプ用です。本番の正本は [sekkeikai/sekkeikai-opu](https://github.com/sekkeikai/sekkeikai-opu)。**
+>
+> - 目的は、トップページなどのレイアウト・デザイン・文章を、作り手と会話しながら素早く固めること
+> - 編集画面（CMS）・CI・Cloudflare などの本番の仕組みはここには無い。足さない（本番の準備は sekkeikai-opu の Issue #7）
+> - 完成したら `src/`、`tokens/`、`public/uploads/` を sekkeikai-opu に PR で移す。新しいセクションを足した場合は、移すときに sekkeikai-opu の `public/admin/config.yml` にも入力欄を足す
+
+## 概要
+
+- 大学サークル「設計会」のサイト。Astro 7（静的出力）+ Tailwind CSS 4 + GSAP/Lenis
+- 文章は `src/content/`（トップページの構成は `src/content/pages/home.yaml`）。入力ルールの検証は `src/content.config.ts`（zod）
+- デザイントークンの正本は `tokens/tokens.json`（DTCG 形式）。`src/styles/tokens.css` は生成物で Git 管理外
+- `/lab/` はデザイン確認用ページ（トークン、図、全セクションの一覧）
+- **文章を書く前に `docs/writing-guide.md` を読む**（Web の読まれ方と読みやすい文章について調べたことと、このサイトの決まり）
+- トップページは「なぜ今、設計が大事なのか」を伝える長文。`home.yaml` の章（`type: chapter`）を並べ、各章は「読者の問い（eyebrow）→ 主張の見出し → 要点（point）→ 本文」。先頭の「設計会の考え方」は各章の見出しと要点から自動で作られる。章は前の章が次の章の前提になる順に並べる。主張には実際にあった例を添え、短い出典は段落の `note`（本文の右）に入れる。AI の話から始めない
+- 長文は「ブロック」を並べて書く（`src/content.config.ts` の `block`、表示は `src/components/Blocks.astro`）。要点 `point`・問いかけ `question`・身近な例 `example`・補足 `aside`（折りたたみ）・小見出し `heading`・段落 `p`・表 `table`・画像 `image`・機能の図 `idef0` などを、大事さに合わせて使い分ける。トップページと「設計を知る」で同じブロックが使える。**問いかけの答えは隠さない。折りたたみは、本題でない長い補足や詳しい事例だけに使う**。読者に「読み飛ばしてよい」「3分で読める」などの読み方は書かない（拾い読みしやすさは見た目と構成でつくる）
+- 本文中の `[[modeling]]`、`[[modeling|モデル]]`、`[[process#loop|工程の行き来]]` は「設計を知る」のページ（や章）へのリンク、`**強調**` は強調になる（`src/lib/inline.ts`）
+- 「設計を知る」（`/design/`）は `src/content/design/*.yaml`（ファイル名が URL）。**YAML を一つ足せば、一覧・地図・リンクに自動で加わる**。決まった章立てはなく、テーマがいちばん伝わる組み立てで書く。**1 ページで伝えたいことは 1 つ**。長くなったらページを分ける。**階層は混ぜない**：`layer: process` は設計のプロセスの全体（1 ページ）、`layer: step` は工程 1 つにつき 1 ページ（`order` が工程の番号。上に工程の帯 `StepNav` が出る）、`layer: lens` はどの工程にも通じる視点（`perStep` を書くと地図の表に出る）、`layer: case` は実際の設計の流れの例（章に `step: 番号` を書くと工程のページへのリンクが付く。架空の例であることを lead に書く）、`layer: topic` はそれ以外のテーマ
+- 図は `src/components/figures/`（名前の一覧は `src/lib/figures.ts`）。トップページでは図を番号・出典なしで出す
+- イラストは使わない。わかりにくいところは図（`src/components/figures/`）で示す。外部の画像は必要最低限にし、パブリックドメインか再利用が許されたライセンスのものだけを `public/uploads/` に置いて、`image` ブロックに作者・ライセンス・元のページを書く（一覧は `docs/image-credits.md`）
+- Discord・TimeTree・問い合わせメールは `src/content/site/links.yaml`（ヘッダーのアイコン、フッター、入部の章のボタン。空の項目は出ない）。入部フォームは Microsoft Forms の URL を `home.yaml` の join の `formUrl` に書く。メールは団体で共有しているアドレスだけ（個人や大学の個人用アドレスは書かない）。GitHub のリンクと「サイトをみんなでつくっている」という文言は載せない
+- 活動の段階（なんでもプレゼン〜大プレゼン）、発案者・設計仲間・投資家の役割、プロジェクト紹介は古い情報なので使わない
+
+## コマンド
+
+- `npm run dev` … 開発用サーバー（http://localhost:4321）
+- `npm run check` … 型チェック
+- `npm run build` … `dist/` に出力
+
+## 作業の進め方
+
+- 変更したら `npm run build` が通ることを確かめ、可能ならスクリーンショット（PC 幅とスマホ幅）で見た目を確認して作り手に見せる
+- 案を比べたいときは、セクションのバリエーションを `/lab/` に並べて見比べられるようにする
+
+## ルール（本番でも同じ）
+
+- UI の文言・コメントは日本語。部員の多くはプログラミング初心者なので、コメントは「何のためか」を平易に書く
+- セクションを追加・変更したら、`src/components/sections/*.astro`、`src/content.config.ts`、`src/components/SectionRenderer.astro` をそろえる。文字数上限は zod に書く（本番の CMS の `maxlength` と同じ値になる）
+- 色・フォント・動きの値をコードに直接書かない。`tokens/tokens.json` に足して Tailwind のクラスや CSS 変数で使う
+- アニメーションは `src/scripts/motion.ts` に集約。`prefers-reduced-motion: reduce` のときは動かさない。スマホ（pointer: coarse）では Lenis を使わない
+- 画像には意味のある `alt`（装飾なら `alt=""`）。見出しの階層を飛ばさない
+- 代表者の氏名はサイトに載せてよいが、年度ごとに変わるのでコードに直接書かず、`home.yaml` の団体概要（info セクション）に置く
+- 学籍番号・大学のメールアドレス・個人の連絡先はコード・コンテンツ・サンプルデータに入れない
+- 依存パッケージを追加するときは理由を説明する。CDN からのスクリプト読み込みは増やさない

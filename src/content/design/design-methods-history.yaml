@@ -1,0 +1,77 @@
+title: 設計の方法の歴史
+en: History of Design Methods
+layer: topic
+order: 1
+short: 設計の方法の歴史
+question: 設計の進め方は、いつ、誰が方法にしたのか
+summary: 設計の進め方そのものを研究し、方法としてまとめる試みは、20世紀の半ばから大きく進んだ。工程のページで紹介した手法が生まれた順に並べる。
+lead: 工程のページで紹介した手法には、それぞれ生まれた時代と、考えた人がいます。設計の進め方そのものを研究し、誰でも使える方法にまとめる試みは、20世紀の半ばから大きく進みました。
+chapters:
+  - id: timeline
+    heading: 設計を「方法」にした人たち
+    blocks:
+      - type: point
+        text: 設計の手法の多くは、1950年代から1990年代にかけて生まれました。日本で生まれた手法（KJ法、品質機能展開、狩野モデル、一般設計学）も少なくありません。
+      - type: timeline
+        items:
+          - year: 紀元前1世紀
+            title: 強・用・美
+            body: ウィトルウィウスが、建築が備えるべき条件として丈夫さ、使いやすさ、美しさを挙げる。
+          - year: "1953"
+            title: ブレインストーミング
+            body: アレックス・オズボーンが著書『Applied Imagination』で、批判をしない発想会議の方法を広める。
+          - year: "1964"
+            title: 『形の合成に関するノート』
+            body: 建築家クリストファー・アレグザンダーが、設計の問題を要素に分けて形を導く方法を論じる。
+          - year: "1966"
+            title: 品質機能展開の源流
+            body: 赤尾洋二が、使う人の求める品質を設計に展開する考え方を提唱する。
+          - year: "1967"
+            title: KJ法
+            body: 川喜田二郎が『発想法』で、集めた事実から構造を見つける方法を紹介する。
+          - year: "1969"
+            title: 『システムの科学』
+            body: ハーバート・サイモンが、設計を「どうあるべきか」を扱う独自の知として論じる（原題The Sciences of the Artificial）。
+          - year: "1973"
+            title: 厄介な問題
+            body: リッテルとウェバーが、設計や計画が扱う問題の特殊な性質を指摘する。
+          - year: "1977"
+            title: 工学設計の体系化
+            body: パールとバイツが、設計を段階に分けて進める手順をまとめる。
+          - year: 1977〜1980
+            title: 階層分析法（AHP）
+            body: トーマス・サーティが、一対比較から重みを求める方法を発表する。
+          - year: "1979"
+            title: 一般設計学
+            body: 吉川弘之が、設計を「機能の空間から属性の空間への写像」として数学の言葉で捉える理論を発表する。
+          - year: "1981"
+            title: ピューの概念選定法
+            body: スチュアート・ピューが、案を基準ごとに比べて選ぶ方法を発表する。
+          - year: "1983"
+            title: 省察的実践
+            body: ドナルド・ショーンが、設計する人が状況と対話しながら考える姿を描く。
+          - year: "1984"
+            title: 狩野モデル
+            body: 狩野紀昭らが、要求の性格を見分けるモデルを発表する。
+          - year: "1990"
+            title: 公理的設計
+            body: ナム・P・スーが、「機能の要求は互いに独立に保つ」などの公理で設計のよしあしを判断する方法をまとめる。
+          - year: "1995"
+            title: セットベース設計
+            body: トヨタの開発の研究から、いくつかの案を並べて絞り込む進め方が注目される。
+          - year: 2005ごろ
+            title: ダブルダイヤモンド
+            body: 英国デザイン・カウンシルが、広げると絞るを二度繰り返す進め方を図で示す。
+
+references:
+  - text: A. F. Osborn, Applied Imagination, Charles Scribner's Sons, 1953.
+  - text: C. Alexander, Notes on the Synthesis of Form, Harvard University Press, 1964.
+  - text: 川喜田二郎『発想法 ― 創造性開発のために』中公新書, 1967年.
+  - text: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969.
+  - text: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973.
+    url: https://doi.org/10.1007/BF01405730
+  - text: 吉川弘之「一般設計学序説」『精密機械』45巻536号, pp.906–912, 1979年.
+  - text: N. P. Suh, The Principles of Design, Oxford University Press, 1990.
+  - text: 狩野紀昭・瀬楽信彦・高橋文夫・辻新一「魅力的品質と当り前品質」『品質』14巻2号, 1984年.
+related:
+  - process

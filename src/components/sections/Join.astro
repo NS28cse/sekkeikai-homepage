@@ -1,0 +1,84 @@
+---
+// 入部の呼びかけ。身につく力と、入部フォーム（Microsoft Forms）・Discord・TimeTree・メールへの入り口を並べる。
+// formUrl が空なら入部フォームは「準備中」。Discord などは src/content/site/links.yaml が空なら出さない。
+import { getSiteLinks } from "../../lib/site";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  body: string;
+  traitsTitle?: string;
+  traits: { title: string; body: string }[];
+  formUrl?: string;
+  buttonLabel: string;
+}
+
+const { eyebrow = "入部する", title, body, traitsTitle, traits, formUrl, buttonLabel } = Astro.props;
+const contacts = (await getSiteLinks()).filter((c) => c.href);
+---
+
+<section id="join" class="scroll-mt-14 bg-ink py-24 text-paper sm:py-32" aria-labelledby="join-title">
+  <div class="container-page">
+    <p class="annotation text-accent" data-reveal>
+      {eyebrow}
+    </p>
+    <h2 id="join-title" class="mt-5 text-[2.5rem] leading-tight font-black sm:text-7xl" data-reveal>
+      {title}
+    </h2>
+    <p class="mt-8 max-w-2xl font-serif text-lg leading-loose text-paper/85 sm:text-xl" data-reveal>
+      {body}
+    </p>
+
+    {traitsTitle && traits.length > 0 && (
+      <p class="annotation mt-14 text-paper/60" data-reveal>
+        {traitsTitle}
+      </p>
+    )}
+    {traits.length > 0 && (
+      <ul class:list={["grid gap-4 sm:grid-cols-3", traitsTitle ? "mt-4" : "mt-14"]}>
+        {traits.map((t, i) => (
+          <li class="border-t-2 border-accent pt-5" data-reveal data-reveal-delay={String(i * 0.08)}>
+            <p class="font-display text-2xl font-bold">{t.title}</p>
+            <p class="mt-2 text-paper/75">{t.body}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    <div class="mt-10 flex flex-wrap items-center gap-4" data-reveal>
+      {formUrl ? (
+        <a
+          href={formUrl}
+          class="inline-flex items-center gap-2 rounded-full bg-accent-strong px-8 py-4 font-bold text-paper transition hover:bg-paper hover:text-ink"
+          rel="noopener"
+          target="_blank"
+        >
+          {buttonLabel}
+          <span aria-hidden="true">↗</span>
+        </a>
+      ) : (
+        <>
+          <p class="rounded-full border border-paper/30 px-8 py-4 text-paper/60">入部フォームは準備中です</p>
+          <a
+            href="/news/"
+            class="inline-flex items-center gap-2 rounded-full border-2 border-paper px-8 py-3.5 font-bold transition hover:bg-paper hover:text-ink"
+          >
+            募集の開始はお知らせで
+            <span aria-hidden="true">→</span>
+          </a>
+        </>
+      )}
+      {contacts.map((c) => (
+        <a
+          href={c.href}
+          class="inline-flex items-center gap-2 rounded-full border-2 border-paper px-8 py-3.5 font-bold transition hover:bg-paper hover:text-ink"
+          rel={c.external ? "noopener" : undefined}
+          target={c.external ? "_blank" : undefined}
+        >
+          {c.action}
+          <span aria-hidden="true">{c.external ? "↗" : "→"}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

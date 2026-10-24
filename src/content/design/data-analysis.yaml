@@ -1,0 +1,198 @@
+title: データ分析
+en: Data Analysis
+layer: lens
+order: 3
+short: データで考える
+question: 過去から学び、未来の設計に生かす
+summary: 事実を数字で捉え、目に見える形にし、仮説を確かめて設計に返す。設計会ではDeepnoteを使い、チームで同じデータを見ながら議論する。
+lead: よい設計は、思い込みではなく根拠から生まれます。データ分析とは、集めた事実を数字で捉え、形にして眺め、問いを立てて確かめること。過去のデータは、まだない未来のものをよりよく設計するための、もっとも確かな手がかりです。
+chapters:
+  - id: basics
+    heading: まず、見ることから
+    blocks:
+      - type: question
+        text: 平均も、ばらつきも、相関係数もほとんど同じ4組のデータ。グラフにすると、同じ形に見えるでしょうか？
+        answer: まったく違う形になります。下の図で確かめてください。数字の要約だけでは、データの本当の姿はわかりません。
+      - type: point
+        text: データ分析は、まず見ること。集め方の偏りに気をつけながら、数字を形にして眺め、問いを立てて確かめます。
+      - type: p
+        text: |-
+          統計学者ジョン・テューキーは、データをまず眺め、意外な形や外れた値から問いを見つける「探索的データ分析」の大切さを説きました。仮説を確かめる前に、データそのものに語らせる段階が必要だという考え方です。
+        note: |-
+          J. W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977。
+      - type: p
+        text: |-
+          1973年、統計学者フランシス・アンスコムは、平均、分散、相関係数、回帰直線がほとんど同じなのに、グラフにするとまったく違う形をした4組のデータを示しました。数字の要約だけを見て判断すると、データの本当の姿を見誤ることがあります。下の図と表は、アンスコムのデータから、このサイトのプログラムが計算して描いたものです。
+        note: |-
+          F. J. Anscombe, "Graphs in Statistical Analysis", The American Statistician, 27(1), 1973。
+      - type: figure
+        name: anscombe
+      - type: p
+        text: |-
+          データを見るときには、そのデータがどのように集められたかにも気をつける必要があります。たとえば、戦闘から帰ってきた飛行機の弾の跡だけを調べて補強する場所を決めると、撃ち落とされて帰ってこなかった機体の情報が抜け落ちてしまいます。この「生存者バイアス」の例は、統計学者エイブラハム・ウォールドが第二次世界大戦中に行った研究にちなんで語られることの多いものです。
+        note: |-
+          A. Wald, "A Method of Estimating Plane Vulnerability Based on Damage of Survivors", 1943（米国コロンビア大学統計研究グループの報告。1980年に再刊）。よく語られる逸話は、実際の研究を単純化したものである。
+
+  - id: pictures
+    heading: 図にすると、決め方が変わる
+    blocks:
+      - type: point
+        text: 数字を図にすると、表では見えなかったことが見え、人の決め方が変わります。19世紀のロンドンと、クリミア戦争の病院で、それが起きました。
+      - type: image
+        src: /uploads/design/snow-cholera-map.jpg
+        alt: ロンドンのソーホー地区の地図。通りに沿って、コレラで亡くなった人の数を表す黒い棒が積み重なり、ブロード・ストリートの井戸のポンプの周りに集中している。
+        caption: ジョン・スノウのコレラの地図（1854年作成、1855年の著書に掲載）。亡くなった人を家ごとに黒い棒で記すと、一台の井戸のポンプの周りに集まっていることがわかる。スノウはまず死者の集計をもとにポンプの柄を外すよう訴え（1854年9月）、この地図はそのあと、主張を広く示すために描かれた。
+        credit: John Snow, On the Mode of Communication of Cholera, 2nd ed., 1855（Wikimedia Commons）
+        license: パブリックドメイン
+        sourceUrl: https://commons.wikimedia.org/wiki/File:Snow-cholera-map-1.jpg
+      - type: image
+        src: /uploads/design/nightingale-mortality.jpg
+        alt: 二つの円形のグラフ。月ごとの扇形が、防げる病気による死者（青）、戦傷による死者（赤）、そのほかの死者（黒）に塗り分けられ、青い部分が最も大きい。
+        caption: ナイチンゲールの「鶏頭図」（1858年）。クリミア戦争の兵士の死因を月ごとの扇形で表し、戦いの傷よりも、防げる病気で亡くなる兵士のほうがずっと多いことを示した。この図は、軍の病院の衛生を改める訴えに使われた。
+        credit: Florence Nightingale, Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army, 1858（Wikimedia Commons）
+        license: パブリックドメイン
+        sourceUrl: https://commons.wikimedia.org/wiki/File:Nightingale-mortality.jpg
+      - type: p
+        text: |-
+          どちらも、新しいデータを集めたのではありません。手元にある数字を、誰が見ても違いがわかる形にしたことで、人を動かしました。設計の話し合いでも、同じ数字をどう見せるかで、決め方が変わります。
+
+  - id: why
+    heading: 「設計」は統計学の言葉でもある
+    blocks:
+      - type: point
+        text: 設計は未来についての判断ですが、その根拠の多くは過去のデータにあります。統計学そのものが、実験を「設計」する学問として育ってきました。
+      - type: p
+        text: |-
+          設計は未来についての判断ですが、その判断の根拠の多くは過去にあります。今ある製品はどのように使われ、どこで壊れ、どこで人がつまずいたのか。データは、設計する人の思い込みを確かめ、ときにくつがえしてくれます。
+      - type: p
+        text: |-
+          設計とデータの結びつきは、統計学の歴史そのものにも刻まれています。ロナルド・フィッシャーが1935年に著した『実験計画法（The Design of Experiments）』は、何をどう比べれば偶然に惑わされずに結論を出せるかを、実験を「設計」する問題として論じました。無作為化、反復（繰り返し）、局所管理といった原則は、農業試験場で生まれ、医療の臨床試験やウェブサービスのA/Bテストにまで受け継がれています。
+        note: |-
+          R. A. Fisher, The Design of Experiments, Oliver and Boyd, 1935。フィッシャーは英国ロザムステッド農業試験場での研究を通じて、これらの方法を発展させた。
+      - type: p
+        text: |-
+          日本では、田口玄一が品質工学（タグチメソッド）を体系化し、使われる環境や部品のばらつきが変わっても性能が安定する「ロバストな」設計を、少ない実験から導く方法を広めました。データ分析は、設計案を評価するだけでなく、設計そのものをよくしていく道具にもなるのです。
+
+  - id: how
+    heading: 問いから始めて、設計に返す
+    blocks:
+      - type: point
+        text: 問いを立て、集め、整え、見て、確かめ、設計に返す。この循環を、設計とともに回し続けます。
+      - type: p
+        text: |-
+          データ分析を設計に生かす流れは、データ分析の標準的な進め方として知られるCRISP-DMなどを参考に、次のように整理できます。
+        note: |-
+          CRISP-DM（Cross-Industry Standard Process for Data Mining）は、1990年代の終わりに欧州の企業の共同プロジェクトによってまとめられた。
+      - type: figure
+        name: analysis-cycle
+      - type: steps
+        items:
+          - title: 問いを立てる
+            body: 「どの学年の利用者が、どの画面で使うのをやめているのか」のように、設計の判断に結びつく問いを決めます。問いのないデータ集めは、時間を浪費します。
+          - title: 集める
+            body: 今ある記録、アンケート、実験、センサー、公開されているオープンデータなどから集めます。集め方の偏りも、この時点で書き留めます。
+          - title: 整える
+            body: 欠けている値、入力の誤り、単位の違いを直します。実際の分析では、この作業にいちばん時間がかかることも珍しくありません。
+          - title: 見る
+            body: グラフにして、分布や関係を眺めます。外れた値や、意外な傾向を探します。
+          - title: 確かめる
+            body: 統計的な検定や回帰分析、機械学習のモデルを使って、見えた傾向が偶然ではないかを確かめます。
+          - title: 設計に返す
+            body: 結果を設計の判断や要求に反映し、何がわかり、何がわからなかったのかを記録します。
+      - type: p
+        text: |-
+          気をつけたいのは、**相関は因果を意味しない**ということです。二つの数値が一緒に動いていても、一方が他方の原因とは限りません。設計の判断に使うときは、比べる条件をそろえた実験や、ほかの説明の可能性を検討することが欠かせません。
+      - type: per-step
+
+  - id: now
+    heading: 出したあとも、データで育てる
+    blocks:
+      - type: point
+        text: 製品は出したあとも使われ方のデータで育てるものになり、同時に、集めるデータへの責任も重くなっています。
+      - type: p
+        text: |-
+          センサーやスマートフォン、ウェブサービスが生み出すデータの量は、かつてとは比べものになりません。製品がどのように使われているかを発売後も知り続けられるようになり、設計は「出して終わり」ではなく、データを見ながら改善し続けるものになりました。
+      - type: p
+        text: |-
+          一方で、データには個人に関する情報が含まれることも多く、プライバシーへの配慮は、それ自体が設計の要件になっています。日本の個人情報保護法や欧州の一般データ保護規則（GDPR）のような規制に従うことはもちろん、本当に必要なデータだけを集めるという姿勢が求められます。
+      - type: p
+        text: |-
+          分析の道具も変わりました。Jupyterのようなノートブックは、コード、結果、説明を一つの文書にまとめ、分析の過程をほかの人がたどれるようにしました。さらに近年は、クラウドの上で複数人が同時に同じノートブックを編集できるサービスも登場しています。
+
+  - id: club
+    heading: Deepnoteで、同じ数字を見ながら話す
+    blocks:
+      - type: point
+        text: Deepnoteでデータを共有し、同じグラフを見ながら決めます。
+      - type: p
+        text: |-
+          設計会では、データ分析に**Deepnote**を使っています。Deepnoteはブラウザーで動くデータ分析用のノートブックで、Jupyterと互換性があり、PythonやSQLのコードと、グラフ、説明の文章を一つのページにまとめられます。インストールの手間がなく、複数人がリアルタイムに同じノートブックを編集できるので、プログラミングに慣れていない部員も、画面を共有しながら一緒に分析に参加できます。
+        note: |-
+          Deepnote は2025年に、ノートブックの形式などをオープンソースとして公開した。機能や料金は変わることがあるので、最新の情報は公式サイト（deepnote.com）で確認してほしい。
+      - type: p
+        text: |-
+          たとえば要件を定める工程では、アンケートの結果をDeepnoteに読み込み、回答の分布をグラフにしながら「この不満は本当に多いのか」「どの層に偏っているのか」をチームで確かめます。分析の過程がノートブックに残るので、発表のときに、結論だけでなく、その根拠まで示すことができます。
+      - type: p
+        text: |-
+          データ分析は、プログラミングの経験がなくても始められます。まずは身近なデータをグラフにして眺めることから。設計会では、分析の基本を部員どうしで教えあっています。
+  - id: history
+    label: 寄り道：歴史
+    heading: 数字が社会を動かしてきた
+    blocks:
+      - type: point
+        text: 一枚の地図、一枚のグラフが、社会の仕組みを変えてきました。
+      - type: timeline
+        items:
+          - year: "1786"
+            title: 折れ線グラフと棒グラフ
+            body: ウィリアム・プレイフェアが『商業と政治の図解』で、統計を図で表す方法を広める。
+          - year: "1924"
+            title: 管理図
+            body: ウェスタン・エレクトリック社（翌年に発足するベル研究所の前身の一つ）のウォルター・シューハートが、製造工程のばらつきを見張る管理図を考案する。
+          - year: "1935"
+            title: 『実験計画法』
+            body: フィッシャーが、実験を設計する原理をまとめる。
+          - year: "1950"
+            title: デミングの来日講義
+            body: W・E・デミングが日本の技術者に統計的品質管理を講義し、日本の品質管理運動に大きな影響を与える。
+          - year: 1950年代〜
+            title: 品質工学
+            body: 田口玄一が実験計画法を応用し、ばらつきに強い設計の方法を体系化していく。
+          - year: "1977"
+            title: 探索的データ分析
+            body: テューキーが、データを眺めて問いを見つける方法を一冊にまとめる。
+          - year: 2000年代
+            title: ウェブのA/Bテスト
+            body: インターネット企業が、利用者を無作為に分けて設計案を比べる実験を日常的に行うようになる。
+          - year: 2010年代
+            title: ノートブックの普及
+            body: コード、結果、説明を一つの文書にまとめるJupyter Notebookが、データ分析の標準的な道具になる。
+
+perStep:
+  - cell: 今あるデータを眺める
+    body: 利用の記録や公開データをグラフにして眺め、意外な傾向や外れた値から問題の手がかりを探します。
+  - cell: アンケートで要求の重みを測る
+    body: アンケートで、どの要求がどれだけ多くの人にとって大事なのかを数字で確かめます。
+  - cell: 似た事例の数字を調べる
+    body: 似た製品やサービスの数字を集め、案の手がかりや、目指す水準の目安にします。
+  - cell: 試した結果を統計で比べる
+    body: 案ごとの利用テストや試作の結果を集め、差が偶然ではないかを統計で確かめてから選びます。
+  - cell: 実験計画で条件を絞る
+    body: 実験計画法や品質工学で、少ない試行から、ばらつきに強い条件を探します。
+references:
+  - text: J. W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977.
+  - text: F. J. Anscombe, "Graphs in Statistical Analysis", The American Statistician, 27(1), pp.17–21, 1973.
+    url: https://doi.org/10.1080/00031305.1973.10478966
+  - text: R. A. Fisher, The Design of Experiments, Oliver and Boyd, 1935.
+  - text: A. Wald, A Method of Estimating Plane Vulnerability Based on Damage of Survivors, 1943（Center for Naval Analyses, CRC 432, 1980 再刊）.
+  - text: W. A. Shewhart, Economic Control of Quality of Manufactured Product, Van Nostrand, 1931.
+  - text: 田口玄一『品質工学講座』日本規格協会, 1988年.
+  - text: J. Snow, On the Mode of Communication of Cholera, 2nd ed., John Churchill, 1855.
+  - text: F. Nightingale, Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army, 1858.
+  - text: P. Chapman ほか, CRISP-DM 1.0 Step-by-step data mining guide, 2000.
+  - text: Deepnote（公式サイト）.
+    url: https://deepnote.com/
+related:
+  - process
+  - modeling
+  - human-interface

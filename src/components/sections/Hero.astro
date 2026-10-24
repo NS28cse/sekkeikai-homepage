@@ -1,0 +1,73 @@
+---
+// トップの大見出し。方眼の背景に、主張を一つだけ大きく置く。
+import { getEntry } from "astro:content";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  cta2Label?: string;
+  cta2Href?: string;
+}
+
+const { eyebrow, title, lead, ctaLabel, ctaHref, cta2Label, cta2Href } = Astro.props;
+const site = await getEntry("site", "links");
+const discord = site?.data.discord ?? "";
+// 「、」の後ろで改行して、見出しを二行に組む
+const lines = title.split(/(?<=、)/);
+---
+
+<section class="bg-blueprint-grid relative overflow-hidden border-b border-grid">
+  <div class="container-page relative flex flex-col justify-center pt-14 pb-10 md:min-h-[min(calc(100svh-3.5rem),56rem)] md:py-20">
+    {eyebrow && (
+      <p class="annotation mb-8 text-muted" data-reveal>
+        {eyebrow}
+      </p>
+    )}
+    <h1 class="text-[2.75rem] leading-[1.15] font-black sm:text-7xl lg:text-8xl" data-reveal data-reveal-delay="0.1">
+      {lines.map((line) => (
+        <span class="block">{line}</span>
+      ))}
+    </h1>
+    <p
+      class="mt-10 max-w-xl font-serif text-lg leading-loose text-ink/85 sm:text-xl"
+      data-reveal
+      data-reveal-delay="0.2"
+    >
+      {lead}
+    </p>
+    <div class="mt-12 flex flex-wrap items-center gap-4" data-reveal data-reveal-delay="0.3">
+      {ctaLabel && ctaHref && (
+        <a
+          href={ctaHref}
+          class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-bold text-paper transition hover:bg-accent-strong"
+        >
+          {ctaLabel}
+          <span aria-hidden="true">↓</span>
+        </a>
+      )}
+      {cta2Label && cta2Href && (
+        <a
+          href={cta2Href}
+          class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-3 font-bold transition hover:bg-ink hover:text-paper"
+        >
+          {cta2Label}
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
+      {discord && (
+        <a
+          href={discord}
+          rel="noopener"
+          target="_blank"
+          class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-3 font-bold transition hover:bg-ink hover:text-paper"
+        >
+          Discord で話を聞く
+          <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,72 @@
+---
+// 名前（YAML の「type: figure」の name）から図のコンポーネントを選んで表示する。
+// 図を足すときは：figures/ にコンポーネントをつくる → src/lib/figures.ts に名前を足す → ここの map に登録する
+import type { FigureName } from "../lib/figures";
+import DesignProcess from "./figures/DesignProcess.astro";
+import CostEscalation from "./figures/CostEscalation.astro";
+import DoubleDiamond from "./figures/DoubleDiamond.astro";
+import RequirementsLayers from "./figures/RequirementsLayers.astro";
+import VModel from "./figures/VModel.astro";
+import KanoModel from "./figures/KanoModel.astro";
+import KjMethod from "./figures/KjMethod.astro";
+import AbstractionLadder from "./figures/AbstractionLadder.astro";
+import BeamCalculator from "./figures/BeamCalculator.astro";
+import FittsDemo from "./figures/FittsDemo.astro";
+import Gulfs from "./figures/Gulfs.astro";
+import HcdCycle from "./figures/HcdCycle.astro";
+import Anscombe from "./figures/Anscombe.astro";
+import AnalysisCycle from "./figures/AnalysisCycle.astro";
+import ParetoFront from "./figures/ParetoFront.astro";
+import AhpExample from "./figures/AhpExample.astro";
+import DoorSignifier from "./figures/DoorSignifier.astro";
+import FittsLaw from "./figures/FittsLaw.astro";
+import DesignScope from "./figures/DesignScope.astro";
+import InterfaceMismatch from "./figures/InterfaceMismatch.astro";
+import SubtitleUsers from "./figures/SubtitleUsers.astro";
+import RobotDimensions from "./figures/RobotDimensions.astro";
+import SessionTimeline from "./figures/SessionTimeline.astro";
+import SetBased from "./figures/SetBased.astro";
+import ToleranceFit from "./figures/ToleranceFit.astro";
+import BrainstormLanes from "./figures/BrainstormLanes.astro";
+
+interface Props {
+  name: FigureName;
+  number?: number;
+  // true にすると番号・題・説明・出典を出さない（トップページの章の中で使う）
+  compact?: boolean;
+}
+
+const components: Record<FigureName, (props: { number?: number; compact?: boolean }) => any> = {
+  "design-process": DesignProcess,
+  "cost-escalation": CostEscalation,
+  "double-diamond": DoubleDiamond,
+  "requirements-layers": RequirementsLayers,
+  "v-model": VModel,
+  "kano-model": KanoModel,
+  "kj-method": KjMethod,
+  "abstraction-ladder": AbstractionLadder,
+  "beam-calculator": BeamCalculator,
+  "fitts-demo": FittsDemo,
+  gulfs: Gulfs,
+  "hcd-cycle": HcdCycle,
+  anscombe: Anscombe,
+  "analysis-cycle": AnalysisCycle,
+  "pareto-front": ParetoFront,
+  "ahp-example": AhpExample,
+  "door-signifier": DoorSignifier,
+  "fitts-law": FittsLaw,
+  "design-scope": DesignScope,
+  "interface-mismatch": InterfaceMismatch,
+  "subtitle-users": SubtitleUsers,
+  "robot-dimensions": RobotDimensions,
+  "session-timeline": SessionTimeline,
+  "set-based": SetBased,
+  "tolerance-fit": ToleranceFit,
+  "brainstorm-lanes": BrainstormLanes,
+};
+
+const { name, number, compact } = Astro.props;
+const Component = components[name];
+---
+
+<Component number={number} compact={compact} />

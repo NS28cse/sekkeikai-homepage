@@ -1,0 +1,83 @@
+title: 設計のプロセス
+en: Design Process
+layer: process
+order: 1
+short: 工程で進める
+question: 問題から設計の答えまで、どう進むか
+summary: 問題を見つけ、要件を定め、案を広げ、比べて選び、形を詰める。設計は五つの工程を行き来しながら確かになっていく。
+lead: 設計は、ひらめきを一度で形にする作業ではありません。解くべき問題を見つけ、満たすべき条件を言葉にし、たくさんの案から根拠をもって選び、細部を詰めていきます。このページでは、五つの工程の全体と、そのつながり方を紹介します。各工程の中身は、それぞれのページで詳しく書いています。
+chapters:
+  - id: overview
+    heading: 設計は、五つの工程で進む
+    blocks:
+      - type: point
+        text: 設計は「問題を見つける → 要件を定める → 案を広げる → 比べて選ぶ → 形を詰める」の五つの工程で進みます。
+      - type: figure
+        name: design-process
+      - type: p
+        text: 経済学者であり認知科学の開拓者でもあったハーバート・サイモンは、今の状態をより好ましい状態に変えようとして行動の道筋を考える人は、誰もが設計をしているのだと述べました。設計とは、まだないものについて「どうあるべきか」を考えることです。
+        note: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）。邦訳『システムの科学』。
+      - type: p
+        text: 設計の進め方を示したモデルは数多くありますが、多くは同じ骨格を持っています。このサイトでは、その骨格を五つの工程に分けて紹介しています。
+        note: G. Pahl & W. Beitz, Konstruktionslehre, Springer, 1977（英語版 Engineering Design, 1984）は、課題の明確化・構想設計・実体設計・詳細設計の段階を示した。英国デザイン・カウンシルのダブルダイヤモンドは、発見・定義・展開・提供の4段階で示す。
+
+  - id: modes
+    heading: 広げる工程と、絞る工程が交互に来る
+    blocks:
+      - type: point
+        text: 問題を見つけるときと案を考えるときは、評価をあとまわしにして広げる。要件を定めるときと案を選ぶときは、根拠をもって絞る。今どちらなのかを意識すると、話し合いが進めやすくなります。
+      - type: p
+        text: 工程には、考えを**広げる**ものと**絞る**ものがあります。広げるときによしあしを言い始めると、案が出なくなります。絞るときにまた広げ始めると、いつまでも決まりません。英国デザイン・カウンシルは、この切り替えを二つのひし形で表しました。
+      - type: figure
+        name: double-diamond
+
+  - id: loop
+    heading: 工程は、行き来しながら確かになる
+    blocks:
+      - type: point
+        text: 案を考えてはじめて、要件の見落としに気づくことはよくあります。そのときは前の工程に戻ります。ただし、見落としは早く見つけるほど、直す手間は小さく済みます。
+      - type: p
+        text: 1973年、リッテルとウェバーは、設計や計画が扱う問題の多くは、問題をどう定義するかに解き方が含まれてしまう「厄介な問題」だと指摘しました。問題と答えは、行き来しながら一緒に確かになっていくのです。
+        note: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973。D. A. Schön, The Reflective Practitioner, 1983 も、設計する人が状況と「対話」しながら問題の捉え方を組み替えていく姿を描いた。
+      - type: p
+        text: それでも、早い工程で考え抜く価値は大きいのです。NASAが過去の大規模な開発をもとにまとめた見積もりでは、要求の段階で紛れ込んだ誤りを運用に入ってから直すと、その場で直す場合の数十倍から千倍以上の手間がかかりました。
+        note: J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004。宇宙機のような大規模なシステムでの見積もりで、倍率そのものは分野や規模によって大きく変わる。
+      - type: figure
+        name: cost-escalation
+      - type: p
+        text: ソフトウェアの世界では、すべての要件を最初に決めきらず、小さくつくって使ってもらい、要件そのものを学びながら更新していく進め方が広く使われています。工程を一度だけ通るのではなく、短い周期で何度も回すのです。一方、自動車や医療機器のように安全が重要な分野では、要件から設計、試験までのつながりを漏れなくたどれることが求められます。
+
+  - id: examples
+    heading: 例で、五つの工程をたどる
+    blocks:
+      - type: point
+        text: 工程のページでは、架空の例として「部室の予約が取り合いになっている」という一つの問題を、五つの工程で順にたどります。もっと大きな例は、イベントとロボットの設計の流れのページにあります。
+      - type: example
+        title: 部室の予約が、五つの工程でどう進んだか
+        text: 話を聞くと、問題は「空いているかが前もってわからないこと」だった（問題発見）。「スマートフォンから3操作以内」「重なりは0件」「費用は0円」と決めた（要件定義）。アプリ、紙の予約表、共有カレンダーなど九つの案を出し（発想）、比べて共有カレンダーを選んだ（評価・選定）。最後に、予約の書き方と決まりを仕様書にまとめた（詳細設計）。
+      - type: link
+        label: 工程1「問題を見つける」から読む
+        href: /design/problem-finding/
+
+  - id: club
+    heading: 設計会では、今どの工程かを意識して話す
+    blocks:
+      - type: point
+        text: 部員がテーマを持ち寄り、今どの工程にいるのかを確かめながら、チームで考えます。
+      - type: p
+        text: 問題を見つける工程ではKJ法でカードを並べ、要件を定める工程ではIDEF0で機能を図にし、案を選ぶ工程ではピューの概念選定法やAHPで判断の根拠を見えるようにします。アンケートなどのデータはDeepnoteで一緒に分析します。考えたことは発表し、違う視点から意見をもらって、また前の工程に戻ります。
+
+references:
+  - text: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）.
+  - text: 'G. Pahl & W. Beitz, Engineering Design: A Systematic Approach, Springer, 1984（原著 Konstruktionslehre, 1977）.'
+  - text: Design Council (UK), "The Double Diamond".
+    url: https://www.designcouncil.org.uk/our-resources/the-double-diamond/
+  - text: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), pp.155–169, 1973.
+    url: https://doi.org/10.1007/BF01405730
+  - text: D. A. Schön, The Reflective Practitioner, Basic Books, 1983（邦訳『省察的実践とは何か』鳳書房, 2007年）.
+  - text: J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004.
+    url: https://ntrs.nasa.gov/citations/20100036670
+related:
+  - problem-finding
+  - design-methods-history
+  - modeling
