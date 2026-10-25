@@ -21,7 +21,7 @@ chapters:
       - type: p
         text: いきなり「こんなものをつくろう」と考え始めると、見当違いの問題を、見事に解いてしまうことがあります。最初の工程では、誰が、どんな場面で、何に困っているのかを、先入観をできるだけ脇に置いて集めます。
       - type: p
-        text: 手がかりは現場にあります。使っている人を観察し、話を聞き、今ある記録や数字を眺める。言葉にされない不満は、行動を見てはじめてわかることも多いのです。観察と聞き取りの方法は[[human-interface]]、記録の読み方は[[data-analysis]]のページで詳しく紹介しています。
+        text: 手がかりは現場にあります。使っている人を観察し、話を聞き、今ある記録や数字を眺める。言葉にされない不満は、行動を見てはじめてわかることも多いのです。使う人の特性と利用状況のつかみ方は[[human-interface]]、記録や数字をグラフにして読む方法は[[data-analysis]]のページにあります。
 
   - id: reframe
     heading: 問いを置き直すと、答えが変わる
@@ -31,7 +31,7 @@ chapters:
       - type: example
         title: 実際にあった例：電気がなくても温める
         text: 2007年、スタンフォード大学の授業で、学生のチームが「安い保育器をつくる」という課題に取り組みました。ネパールを訪ねると、多くの出産は、病院から遠く電気の安定しない村で行われていました。寄付された保育器が、病院で使われずに置かれていることもありました。チームは問題を「電気なしで赤ちゃんを温める」に置き直し、温めたワックスの保温パックを入れる寝袋の形にしました。一度温めると、4〜6時間ほど温度を保ちます。
-        source: '[The Stanford Daily, "At-risk babies kept warm by Stanford innovation", 2010年11月18日](https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/)。製品名は Embrace。'
+        source: '[Stanford Biodesign, "Embrace"](https://biodesign.stanford.edu/content/dam/sm/biodesign/documents/global-health-innovation/insight-series/Embrace.pdf)（2007年の授業）、[C-IP2（ジョージ・メイソン大学）, 2017年](https://cip2.gmu.edu/?p=6397)（ネパールの病院と村）、[The Stanford Daily, 2010年11月18日](https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/)（保温の時間）。製品名は Embrace。'
       - type: p
         text: 決め手になったのは、性能の工夫より先に「安い保育器」という問いの立て方を疑ったことでした。問いのまま保育器を安くしても、電気のない村では使えなかったはずです。
       - type: example
@@ -53,18 +53,18 @@ chapters:
           - from: 予約アプリがあったら使う？
             to: 最後に部室を使ったのはいつ？
           - from: 部室の予約は不便ですか？
-            to: そのとき、空きをどう確かめた？
+            to: 前回、空きをどう確かめた？
           - from: 毎週、部室を使いますか？
             to: 先週は何回、部室に行った？
           - from: 共有カレンダーは便利だと思う？
             to: いちばん困ったのはどんなとき？
       - type: p
-        text: もう一つのこつは、相手が自分の言葉で答える、開いた質問をすることです。「不便ですか」と聞くと、相手は「はい」と答えて話が終わります。「そのとき、どうしましたか」と聞けば、こちらが想像していなかった工夫や回り道が出てきます。
+        text: もう一つのこつは、相手が自分の言葉で答える「開かれた質問（オープンクエスチョン）」をすることです。「不便ですか」と聞くと、相手は「はい」と答えて話が終わります。「そのとき、どうしましたか」と聞けば、こちらが想像していなかった工夫や回り道が出てきます。
         note: 意見や予想ではなく、過去の具体的な行動を聞くという助言は、[R. Fitzpatrick, The Mom Test (2013)](https://www.momtestbook.com/) などに見られる。
       - type: heading
         text: 見たことと、読み取ったことを分けて書く
       - type: p
-        text: 記録するときは、見たこと・聞いたこと（**事実**）と、そこから自分が読み取ったこと（**解釈**）を分けて書きます。分けて書いておけば、あとで解釈が間違っていたとわかったときも、元の事実に戻って考え直せます。次の章で紹介するKJ法でも、カードにはまず事実を書きます。
+        text: 記録するときは、見たこと・聞いたこと（事実）と、そこから自分が読み取ったこと（解釈）を分けて書きます。分けて書いておけば、あとで解釈が間違っていたとわかったときも、元の事実に戻って考え直せます。次の章で紹介するKJ法でも、カードにはまず事実を書きます。
       - type: figure
         name: fact-vs-interpretation
       - type: steps
@@ -110,13 +110,17 @@ chapters:
       - type: point
         text: 見えてきた問題は「誰の、どんな困りごとを、なぜ解くのか」という一文にまとめます。この一文が、次の工程で迷ったときの拠りどころになります。
       - type: p
-        text: 一文にまとめるときは、困りごとだけを書き、解決策は次の工程に残すのがこつです。「予約アプリがない」ではなく「部員が、部室が空いているかを前もって確かめられない」と書けば、アプリ以外の解き方も考えられます。
+        text: 一文にまとめるときは、困りごとだけを書き、解決策は[[ideation|案を広げる]]工程まで残しておくのがこつです。「予約アプリがない」ではなく「部員が、部室が空いているかを前もって確かめられない」と書けば、アプリ以外の解き方も考えられます。
       - type: p
         text: 集めた事実をもとに、架空だが具体的な一人の利用者像（**ペルソナ**）を立てておくのも有効です。「週に2回、授業の合間に部室で作業する2年生」のように決めておくと、「この人は困るだろうか」と具体的に考えられます。
 
 references:
   - text: 川喜田二郎『発想法 ― 創造性開発のために』中公新書, 1967年.
     url: https://ndlsearch.ndl.go.jp/books/R100000002-I000001091965
+  - text: Stanford Biodesign, "Embrace", Global Health Innovation Insight Series.
+    url: https://biodesign.stanford.edu/content/dam/sm/biodesign/documents/global-health-innovation/insight-series/Embrace.pdf
+  - text: 'G. Savich, "Innovate4Health: Embrace Infant Warmers Help Save Lives of Preterm Babies in Developing Countries", C-IP2, George Mason University, 2017.'
+    url: https://cip2.gmu.edu/?p=6397
   - text: The Stanford Daily, "At-risk babies kept warm by Stanford innovation", 2010.
     url: https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/
   - text: 政府広報オンライン「Highlighting Japan」2011年11月号.

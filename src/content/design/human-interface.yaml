@@ -17,9 +17,9 @@ chapters:
         text: 人と人工物が出会う「境界面」を、人の特性に合わせて設計する。それがヒューマンインターフェースです。
       - type: p
         text: |-
-          人の知覚や記憶、手の動きには、科学的に調べられた特性と限界があります。たとえば、手を動かして目標を指し示すのにかかる時間は、目標までの距離が遠いほど、目標が小さいほど長くなります。心理学者ポール・フィッツが1954年に定式化したこの関係は「フィッツの法則」と呼ばれ、のちにマウスなどで画面上の目標を指す操作にも当てはまることが確かめられて、ボタンの大きさや配置を決める根拠として使われています。
+          人の知覚や記憶、手の動きには、科学的に調べられた特性と限界があります。たとえば、手を動かして目標を指し示すのにかかる時間は、目標までの距離が遠いほど、目標が小さいほど長くなります。心理学者ポール・フィッツが1954年に定式化したこの関係を「フィッツの法則」と呼びます。のちに、マウスなどで画面上の目標を指す操作にも当てはまることが確かめられ、ボタンの大きさや配置を決める根拠になっています。
         note: |-
-          [P. M. Fitts, "The information capacity of the human motor system in controlling the amplitude of movement", Journal of Experimental Psychology, 47(6), 1954](https://doi.org/10.1037/h0055392)。
+          [P. M. Fitts, "The information capacity of the human motor system in controlling the amplitude of movement", Journal of Experimental Psychology, 47(6), 1954](https://doi.org/10.1037/h0055392)。画面上の操作への当てはまりは [I. S. MacKenzie, 1992](https://doi.org/10.1207/s15327051hci0701_3) がまとめている。
       - type: p
         text: |-
           下のデモで、実際に試してみてください。表示される丸を次々にクリック（タップ）すると、丸の大きさと距離から計算した難しさの指数（ID）と、かかった時間の関係がグラフに描かれていきます。
