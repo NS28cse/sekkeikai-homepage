@@ -106,7 +106,7 @@ chapters:
           - どこから来たか
           - 確かめ方
         rows:
-          - - スマートフォンから3操作以内で予約できる
+          - - スマートフォンから3操作以内で、空きを確かめて予約できる
             - 必須
             - 問題の一文の「前もって確かめられない」。確かめる手間を小さくする
             - 部員5人に試してもらい、操作の数を数える
@@ -143,8 +143,8 @@ chapters:
       - type: example
         kind: real
         title: 通知が届かなかった接触確認アプリ
-        text: 新型コロナウイルスの接触確認アプリ「COCOA」では、2020年9月28日の更新（バージョン1.1.4）から、Android版で陽性者と接触しても通知が届かない状態になりました。いちばん大事な機能が働かない状態は、4か月以上続きました。通知が届くまでの一連の流れを、端から端まで試すテストは行われていませんでした。
-        source: "[厚生労働省「接触確認アプリ『COCOA』の不具合の発生経緯の調査と再発防止の検討について（報告書）」2021年4月16日](https://www.mhlw.go.jp/content/000769773.pdf)。"
+        text: 新型コロナウイルスの接触確認アプリ「COCOA」では、2020年9月28日の更新（バージョン1.1.4）から、Android版で陽性者と接触しても通知が届かない状態になりました。いちばん大事な機能が働かない状態は、約4か月、見逃されました。通知が届くまでの一連の流れを、端から端まで試すテストは行われていませんでした。
+        source: "[厚生労働省「接触確認アプリ『COCOA』の不具合の発生経緯の調査と再発防止の検討について（報告書）」2021年4月16日](https://www.mhlw.go.jp/content/000769774.pdf)。"
       - type: p
         text: 報告書は、発注者として全体を管理できていなかったことを原因の一つに挙げています。いちばん大事な要件ほど、誰がどう確かめるのかを、はじめに決めておきます。
 
@@ -162,7 +162,7 @@ references:
   - text: B. W. Boehm, "Verifying and Validating Software Requirements and Design Specifications", IEEE Software, 1(1), pp.75–88, 1984.
     url: https://doi.org/10.1109/MS.1984.233702
   - text: 厚生労働省「接触確認アプリ『COCOA』の不具合の発生経緯の調査と再発防止の検討について（報告書）」2021年4月16日.
-    url: https://www.mhlw.go.jp/content/000769773.pdf
+    url: https://www.mhlw.go.jp/content/000769774.pdf
   - text: ISO/IEC/IEEE 29148:2011 Systems and software engineering — Life cycle processes — Requirements engineering.
     url: https://www.iso.org/standard/45171.html
 related:

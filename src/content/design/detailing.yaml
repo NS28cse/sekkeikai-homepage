@@ -19,7 +19,7 @@ chapters:
         kind: real
         title: ハッブル宇宙望遠鏡の鏡
         text: 1990年に打ち上げられたハッブル宇宙望遠鏡は、最初に届いた画像がぼやけていました。直径2.4mの主鏡が、縁のあたりで設計より約2.2µm平らに磨かれていたのです。髪の毛の太さの数十分の一のずれでした。原因は、鏡の形を測る検査の道具の中で、レンズの位置が1.3mmずれていたことでした。
-        source: '[L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report" (Allen Report), NASA, 1990](https://ntrs.nasa.gov/citations/19910003124)。'
+        source: '[L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report" (Allen Report), NASA, 1990](https://ntrs.nasa.gov/citations/19910003124)、[NASA「Servicing Mission 1」](https://asd.gsfc.nasa.gov/archive/hubble/missions/sm1.html)。'
       - type: p
         text: 別の検査の道具は、この誤りを示していました。けれど、その結果は「そちらの道具のほうが不正確なのだろう」と見過ごされました。1993年、宇宙飛行士が補正の光学装置を取り付けて、ようやく設計どおりの像が得られました。細部の数字は、**確かめ方まで含めて設計します**。
         note: 補正は1993年12月の最初の修理ミッション（[スペースシャトルSTS-61](https://www.nasa.gov/mission/sts-61/)）で行われた。[調査報告](https://ntrs.nasa.gov/citations/19910003124)は、検査の結果を独立した立場で確かめる仕組みが弱かったことも指摘した。
@@ -101,6 +101,12 @@ chapters:
       - type: example
         title: 部室の予約なら（架空の例）
         text: 共有カレンダーへの予約の書き方（名前・用件・時間）、予約の締め切り、重なったときの決め方を一枚の仕様書にまとめます。何人かに試してもらって書き方を直してから、部全体で使い始めます。
+      - type: link
+        label: 5つの工程を通した計画の例を読む
+        href: /design/#cases-title
+      - type: link
+        label: 設計会で一緒に設計する
+        href: /#join
 
 references:
   - text: 'L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report", NASA, 1990.'

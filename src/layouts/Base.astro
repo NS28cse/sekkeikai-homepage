@@ -16,7 +16,7 @@ const { title, description, noindex = false, progress = false } = Astro.props;
 const fullTitle = title === "設計会" ? "設計会 | 岡山県立大学 公認サークル" : `${title} | 設計会`;
 // mobile: false の項目は、スマホ幅ではヘッダーに出さない（フッターには全部出る）
 const nav = [
-  { href: "/#place", label: "設計会とは", mobile: false },
+  { href: "/#summary", label: "設計会とは", mobile: false },
   { href: "/design/", label: "設計を知る", mobile: true },
   { href: "/news/", label: "お知らせ", mobile: false },
   { href: "/#join", label: "入部", mobile: true },

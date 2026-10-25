@@ -47,8 +47,9 @@ for (const file of files) {
   let inReferences = false;
   // 読んでいる途中の example ブロック（kind は text の後ろに書かれることもあるので、ブロックの終わりで判断する）
   let example = null;
+  // 実際にあった例（kind: real）は過去の出来事なので、事例のページの中でも調べない
   const flushExample = () => {
-    if (example && !example.real && !isCase) {
+    if (example && !example.real) {
       for (const [where, text] of example.texts) {
         const m = text.match(pastTense);
         if (m) problems.push(`${where}: 架空の例は、計画の形（〜します、〜なら）で書く（「${m[0]}」）`);
@@ -70,7 +71,8 @@ for (const file of files) {
       if (/^\s+kind:\s*real\s*$/.test(raw)) example.real = true;
       if (own) example.texts.push([where, own[1]]);
     }
-    if (isCase && own) {
+    // example の中の行は、ブロックの終わり（flushExample）でまとめて調べる
+    if (isCase && own && !example) {
       const m = own[1].match(pastTense);
       if (m) problems.push(`${where}: 事例のページは、これから進める計画の形（〜します、〜なら）で書く（「${m[0]}」）`);
     }

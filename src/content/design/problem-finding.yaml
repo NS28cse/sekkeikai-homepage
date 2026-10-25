@@ -32,14 +32,14 @@ chapters:
         kind: real
         title: 電気がなくても温める
         text: 2007年、スタンフォード大学の授業で、学生のチームが「安い保育器をつくる」という課題に取り組みました。ネパールを訪ねると、多くの出産は、病院から遠く電気の安定しない村で行われていました。寄付された保育器が、病院で使われずに置かれていることもありました。チームは問題を「電気なしで赤ちゃんを温める」に置き直し、温めたワックスの保温パックを入れる寝袋の形にしました。一度温めると、4〜6時間ほど温度を保ちます。
-        source: '[The Stanford Daily, "At-risk babies kept warm by Stanford innovation", 2010年11月18日](https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/)。製品名は Embrace。'
+        source: '[The Stanford Daily, 2010年11月18日](https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/)、[Pomona College Magazine, 2011年](https://magazine.pomona.edu/?p=48)、[C-IP2（ジョージ・メイソン大学）, 2017年](https://cip2.gmu.edu/?p=6397)。製品名は Embrace。'
       - type: p
         text: 決め手になったのは、性能の工夫より先に「安い保育器」という問いの立て方を疑ったことでした。問いのまま保育器を安くしても、電気のない村では使えなかったはずです。
       - type: example
         kind: real
         title: 「行動」を見せる動物園
         text: 北海道旭川市の旭山動物園は、1990年代に入園者が年間26万人ほどまで減りました。職員たちは、動物の姿をただ見せるのではなく、泳ぐ、飛ぶ、木に登るといった、その動物らしい行動が見える展示（行動展示）に変えていきました。ペンギンが頭の上を泳ぐ水中トンネルなどが評判になり、2004年には、月によっては入園者数で上野動物園を上回りました。
-        source: "[政府広報オンライン「Highlighting Japan」2011年11月号（坂東元園長へのインタビュー）](https://www.gov-online.go.jp/eng/publicity/book/hlj/html/201111/201111_03j.html)など。"
+        source: '[日本サービス大賞（第1回）受賞事例「旭川市旭山動物園」](https://service-award.jp/result_case/dl/creation01.pdf)と[政府広報オンライン「Highlighting Japan」2011年11月号（坂東元園長へのインタビュー）](https://www.gov-online.go.jp/eng/publicity/book/hlj/html/201111/201111_03j.html)。'
       - type: p
         text: 2つの例に共通するのは、「何をつくるか」より先に、使う人や来る人が本当は何に困り、何を求めているのかを、現場で確かめ直したことです。
 
@@ -75,7 +75,7 @@ chapters:
           - title: 聞きたいことを絞る
             body: 確かめたいことを3つほどに絞り、それぞれについて「最近のできごと」を聞く質問にしておきます。
           - title: 現場で聞く・見る
-            body: 2人で行き、一人が聞き、一人が書きます。答えに「どうしてですか」「そのときは？」と重ねて聞きます。
+            body: 2人で行き、1人が聞き、1人が書きます。答えに「どうしてですか」「そのときは？」と重ねて聞きます。
           - title: 事実と解釈を書き分ける
             body: 見たこと・聞いたことと、自分の読み取りを、別の欄やカードに書きます。言われた言葉は、そのまま書きます。
           - title: その日のうちに振り返る
@@ -123,6 +123,10 @@ references:
     url: https://stanforddaily.com/2010/11/18/at-risk-babies-kept-warm-by-stanford-innovation/
   - text: 政府広報オンライン「Highlighting Japan」2011年11月号.
     url: https://www.gov-online.go.jp/eng/publicity/book/hlj/html/201111/201111_03j.html
+  - text: サービス産業生産性協議会「日本サービス大賞（第1回）受賞事例 旭川市旭山動物園」.
+    url: https://service-award.jp/result_case/dl/creation01.pdf
+  - text: Pomona College Magazine, 2011.
+    url: https://magazine.pomona.edu/?p=48
   - text: R. Fitzpatrick, The Mom Test, 2013.
     url: https://www.momtestbook.com/
   - text: 大野耐一『トヨタ生産方式 ― 脱規模の経営をめざして』ダイヤモンド社, 1978年.

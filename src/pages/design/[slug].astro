@@ -122,10 +122,12 @@ const crumb =
             </li>
           )}
         </ol>
-        <a href="/design/process/" class="mt-8 block text-xs text-muted underline hover:text-link">
-          ← 設計のプロセスの全体
-        </a>
-        <a href="/design/" class="mt-2 block text-xs text-muted underline hover:text-link">
+        {layer !== "process" && (
+          <a href="/design/process/" class="mt-8 block text-xs text-muted underline hover:text-link">
+            ← 設計のプロセスの全体
+          </a>
+        )}
+        <a href="/design/" class:list={["block text-xs text-muted underline hover:text-link", layer === "process" ? "mt-8" : "mt-2"]}>
           ← 設計を知る（一覧）
         </a>
       </div>

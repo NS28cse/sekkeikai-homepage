@@ -15,7 +15,7 @@ chapters:
       - type: figure
         name: design-process
       - type: p
-        text: 経済学者であり認知科学の開拓者でもあったハーバート・サイモンは、今の状態をより好ましい状態に変えようとして行動の道筋を考える人は、誰もが設計をしているのだと述べました。設計とは、まだないものについて「どうあるべきか」を考えることです。5つの工程は、その答えを確かめながら決めていく段取りです。
+        text: 経済学者で、認知科学の開拓者でもあるハーバート・サイモンは、設計を広く捉えました。今の状態をより好ましい状態に変えようと、行動の道筋を考える人は、誰もが設計をしている、というのです。設計とは、まだないものについて「どうあるべきか」を考えることです。5つの工程は、その答えを確かめながら決めていく段取りです。
         note: "[H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）](https://ndlsearch.ndl.go.jp/books/R100000002-I000006331276)。邦訳[『システムの科学』](https://ndlsearch.ndl.go.jp/books/R100000002-I000002864619)。"
 
   - id: fields
@@ -54,7 +54,7 @@ chapters:
             - 提供（小さく試して改良）
       - type: p
         text: 同じ「基本設計」という言葉でも、建築では実施設計の前に行う設計を、ソフトウェアでは画面や外から見た動きを決める設計を指すことが多く、中身が違います。ほかの学部の人と話すときは、言葉より「今、何を決めているのか」をそろえるのが近道です。
-        note: 機械は[Pahl & Beitz, Konstruktionslehre（1977）](https://ci.nii.ac.jp/ncid/BA62999351)、建築は[令和6年国土交通省告示第8号](https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html)、ソフトウェアは[IPA「共通フレーム2013」](https://www.ipa.go.jp/publish/secbooks20130304.html)による。ソフトウェアの「基本設計」「詳細設計」は、日本の現場での慣用の呼び方。
+        note: 機械は[Pahl & Beitz, Konstruktionslehre（1977）](https://ci.nii.ac.jp/ncid/BA62999351)、建築は[令和6年国土交通省告示第8号](https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html)、ソフトウェアは[IPA「共通フレーム2013」](https://www.ipa.go.jp/publish/secbooks20130304.html)による。ソフトウェアの「基本設計」「詳細設計」は、日本の現場での慣用の呼び方。建築の「企画・基本計画」は告示の標準業務の外で、慣用の呼び方。
 
   - id: modes
     heading: 広げる工程と、絞る工程が交互に来る
@@ -81,16 +81,18 @@ chapters:
         note: 見落としを見つけるのが後の工程になるほど、直す手間は大きくなる。NASAの見積もりでは、要件の段階の誤りを運用の段階で直すと、数十倍から千倍以上の手間がかかる（[J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA, 2004](https://ntrs.nasa.gov/citations/20100036670)）。
       - type: p
         text: 5つの工程の外にも、仕事があります。できたものが要件を満たすかを確かめる検証、建築や福祉用具での法令や安全規格の確認、イベントの当日の運営とふり返りです。分野によっては、これらも設計と同じくらい大切です。設計会では、仕様書の中に「どう確かめるか」まで書くことで、次につなげます。
-        note: ドイツ技術者協会の指針 [VDI 2221](https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung) は2019年の改訂で、決まった順番を示すのをやめ、どの製品開発にも通じる「活動」を定めて、並べ方は状況に応じて決める形にした。
+        note: ドイツ技術者協会の指針 [VDI 2221](https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung) は2019年の改訂で、製品開発の中心となる目標・活動・成果を定める形になり、実際の進め方は状況に合わせて組み立てる（Blatt 2）とした。
 
   - id: examples
     heading: 例で、5つの工程をたどる
     blocks:
       - type: point
-        text: 工程のページでは、架空の例として「部室の予約が取り合いになっている」という一つの問題を取り上げ、5つの工程でどう進めるかを順に示します。もっと大きな例は、「設計の流れの例」のページ（イベント、ロボット、アプリ、設備、防災）にあります。
+        text: 工程のページでは、架空の例として「部室の予約が取り合いになっている」という一つの問題を取り上げ、5つの工程でどう進めるかを順に示します。
       - type: example
         title: 部室の予約を、5つの工程で進めるなら
         text: まず部員に話を聞き、取り合いの本当の理由を確かめる（問題発見）。理由が「空いているかが前もってわからないこと」なら、「スマートフォンから3操作以内」「重なりは0件」「費用は0円」のように、確かめられる条件にする（要件定義）。アプリ、紙の予約表、共有カレンダーなど、案をいくつも出す（発想）。条件で比べて一つを選ぶ（評価・選定）。最後に、予約の書き方と決まりを仕様書にまとめる（詳細設計）。
+      - type: p
+        text: もっと大きな例は、設計の流れの例のページにあります。[[case-open-campus|イベント]]、[[case-delivery-robot|ロボット]]、[[case-deadline|アプリ]]、[[case-bicycle-parking|設備]]、[[case-shelter-reception|防災]]の5つです。
       - type: link
         label: 工程1「問題を見つける」から読む
         href: /design/problem-finding/
