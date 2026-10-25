@@ -5,6 +5,7 @@
 //   - 読み方の指示（「読み飛ばしてよい」「3分で読める」など）
 //   - 二重否定の決まった形（「ないことはない」など）
 //   - 一段落（YAML の 1 行）に強調（**…**）が2か所以上
+//   - 架空の例（事例のページと、説明のための場面の例）が、起きていない出来事を過去の形で語っている
 //   - 同じ出典の実例が、2つ以上のページにある（同じ実例は1ページにだけ置く）
 //   - public/uploads/ の画像が docs/image-credits.md に載っていない
 // 参考文献（references:）とリンクの表示名（[…](https://…)）は、作品の名前なのでそのまま使う（調べない）。
@@ -33,13 +34,46 @@ const problems = [];
 const sources = new Map(); // 実例の出典の URL → それを使っているファイル
 const images = [];
 
+// 架空の例は「これからこう進める」という計画の形で書く。起きていない出来事を過去の形で書かない（存在しない過去の話には価値がない）。
+// 調べるのは、事例（layer: case）のページの本文と、説明のための場面の例（kind: real でない example）。
+// 「〜だったら」のような仮定は調べない。
+const pastTense = /ました|でした|だった(?!ら)|ていた/;
+const ownText = /^\s+(?:- )?(?:text|point|caption|heading|lead|summary|title|answer):\s*(.*)$/;
+
 for (const file of files) {
-  const lines = readFileSync(file, "utf8").split("\n");
+  const content = readFileSync(file, "utf8");
+  const lines = content.split("\n");
+  const isCase = /^layer: case\s*$/m.test(content);
   let inReferences = false;
+  // 読んでいる途中の example ブロック（kind は text の後ろに書かれることもあるので、ブロックの終わりで判断する）
+  let example = null;
+  const flushExample = () => {
+    if (example && !example.real && !isCase) {
+      for (const [where, text] of example.texts) {
+        const m = text.match(pastTense);
+        if (m) problems.push(`${where}: 架空の例は、計画の形（〜します、〜なら）で書く（「${m[0]}」）`);
+      }
+    }
+    example = null;
+  };
   lines.forEach((raw, i) => {
     if (/^\S/.test(raw)) inReferences = /^references:/.test(raw);
     if (inReferences || /^\s*#/.test(raw)) return;
     const where = `${file}:${i + 1}`;
+    const block = raw.match(/^(\s*)- (?:type|id):\s*(\S+)/);
+    if (block) {
+      flushExample();
+      if (block[2] === "example") example = { real: false, texts: [] };
+    }
+    const own = raw.match(ownText);
+    if (example) {
+      if (/^\s+kind:\s*real\s*$/.test(raw)) example.real = true;
+      if (own) example.texts.push([where, own[1]]);
+    }
+    if (isCase && own) {
+      const m = own[1].match(pastTense);
+      if (m) problems.push(`${where}: 事例のページは、これから進める計画の形（〜します、〜なら）で書く（「${m[0]}」）`);
+    }
     // リンクの表示名と URL は調べない（作品や記事の名前は原文のまま）
     const text = raw.replace(/\[[^\[\]]*\]\(https:\/\/[^\s)]+\)/g, "").replace(/https?:\/\/\S+/g, "");
     for (const [re, message] of rules) {
@@ -57,6 +91,7 @@ for (const file of files) {
     const image = raw.match(/^\s+src:\s*["']?(\/uploads\/\S+?)["']?\s*$/);
     if (image) images.push([where, image[1]]);
   });
+  flushExample();
 }
 
 for (const [url, where] of sources) {

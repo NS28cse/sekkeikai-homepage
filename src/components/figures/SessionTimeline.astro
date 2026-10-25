@@ -1,5 +1,6 @@
 ---
-// 「オープンキャンパスの体験コーナー」（架空の例）の、一回15分の流れを係ごとの帯で描く図。
+// 「オープンキャンパスの体験コーナー」（これから取り組む企画の計画の例）の、一回15分の流れを係ごとの帯で描く図。
+// まだ行っていない企画なので、「試してわかったこと」ではなく「本番の前に試すこと」を描く。
 // 数字は src/content/design/case-open-campus.yaml の運営の仕様書の表と同じ。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -29,15 +30,15 @@ const muted = "var(--color-muted)";
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="一回15分の流れと、試してわかったこと"
-  caption="架空の例。最初の案では説明に5分かかり、体験の時間が足りなかった。説明を図の入ったカード1枚にして2分に縮めた。15分ごとに9人が体験できるので、1時間に36人。要件の24人以上を満たす。"
+  title="一回15分の流れと、本番の前に試すこと"
+  caption="計画の例（数字は仮の値）。15分ごとに9人が体験できれば、1時間に36人で、要件の24人以上を満たす。いちばん崩れやすいのは最初の説明で、2分を超えると体験の時間が削られる。本番の前に試し、収まらなければ説明を図の入ったカード1枚にまとめ直す。"
   scroll
 >
   <svg
     viewBox="0 0 640 250"
     class="w-full"
     role="img"
-    aria-label="一回15分の流れ。0から2分は説明、2から10分は体験、10から13分は発表、13から15分はアンケート。試したときは説明に5分かかったので、2分に縮めた。1時間に36人が体験でき、要件の24人以上を満たす。"
+    aria-label="一回15分の流れ。0から2分は説明、2から10分は体験、10から13分は発表、13から15分はアンケート。本番の前に、説明が2分に収まるかを試す。1時間に36人が体験でき、要件の24人以上を満たす。"
   >
     {[0, 2, 5, 10, 13, 15].map((m) => (
       <g>
@@ -71,22 +72,19 @@ const muted = "var(--color-muted)";
         ))}
       </g>
     ))}
-    <!-- 試したときの説明（5分）と、縮めたあと -->
+    <!-- 本番の前に試して確かめること（説明が2分に収まるか） -->
     <rect
       x={x(0) + 1}
       y="176"
-      width={5 * perMin - 2}
+      width={2 * perMin - 2}
       height="20"
       rx="4"
       fill="none"
       stroke="var(--color-accent-strong)"
       stroke-dasharray="5 4"
     />
-    <text x={x(0) + 6} y="190" font-size="12" fill="var(--color-accent-strong)">
-      試したとき：説明に5分
-    </text>
-    <text x={x(5) + 8} y="190" font-size="12" fill="var(--color-accent-strong)">
-      → カード1枚にして2分に
+    <text x={x(2) + 8} y="190" font-size="12" fill="var(--color-accent-strong)">
+      ← 本番の前に試す：説明が2分に収まるか
     </text>
     <text x="12" y="232" font-size="13" font-weight="700" fill={ink}>
       15分ごとに9人 → 1時間に36人（要件：24人以上）

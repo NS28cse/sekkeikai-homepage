@@ -1,5 +1,6 @@
 ---
-// 「飲み物を運ぶロボット」（架空の例）の仕様書の数字を、横から見た図と正面から見た図に描く。
+// 「飲み物を運ぶロボット」（これから取り組む設計の計画の例）の仕様書の数字を、横から見た図と正面から見た図に描く。
+// トレーの高さは、段ボールの模型で車いすの利用者に試してもらって決める値なので、「70cm前後」と描く。
 // 数字は src/content/design/case-delivery-robot.yaml の仕様書の表と同じ。1cm を px ピクセルで描く。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -11,7 +12,6 @@ interface Props {
 const px = 2.2;
 const floor = 290;
 const tray = 70;
-const trayBefore = 75;
 const width = 50;
 const stop = 50;
 // 人・車いすの目印の高さ（cm）。人の形は描かず、枠だけで示す
@@ -34,14 +34,14 @@ const half = (width * px) / 2;
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="仕様書の数字を図にする"
-  caption="架空の例。トレーの高さは、試作前の75cmから、車いすの利用者に試してもらって70cmに下げた。幅は廊下で車いすとすれ違える50cm以下、人の50cm手前で止まり、速さは秒速0.8m以下。"
+  caption="計画の例（数字は仮の値）。トレーの高さは70cm前後とし、段ボールの模型で車いすの利用者に試してもらって決める。幅は廊下で車いすとすれ違える50cm以下、人の50cm手前で止まり、速さは秒速0.8m以下。"
   scroll
 >
   <svg
     viewBox="0 0 680 330"
     class="w-full"
     role="img"
-    aria-label="ロボットの寸法の図。トレーの高さ70cm（試作前は75cm）、幅50cm以下、人の50cm手前で止まる、速さは秒速0.8m以下、上面に非常停止ボタン。"
+    aria-label="ロボットの寸法の図。トレーの高さ70cm前後（模型で試して決める）、幅50cm以下、人の50cm手前で止まる、速さは秒速0.8m以下、上面に非常停止ボタン。"
   >
     <text x="20" y="22" font-size="13" font-weight="700" fill={ink}>
       横から見た図
@@ -69,15 +69,18 @@ const half = (width * px) / 2;
       ← 非常停止
     </text>
 
-    <!-- トレーの高さ（今の 70cm と、試作前の 75cm） -->
+    <!-- トレーの高さ（70cm前後。模型で試して決める） -->
     <line x1="56" x2="56" y1={floor} y2={y(tray)} stroke={link} stroke-width="1.5" />
     <line x1="50" x2={body.x - 8} y1={y(tray)} y2={y(tray)} stroke={link} />
     <text x="50" y={y(tray / 2)} text-anchor="end" font-size="14" font-weight="700" fill={link}>
       70cm
     </text>
-    <line x1="20" x2={body.x - 8} y1={y(trayBefore)} y2={y(trayBefore)} stroke={muted} stroke-dasharray="5 4" />
-    <text x="20" y={y(trayBefore) - 6} font-size="12" fill={muted}>
-      試作前の75cm
+    <!-- 「前後」は2行目に置く（1行だと左にはみ出して切れるため） -->
+    <text x="50" y={y(tray / 2) + 18} text-anchor="end" font-size="12" font-weight="700" fill={link}>
+      前後
+    </text>
+    <text x="20" y={y(tray) - 8} font-size="12" fill={muted}>
+      模型で試して決める
     </text>
 
     <!-- 速さ -->
