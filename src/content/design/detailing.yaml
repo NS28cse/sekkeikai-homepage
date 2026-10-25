@@ -16,7 +16,8 @@ chapters:
       - type: point
         text: 寸法、材料、部品、画面の一つ一つの動きを決めます。ここで決めた数字は、そのまま製品の安全や使いやすさになります。
       - type: example
-        title: 実際にあった例：ハッブル宇宙望遠鏡の鏡
+        kind: real
+        title: ハッブル宇宙望遠鏡の鏡
         text: 1990年に打ち上げられたハッブル宇宙望遠鏡は、最初に届いた画像がぼやけていました。直径2.4mの主鏡が、縁のあたりで設計より約2.2µm平らに磨かれていたのです。髪の毛の太さの数十分の一のずれでした。原因は、鏡の形を測る検査の道具の中で、レンズの位置が1.3mmずれていたことでした。
         source: '[L. Allen ほか, "The Hubble Space Telescope Optical Systems Failure Report" (Allen Report), NASA, 1990](https://ntrs.nasa.gov/citations/19910003124)。'
       - type: p
@@ -78,7 +79,7 @@ chapters:
             - 当日の朝に重なりが見つかる
             - 重なったら、先に書いた人を優先と決める
       - type: p
-        text: FMEAは、1949年にアメリカ軍の手順書として始まり、宇宙開発や自動車の開発に広がりました。小さな表でも、「どこが・どう壊れる・何が起きる・どう防ぐ」の四つの列を埋めるだけで、見落としがぐっと減ります。
+        text: FMEAは、1949年にアメリカ軍の手順書として始まり、宇宙開発や自動車の開発に広がりました。小さな表でも、「どこが・どう壊れる・何が起きる・どう防ぐ」の4つの列を埋めるだけで、見落としがぐっと減ります。
         note: '[MIL-P-1629, "Procedures for Performing a Failure Mode, Effects and Criticality Analysis", U.S. Department of Defense, 1949](https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=86479)。'
       - type: p
         text: 粗い試作には、見た人が遠慮なく意見を言いやすいという利点もあります。きれいにつくり込んだ見本ほど、「もう決まったもの」に見えて、直す意見が出にくくなります。

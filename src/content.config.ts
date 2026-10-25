@@ -2,7 +2,7 @@ import { defineCollection, reference } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { figureNames } from "./lib/figures";
-import { hasAnyLink, hasExternalLink } from "./lib/inline";
+import { hasAnyLink, hasExternalLink, visibleLength } from "./lib/inline";
 
 // エラーメッセージを日本語にする（CI のログで読めるように）
 z.config(z.locales.ja());
@@ -20,7 +20,9 @@ const news = defineCollection({
     cover: z.string().optional(),
     coverAlt: z.string().max(100).optional(),
     draft: z.boolean().default(false),
-  }),
+  })
+    // 画像には、画像の中身を伝える説明（alt）が要る。cover を書いたら coverAlt も書く
+    .refine((n) => !n.cover || n.coverAlt, { message: "cover（画像）を書いたら coverAlt（画像の説明）も書いてください", path: ["coverAlt"] }),
 });
 
 // ── 関連授業 ──
@@ -45,14 +47,16 @@ const course = z.object({
 const block = z.discriminatedUnion("type", [
   // 段落。note は本文の右（スマホでは段落の下）に出る短い注。出典や一言の補足を書く。
   // 注には出典のリンク [表示名](https://…) を必ず書く（URL のない出典は使わない）。
-  // 出典ではなく、このサイトのほかのページへの案内だけの注なら [[…]] のリンクでもよい
+  // 出典ではなく、このサイトのほかのページへの案内だけの注なら [[…]] のリンクでもよい。
+  // 文字数の上限（300字）は、画面に出る文字だけを数える（URL は数えない）。max(1000) は URL も含めた入力全体の上限
   z.object({
     type: z.literal("p"),
     text: z.string().max(600),
     note: z
       .string()
-      .max(300)
+      .max(1000)
       .refine(hasAnyLink, { message: "注には出典のリンク [表示名](https://…) を書いてください" })
+      .refine((s) => visibleLength(s) <= 300, { message: "注は、表示される文字で300字以内にしてください" })
       .optional(),
   }),
   // 章の中の小見出し。見出しだけ拾い読みしても話がわかるように、主張の形で書く
@@ -61,19 +65,27 @@ const block = z.discriminatedUnion("type", [
   z.object({ type: z.literal("point"), text: z.string().max(160) }),
   // 読者への問いかけ。答え（answer）は隠さず、すぐ下に出す（折りたたみは読み飛ばされやすいため）
   z.object({ type: z.literal("question"), text: z.string().max(100), answer: z.string().max(240).optional() }),
-  // 身近な例。抽象的な話の前後に、具体的な場面を一つ置く
-  // source … 実際にあった例の出どころ（例の枠の下に小さく出す）
-  z.object({
-    type: z.literal("example"),
-    title: z.string().max(30).optional(),
-    text: z.string().max(400),
-    // 文字数には URL も入るので、上限を広めにしている
-    source: z
-      .string()
-      .max(400)
-      .refine(hasExternalLink, { message: "例の出典には [表示名](https://…) の形でリンクを書いてください" })
-      .optional(),
-  }),
+  // 例。kind で2種類に分ける（見た目の札も変わる）：
+  //   real  … 実際にあった例。source（出どころ）にリンクを必ず書く。札は「実際にあった例」
+  //   scene … 説明のための場面（部室の予約など）。省略するとこちら。札は「たとえば」。架空なら題か lead にそう書く
+  // source の文字数の上限（200字）は、画面に出る文字だけを数える（URL は数えない）
+  z
+    .object({
+      type: z.literal("example"),
+      kind: z.enum(["real", "scene"]).default("scene"),
+      title: z.string().max(30).optional(),
+      text: z.string().max(400),
+      source: z
+        .string()
+        .max(800)
+        .refine(hasExternalLink, { message: "例の出典には [表示名](https://…) の形でリンクを書いてください" })
+        .refine((s) => visibleLength(s) <= 200, { message: "例の出典は、表示される文字で200字以内にしてください" })
+        .optional(),
+    })
+    .refine((b) => b.kind !== "real" || b.source, {
+      message: "実際にあった例（kind: real）には source に出典のリンクを書いてください",
+      path: ["source"],
+    }),
   // 折りたたみの補足。本題ではないが分量の多い補足や、詳しい事例を入れる。
   // 短い補足や出典は、折りたたみではなく段落の note（本文の右）に書く
   z.object({
@@ -103,17 +115,23 @@ const block = z.discriminatedUnion("type", [
   }),
   // 外部の画像。著作権を必ず確認し、パブリックドメインか再利用が許されたライセンスの画像だけを使う。
   // 画像は public/uploads/ に置き、credit（作者・出典）と license を必ず書く。
-  // sourceUrl は画像の元のページ。CC BY などのライセンスでは、licenseUrl（ライセンスの本文へのリンク）も書く
-  z.object({
-    type: z.literal("image"),
-    src: z.string(),
-    alt: z.string().max(160),
-    caption: z.string().max(200),
-    credit: z.string().max(160),
-    license: z.string().max(60),
-    licenseUrl: z.url().optional(),
-    sourceUrl: z.url(),
-  }),
+  // sourceUrl は画像の元のページ。CC BY などのライセンスでは、licenseUrl（ライセンスの本文へのリンク）も書く。
+  // 画像を足したら docs/image-credits.md にも書く（npm run check:content で突き合わせる）
+  z
+    .object({
+      type: z.literal("image"),
+      src: z.string(),
+      alt: z.string().max(160),
+      caption: z.string().max(200),
+      credit: z.string().max(160),
+      license: z.string().max(60),
+      licenseUrl: z.url().optional(),
+      sourceUrl: z.url(),
+    })
+    .refine((b) => !/^CC BY/i.test(b.license) || b.licenseUrl, {
+      message: "CC BY 系のライセンスの画像には licenseUrl（ライセンスの本文へのリンク）を書いてください",
+      path: ["licenseUrl"],
+    }),
   // 表（要件の一覧や、案の比べ方など）。head は見出しの行、rows は本文の行
   z.object({
     type: z.literal("table"),
@@ -168,8 +186,8 @@ const block = z.discriminatedUnion("type", [
   z.object({ type: z.literal("map"), variant: z.enum(["compact", "full"]).default("compact") }),
   // 視点（lens）のページで、その視点を工程ごとにどう使うか（ページの perStep から作る）
   z.object({ type: z.literal("per-step") }),
-  // 岡山県立大学の関連授業（トップページの章などで使う）
-  z.object({ type: z.literal("courses"), items: z.array(course).min(1).max(8) }),
+  // 岡山県立大学の関連授業（トップページの章などで使う）。1か所に5件まで
+  z.object({ type: z.literal("courses"), items: z.array(course).min(1).max(5) }),
   // ほかのページへの「詳しく読む」リンク
   z.object({ type: z.literal("link"), label: z.string().max(40), href: z.string() }),
 ]);
@@ -213,13 +231,14 @@ const section = z.discriminatedUnion("type", [
       .array(z.object({ title: z.string().max(10), body: z.string().max(40) }))
       .max(4)
       .default([]),
-    // 入部フォーム（Microsoft Forms）の URL。空のあいだは「準備中」と出る
+    // 入部フォーム（Microsoft Forms）の URL。空のあいだは「準備中」と出る。
+    // 共有リンクは forms.office.com のほか、新しい forms.cloud.microsoft で出ることもある
     formUrl: z
       .union([
         z.literal(""),
         z
           .url({ message: "入部フォームの URL は https:// から始まる形で入力してください" })
-          .refine((u) => /^https:\/\/(forms\.office\.com|forms\.microsoft\.com)\//.test(u), {
+          .refine((u) => /^https:\/\/(forms\.office\.com|forms\.microsoft\.com|forms\.cloud\.microsoft)\//.test(u), {
             message: "入部フォームは Microsoft Forms の URL（https://forms.office.com/…）を入力してください",
           }),
       ])
@@ -254,7 +273,7 @@ const pages = defineCollection({
 
 // ── 「設計を知る」のページ（/design/〇〇/） ──
 // ファイル名がそのまま URL になる（例: modeling.yaml → /design/modeling/）。ファイルを足せばページが増える。
-// 1 ページで伝えたいことは 1 つにする。長くなったら、ページを分ける。
+// 1ページ1テーマにする（トップページだけは例外で、概要から興味をもつまでを1ページで担う）。長くなったら、ページを分ける。
 // layer で階層を分ける（混ぜない）：
 //   process … 設計のプロセスの全体像（1 ページだけ）
 //   step    … 工程 1 つにつき 1 ページ。order が工程の順番。stepName に正式な呼び名（例: 要件定義）を書く。地図の列になる
@@ -306,7 +325,7 @@ const design = defineCollection({
         .max(30)
         .default([]),
       // 岡山県立大学の関連授業（補足）。ページの終わりに小さな枠で出す
-      courses: z.array(course).max(8).default([]),
+      courses: z.array(course).max(5).default([]),
       related: z.array(reference("design")).max(4).default([]),
       // 視点（lens）のページ：各工程で、この視点をどう使うか（工程の順に、工程の数だけ書く）。
       // cell は地図の表のマスに、body は「工程ごとの使い方」（ブロック type: per-step）に出る。
@@ -347,7 +366,15 @@ const site = defineCollection({
     // TimeTree（活動予定のカレンダー）の共有リンク。空のあいだは出さない
     timetree: z.union([z.literal(""), z.url()]),
     // 問い合わせ用のメールアドレス。団体で共有しているアドレスにする（個人や大学の個人用アドレスは書かない）
-    email: z.union([z.literal(""), z.email({ message: "メールアドレスの形で書いてください" })]),
+    // 大学の個人用アドレス（英字のあとに数字が続く、学籍番号の形）は入力できないようにしている
+    email: z.union([
+      z.literal(""),
+      z
+        .email({ message: "メールアドレスの形で書いてください" })
+        .refine((m) => !/^[a-z]{1,4}\d{5,}@([\w-]+\.)*oka-pu\.ac\.jp$/i.test(m), {
+          message: "大学の個人用アドレスは書けません。団体で共有しているアドレスを書いてください",
+        }),
+    ]),
   }),
 });
 

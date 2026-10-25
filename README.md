@@ -50,8 +50,11 @@ npm run dev      # → http://localhost:4321（トップ）と http://localhost:
 ```bash
 npm run dev      # 開発用サーバー
 npm run check    # 型チェック
-npm run build    # dist/ に出力
+npm run build    # dist/ に出力（先に下の check:sources と check:content が走る）
 npm run preview  # build したものを確認
+npm run check:sources  # 図の出典にリンクがあるか
+npm run check:content  # 表記の決まり・実例の重複・画像の一覧を確かめる
+npm run check:links    # リンクとシラバスのページが開けるか（年度の初めに）
 ```
 
 ## 本番に移すとき

@@ -1,6 +1,6 @@
 ---
 // 案を選ぶ順番：まず「必須の要件」でふるいにかけ、残った案だけを比べて選ぶ。
-// 例は「部室の予約」（架空の例）。九つの案と要件は、工程のページの文章と同じにしている
+// 例は「部室の予約」（架空の例）。9つの案と要件は、工程のページの文章と同じにしている
 // （案の一覧は ideation.yaml、要件は requirements.yaml、比べ方の表は selection.yaml）。
 // 比べ方（ピューの概念選定法）はページの後半で説明するので、この図では点数を出さない。
 import FigureFrame from "./FigureFrame.astro";
@@ -15,7 +15,7 @@ const link = "var(--color-link)";
 const accent = "var(--color-accent-strong)";
 const muted = "var(--color-muted)";
 
-// 九つの案。fail に書いた要件を満たさない案は、ふるいで外れる。chosen は最後に選んだ案
+// 9つの案。fail に書いた要件を満たさない案は、ふるいで外れる。chosen は最後に選んだ案
 const plans: { name: string; fail?: string; chosen?: boolean }[] = [
   { name: "専用の予約アプリ" },
   { name: "紙の予約表", fail: "3操作以内" },
@@ -50,21 +50,20 @@ const bestIndex = Math.max(
 );
 const failedCount = plans.filter((p) => p.fail).length;
 // 「〜つ」の数は漢数字で書く（docs/writing-guide.md の表記の決まり）
-const kanji = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
 ---
 
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="先にふるいにかけ、残った案だけを比べる"
-  caption={`部室の予約（架空の例）。九つの案のうち${kanji[failedCount]}つは、必須の要件か制約を一つでも満たさないので、比べる前に外す。残った${kanji[passed.length]}つだけを比べて、一つを選ぶ。比べるときは、要件は満たさないが今のやり方に近い「紙の予約表」を基準案にした。`}
+  caption={`部室の予約（架空の例）。9つの案のうち${failedCount}つは、必須の要件か制約を一つでも満たさないので、比べる前に外す。残った${passed.length}つだけを比べて、一つを選ぶ。比べるときは、要件は満たさないが今のやり方に近い「紙の予約表」を基準案にした。`}
   scroll
 >
   <svg
     viewBox="0 0 840 420"
     class="w-full"
     role="img"
-    aria-label={`九つの案のうち${kanji[failedCount]}つが、3操作以内・重なり0件・費用0円のどれかを満たさずに外れ、残った${kanji[passed.length]}つを比べて、無料の共有カレンダーを選んだ図。`}
+    aria-label={`9つの案のうち${failedCount}つが、3操作以内・重なり0件・費用0円のどれかを満たさずに外れ、残った${passed.length}つを比べて、無料の共有カレンダーを選んだ図。`}
   >
     <defs>
       <marker id="mf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
@@ -74,7 +73,7 @@ const kanji = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "�
 
     <!-- 列の見出し -->
     <text x="16" y="30" font-size="14" font-weight="700" fill={ink}>
-      ① 九つの案
+      ① 9つの案
     </text>
     <text x="214" y="30" font-size="14" font-weight="700" fill={ink}>
       ② 要件でふるいにかける
@@ -92,7 +91,7 @@ const kanji = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "�
       ④ 選んだ案
     </text>
 
-    <!-- ①と② 九つの案と、ふるいの結果 -->
+    <!-- ①と② 9つの案と、ふるいの結果 -->
     {plans.map((p, i) => (
       <g>
         <rect

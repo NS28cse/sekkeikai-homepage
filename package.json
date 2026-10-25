@@ -9,12 +9,14 @@
     "tokens": "node scripts/build-tokens.mjs",
     "predev": "npm run tokens",
     "dev": "astro dev",
-    "prebuild": "npm run tokens",
+    "prebuild": "npm run tokens && npm run check:sources && npm run check:content",
     "build": "astro build",
     "preview": "astro preview --ignore-lock",
     "check": "npm run tokens && astro check",
     "format": "prettier --write .",
-    "check:sources": "node scripts/check-figure-sources.mjs"
+    "check:sources": "node scripts/check-figure-sources.mjs",
+    "check:content": "node scripts/check-content.mjs",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

@@ -15,7 +15,7 @@ interface Props {
 const { eyebrow, title, lead, ctaLabel, ctaHref, cta2Label, cta2Href } = Astro.props;
 const site = await getEntry("site", "links");
 const discord = site?.data.discord ?? "";
-// 「、」の後ろで改行して、見出しを二行に組む
+// 「、」の後ろで改行して、見出しを2行に組む
 const lines = title.split(/(?<=、)/);
 ---
 

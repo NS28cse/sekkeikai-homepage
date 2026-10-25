@@ -3,7 +3,8 @@
 // 読む人が拾い読みできるように、ブロックの種類ごとに見た目をはっきり分けている（読者に「読み方」を説明する文は書かない）：
 //   要点（point）  … オレンジの線。ここだけ拾っても話の筋が通る
 //   問いかけ       … 「？」の印。答えは隠さずにすぐ下に出す
-//   例             … 灰色の箱（身近な例も、実際にあった例も。どちらかは題に書く）
+//   例             … 灰色の箱。実際にあった例（kind: real）は実線の枠と「実際にあった例」の札、
+//                    説明のための場面（kind: scene）は点線の枠と「たとえば」の札
 //   短い補足・出典 … 段落の note。本文の右（スマホでは段落の下）
 //   長い補足・事例 … 折りたたみ（aside）
 // 注と図の番号は src/lib/blocks.ts の numberChapters で付けたものを使う。
@@ -19,7 +20,7 @@ interface Props {
   blocks: NumberedBlock[];
   // 視点のページで「工程ごとの使い方」（per-step）を出すための情報
   lens?: { short: string; perStep?: { cell: string; body: string }[] };
-  // true にすると、図を番号・説明・出典なしで出す（トップページ用。説明は前後の本文で書く）
+  // true にすると、図を番号・題・説明なしで出す（トップページ用。説明は前後の本文で書く。出典は出す）
   compactFigures?: boolean;
 }
 
@@ -90,11 +91,24 @@ const { blocks, lens, compactFigures = false } = Astro.props;
 
     case "example":
       return (
-        <div class="my-8 max-w-[38em] rounded-card border border-grid bg-paper-muted p-5 font-sans sm:p-6" data-reveal>
-          <p class="flex items-center gap-2 text-sm font-bold text-ink/75">
-            <span class="h-2.5 w-2.5 rounded-full bg-positive" aria-hidden="true" />
-            {/* 題は YAML の title（「実際にあった例：〇〇」「部室の予約なら」など）。無ければ「例」 */}
-            {block.title ?? "例"}
+        <div
+          class:list={[
+            "my-8 max-w-[38em] rounded-card border bg-paper-muted p-5 font-sans sm:p-6",
+            // 実際にあった例は実線、説明のための場面は点線の枠にして、ひと目で見分けられるようにする
+            block.kind === "real" ? "border-grid" : "border-dashed border-muted/40",
+          ]}
+          data-reveal
+        >
+          <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-bold text-ink/75">
+            <span
+              class:list={["h-2.5 w-2.5 rounded-full", block.kind === "real" ? "bg-positive" : "bg-muted/60"]}
+              aria-hidden="true"
+            />
+            {/* 札は kind から決まる。題（title）は札のあとに続ける */}
+            <span class:list={["annotation", block.kind === "real" ? "text-positive" : "text-muted"]}>
+              {block.kind === "real" ? "実際にあった例" : "たとえば"}
+            </span>
+            {block.title && <span>{block.title}</span>}
           </p>
           <p class="mt-2 text-[0.98rem] leading-loose tracking-normal">
             <InlineText text={block.text} />
