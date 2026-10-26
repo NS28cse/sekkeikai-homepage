@@ -20,7 +20,7 @@ export function initBeam(): void {
       };
       const delta = deflectionMm(input);
       result.textContent = delta.toFixed(1);
-      ratio.textContent = `（最初の設定の ${(delta / base).toFixed(1)} 倍）`;
+      ratio.textContent = `(最初の設定の ${(delta / base).toFixed(1)} 倍)`;
       for (const [key, value] of Object.entries(input)) {
         const label = root.querySelector(`[data-beam-value="${key}"]`);
         if (label) label.textContent = String(value);

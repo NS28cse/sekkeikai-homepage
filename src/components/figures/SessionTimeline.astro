@@ -1,5 +1,5 @@
 ---
-// 「オープンキャンパスの体験コーナー」（架空の例）の、一回15分の流れを係ごとの帯で描く図。
+// 「オープンキャンパスの体験コーナー」(架空の例)の、一回15分の流れを係ごとの帯で描く図。
 // 数字は src/content/design/case-open-campus.yaml の運営の仕様書の表と同じ。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -19,7 +19,7 @@ const lanes = [
       { from: 10, to: 13, label: "発表を聞く" },
     ],
   },
-  { role: "見守り係（2人）", bars: [{ from: 2, to: 10, label: "3人一組で案内表示を描く" }] },
+  { role: "見守り係(2人)", bars: [{ from: 2, to: 10, label: "3人一組で案内表示を描く" }] },
   { role: "受付係", bars: [{ from: 13, to: 15, label: "アンケート" }] },
 ];
 const ink = "var(--color-ink)";
@@ -29,7 +29,7 @@ const muted = "var(--color-muted)";
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="一回15分の流れと、試してわかったこと"
+  title="一回15分の流れと、試して分かったこと"
   caption="架空の例。最初の案では説明に5分かかり、体験の時間が足りなかった。説明を図の入ったカード1枚にして2分に縮めた。15分ごとに9人が体験できるので、1時間に36人。要件の24人以上を満たす。"
   scroll
 >
@@ -71,7 +71,7 @@ const muted = "var(--color-muted)";
         ))}
       </g>
     ))}
-    <!-- 試したときの説明（5分）と、縮めたあと -->
+    <!-- 試したときの説明(5分)と、縮めた後 -->
     <rect
       x={x(0) + 1}
       y="176"
@@ -83,13 +83,13 @@ const muted = "var(--color-muted)";
       stroke-dasharray="5 4"
     />
     <text x={x(0) + 6} y="190" font-size="12" fill="var(--color-accent-strong)">
-      試したとき：説明に5分
+      試したとき: 説明に5分
     </text>
     <text x={x(5) + 8} y="190" font-size="12" fill="var(--color-accent-strong)">
       → カード1枚にして2分に
     </text>
     <text x="12" y="232" font-size="13" font-weight="700" fill={ink}>
-      15分ごとに9人 → 1時間に36人（要件：24人以上）
+      15分ごとに9人 → 1時間に36人(要件: 24人以上)
     </text>
   </svg>
 </FigureFrame>

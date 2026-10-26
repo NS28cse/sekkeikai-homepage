@@ -1,5 +1,5 @@
 ---
-// KJ 法の流れ。小さな図はカード（付箋）の動きを表している。
+// KJ 法の流れ。小さな図はカード(付箋)の動きを表している。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -37,21 +37,21 @@ const steps = [
   { title: "名付ける", body: "集まりに、中身を言い表す「表札」を付ける", cards: grouped, islands: true, links: false },
   {
     title: "図にする",
-    body: "集まりどうしの関係（原因、対立など）を線で表す",
+    body: "集まりどうしの関係(原因、対立など)を線で表す",
     cards: grouped,
     islands: true,
     links: true,
   },
-  { title: "文章にする", body: "図を読み解き、わかったことを文章にまとめる", cards: [], islands: false, links: false },
+  { title: "文章にする", body: "図を読み解き、分かったことを文章にまとめる", cards: [], islands: false, links: false },
 ];
 ---
 
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="KJ法 ― 散らばった事実から、構造を見つける"
+  title="KJ法: 散らばった事実から、構造を見つける"
   caption="大切なのは、分類の枠をカードの方から見つけること。「集まりたがっている」まとまりを探していくと、予想していなかった構造が見えてくる。"
-  source="[川喜田二郎『発想法』中公新書 (1967)](https://ndlsearch.ndl.go.jp/books/R100000002-I000001091965) をもとに作図"
+  source="[川喜田二郎『発想法』中公新書 (1967)](https://ndlsearch.ndl.go.jp/books/R100000002-I000001091965) を基に作図"
 >
   <ol class="grid gap-4 sm:grid-cols-5">
     {steps.map((s, i) => (

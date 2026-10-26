@@ -20,12 +20,12 @@ const controls = [
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="試作の前に、計算で比べる ― 棚板のたわみ"
-  caption={`両端を支えた板に本の重さが均等にかかる、という単純なモデルで計算している（奥行き${depthMm}mm）。材料の硬さはおおよその目安。木材は長い時間荷重がかかると少しずつたわみが増える（クリープ）ため、実際の設計では余裕を持たせる。`}
+  title="試作の前に、計算で比べる: 棚板のたわみ"
+  caption={`両端を支えた板に本の重さが均等にかかる、という単純なモデルで計算している(奥行き${depthMm}mm)。材料の硬さはおおよその目安。木材は長い時間荷重がかかると少しずつたわみが増える(クリープ)ため、実際の設計では余裕を持たせる。`}
 >
   <div data-beam class="grid gap-6 md:grid-cols-[1fr_16rem]">
     <div>
-      <svg viewBox="0 0 600 170" class="w-full" role="img" aria-label="たわんだ棚板の図（たわみは6倍に誇張）">
+      <svg viewBox="0 0 600 170" class="w-full" role="img" aria-label="たわんだ棚板の図(たわみは6倍に誇張)">
         <g stroke="var(--color-accent-strong)" stroke-width="1.5" fill="none" data-beam-load>
           {Array.from({ length: 12 }, (_, i) => (
             <path d={`M${80 + i * 40} 18 V52 m-4 -6 l4 6 l4 -6`} />
@@ -53,7 +53,7 @@ const controls = [
         </output>
         <span class="font-mono text-lg">mm</span>
         <span class="ml-2 text-sm text-muted" data-beam-ratio>
-          （最初の設定の 1.0 倍）
+          (最初の設定の 1.0 倍)
         </span>
       </p>
     </div>
@@ -82,7 +82,7 @@ const controls = [
         <select name="e" class="mt-1 w-full rounded border border-grid bg-paper px-2 py-1.5">
           {materials.map((m) => (
             <option value={m.e}>
-              {m.name}（E ≒ {m.e / 1e9} GPa）
+              {m.name}(E ≒ {m.e / 1e9} GPa)
             </option>
           ))}
         </select>

@@ -1,17 +1,17 @@
 ---
 // 工程のページの上に出す「今どの工程か」の帯。5 つの工程を並べ、今の工程を目立たせる。
 // どの工程のページにもすぐ移れるように、全部の工程をリンクにしている。
-// 工程の一覧は src/content/design/ の layer: step のページからつくる（src/lib/design.ts）。
+// 工程の一覧は src/content/design/ の layer: step のページからつくる(src/lib/design.ts)。
 import { getProcessSteps } from "../lib/design";
 
 interface Props {
-  // 今の工程の番号（1 から）。事例のページなどで、どれも選ばないときは省略
+  // 今の工程の番号(1 から)。事例のページなどで、どれも選ばないときは省略
   current?: number;
 }
 
 const { current } = Astro.props;
 const steps = await getProcessSteps();
-// 前と次の工程。最初の工程の前は全体のページ、最後の工程の次は「設計を知る」の一覧（例のページへ進める）
+// 前と次の工程。最初の工程の前は全体のページ、最後の工程の次は「設計を知る」の一覧(例のページへ進める)
 const prev = current
   ? (steps.find((s) => s.n === current - 1) ?? { title: "設計のプロセスの全体", href: "/design/process/" })
   : undefined;
@@ -39,7 +39,7 @@ const next = current
             </span>
             <span
               class:list={[
-                // スマホ幅では番号だけ見せる（名前は読み上げ用に残す）
+                // スマホ幅では番号だけ見せる(名前は読み上げ用に残す)
                 "sr-only mt-0.5 text-sm leading-snug font-bold sm:not-sr-only sm:block [word-break:auto-phrase]",
                 !here && "group-hover:text-link",
               ]}

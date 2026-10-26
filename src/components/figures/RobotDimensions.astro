@@ -1,5 +1,5 @@
 ---
-// 「飲み物を運ぶロボット」（架空の例）の仕様書の数字を、横から見た図と正面から見た図に描く。
+// 「飲み物を運ぶロボット」(架空の例)の仕様書の数字を、横から見た図と正面から見た図に描く。
 // 数字は src/content/design/case-delivery-robot.yaml の仕様書の表と同じ。1cm を px ピクセルで描く。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -14,13 +14,13 @@ const tray = 70;
 const trayBefore = 75;
 const width = 50;
 const stop = 50;
-// 人・車いすの目印の高さ（cm）。人の形は描かず、枠だけで示す
+// 人・車いすの目印の高さ(cm)。人の形は描かず、枠だけで示す
 const personH = 110;
 const ink = "var(--color-ink)";
 const muted = "var(--color-muted)";
 const link = "var(--color-link)";
 const accent = "var(--color-accent-strong)";
-// 横から見た図のロボットの位置（前後の長さは 45cm として描く）
+// 横から見た図のロボットの位置(前後の長さは 45cm として描く)
 const body = { x: 90, w: 45 * px };
 const front = body.x + body.w;
 const person = front + stop * px;
@@ -41,7 +41,7 @@ const half = (width * px) / 2;
     viewBox="0 0 680 330"
     class="w-full"
     role="img"
-    aria-label="ロボットの寸法の図。トレーの高さ70cm（試作前は75cm）、幅50cm以下、人の50cm手前で止まる、速さは秒速0.8m以下、上面に非常停止ボタン。"
+    aria-label="ロボットの寸法の図。トレーの高さ70cm(試作前は75cm)、幅50cm以下、人の50cm手前で止まる、速さは秒速0.8m以下、上面に非常停止ボタン。"
   >
     <text x="20" y="22" font-size="13" font-weight="700" fill={ink}>
       横から見た図
@@ -63,13 +63,13 @@ const half = (width * px) / 2;
     <circle cx={body.x + 18} cy={floor - 9} r="9" fill={ink} />
     <circle cx={front - 18} cy={floor - 9} r="9" fill={ink} />
 
-    <!-- 非常停止ボタン（上面） -->
+    <!-- 非常停止ボタン(上面) -->
     <rect x={front - 34} y={y(tray) - 9} width="20" height="9" rx="3" fill={accent} />
     <text x={front + 12} y={y(tray) + 22} font-size="12" fill={accent}>
       ← 非常停止
     </text>
 
-    <!-- トレーの高さ（今の 70cm と、試作前の 75cm） -->
+    <!-- トレーの高さ(今の 70cm と、試作前の 75cm) -->
     <line x1="56" x2="56" y1={floor} y2={y(tray)} stroke={link} stroke-width="1.5" />
     <line x1="50" x2={body.x - 8} y1={y(tray)} y2={y(tray)} stroke={link} />
     <text x="50" y={y(tray / 2)} text-anchor="end" font-size="14" font-weight="700" fill={link}>
