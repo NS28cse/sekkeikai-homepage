@@ -1,0 +1,6 @@
+dist
+node_modules
+src/styles/tokens.css
+package-lock.json
+# 編集画面（CMS）が書き出すファイルは CMS の書式に任せる
+src/content
