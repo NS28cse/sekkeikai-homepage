@@ -2,7 +2,8 @@
 // 全ページ共通の枠(<head>、ヘッダー、フッター)
 import "../styles/global.css";
 import SocialLinks from "../components/SocialLinks.astro";
-import { getSiteLinks } from "../lib/site";
+import JoinButton from "../components/JoinButton.astro";
+import { getJoinFormUrl, getSiteLinks } from "../lib/site";
 
 interface Props {
   title: string;
@@ -14,13 +15,13 @@ interface Props {
 
 const { title, description, noindex = false, progress = false } = Astro.props;
 const fullTitle = title === "設計会" ? "設計会 | 岡山県立大学 公認サークル" : `${title} | 設計会`;
-// mobile: false の項目は、スマホ幅ではヘッダーに出さない(フッターには全部出る)
+// mobile: false の項目は、スマホ幅ではヘッダーに出さない(フッターには全部出る)。
+// 「入部」はページへのリンクではなく、入部フォームを開くボタン(JoinButton)なので、この一覧とは別に置く
 const nav = [
-  { href: "/#summary", label: "設計会とは", mobile: false },
   { href: "/design/", label: "設計を知る", mobile: true },
   { href: "/news/", label: "お知らせ", mobile: false },
-  { href: "/#join", label: "入部", mobile: true },
 ];
+const joinFormUrl = await getJoinFormUrl();
 // Discord・TimeTree・メール(src/content/site/links.yaml)
 const contacts = await getSiteLinks();
 const hasContacts = contacts.some((c) => c.href);
@@ -74,6 +75,7 @@ const hasContacts = contacts.some((c) => c.href);
               ))}
             </ul>
           </nav>
+          <JoinButton size="sm" />
           {hasContacts && <span class="hidden h-5 w-px bg-grid sm:block" aria-hidden="true" />}
           <SocialLinks />
         </div>
@@ -119,6 +121,15 @@ const hasContacts = contacts.some((c) => c.href);
                 </a>
               </li>
             ))}
+            <li>
+              {joinFormUrl ? (
+                <a href={joinFormUrl} class="hover:text-ink" rel="noopener" target="_blank">
+                  入部<span aria-hidden="true"> ↗</span>
+                </a>
+              ) : (
+                <span class="text-muted/70">入部(準備中)</span>
+              )}
+            </li>
           </ul>
         </nav>
       </div>

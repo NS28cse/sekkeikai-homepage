@@ -1,18 +1,16 @@
 ---
 // トップの大見出し。方眼の背景に、主張を一つだけ大きく置く。
+// ボタンは「入部」(入部フォームが開く)だけ。設計会の考え方は、スクロールすればすぐ下にあるのでボタンは置かない
 import { getEntry } from "astro:content";
+import JoinButton from "../JoinButton.astro";
 
 interface Props {
   eyebrow?: string;
   title: string;
   lead: string;
-  ctaLabel?: string;
-  ctaHref?: string;
-  cta2Label?: string;
-  cta2Href?: string;
 }
 
-const { eyebrow, title, lead, ctaLabel, ctaHref, cta2Label, cta2Href } = Astro.props;
+const { eyebrow, title, lead } = Astro.props;
 const site = await getEntry("site", "links");
 const discord = site?.data.discord ?? "";
 // 「、」の後ろで改行して、見出しを2行に組む
@@ -39,24 +37,7 @@ const lines = title.split(/(?<=、)/);
       {lead}
     </p>
     <div class="mt-12 flex flex-wrap items-center gap-4" data-reveal data-reveal-delay="0.3">
-      {ctaLabel && ctaHref && (
-        <a
-          href={ctaHref}
-          class="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 font-bold text-paper transition hover:bg-accent-strong"
-        >
-          {ctaLabel}
-          <span aria-hidden="true">↓</span>
-        </a>
-      )}
-      {cta2Label && cta2Href && (
-        <a
-          href={cta2Href}
-          class="inline-flex items-center gap-2 rounded-full border-2 border-ink px-7 py-3 font-bold transition hover:bg-ink hover:text-paper"
-        >
-          {cta2Label}
-          <span aria-hidden="true">→</span>
-        </a>
-      )}
+      <JoinButton size="md" />
       {discord && (
         <a
           href={discord}

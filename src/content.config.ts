@@ -202,11 +202,7 @@ const section = z.discriminatedUnion("type", [
     eyebrow: z.string().max(60).optional(),
     title: z.string().max(30),
     lead: z.string().max(160),
-    ctaLabel: z.string().max(20).optional(),
-    ctaHref: z.string().optional(),
-    // 二つ目のボタン
-    cta2Label: z.string().max(20).optional(),
-    cta2Href: z.string().optional(),
+    // ボタンは「入部」だけで、文言と行き先は決まっている(src/components/JoinButton.astro)ので、ここには書かない
   }),
   // 全体の見取り図。後ろに続く章の見出しと要点を並べる(中身は自動)
   z.object({ type: z.literal("summary"), title: z.string().max(30), lead: z.string().max(120).optional() }),
@@ -231,7 +227,7 @@ const section = z.discriminatedUnion("type", [
       .array(z.object({ title: z.string().max(10), body: z.string().max(40) }))
       .max(4)
       .default([]),
-    // 入部フォーム(Microsoft Forms)の URL。空の間は「準備中」と出る。
+    // 入部フォーム(Microsoft Forms)の URL。ヘッダー・トップの上部・入部の章の「入部」ボタンは、すべてここを開く。空の間は押せない「入部」になる。
     // 共有リンクは forms.office.com の他、新しい forms.cloud.microsoft で出ることもある
     formUrl: z
       .union([
@@ -243,7 +239,6 @@ const section = z.discriminatedUnion("type", [
           }),
       ])
       .optional(),
-    buttonLabel: z.string().max(20),
   }),
   z.object({
     type: z.literal("info"),

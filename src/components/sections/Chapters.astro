@@ -5,6 +5,7 @@
 import type { Block } from "../../content.config";
 import { numberChapters } from "../../lib/blocks";
 import Blocks from "../Blocks.astro";
+import JoinButton from "../JoinButton.astro";
 
 interface Chapter {
   id: string;
@@ -35,9 +36,10 @@ const numbered = numberChapters(Astro.props.chapters);
           </li>
         ))}
       </ol>
-      <a href="#join" class="mt-8 block text-xs font-bold text-link underline underline-offset-4">
-        入部について →
-      </a>
+      <!-- 「入部」はほかの場所と同じボタンにそろえる(入部フォームが新しいタブで開く) -->
+      <div class="mt-8">
+        <JoinButton size="sm" />
+      </div>
     </div>
   </nav>
 
