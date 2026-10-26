@@ -24,7 +24,6 @@ const nav = [
 const joinFormUrl = await getJoinFormUrl();
 // Discord・TimeTree・メール(src/content/site/links.yaml)
 const contacts = await getSiteLinks();
-const hasContacts = contacts.some((c) => c.href);
 ---
 
 <!doctype html>
@@ -57,8 +56,9 @@ const hasContacts = contacts.some((c) => c.href);
     </a>
     <header class="sticky top-0 z-40 border-b border-grid bg-paper/85 backdrop-blur">
       {progress && <div class="absolute -bottom-px left-0 h-0.5 w-0 bg-accent" data-progress aria-hidden="true" />}
-      <div class="container-page flex h-14 items-center justify-between gap-4">
-        <a href="/" class="flex items-center gap-2 font-display text-lg font-bold tracking-widest">
+      <!-- 左にロゴ、中央にメニューと「入部はこちら」、右に Discord と TimeTree。左右の列を同じ幅（1fr）にして、中央の列をいつも真ん中に置く -->
+      <div class="container-page grid h-14 grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <a href="/" class="flex items-center gap-2 justify-self-start font-display text-lg font-bold tracking-widest">
           <!-- 設計会の印。すぐ横に「設計会」と書いてあるので、読み上げでは飛ばす(alt="") -->
           <img src="/favicon.svg" width="28" height="28" alt="" class="h-7 w-7" />
           設計会
@@ -76,8 +76,9 @@ const hasContacts = contacts.some((c) => c.href);
             </ul>
           </nav>
           <JoinButton size="sm" arrow={false} />
-          {hasContacts && <span class="hidden h-5 w-px bg-grid sm:block" aria-hidden="true" />}
-          <SocialLinks />
+        </div>
+        <div class="justify-self-end">
+          <SocialLinks only={["Discord", "TimeTree"]} />
         </div>
       </div>
     </header>
