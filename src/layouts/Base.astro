@@ -16,7 +16,7 @@ interface Props {
 const { title, description, noindex = false, progress = false } = Astro.props;
 const fullTitle = title === "設計会" ? "設計会 | 岡山県立大学 公認サークル" : `${title} | 設計会`;
 // mobile: false の項目は、スマホ幅ではヘッダーに出さない(フッターには全部出る)。
-// 「入部」はページへのリンクではなく、入部フォームを開くボタン(JoinButton)なので、この一覧とは別に置く
+// 「入部はこちら」はページへのリンクではなく、入部フォームを開くボタン(JoinButton)なので、この一覧とは別に置く
 const nav = [
   { href: "/design/", label: "設計を知る", mobile: true },
   { href: "/news/", label: "お知らせ", mobile: false },
@@ -75,7 +75,7 @@ const hasContacts = contacts.some((c) => c.href);
               ))}
             </ul>
           </nav>
-          <JoinButton size="sm" />
+          <JoinButton size="sm" arrow={false} />
           {hasContacts && <span class="hidden h-5 w-px bg-grid sm:block" aria-hidden="true" />}
           <SocialLinks />
         </div>
@@ -124,10 +124,10 @@ const hasContacts = contacts.some((c) => c.href);
             <li>
               {joinFormUrl ? (
                 <a href={joinFormUrl} class="hover:text-ink" rel="noopener" target="_blank">
-                  入部<span aria-hidden="true"> ↗</span>
+                  入部はこちら<span aria-hidden="true"> →</span>
                 </a>
               ) : (
-                <span class="text-muted/70">入部(準備中)</span>
+                <span class="text-muted/70">入部はこちら(準備中)</span>
               )}
             </li>
           </ul>

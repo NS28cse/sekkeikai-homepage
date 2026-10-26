@@ -26,7 +26,7 @@ const icons = {
 };
 
 // 入部フォーム(Microsoft Forms)の URL。書く場所は src/content/pages/home.yaml の join の formUrl の一か所だけ。
-// ヘッダー・トップの上部・入部の章の「入部」ボタンは、すべてここから行き先を受け取る。空の間は ""
+// ヘッダー・トップの上部・目次・入部の章の「入部はこちら」ボタンと、フッターのリンクは、すべてここから行き先を受け取る。空の間は ""
 export async function getJoinFormUrl(): Promise<string> {
   const home = await getEntry("pages", "home");
   const join = home?.data.sections.find((s) => s.type === "join");
