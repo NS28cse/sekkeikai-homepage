@@ -1,5 +1,5 @@
 ---
-// ノーマンの「実行の淵」と「評価の淵」。人と人工物のあいだにある2つの溝に、設計で橋を架ける。
+// ノーマンの「実行の淵」と「評価の淵」。人と人工物の間にある2つの溝に、設計で橋を架ける。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -12,11 +12,11 @@ interface Props {
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="2つの淵に、橋を架ける"
-  caption="人は「何をすればよいか」がわからないとき（実行の淵）と、「どうなったか」がわからないとき（評価の淵）に迷う。操作の手がかりと、すぐに返ってくる結果の表示が、それぞれの淵に架ける橋になる。"
-  source="[E. L. Hutchins, J. D. Hollan, D. A. Norman (1985)](https://doi.org/10.1207/s15327051hci0104_2)、[D. A. Norman, The Design of Everyday Things (2013)](https://www.basicbooks.com/titles/don-norman/the-design-of-everyday-things/9780465050659/) をもとに作図"
+  caption="人は「何をすればよいか」が分からないとき(実行の淵)と、「どうなったか」が分からないとき(評価の淵)に迷う。操作の手がかりと、すぐに返ってくる結果の表示が、それぞれの淵に架ける橋になる。"
+  source="[E. L. Hutchins, J. D. Hollan, D. A. Norman (1985)](https://doi.org/10.1207/s15327051hci0104_2)、[D. A. Norman, The Design of Everyday Things (2013)](https://www.basicbooks.com/titles/don-norman/the-design-of-everyday-things/9780465050659/) を基に作図"
   scroll
 >
-  <svg viewBox="0 0 680 280" class="w-full" role="img" aria-label="人と人工物のあいだの、実行の淵と評価の淵の図">
+  <svg viewBox="0 0 680 280" class="w-full" role="img" aria-label="人と人工物の間の、実行の淵と評価の淵の図">
     <defs>
       <marker id="gulf-arrow-do" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
         <path d="M0 0 L10 5 L0 10 z" fill="var(--color-accent-strong)" />
@@ -78,10 +78,10 @@ interface Props {
       実行の淵
     </text>
     <text x="340" y="38" text-anchor="middle" font-size="12.5" fill="var(--color-muted)">
-      何をすればいい？
+      何をすればいい?
     </text>
     <text x="340" y="112" text-anchor="middle" font-size="12.5" fill="var(--color-ink)">
-      橋：手がかり・対応づけ・制約
+      橋: 手がかり・対応付け・制約
     </text>
 
     <path
@@ -96,10 +96,10 @@ interface Props {
       評価の淵
     </text>
     <text x="340" y="254" text-anchor="middle" font-size="12.5" fill="var(--color-muted)">
-      どうなった？
+      どうなった?
     </text>
     <text x="340" y="176" text-anchor="middle" font-size="12.5" fill="var(--color-ink)">
-      橋：フィードバック・状態の表示
+      橋: フィードバック・状態の表示
     </text>
   </svg>
 </FigureFrame>

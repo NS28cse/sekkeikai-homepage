@@ -1,6 +1,6 @@
-// 「設計を知る」のデータ（src/content/design/）から、工程・視点・事例を取り出す。
-// 工程は layer: step のページ（1 工程 1 ページ）。order が工程の番号になる。
-// ページ（YAML）を足すだけで、一覧・地図・リンクに自動で加わるようにしている。
+// 「設計を知る」のデータ(src/content/design/)から、工程・視点・事例を取り出す。
+// 工程は layer: step のページ(1 工程 1 ページ)。order が工程の番号になる。
+// ページ(YAML)を足すだけで、一覧・地図・リンクに自動で加わるようにしている。
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -9,12 +9,12 @@ type Layer = CollectionEntry<"design">["data"]["layer"];
 export interface ProcessStep {
   // 1 から始まる工程の番号
   n: number;
-  // ページの名前（URL の一部）
+  // ページの名前(URL の一部)
   id: string;
   href: string;
   title: string;
   sub: string;
-  // その工程で考える問い（例: 本当に解くべき問題は何か）
+  // その工程で考える問い(例: 本当に解くべき問題は何か)
   question: string;
   mode: "diverge" | "converge";
   tools: string;
@@ -38,14 +38,14 @@ export async function getProcessSteps(): Promise<ProcessStep[]> {
   }));
 }
 
-// 視点（lens）のページ。perStep を書いているのに工程の数と合わないときは、ビルドを止めて知らせる
+// 視点(lens)のページ。perStep を書いているのに工程の数と合わないときは、ビルドを止めて知らせる
 export async function getLenses(): Promise<CollectionEntry<"design">[]> {
   const steps = await getProcessSteps();
   const lenses = await getDesignPages("lens");
   for (const l of lenses) {
     if (l.data.perStep && l.data.perStep.length !== steps.length) {
       throw new Error(
-        `src/content/design/${l.id}.yaml の perStep は、工程の数（${steps.length}個）と同じ数だけ書いてください`,
+        `src/content/design/${l.id}.yaml の perStep は、工程の数(${steps.length}個)と同じ数だけ書いてください`,
       );
     }
   }

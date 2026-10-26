@@ -1,7 +1,7 @@
 ---
 // 4人で10分、案を出すときの時間の使い方を、一人一本の帯で比べる図。
-// 上：みんなで話しながら出す（話せるのは一度に一人。ほかの人は順番を待つあいだに案を忘れたり、控えたりする）。
-// 下：まず一人ずつ黙って書き出す（全員が同時に案を出せる）。発言の順番は説明のための例。
+// 上: みんなで話しながら出す(話せるのは一度に一人。他の人は順番を待つ間に、案を忘れたり、考えが止まったりする)。
+// 下: まず各自で黙って書き出す(全員が同時に案を出せる)。発言の順番は説明のための例。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -13,7 +13,7 @@ const people = ["Aさん", "Bさん", "Cさん", "Dさん"];
 const left = 90;
 const perMin = 50;
 const x = (m: number) => left + m * perMin;
-// 話しながら出すときに、誰がいつ話しているか（分）
+// 話しながら出すときに、誰がいつ話しているか(分)
 const turns = [
   [0, 3],
   [3, 5],
@@ -28,16 +28,16 @@ const link = "var(--color-link)";
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="話し合うより、まず一人ずつ書く"
-  caption="上：話し合いながら案を出すと、話せるのは一度に一人。ほかの人は待つあいだに案を忘れたり、評価を気にして控えたりする。下：まず一人ずつ黙って書き出すと、全員が同時に案を出せる。"
-  source="[M. Diehl & W. Stroebe (1987)](https://doi.org/10.1037/0022-3514.53.3.497) の説明をもとに作図"
+  title="話し合うより、まず各自で書く"
+  caption="上: 話し合いながら案を出すと、話せるのは一度に一人。他の人は順番を待つ間に、案を忘れたり、考えが止まったりする。下: まず各自で黙って書き出すと、全員が同時に案を出せる。"
+  source="[M. Diehl & W. Stroebe (1987)](https://doi.org/10.1037/0022-3514.53.3.497) の説明を基に作図"
   scroll
 >
   <svg
     viewBox="0 0 620 330"
     class="w-full"
     role="img"
-    aria-label="4人で10分案を出すときの比較。話し合いで話せるのは、一度に一人。一人ずつ書くと全員が同時に案を出せる。"
+    aria-label="4人で10分案を出すときの比較。話し合いで話せるのは、一度に一人で、他の人は順番を待つ間に、案を忘れたり、考えが止まったりする。各自で書くと全員が同時に案を出せる。"
   >
     <defs>
       <pattern id="lanes-wait" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -51,7 +51,7 @@ const link = "var(--color-link)";
     ))}
     {[
       { y0: 34, title: "話し合いながら出す" },
-      { y0: 170, title: "まず一人ずつ書く" },
+      { y0: 170, title: "まず各自で書く" },
     ].map((block, b) => (
       <g>
         <text x="12" y={block.y0 + 10} font-size="13" font-weight="700" fill={ink}>

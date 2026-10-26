@@ -1,12 +1,12 @@
 ---
-// 長文のブロックを上から順に表示する（ブロックの種類と書き方は src/content.config.ts）。
-// 読む人が拾い読みできるように、ブロックの種類ごとに見た目をはっきり分けている（読者に「読み方」を説明する文は書かない）：
-//   要点（point）  … オレンジの線。ここだけ拾っても話の筋が通る
-//   問いかけ       … 「？」の印。答えは隠さずにすぐ下に出す
-//   例             … 灰色の箱。実際にあった例（kind: real）は実線の枠と「実際にあった例」の札、
-//                    説明のための場面（kind: scene）は点線の枠と「たとえば」の札
-//   短い補足・出典 … 段落の note。本文の右（スマホでは段落の下）
-//   長い補足・事例 … 折りたたみ（aside）
+// 長文のブロックを上から順に表示する(ブロックの種類と書き方は src/content.config.ts)。
+// 読む人が拾い読みできるように、ブロックの種類ごとに見た目をはっきり分けている(読者に「読み方」を説明する文は書かない):
+//   要点(point)  … オレンジの線。ここだけ拾っても話の筋が通る
+//   問いかけ       … 「?」の印。答えは隠さずにすぐ下に出す
+//   例             … 灰色の箱。実際にあった例(kind: real)は実線の枠と「実際にあった例」の札、
+//                    説明のための場面(kind: scene)は点線の枠と「例えば」の札
+//   短い補足・出典 … 段落の note。本文の右(スマホでは段落の下)
+//   長い補足・事例 … 折りたたみ(aside)
 // 注と図の番号は src/lib/blocks.ts の numberChapters で付けたものを使う。
 import type { NumberedBlock } from "../lib/blocks";
 import InlineText from "./InlineText.astro";
@@ -18,9 +18,9 @@ import Courses from "./Courses.astro";
 
 interface Props {
   blocks: NumberedBlock[];
-  // 視点のページで「工程ごとの使い方」（per-step）を出すための情報
+  // 視点のページで「工程ごとの使い方」(per-step)を出すための情報
   lens?: { short: string; perStep?: { cell: string; body: string }[] };
-  // true にすると、図を番号・題・説明なしで出す（トップページ用。説明は前後の本文で書く。出典は出す）
+  // true にすると、図を番号・題・説明なしで出す(トップページ用。説明は前後の本文で書く。出典は出す)
   compactFigures?: boolean;
 }
 
@@ -104,9 +104,9 @@ const { blocks, lens, compactFigures = false } = Astro.props;
               class:list={["h-2.5 w-2.5 rounded-full", block.kind === "real" ? "bg-positive" : "bg-muted/60"]}
               aria-hidden="true"
             />
-            {/* 札は kind から決まる。題（title）は札のあとに続ける */}
+            {/* 札は kind から決まる。題(title)は札の後に続ける */}
             <span class:list={["annotation", block.kind === "real" ? "text-positive" : "text-muted"]}>
-              {block.kind === "real" ? "実際にあった例" : "たとえば"}
+              {block.kind === "real" ? "実際にあった例" : "例えば"}
             </span>
             {block.title && <span>{block.title}</span>}
           </p>
@@ -115,7 +115,7 @@ const { blocks, lens, compactFigures = false } = Astro.props;
           </p>
           {block.source && (
             <p class="mt-2 text-xs text-muted">
-              出典：
+              出典:
               <InlineText text={block.source} />
             </p>
           )}
@@ -127,7 +127,7 @@ const { blocks, lens, compactFigures = false } = Astro.props;
         <details class="group my-8 max-w-[38em] rounded-card border border-dashed border-muted/40 font-sans">
           <summary class="flex cursor-pointer list-none items-center gap-3 px-5 py-3 text-sm">
             <span class="font-mono text-base text-muted transition group-open:rotate-45" aria-hidden="true">
-              ＋
+              +
             </span>
             <span class="font-bold text-ink/80">{block.title}</span>
           </summary>
@@ -192,11 +192,11 @@ const { blocks, lens, compactFigures = false } = Astro.props;
           <figcaption class="mt-3 text-sm text-ink/80">
             {block.caption}
             <span class="mt-1 block text-xs text-muted">
-              出典：
+              出典:
               <a href={block.sourceUrl} class="underline" rel="noopener">
                 {block.credit}
               </a>
-              （
+              (
               {block.licenseUrl ? (
                 <a href={block.licenseUrl} class="underline" rel="noopener license">
                   {block.license}
@@ -204,7 +204,7 @@ const { blocks, lens, compactFigures = false } = Astro.props;
               ) : (
                 block.license
               )}
-              ）
+              )
             </span>
           </figcaption>
         </figure>

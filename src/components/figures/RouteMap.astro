@@ -1,9 +1,9 @@
 ---
 // 架空の町の鉄道を、2つのモデルで描き比べる図。
-//   左：本当の位置と距離で描いた地図（曲がった線路、駅の間隔もばらばら、川や縮尺も入る）
-//   右：駅の順番と乗り換えだけを残した路線図（線はまっすぐ、駅は等間隔）
-// 同じ町でも、目的（乗り換えを調べる）が決まると、残すものと捨てるものが決まることを見せる。
-// 駅の名前と線の形はすべて架空。実在の地図や路線図は写していない。
+//   左: 本当の位置と距離で描いた地図(曲がった線路、駅の間隔もばらばら、川や縮尺も入る)
+//   右: 駅の順番と乗り換えだけを残した路線図(線はまっすぐ、駅は等間隔)
+// 同じ町でも、目的(乗り換えを調べる)が決まると、残すものと捨てるものが決まることを見せる。
+// 駅の名前と線の形は全て架空。実在の地図や路線図は写していない。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -16,12 +16,12 @@ const muted = "var(--color-muted)";
 const lineA = "var(--color-link)";
 const lineB = "var(--color-accent-strong)";
 
-// 左の地図：駅の本当の位置（架空）。label の dx, dy は駅名をずらす量
+// 左の地図: 駅の本当の位置(架空)。label の dx, dy は駅名をずらす量
 const geo = {
   a: [
     { name: "北町", x: 70, y: 66, dx: 10, dy: 4 },
     { name: "大学前", x: 96, y: 112, dx: 10, dy: 4 },
-    // 中央駅は乗り換えの駅なので、あとで別の印で描く
+    // 中央駅は乗り換えの駅なので、後で別の印で描く
     { name: "中央", x: 150, y: 196, dx: 0, dy: 0 },
     { name: "港", x: 262, y: 270, dx: 10, dy: 4 },
   ],
@@ -32,12 +32,12 @@ const geo = {
     { name: "東山", x: 270, y: 120, dx: -40, dy: 0 },
   ],
 };
-// 曲がった線路（2次ベジェ曲線で、駅と駅のあいだを結ぶ）
+// 曲がった線路(2次ベジェ曲線で、駅と駅の間を結ぶ)
 // A線は中央からいったん真下へ下りてから港へ向かい、市役所の駅名と重ならないようにしている
 const curveA = "M 70 66 Q 74 92 96 112 Q 110 170 150 196 Q 150 260 262 270";
 const curveB = "M 34 222 Q 90 190 150 196 Q 168 210 186 206 Q 250 196 270 120";
 
-// 右の路線図：駅の順番だけを残し、等間隔に並べる
+// 右の路線図: 駅の順番だけを残し、等間隔に並べる
 const ox = 340;
 const diaA = [
   { name: "北町", x: ox + 110, y: 66 },
@@ -65,7 +65,7 @@ const pts = (list: { x: number; y: number }[]) => list.map((p) => `${p.x},${p.y}
     viewBox="0 0 640 320"
     class="w-full"
     role="img"
-    aria-label="架空の町の鉄道を2通りに描いた図。左は本当の位置で描いた地図で、線路は曲がり、駅の間隔もばらばら。右は路線図で、線はまっすぐ、駅は等間隔に並び、中央駅で2つの線が乗り換えられることだけがはっきりわかる。"
+    aria-label="架空の町の鉄道を2通りに描いた図。左は本当の位置で描いた地図で、線路は曲がり、駅の間隔もばらばら。右は路線図で、線はまっすぐ、駅は等間隔に並び、中央駅で2つの線が乗り換えられることだけがはっきり分かる。"
   >
     <text x="150" y="24" text-anchor="middle" font-size="15" font-weight="700" fill={ink}>
       本当の位置で描いた地図
@@ -74,9 +74,9 @@ const pts = (list: { x: number; y: number }[]) => list.map((p) => `${p.x},${p.y}
       順番だけを残した路線図
     </text>
 
-    <!-- 左：地図 -->
+    <!-- 左: 地図 -->
     <rect x="14" y="40" width="292" height="252" fill="var(--color-paper-muted)" stroke={ink} stroke-opacity="0.3" />
-    <!-- 川（地図にだけ描く） -->
+    <!-- 川(地図にだけ描く) -->
     <path
       d="M 14 150 Q 80 140 120 160 Q 200 200 306 170"
       fill="none"
@@ -108,7 +108,7 @@ const pts = (list: { x: number; y: number }[]) => list.map((p) => `${p.x},${p.y}
       1km
     </text>
 
-    <!-- 右：路線図 -->
+    <!-- 右: 路線図 -->
     <rect x={ox - 6} y="40" width="300" height="252" fill="var(--color-paper)" stroke={ink} stroke-opacity="0.3" />
     <polyline
       points={pts(diaA)}
@@ -142,7 +142,7 @@ const pts = (list: { x: number; y: number }[]) => list.map((p) => `${p.x},${p.y}
     <!-- 乗り換えの駅は、2つの線が出会う大きな印にする -->
     <rect x={ox + 98} y="182" width="24" height="24" rx="6" fill="var(--color-paper)" stroke={ink} stroke-width="3" />
     <text x={ox + 128} y="180" font-size="13" font-weight="700" fill={ink}>
-      中央（乗り換え）
+      中央(乗り換え)
     </text>
     <!-- 左の地図の乗り換えの駅 -->
     <circle cx="150" cy="196" r="7" fill="var(--color-paper)" stroke={ink} stroke-width="3" />
@@ -164,7 +164,7 @@ const pts = (list: { x: number; y: number }[]) => list.map((p) => `${p.x},${p.y}
       距離も向きも正しいが、乗り換えは見つけにくい
     </text>
     <text x={ox + 150} y="312" text-anchor="middle" font-size="12" fill={muted}>
-      距離は捨てたが、順番と乗り換えがすぐわかる
+      距離は捨てたが、順番と乗り換えがすぐ分かる
     </text>
   </svg>
 </FigureFrame>

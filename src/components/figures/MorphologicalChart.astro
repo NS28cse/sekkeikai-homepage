@@ -1,7 +1,7 @@
 ---
-// 形態分析表（モルフォロジカル・チャート）の図。行は機能（要件の工程で IDEF0 に描いた3つの機能）、
+// 形態分析表(モルフォロジカル・チャート)の図。行は機能(要件の工程で IDEF0 に描いた3つの機能)、
 // 横に並ぶマスは、その機能の解き方。各行から一つずつ選んでつないだ線が、一つの案になる。
-// 例は部室の予約（架空の例）。組み合わせの数は、マスの数からこのファイルの中で計算している。
+// 例は部室の予約(架空の例)。組み合わせの数は、マスの数からこのファイルの中で計算している。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -14,7 +14,7 @@ const muted = "var(--color-muted)";
 const accent = "var(--color-accent-strong)";
 const link = "var(--color-link)";
 
-// 行（機能）と、その解き方。マスの文字は2行に分けて書く
+// 行(機能)と、その解き方。マスの文字は2行に分けて書く
 const rows = [
   {
     name: ["空き状況を", "調べる"],
@@ -46,9 +46,9 @@ const rows = [
   },
 ];
 
-// 線でつなぐ案（各行で選んだマスの番号）。chosen は次の工程で選ばれた案
+// 線でつなぐ案(各行で選んだマスの番号)。chosen は次の工程で選ばれた案
 const paths = [
-  { label: "無料の共有カレンダーの案（選ばれた案）", pick: [2, 2, 2], color: accent, dash: "", chosen: true },
+  { label: "無料の共有カレンダーの案(選ばれた案)", pick: [2, 2, 2], color: accent, dash: "", chosen: true },
   { label: "紙の予約表の案", pick: [1, 0, 0], color: link, dash: "6 4", chosen: false },
 ];
 
@@ -63,7 +63,7 @@ const cellX = (c: number) => labelW + c * (cellW + gap);
 const rowY = (r: number) => top + r * (cellH + rowGap);
 const center = (r: number, c: number) => ({ x: cellX(c) + cellW / 2, y: rowY(r) + cellH / 2 });
 
-// 組み合わせの数（各行のマスの数を掛け合わせる）
+// 組み合わせの数(各行のマスの数を掛け合わせる)
 const combos = rows.reduce((n, r) => n * r.cells.length, 1);
 const legendY = rowY(rows.length) + 6;
 const height = legendY + paths.length * 22 + 8;
@@ -74,8 +74,8 @@ const isPicked = (r: number, c: number) => paths.find((p) => p.pick[r] === c);
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="機能ごとの解き方を、表で組み合わせる"
-  caption={`行は機能、マスはその解き方。各行から一つずつ選んでつなぐと一つの案になる。この表だけで ${combos} 通りの組み合わせがあり、筋の通るものを選んで案にする。例は部室の予約（架空の例）。`}
-  source="[F. Zwicky (1967)](https://doi.org/10.1007/978-3-642-87617-2_14) の形態分析、[G. Pahl & W. Beitz ほか, Engineering Design 第3版 (2007)](https://doi.org/10.1007/978-1-84628-319-2) をもとに作図"
+  caption={`行は機能、マスはその解き方。各行から一つずつ選んでつなぐと一つの案になる。この表だけで ${combos} 通りの組み合わせがあり、筋の通るものを選んで案にする。例は部室の予約(架空の例)。`}
+  source="[F. Zwicky (1967)](https://doi.org/10.1007/978-3-642-87617-2_14) の形態分析、[G. Pahl & W. Beitz 他, Engineering Design 第3版 (2007)](https://doi.org/10.1007/978-1-84628-319-2) を基に作図"
   scroll
 >
   <svg
@@ -90,7 +90,7 @@ const isPicked = (r: number, c: number) => paths.find((p) => p.pick[r] === c);
   >
     {rows.map((r, ri) => (
       <g>
-        <!-- 行の見出し（機能） -->
+        <!-- 行の見出し(機能) -->
         {r.name.map((line, li) => (
           <text x="4" y={rowY(ri) + 21 + li * 17} font-size="13" font-weight="700" fill={ink}>
             {line}
@@ -130,7 +130,7 @@ const isPicked = (r: number, c: number) => paths.find((p) => p.pick[r] === c);
       </g>
     ))}
 
-    <!-- 案：各行で選んだマスを上から下へつなぐ線 -->
+    <!-- 案: 各行で選んだマスを上から下へつなぐ線 -->
     {paths.map((p) =>
       p.pick.slice(0, -1).map((c, r) => {
         const a = center(r, c);

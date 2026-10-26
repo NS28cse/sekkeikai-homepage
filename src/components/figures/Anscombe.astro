@@ -1,5 +1,5 @@
 ---
-// アンスコムの例（1973）。統計量がほぼ同じでも、グラフにするとまったく違う 4 組のデータ。
+// アンスコムの例(1973)。統計量がほぼ同じでも、グラフにすると全く違う 4 組のデータ。
 // 下の統計量は、このデータからビルドのときに計算している。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -45,7 +45,7 @@ const rows: { label: string; value: (s: ReturnType<typeof stats>) => string }[] 
   { label: "回帰直線", value: (s) => `y = ${s.a.toFixed(2)} + ${s.b.toFixed(3)}x` },
 ];
 
-// 小さなグラフの座標（x: 2〜20、y: 2〜14）
+// 小さなグラフの座標(x: 2~20、y: 2~14)
 const W = 220;
 const H = 170;
 const sx = (v: number) => 24 + ((v - 2) / 18) * (W - 34);
@@ -55,7 +55,7 @@ const sy = (v: number) => H - 20 - ((v - 2) / 12) * (H - 32);
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="数字は同じ、形はまったく違う"
+  title="数字は同じ、形は全く違う"
   caption="4組とも、平均・分散・相関係数・回帰直線がほぼ同じ。しかしグラフにすると、Iは素直な直線関係、IIは曲線、IIIは一つの外れ値が直線を傾け、IVは一つの点だけが相関を生んでいる。要約の数字だけで判断する前に、まず見ること。"
   source="[F. J. Anscombe, Graphs in Statistical Analysis, The American Statistician 27(1) (1973)](https://doi.org/10.1080/00031305.1973.10478966) のデータ"
 >

@@ -1,6 +1,6 @@
 ---
 // 字幕を使ったことがある人のうち、聴覚に障害のない人の割合を一本の帯で見せる図。
-// 数字は英国 Ofcom の 2006 年の報告（約750万人のうち約600万人）。
+// 数字は英国 Ofcom の 2006 年の報告(約750万人のうち約600万人)。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -18,7 +18,7 @@ const split = (hearing / total) * width;
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="一部の人のための工夫を、多くの人が使っている"
-  caption="聴覚に障害のある人のためにつくられたテレビの字幕を使ったことがある人（英国、約750万人）のうち、約600万人は聴覚に障害のない人だった。"
+  caption="聴覚に障害のある人のためにつくられたテレビの字幕を使ったことがある人(英国、約750万人)のうち、約600万人は聴覚に障害のない人だった。"
   source="英国の放送の監督機関 Ofcom の報告 [Television access services: Review of the Code and guidance (2006)](https://web.archive.org/web/20240705100615/https://www.ofcom.org.uk/siteassets/resources/documents/consultations/uncategorised/8639-accessservs/summary/access.pdf) の 1.9 節"
   scroll
 >
@@ -41,7 +41,7 @@ const split = (hearing / total) * width;
       fill-opacity="0.85"
     />
     <text x="32" y="62" font-size="14" font-weight="700" fill="var(--color-paper)">
-      聴覚に障害のない人 約600万人（8割）
+      聴覚に障害のない人 約600万人(8割)
     </text>
     <text x={20 + width} y="104" text-anchor="end" font-size="13" fill="var(--color-ink)">
       聴覚に障害のある人 約150万人

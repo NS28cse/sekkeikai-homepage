@@ -1,5 +1,5 @@
 ---
-// パレート最適：価格と重さの両方を小さくしたいときの、架空の自転車の設計案。
+// パレート最適: 価格と重さの両方を小さくしたいときの、架空の自転車の設計案。
 // どの案が「他の案に完全に負けていないか」は、ビルドのときに計算して色分けしている。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -8,7 +8,7 @@ interface Props {
   compact?: boolean;
 }
 
-// [価格（万円）, 重さ（kg）]
+// [価格(万円), 重さ(kg)]
 const designs: [number, number][] = [
   [3.0, 16.5],
   [3.5, 14.2],
@@ -34,7 +34,7 @@ const designs: [number, number][] = [
 const dominatedBy = (p: [number, number]) =>
   designs.find((q) => q !== p && q[0] <= p[0] && q[1] <= p[1] && (q[0] < p[0] || q[1] < p[1]));
 const front = designs.filter((p) => !dominatedBy(p)).sort((a, b) => a[0] - b[0]);
-// この案の右上（価格も重さも大きい側）にある案は、すべてこの案に負けている
+// この案の右上(価格も重さも大きい側)にある案は、全てこの案に負けている
 const anchor = designs.find((p) => p[0] === 8.0)!;
 const beaten = designs.filter((p) => p !== anchor && p[0] >= anchor[0] && p[1] >= anchor[1]).length;
 
@@ -51,7 +51,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="パレート最適な案の集まり"
-  caption={`架空の自転車の設計案${designs.length}個。青い点は、価格と重さの一方をよくすると、もう一方が必ず悪くなる「パレート最適」な案（${front.length}個）。灰色の点は、少なくとも一つの青い点（または他の案）に、価格でも重さでも負けている。点線で囲んだ範囲の${beaten}個の案は、どれも価格${anchor[0]}万円・${anchor[1]}kgの案に、価格でも重さでも負けている。`}
+  caption={`架空の自転車の設計案${designs.length}個。青い点は、価格と重さの一方を良くすると、もう一方が必ず悪くなる「パレート最適」な案(${front.length}個)。灰色の点は、少なくとも一つの青い点(または他の案)に、価格でも重さでも負けている。点線で囲んだ範囲の${beaten}個の案は、どれも価格${anchor[0]}万円・${anchor[1]}kgの案に、価格でも重さでも負けている。`}
   scroll
 >
   <svg
@@ -79,7 +79,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
       ))}
     </g>
     <text x={(L + R) / 2} y="342" text-anchor="middle" font-size="13" fill="var(--color-ink)">
-      価格（万円）← 安いほどよい
+      価格(万円)← 安いほど良い
     </text>
     <text
       x="16"
@@ -89,7 +89,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
       fill="var(--color-ink)"
       transform={`rotate(-90 16 ${(T + B) / 2})`}
     >
-      重さ（kg）← 軽いほどよい
+      重さ(kg)← 軽いほど良い
     </text>
     <rect
       x={x(anchor[0])}
@@ -116,7 +116,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
       );
     })}
     <text x={x(2.4)} y={y(6.6)} font-size="13" fill="var(--color-accent-strong)">
-      ★ 理想（実現できない）
+      ★ 理想(実現できない)
     </text>
   </svg>
   <ul class="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm">
@@ -124,7 +124,7 @@ const frontPath = front.map((p, i) => `${i === 0 ? "M" : "L"}${x(p[0]).toFixed(1
       <span class="h-3 w-3 rounded-full bg-link" aria-hidden="true"></span>パレート最適な案
     </li>
     <li class="flex items-center gap-2">
-      <span class="h-3 w-3 rounded-full border-2 border-muted" aria-hidden="true"></span>ほかの案に負けている案
+      <span class="h-3 w-3 rounded-full border-2 border-muted" aria-hidden="true"></span>他の案に負けている案
     </li>
     <li class="flex items-center gap-2">
       <span class="h-3 w-5 border border-dashed border-muted bg-muted/10" aria-hidden="true"></span>価格{anchor[0]}

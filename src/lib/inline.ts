@@ -1,10 +1,10 @@
 // 文章の中に書ける、ごく簡単な書式を読み取る。
-//   [[modeling]]          … 設計を知るページ（/design/modeling/）へのリンク。表示はページの名前
+//   [[modeling]]          … 設計を知るページ(/design/modeling/)へのリンク。表示はページの名前
 //   [[modeling|モデル]]   … 表示する文字を変えたリンク
-//   [[process#loop|工程の行き来]] … ページの中の章へのリンク（# の後ろは章の id）
+//   [[process#loop|工程の行き来]] … ページの中の章へのリンク(# の後ろは章の id)
 //   **大事なこと**        … 強調
-//   [出典の名前](https://…) … ほかのサイトへのリンク（出典を示すときに使う。https:// で始まるものだけ）
-// HTML は書けない（そのまま文字として表示される）ので、編集画面から入力しても安全。
+//   [出典の名前](https://…) … 他のサイトへのリンク(出典を示すときに使う。https:// で始まるものだけ)
+// HTML は書けない(そのまま文字として表示される)ので、編集画面から入力しても安全。
 export type InlineToken =
   | { kind: "text"; value: string }
   | { kind: "strong"; value: string }
@@ -29,17 +29,17 @@ export function parseInline(source: string): InlineToken[] {
   return tokens;
 }
 
-// 文章の中に、ほかのサイトへのリンク（出典）が一つ以上あるか。出典の書き忘れを見つけるのに使う
+// 文章の中に、他のサイトへのリンク(出典)が一つ以上あるか。出典の書き忘れを見つけるのに使う
 export const hasExternalLink = (source: string) => parseInline(source).some((t) => t.kind === "link");
-// 画面に表示される文字の数（リンクの URL や ** は数えない）。注の文字数の上限に使う
-// （URL まで数えると、DOI の長いリンクだけで上限を使い切ってしまうため）
+// 画面に表示される文字の数(リンクの URL や ** は数えない)。注の文字数の上限に使う
+// (URL まで数えると、DOI の長いリンクだけで上限を使い切ってしまうため)
 export const visibleLength = (source: string) =>
   parseInline(source).reduce((sum, t) => {
     if (t.kind === "link") return sum + [...t.label].length;
     if (t.kind === "element") return sum + [...(t.label ?? t.slug)].length;
     return sum + [...t.value].length;
   }, 0);
-// 出典のリンクか、このサイトのほかのページへのリンク（[[…]]）が一つ以上あるか。注に使う
-// （出典ではなく「詳しくはこのページへ」という案内だけの注もあるため）
+// 出典のリンクか、このサイトの他のページへのリンク([[…]])が一つ以上あるか。注に使う
+// (出典ではなく「詳しくはこのページへ」という案内だけの注もあるため)
 export const hasAnyLink = (source: string) =>
   parseInline(source).some((t) => t.kind === "link" || t.kind === "element");

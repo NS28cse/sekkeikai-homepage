@@ -16,7 +16,7 @@ chapters:
         name: design-process
       - type: p
         text: 経済学者で、認知科学の開拓者でもあるハーバート・サイモンは、設計を広く捉えました。今の状態をより好ましい状態に変えようと、行動の道筋を考える人は、誰もが設計をしている、というのです。設計とは、まだないものについて「どうあるべきか」を考えることです。5つの工程は、その答えを確かめながら決めていく段取りです。
-        note: "[H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）](https://ndlsearch.ndl.go.jp/books/R100000002-I000006331276)。邦訳[『システムの科学』](https://ndlsearch.ndl.go.jp/books/R100000002-I000002864619)。"
+        note: "[H. A. Simon, The Sciences of the Artificial, MIT Press, 1969(第3版 1996)](https://ndlsearch.ndl.go.jp/books/R100000002-I000006331276)。邦訳[『システムの科学』](https://ndlsearch.ndl.go.jp/books/R100000002-I000002864619)。"
 
   - id: fields
     heading: 分野が違っても、骨格は共通
@@ -24,7 +24,7 @@ chapters:
       - type: point
         text: 機械、ソフトウェア、建築、サービスでは、進め方の呼び方も区切り方も違います。けれど「問題 → 要件 → 案 → 選ぶ → 細部」という骨格は共通です。5つの工程は、その骨格に付けた名前です。
       - type: table
-        caption: 分野ごとの呼び方（目安。区切りは分野によって重なる）
+        caption: 分野ごとの呼び方(目安。区切りは分野によって重なる)
         head:
           - 分野
           - 問題を見つける
@@ -32,56 +32,56 @@ chapters:
           - 案を広げる・比べて選ぶ
           - 形を詰める
         rows:
-          - - 機械（パールとバイツ）
+          - - 機械(パールとバイツ)
             - 課題の明確化
-            - 課題の明確化（要求リスト）
+            - 課題の明確化(要求リスト)
             - 構想設計
             - 実体設計・詳細設計
-          - - ソフトウェア（共通フレーム2013など）
+          - - ソフトウェア(共通フレーム2013など)
             - 企画
             - 要件定義
-            - 方式設計（基本設計）
+            - 方式設計(基本設計)
             - 詳細設計
-          - - 建築（国土交通省の告示）
+          - - 建築(国土交通省の告示)
             - 企画・基本計画
             - 設計条件の整理
-            - 基本設計（いくつもの方針案を検討）
+            - 基本設計(いくつもの方針案を検討)
             - 基本設計図書・実施設計
-          - - サービス・UX（ダブルダイヤモンド）
+          - - サービス・UX(ダブルダイヤモンド)
             - 発見
             - 定義
             - 展開
-            - 提供（小さく試して改良）
+            - 提供(小さく試して改良)
       - type: p
-        text: 同じ「基本設計」という言葉でも、建築では実施設計の前に行う設計を、ソフトウェアでは画面や外から見た動きを決める設計を指すことが多く、中身が違います。ほかの学部の人と話すときは、言葉より「今、何を決めているのか」をそろえるのが近道です。
-        note: 機械は[Pahl & Beitz, Konstruktionslehre（1977）](https://ci.nii.ac.jp/ncid/BA62999351)、建築は[令和6年国土交通省告示第8号](https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html)、ソフトウェアは[IPA「共通フレーム2013」](https://www.ipa.go.jp/publish/secbooks20130304.html)による。ソフトウェアの「基本設計」「詳細設計」は、日本の現場での慣用の呼び方。建築の「企画・基本計画」は告示の標準業務の外で、慣用の呼び方。
+        text: 同じ「基本設計」という言葉でも、建築では実施設計の前に行う設計を、ソフトウェアでは画面や外から見た動きを決める設計を指すことが多く、中身が違います。他の学部の人と話すときは、言葉より「今、何を決めているのか」をそろえるのが近道です。
+        note: 機械は[Pahl & Beitz, Konstruktionslehre(1977)](https://ci.nii.ac.jp/ncid/BA62999351)、建築は[令和6年国土交通省告示第8号](https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html)、ソフトウェアは[IPA「共通フレーム2013」](https://www.ipa.go.jp/publish/secbooks20130304.html)による。ソフトウェアの「基本設計」「詳細設計」は、日本の現場での慣用の呼び方。建築の「企画・基本計画」は告示の標準業務の外で、慣用の呼び方。
 
   - id: modes
-    heading: 広げる工程と、絞る工程が交互に来る
+    heading: 広げては絞る、を二度繰り返す
     blocks:
       - type: point
-        text: 問題を見つけるときと案を考えるときは、評価をあとまわしにして広げる。要件を定めるときと案を選ぶときは、根拠をもって絞る。今どちらなのかを意識すると、話し合いが進めやすくなります。
+        text: 問題を見つけるときと案を考えるときは、評価を後回しにして広げる。要件を定めるとき、案を選ぶとき、形を詰めるときは、根拠をもって絞る。今どちらなのかを意識すると、話し合いが進めやすくなります。
       - type: p
-        text: 工程には、考えを「広げる」ものと「絞る」ものがあります。広げている最中によしあしを言い始めると、案の出る勢いが落ちます。絞る番になってまた広げ始めると、決めるのがいつまでも先送りになります。英国デザイン・カウンシルは、この切り替えを2つのひし形（ダブルダイヤモンド）で表しました。5つの工程を重ねると、工程1と2が左のひし形に、工程3から5が右のひし形に入ります。
+        text: 工程には、考えを「広げる」ものと「絞る」ものがあります。広げている最中に良し悪しを言い始めると、案の出る勢いが落ちます。絞る番になってまた広げ始めると、決めるのがいつまでも先送りになります。英国デザイン・カウンシルは、この切り替えを2つのひし形(ダブルダイヤモンド)で表しました。5つの工程を重ねると、工程1と2が左のひし形に、工程3から5が右のひし形に入ります。
       - type: figure
         name: steps-on-double-diamond
       - type: p
-        text: どの工程も、終わりに形のあるものを一つ残し、それが次の工程の出発点になります。問題の一文、要件の表、案の一覧、選んだ案とその理由、仕様書です。要件の表は、左のひし形の答えであり、右のひし形で案を比べるときの物差しにもなります。
+        text: どの工程も、終わりに形のあるものを一つ残し、それが次の工程の出発点になります。問題の一文、要件の表、案の一覧、比較の表と選んだ理由、仕様書です。要件の表は、左のひし形の答えであり、右のひし形で案を比べるときの物差しにもなります。
 
   - id: loop
     heading: 工程は、行き来しながら確かになる
     blocks:
       - type: point
-        text: 案を考えてはじめて、要件の見落としに気づくことはよくあります。そのときは前の工程に戻ります。見落としは、早く見つけるほど小さな手間で直せます。
+        text: 案を考えて初めて、要件の見落としに気付くことはよくあります。そのときは前の工程に戻ります。見落としは、早く見つけるほど小さな手間で直せます。
       - type: p
-        text: 1973年、リッテルとウェバーは、設計や計画が扱う問題の多くは、問題をどう定義するかに解き方が含まれてしまう「厄介な問題（wicked problem）」だと指摘しました。問題と答えは、行き来しながら一緒に確かになっていくのです。
-        note: '[H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973](https://doi.org/10.1007/BF01405730)。[D. A. Schön, The Reflective Practitioner, 1983](https://ndlsearch.ndl.go.jp/books/R100000136-I1970304959840662912) も、設計する人が状況と「対話」しながら問題の捉え方を組み替えていく姿を描いた。'
+        text: 1973年、リッテルとウェバーは、社会の計画が扱う問題の多くは、問題をどう定義するかに解き方が含まれてしまう「厄介な問題(wicked problem)」だと指摘しました。後に、設計の問題の多くにも当てはまると考えられるようになりました。問題と答えは、行き来しながら一緒に確かになっていくのです。
+        note: '[H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), 1973](https://doi.org/10.1007/BF01405730)。[D. A. Schön, The Reflective Practitioner, 1983](https://ndlsearch.ndl.go.jp/books/R100000136-I1970304959840662912) も、設計する人が状況と「対話」しながら問題の捉え方を組み替えていく姿を描いた。設計への広がりは [R. Buchanan, "Wicked Problems in Design Thinking", Design Issues, 8(2), 1992](https://doi.org/10.2307/1511637) など。'
       - type: p
-        text: ソフトウェアの世界では、小さくつくって使ってもらい、要件そのものを学びながら更新していく進め方が広く使われています。5つの工程を、短い周期で何度も回すのです。一方、自動車や医療機器のように安全が重要な分野では、要件から設計、試験までのつながりを漏れなくたどれること（トレーサビリティ）が求められます。
-        note: 見落としを見つけるのが後の工程になるほど、直す手間は大きくなる。NASAの見積もりでは、要件の段階の誤りを運用の段階で直すと、数十倍から千倍以上の手間がかかる（[J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA, 2004](https://ntrs.nasa.gov/citations/20100036670)）。
+        text: ソフトウェアの世界では、小さくつくって使ってもらい、要件そのものを学びながら更新していく進め方(アジャイル開発)が広く使われています。5つの工程を、短い周期で何度も回すのです。一方、自動車や医療機器のように安全が重要な分野では、要件から設計、試験までのつながりを漏れなくたどれること(トレーサビリティ)が求められます。
+        note: 見落としを見つけるのが後の工程になるほど、直す手間は大きくなる。NASAの見積もりでは、要件の段階の誤りを運用の段階で直すと、数十倍から千倍以上の手間がかかる([J. M. Stecklein 他, "Error Cost Escalation Through the Project Life Cycle", NASA, 2004](https://ntrs.nasa.gov/citations/20100036670))。
       - type: p
-        text: 5つの工程の外にも、仕事があります。できたものが要件を満たすかを確かめる検証、建築や福祉用具での法令や安全規格の確認、イベントの当日の運営とふり返りです。分野によっては、これらも設計と同じくらい大切です。設計会では、仕様書の中に「どう確かめるか」まで書くことで、次につなげます。
-        note: ドイツ技術者協会の指針 [VDI 2221](https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung) は2019年の改訂で、製品開発の中心となる目標・活動・成果を定める形になり、実際の進め方は状況に合わせて組み立てる（Blatt 2）とした。
+        text: 5つの工程の外にも、仕事があります。できたものが要件を満たすかを確かめる検証、建築や福祉用具での法令や安全規格の確認、イベントの当日の運営と振り返りです。分野によっては、これらも設計と同じくらい大切です。設計会では、仕様書の中に「どう確かめるか」まで書くことで、次につなげます。
+        note: ドイツ技術者協会の指針 [VDI 2221](https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung) は2019年の改訂で、製品開発の中心となる目標・活動・成果を定める形になった。実際の進め方は、会社やプロジェクトに合わせて組み立てるとしている([VDI 2221 Blatt 2](https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-2-entwicklung-technischer-produkte-und-systeme-gestaltung-individueller-produktentwicklungsprozesse))。
 
   - id: examples
     heading: 例で、5つの工程をたどる
@@ -90,7 +90,7 @@ chapters:
         text: 工程のページでは、架空の例として「部室の予約が取り合いになっている」という一つの問題を取り上げ、5つの工程でどう進めるかを順に示します。
       - type: example
         title: 部室の予約を、5つの工程で進めるなら
-        text: まず部員に話を聞き、取り合いの本当の理由を確かめる（問題発見）。理由が「空いているかが前もってわからないこと」なら、「スマートフォンから3操作以内」「重なりは0件」「費用は0円」のように、確かめられる条件にする（要件定義）。アプリ、紙の予約表、共有カレンダーなど、案をいくつも出す（発想）。条件で比べて一つを選ぶ（評価・選定）。最後に、予約の書き方と決まりを仕様書にまとめる（詳細設計）。
+        text: まず部員に話を聞き、取り合いの本当の理由を確かめて、「部員が、部室の空き状況を前もって確かめられず、行ってから引き返すことがある」のような一文にまとめる(問題発見)。問題がこの一文なら、「スマートフォンから3操作以内」「重なりは0件」「費用は0円」のように、確かめられる条件にする(要件定義)。アプリ、紙の予約表、共有カレンダーなど、案をいくつも出す(発想)。条件で比べて一つを選ぶ(評価・選定)。最後に、予約の書き方と決まりを仕様書にまとめる(詳細設計)。
       - type: p
         text: もっと大きな例は、設計の流れの例のページにあります。[[case-open-campus|イベント]]、[[case-delivery-robot|ロボット]]、[[case-deadline|アプリ]]、[[case-bicycle-parking|設備]]、[[case-shelter-reception|防災]]の5つです。
       - type: link
@@ -106,13 +106,13 @@ chapters:
         text: 問題を見つける工程ではKJ法でカードを並べ、要件を定める工程ではIDEF0で機能を図にし、案を選ぶ工程ではピューの概念選定法やAHPで判断の根拠を見えるようにします。アンケートなどのデータはDeepnoteで一緒に分析します。考えたことは発表し、違う視点から意見をもらい、必要なら前の工程に戻ります。
 
 references:
-  - text: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969（第3版 1996）.
+  - text: H. A. Simon, The Sciences of the Artificial, MIT Press, 1969(第3版 1996).
     url: https://ndlsearch.ndl.go.jp/books/R100000002-I000006331276
-  - text: 'G. Pahl & W. Beitz, Engineering Design: A Systematic Approach, Springer, 1984（原著 Konstruktionslehre, 1977）.'
+  - text: G. Pahl & W. Beitz, Engineering Design(K. Wallace 編), Design Council / Springer, 1984(原著 Konstruktionslehre, 1977).
     url: https://ci.nii.ac.jp/ncid/BA07271699
-  - text: 国土交通省「設計、工事監理等に係る業務報酬基準について」（令和6年国土交通省告示第8号）.
+  - text: 国土交通省「設計、工事監理等に係る業務報酬基準について」(令和6年国土交通省告示第8号).
     url: https://www.mlit.go.jp/jutakukentiku/build/jutakukentiku_house_tk_000082.html
-  - text: 情報処理推進機構（IPA）『共通フレーム2013』2013年.
+  - text: 情報処理推進機構(IPA)『共通フレーム2013』2013年.
     url: https://www.ipa.go.jp/publish/secbooks20130304.html
   - text: VDI 2221 Blatt 1:2019 Entwicklung technischer Produkte und Systeme — Modell der Produktentwicklung.
     url: https://www.vdi.de/mitgliedschaft/vdi-richtlinien/details/vdi-2221-blatt-1-entwicklung-technischer-produkte-und-systeme-modell-der-produktentwicklung
@@ -120,9 +120,9 @@ references:
     url: https://www.designcouncil.org.uk/resources/the-double-diamond/
   - text: H. W. J. Rittel & M. M. Webber, "Dilemmas in a General Theory of Planning", Policy Sciences, 4(2), pp.155–169, 1973.
     url: https://doi.org/10.1007/BF01405730
-  - text: D. A. Schön, The Reflective Practitioner, Basic Books, 1983（邦訳『省察的実践とは何か』鳳書房, 2007年）.
+  - text: D. A. Schön, The Reflective Practitioner, Basic Books, 1983(邦訳『省察的実践とは何か』鳳書房, 2007年).
     url: https://ndlsearch.ndl.go.jp/books/R100000136-I1970304959840662912
-  - text: J. M. Stecklein ほか, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004.
+  - text: J. M. Stecklein 他, "Error Cost Escalation Through the Project Life Cycle", NASA Johnson Space Center, 2004.
     url: https://ntrs.nasa.gov/citations/20100036670
 related:
   - problem-finding

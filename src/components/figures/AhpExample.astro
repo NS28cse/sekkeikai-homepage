@@ -1,6 +1,6 @@
 ---
-// AHP（階層分析法）の例：サークルで 3D プリンターを選ぶときの、評価基準の重み。
-// 一対比較の行列から、べき乗法で主固有ベクトル（重み）と最大固有値を求め、整合度 CI と整合比 CR（CI をランダム整合度 RI で割った値）を計算する。
+// AHP(階層分析法)の例: サークルで 3D プリンターを選ぶときの、評価基準の重み。
+// 一対比較の行列から、べき乗法で主固有ベクトル(重み)と最大固有値を求め、整合度 CI と整合比 CR(CI をランダム整合度 RI で割った値)を計算する。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const criteria = ["価格", "造形の精度", "扱いやすさ", "造形できる大きさ"];
-// matrix[i][j]：基準 i が基準 j に比べてどれだけ重要か（1 同じ、3 やや重要、5 重要、7 とても重要、9 極めて重要）
+// matrix[i][j]: 基準 i が基準 j に比べてどれだけ重要か(1 同じ、3 やや重要、5 重要、7 とても重要、9 極めて重要)
 const matrix = [
   [1, 1 / 3, 1, 3],
   [3, 1, 3, 5],
@@ -27,7 +27,7 @@ for (let k = 0; k < 100; k++) {
 const aw = matrix.map((row) => row.reduce((s, v, j) => s + v * w[j], 0));
 const lambda = aw.reduce((s, v, i) => s + v / w[i], 0) / n;
 const ci = (lambda - n) / (n - 1);
-const ri = 0.9; // n = 4 のときのランダム整合度（Saaty）
+const ri = 0.9; // n = 4 のときのランダム整合度(Saaty)
 const cr = ci / ri;
 
 const fmt = (v: number) => (v >= 1 ? String(Math.round(v)) : `1/${Math.round(1 / v)}`);
@@ -37,7 +37,7 @@ const fmt = (v: number) => (v >= 1 ? String(Math.round(v)) : `1/${Math.round(1 /
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="AHPで基準の重みを求める"
-  caption="左の表は「行の基準は、列の基準に比べてどれだけ重要か」をチームで話し合って決めた値。右の重みは、この表からプログラムで計算したもの。設計案どうしも、基準ごとに同じ方法で比べて点数を付け、重みを掛けて合計する。"
+  caption="左の表は「行の基準は、列の基準に比べてどれだけ重要か」をチームで話し合って決める値の例。右の重みは、この表からプログラムで計算したもの。設計案どうしも、基準ごとに同じ方法で比べて点数を付け、重みを掛けて合計する。"
   source="[T. L. Saaty, The Analytic Hierarchy Process (1980)](https://archive.org/details/analytichierarch0000saat) の方法による。例は架空"
 >
   <div class="grid gap-6 lg:grid-cols-[1fr_17rem]">
@@ -90,7 +90,7 @@ const fmt = (v: number) => (v >= 1 ? String(Math.round(v)) : `1/${Math.round(1 /
           </li>
         ))}
       </ul>
-      <!-- 整合度（CI）と整合比（CR）の数値は一行に一つずつ並べ、狭い幅でも途中で折り返さないようにする -->
+      <!-- 整合度(CI)と整合比(CR)の数値は一行に一つずつ並べ、狭い幅でも途中で折り返さないようにする -->
       <dl class="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 font-mono text-sm text-muted">
         <dt>λmax</dt>
         <dd>{lambda.toFixed(3)}</dd>
@@ -100,7 +100,7 @@ const fmt = (v: number) => (v >= 1 ? String(Math.round(v)) : `1/${Math.round(1 /
         <dd>{cr.toFixed(3)}</dd>
       </dl>
       <p class:list={["mt-2 text-sm font-bold", cr < 0.1 ? "text-positive" : "text-accent-strong"]}>
-        {cr < 0.1 ? "整合している（整合比 CR < 0.1）" : "判断を見直す（整合比 CR ≥ 0.1）"}
+        {cr < 0.1 ? "整合している(整合比 CR < 0.1)" : "判断を見直す(整合比 CR ≥ 0.1)"}
       </p>
     </div>
   </div>

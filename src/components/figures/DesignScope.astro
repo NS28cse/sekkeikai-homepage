@@ -1,6 +1,6 @@
 ---
 // 「設計とは何か」を、OXO のピーラーの例で左から右へたどる図。
-// 誰が・どんな場面で → 困りごと → 形・材料 → 図面・仕様書 までが設計（設計会が扱う範囲）。最後の「つくる」は範囲の外なので薄く描く。
+// 誰が・どんな場面で → 困りごと → 形・材料 → 図面・仕様書 までが設計(設計会が扱う範囲)。最後の「つくる」は範囲の外なので薄く描く。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -27,13 +27,14 @@ const scopeRight = x0 + 4 * w + 3 * gap;
   compact={Astro.props.compact}
   title="設計は、何を・誰のためにつくるかを決めること"
   caption="ピーラーの例。誰の、どんな困りごとかを決めると、形や材料が決まり、それを図面や仕様書にしてつくる人に渡す。ここまでが設計で、設計会が扱う範囲。"
+  source="[Cooper Hewitt「Getting a Grip on User-Inspired Design」](https://www.cooperhewitt.org/2018/02/12/getting-a-grip-on-user-inspired-design-2/) のピーラーの例を基に作図"
   scroll
 >
   <svg
     viewBox="0 0 720 190"
     class="w-full"
     role="img"
-    aria-label={`設計の流れ。${steps.map((s) => `${s.head}（${s.ex.join("")}）`).join("、")}。つくる手前までが設計。`}
+    aria-label={`設計の流れ。${steps.map((s) => `${s.head}(${s.ex.join("")})`).join("、")}。つくる手前までが設計。`}
   >
     <!-- 設計の範囲を示すかっこ -->
     <path d={`M${x0} 40 V28 H${scopeRight} V40`} fill="none" stroke="var(--color-accent-strong)" stroke-width="2" />
@@ -45,7 +46,7 @@ const scopeRight = x0 + 4 * w + 3 * gap;
       font-weight="700"
       fill="var(--color-accent-strong)"
     >
-      設計（設計会が扱う範囲）
+      設計(設計会が扱う範囲)
     </text>
     {steps.map((s, i) => {
       const x = x0 + i * (w + gap);

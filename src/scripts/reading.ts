@@ -1,6 +1,6 @@
-// 長文を読むための補助（アニメーションではなく、読んでいる位置を知らせるだけ）。
-// - [data-progress]：ヘッダーの下の線。[data-progress-target] の要素をどこまで読んだかで長さが変わる
-// - [data-toc]：目次。いま画面に出ている章（[data-toc-section]）のリンクに aria-current を付ける
+// 長文を読むための補助(アニメーションではなく、読んでいる位置を知らせるだけ)。
+// - [data-progress]: ヘッダーの下の線。[data-progress-target] の要素をどこまで読んだかで長さが変わる
+// - [data-toc]: 目次。いま画面に出ている章([data-toc-section])のリンクに aria-current を付ける
 export function initReading(): void {
   const bar = document.querySelector<HTMLElement>("[data-progress]");
   const target = document.querySelector<HTMLElement>("[data-progress-target]");
@@ -22,7 +22,7 @@ export function initReading(): void {
   });
   if (links.size === 0) return;
 
-  // 画面の上から 1/3 あたりの線を越えた、いちばん下の章を「いま読んでいる章」とする
+  // 画面の上から 1/3 あたりの線を越えた、一番下の章を「いま読んでいる章」とする
   const sections = [...document.querySelectorAll<HTMLElement>("[data-toc-section]")];
   const mark = () => {
     const line = window.innerHeight / 3;

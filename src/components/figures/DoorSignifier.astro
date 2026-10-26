@@ -1,7 +1,7 @@
 ---
-// 押して開けるドアを2つ並べた図。取っ手の形が「どう動かすか」を伝えてしまう（シグニファイア）ことを見せる。
-//   左：つかむ棒が付いている → 「引いて」と伝わるのに押すドア。「押」の表示を貼らないと迷う
-//   右：平らな板が付いている → つかめないので「押して」と伝わる。表示がなくても押すとわかる
+// 押して開けるドアを2つ並べた図。取っ手の形が「どう動かすか」を伝えてしまう(シグニファイア)ことを見せる。
+//   左: つかむ棒が付いている → 「引いて」と伝わるのに押すドア。「押」の表示を貼らないと迷う
+//   右: 平らな板が付いている → つかめないので「押して」と伝わる。表示がなくても押すと分かる
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -31,14 +31,14 @@ const doors = [
   compact={Astro.props.compact}
   title="形が、使い方を伝える"
   caption="どちらも押して開けるドア。左は取っ手の形が「引いて」と伝えてしまうので、「押」の表示を貼っても間違える人が出る。右は形そのものが「押して」と伝えている。"
-  source="[D. A. Norman, The Design of Everyday Things, 2013](https://www.basicbooks.com/titles/don-norman/the-design-of-everyday-things/9780465050659/) の考え方をもとに作図"
+  source="[D. A. Norman, The Design of Everyday Things, 2013](https://www.basicbooks.com/titles/don-norman/the-design-of-everyday-things/9780465050659/) の考え方を基に作図"
   scroll
 >
   <svg
     viewBox="0 0 640 330"
     class="w-full"
     role="img"
-    aria-label="押して開けるドアの比較。左はつかむ棒が付いていて「押」の表示が要る。右は平らな板が付いていて表示がなくても押すとわかる。"
+    aria-label="押して開けるドアの比較。左はつかむ棒が付いていて「押」の表示が要る。右は平らな板が付いていて表示がなくても押すと分かる。"
   >
     {doors.map((d) => (
       <g>
@@ -109,7 +109,7 @@ const doors = [
           font-weight="700"
           fill={d.good ? "var(--color-link)" : "var(--color-accent-strong)"}
         >
-          {d.good ? "一目でわかる" : "迷いやすい"}
+          {d.good ? "一目で分かる" : "迷いやすい"}
         </text>
       </g>
     ))}

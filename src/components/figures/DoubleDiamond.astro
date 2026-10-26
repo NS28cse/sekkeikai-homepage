@@ -1,5 +1,5 @@
 ---
-// ダブルダイヤモンド：問題を見つける段階と、解を見つける段階で、それぞれ発散と収束をする。
+// ダブルダイヤモンド: 問題を見つける段階と、解を見つける段階で、それぞれ発散と収束をする。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -31,9 +31,9 @@ const h = 100;
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="ダブルダイヤモンド ― 発散と収束を二度"
+  title="ダブルダイヤモンド: 発散と収束を二度"
   caption="左のひし形で「どの問題を解くべきか」を広げて絞り、右のひし形で「どう解くか」を広げて絞る。実際の設計では、右から左へ戻ることもよくある。"
-  source="[Design Council (UK), The Double Diamond](https://www.designcouncil.org.uk/resources/the-double-diamond/)（2000年代半ばに発表）をもとに作図"
+  source="[Design Council (UK), The Double Diamond](https://www.designcouncil.org.uk/resources/the-double-diamond/)(2004年から発表)を基に作図。経緯は [Design Council「History of the Double Diamond」](https://www.designcouncil.org.uk/resources/the-double-diamond/history-of-the-double-diamond/) による"
   scroll
 >
   <svg

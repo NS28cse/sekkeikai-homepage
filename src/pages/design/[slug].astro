@@ -1,7 +1,7 @@
 ---
-// 「設計を知る」のページ（/design/〇〇/）。中身は src/content/design/〇〇.yaml。
-// 階層（layer）を見出しの上に出し、「設計のプロセス」「工程」「どの工程にも通じる視点」の関係がわかるようにする。
-// 工程のページには、5 つの工程を並べた帯（StepNav）を出し、ほかの工程へすぐ移れるようにする。
+// 「設計を知る」のページ(/design/〇〇/)。中身は src/content/design/〇〇.yaml。
+// 階層(layer)を見出しの上に出し、「設計のプロセス」「工程」「どの工程にも通じる視点」の関係が分かるようにする。
+// 工程のページには、5 つの工程を並べた帯(StepNav)を出し、他の工程へすぐ移れるようにする。
 // 広い画面では左に目次、本文の右に注を出す。
 import { getCollection, getEntries } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -13,7 +13,7 @@ import { numberChapters } from "../../lib/blocks";
 import { getProcessSteps, layerLabel } from "../../lib/design";
 
 export async function getStaticPaths() {
-  // プロセス → 工程 → 視点 → 事例 → テーマの順に、同じ階層の中は order の順に並べる（前後のページへのリンクに使う）
+  // プロセス → 工程 → 視点 → 事例 → テーマの順に、同じ階層の中は order の順に並べる(前後のページへのリンクに使う)
   const rank = { process: 0, step: 1, lens: 2, case: 3, topic: 4 } as const;
   const pages = (await getCollection("design")).sort((a, b) =>
     a.data.layer === b.data.layer ? a.data.order - b.data.order : rank[a.data.layer] - rank[b.data.layer],
@@ -37,10 +37,10 @@ const related = await getEntries(page.data.related);
 const steps = await getProcessSteps();
 
 // 目次とリンクの行き先になる章の id。YAML に id があればそれを、無ければ ch-1, ch-2… を使う。
-// 事例のページで step（工程の番号）を書いた章には、「工程 N — 〇〇」のラベルと工程のページへのリンクを付ける
+// 事例のページで step(工程の番号)を書いた章には、「工程 N — 〇〇」のラベルと工程のページへのリンクを付ける
 const withIds = numberChapters(chapters).map((c, i) => {
   const step = c.step ? steps.find((s) => s.n === c.step) : undefined;
-  if (c.step && !step) throw new Error(`src/content/design/${page.id}.yaml：工程 ${c.step} のページがありません`);
+  if (c.step && !step) throw new Error(`src/content/design/${page.id}.yaml: 工程 ${c.step} のページがありません`);
   const label = c.label ?? (step ? `工程 ${step.n} — ${step.sub}` : undefined);
   return { ...c, id: c.id ?? `ch-${i + 1}`, label, stepHref: step?.href };
 });
@@ -128,7 +128,7 @@ const crumb =
           </a>
         )}
         <a href="/design/" class:list={["block text-xs text-muted underline hover:text-link", layer === "process" ? "mt-8" : "mt-2"]}>
-          ← 設計を知る（一覧）
+          ← 設計を知る(一覧)
         </a>
       </div>
     </nav>
@@ -229,7 +229,7 @@ const crumb =
         )}
       </div>
       <a href="/design/" class="text-center text-sm text-muted underline hover:text-link">
-        設計を知る（一覧）
+        設計を知る(一覧)
       </a>
       <div class="sm:text-right">
         {next && (

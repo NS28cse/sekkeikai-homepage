@@ -1,6 +1,6 @@
 ---
-// 狩野モデル：要求が満たされる度合い（横軸）と、使う人の満足（縦軸）の関係。
-// 曲線は考え方を示す概念図（実測値ではない）なので、指数関数で形をつくっている。
+// 狩野モデル: 要求が満たされる度合い(横軸)と、使う人の満足(縦軸)の関係。
+// 曲線は考え方を示す概念図(実測値ではない)なので、指数関数で形をつくっている。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -10,8 +10,8 @@ interface Props {
 
 const ox = 290;
 const oy = 200;
-const toX = (t: number) => 60 + t * 460; // t: 0（不充足）〜 1（充足）
-const toY = (s: number) => oy - s * 150; // s: -1（不満）〜 1（満足）
+const toX = (t: number) => 60 + t * 460; // t: 0(不充足)~ 1(充足)
+const toY = (s: number) => oy - s * 150; // s: -1(不満)~ 1(満足)
 const rise = (t: number) => (Math.exp(3 * t) - 1) / (Math.exp(3) - 1);
 
 function curve(f: (t: number) => number): string {
@@ -51,9 +51,9 @@ const curves = [
 <FigureFrame
   number={Astro.props.number}
   compact={Astro.props.compact}
-  title="狩野モデル ― 要求には性格がある"
-  caption="同じ「要求を満たす」でも、満足への効き方は要求の性格によって違う。曲線は考え方を示す概念図。魅力的品質は、時間がたつと一元的品質や当たり前品質へ移っていく。"
-  source="[狩野紀昭ほか「魅力的品質と当り前品質」『品質』14巻2号 (1984)](https://doi.org/10.20684/quality.14.2_147) をもとに作図"
+  title="狩野モデル: 要求には性格がある"
+  caption="同じ「要求を満たす」でも、満足への効き方は要求の性格によって違う。曲線は考え方を示す概念図。魅力的品質は、時間がたつと一元的品質や当たり前品質へ移っていく、という説もある。"
+  source="[狩野紀昭ら「魅力的品質と当り前品質」『品質』14巻2号 (1984)](https://doi.org/10.20684/quality.14.2_147) を基に作図。時間による移り変わりは [Löfgren, Witell & Gustafsson, The TQM Journal, 23(2), 2011](https://doi.org/10.1108/17542731111110267) による"
   scroll
 >
   <svg

@@ -1,5 +1,5 @@
 ---
-// 「飲み物を運ぶロボット」（これから取り組む設計の計画の例）の仕様書の数字を、横から見た図と正面から見た図に描く。
+// 「飲み物を運ぶロボット」(これから取り組む設計の計画の例)の仕様書の数字を、横から見た図と正面から見た図に描く。
 // トレーの高さは、段ボールの模型で車いすの利用者に試してもらって決める値なので、「70cm前後」と描く。
 // 数字は src/content/design/case-delivery-robot.yaml の仕様書の表と同じ。1cm を px ピクセルで描く。
 import FigureFrame from "./FigureFrame.astro";
@@ -14,13 +14,13 @@ const floor = 290;
 const tray = 70;
 const width = 50;
 const stop = 50;
-// 人・車いすの目印の高さ（cm）。人の形は描かず、枠だけで示す
+// 人・車いすの目印の高さ(cm)。人の形は描かず、枠だけで示す
 const personH = 110;
 const ink = "var(--color-ink)";
 const muted = "var(--color-muted)";
 const link = "var(--color-link)";
 const accent = "var(--color-accent-strong)";
-// 横から見た図のロボットの位置（前後の長さは 45cm として描く）
+// 横から見た図のロボットの位置(前後の長さは 45cm として描く)
 const body = { x: 90, w: 45 * px };
 const front = body.x + body.w;
 const person = front + stop * px;
@@ -34,14 +34,14 @@ const half = (width * px) / 2;
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="仕様書の数字を図にする"
-  caption="計画の例（数字は仮の値）。トレーの高さは70cm前後とし、段ボールの模型で車いすの利用者に試してもらって決める。幅は廊下で車いすとすれ違える50cm以下、人の50cm手前で止まり、速さは秒速0.8m以下。"
+  caption="計画の例(数字は仮の値)。トレーの高さは70cm前後とし、段ボールの模型で車いすの利用者に試してもらって決める。幅は廊下で車いすとすれ違える50cm以下、人の50cm手前で止まり、速さは秒速0.8m以下。"
   scroll
 >
   <svg
     viewBox="0 0 680 330"
     class="w-full"
     role="img"
-    aria-label="ロボットの寸法の図。トレーの高さ70cm前後（模型で試して決める）、幅50cm以下、人の50cm手前で止まる、速さは秒速0.8m以下、上面に非常停止ボタン。"
+    aria-label="ロボットの寸法の図。トレーの高さ70cm前後(模型で試して決める)、幅50cm以下、人の50cm手前で止まる、速さは秒速0.8m以下、上面に非常停止ボタン。"
   >
     <text x="20" y="22" font-size="13" font-weight="700" fill={ink}>
       横から見た図
@@ -63,19 +63,19 @@ const half = (width * px) / 2;
     <circle cx={body.x + 18} cy={floor - 9} r="9" fill={ink} />
     <circle cx={front - 18} cy={floor - 9} r="9" fill={ink} />
 
-    <!-- 非常停止ボタン（上面） -->
+    <!-- 非常停止ボタン(上面) -->
     <rect x={front - 34} y={y(tray) - 9} width="20" height="9" rx="3" fill={accent} />
     <text x={front + 12} y={y(tray) + 22} font-size="12" fill={accent}>
       ← 非常停止
     </text>
 
-    <!-- トレーの高さ（70cm前後。模型で試して決める） -->
+    <!-- トレーの高さ(70cm前後。模型で試して決める) -->
     <line x1="56" x2="56" y1={floor} y2={y(tray)} stroke={link} stroke-width="1.5" />
     <line x1="50" x2={body.x - 8} y1={y(tray)} y2={y(tray)} stroke={link} />
     <text x="50" y={y(tray / 2)} text-anchor="end" font-size="14" font-weight="700" fill={link}>
       70cm
     </text>
-    <!-- 「前後」は2行目に置く（1行だと左にはみ出して切れるため） -->
+    <!-- 「前後」は2行目に置く(1行だと左にはみ出して切れるため) -->
     <text x="50" y={y(tray / 2) + 18} text-anchor="end" font-size="12" font-weight="700" fill={link}>
       前後
     </text>

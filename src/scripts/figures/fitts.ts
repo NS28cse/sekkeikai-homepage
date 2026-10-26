@@ -3,11 +3,11 @@
 // 難しさ ID = log2(D / W + 1) を計算し、かかった時間 MT と一緒にグラフへ点を打つ。
 // 3 点以上たまったら、最小二乗法で MT = a + b × ID の直線を引く。
 const TRIALS = 20;
-const SIZES = [14, 20, 28, 40, 56, 76]; // 丸の直径（px）
+const SIZES = [14, 20, 28, 40, 56, 76]; // 丸の直径(px)
 const PLOT = { left: 44, right: 290, top: 26, bottom: 184, maxId: 6, maxMt: 1500 };
 const SVG_NS = "http://www.w3.org/2000/svg";
 const HINT =
-  "オレンジの丸を、マウスや指でできるだけ速く正確に押してください。全 20 回（キーボードでは時間を正しく測れません）。";
+  "オレンジの丸を、マウスや指でできるだけ速く正確に押してください。全 20 回(キーボードでは時間を正しく測れません)。";
 
 interface Trial {
   id: number;
@@ -65,7 +65,7 @@ export function initFitts(): void {
       }
       current = { x, y, w };
       // 中身の文字は消すので、読み上げ用の名前を付け直す
-      target.setAttribute("aria-label", `目標（${trials.length + 1}回目）`);
+      target.setAttribute("aria-label", `目標(${trials.length + 1}回目)`);
       Object.assign(target.style, {
         left: `${x}px`,
         top: `${y}px`,
@@ -119,7 +119,7 @@ export function initFitts(): void {
       event.stopPropagation();
       const now = performance.now();
       const rect = area.getBoundingClientRect();
-      // キーボードで押したとき（座標が 0）は、丸の中心を押したことにする
+      // キーボードで押したとき(座標が 0)は、丸の中心を押したことにする
       const x = event.clientX ? event.clientX - rect.left : current.x;
       const y = event.clientY ? event.clientY - rect.top : current.y;
       if (last) {

@@ -1,9 +1,9 @@
 ---
 // 架空の例「部室の予約」を、2種類のモデルで描いた図。
-//   左：ER図（実体関連図）… 何（部員・予約・部室）があり、どうつながっているか。「1」と「多」はつながる数
-//   右：状態遷移図 … 一つの予約が、どんな状態を通って移り変わるか
-// 同じ対象でも、確かめたいこと（データの形か、移り変わりか）によって描くモデルが変わることを見せる。
-// 個人の情報（学籍番号など）は例にも入れない決まりなので、部員の項目は「名前・学年」だけにしている。
+//   左: ER図(実体関連図)… 何(部員・予約・部室)があり、どうつながっているか。「1」と「多」はつながる数
+//   右: 状態遷移図 … 一つの予約が、どんな状態を通って移り変わるか
+// 同じ対象でも、確かめたいこと(データの形か、移り変わりか)によって描くモデルが変わることを見せる。
+// 個人の情報(学籍番号など)は例にも入れない決まりなので、部員の項目は「名前・学年」だけにしている。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -16,7 +16,7 @@ const muted = "var(--color-muted)";
 const link = "var(--color-link)";
 const accent = "var(--color-accent-strong)";
 
-// ER図の箱（実体）。attrs は箱の中に並べる項目
+// ER図の箱(実体)。attrs は箱の中に並べる項目
 const entities = [
   { name: "部員", y: 46, attrs: ["名前", "学年"] },
   { name: "予約", y: 142, attrs: ["日付・時間帯", "用件", "状態"] },
@@ -28,7 +28,7 @@ const head = 24;
 const row = 18;
 const boxH = (n: number) => head + n * row + 8;
 
-// 状態遷移図の箱（状態）
+// 状態遷移図の箱(状態)
 const sw = 100;
 const sh = 44;
 const states = {
@@ -43,7 +43,7 @@ const states = {
   compact={Astro.props.compact}
   title="同じ予約を、2つのモデルで描く"
   caption="架空の部室の予約を、ER図と状態遷移図で描いた。ER図は「1人の部員がいくつも予約し、一つの予約は部室を一つ使う」というデータの形を、状態遷移図は一つの予約の移り変わりを表す。「取消から確定には戻れない」のような決まりは、右の図を描くと話し合える。"
-  source="[P. P. Chen (1976)](https://doi.org/10.1145/320434.320440) のERモデルと、[UML 2.5.1](https://www.omg.org/spec/UML/2.5.1) の状態機械図の考え方をもとに作図。内容は架空の例"
+  source="[P. P. Chen (1976)](https://doi.org/10.1145/320434.320440) のERモデルと、[UML 2.5.1](https://www.omg.org/spec/UML/2.5.1) の状態機械図の考え方を基に作図。内容は架空の例"
   scroll
 >
   <svg
@@ -59,14 +59,14 @@ const states = {
     </defs>
 
     <text x="115" y="24" text-anchor="middle" font-size="15" font-weight="700" fill={ink}>
-      ER図：何が、どうつながるか
+      ER図: 何が、どうつながるか
     </text>
     <text x="494" y="24" text-anchor="middle" font-size="15" font-weight="700" fill={ink}>
-      状態遷移図：予約の移り変わり
+      状態遷移図: 予約の移り変わり
     </text>
     <line x1="330" x2="330" y1="40" y2="340" stroke="var(--color-grid)" stroke-width="1.5" />
 
-    <!-- ER図：実体の箱 -->
+    <!-- ER図: 実体の箱 -->
     {entities.map((e) => (
       <g>
         <rect
@@ -100,7 +100,7 @@ const states = {
         ))}
       </g>
     ))}
-    <!-- ER図：つながり（1 と 多） -->
+    <!-- ER図: つながり(1 と 多) -->
     {[
       { y1: 46 + boxH(2), y2: 142, top: "1", bottom: "多", label: "1人がいくつも予約する" },
       { y1: 142 + boxH(3), y2: 260, top: "多", bottom: "1", label: "どの予約も部室を一つ使う" },
@@ -119,7 +119,7 @@ const states = {
       </g>
     ))}
 
-    <!-- 状態遷移図：はじまりの黒丸 -->
+    <!-- 状態遷移図: はじまりの黒丸 -->
     <circle cx="368" cy="58" r="7" fill={ink} />
     <line
       x1="374"
@@ -191,7 +191,7 @@ const states = {
       取り消す
     </text>
 
-    <!-- 確定のあと：使い終わり -->
+    <!-- 確定の後: 使い終わり -->
     <line
       x1={states.fixed.x + sw / 2}
       y1={states.fixed.y}
@@ -211,7 +211,7 @@ const states = {
       取消から確定へ戻る矢印は無い
     </text>
     <text x="480" y="332" text-anchor="middle" font-size="12" fill={muted}>
-      （決まりを図で確かめられる）
+      (決まりを図で確かめられる)
     </text>
   </svg>
 </FigureFrame>

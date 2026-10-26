@@ -1,11 +1,11 @@
 ---
-// 公理的設計（N. P. スー）を、蒸気機関の例で見せる図。
-// 左：ニューコメン機関（1712年）。一つのシリンダーを、蒸気で温めては冷水で冷やす → 干渉設計
-// 右：ワット機関（1769年の特許）。冷やす役を別の容器（復水器）に分けた → 独立設計
-// 下の表は「要求機能（FR：やりたいこと）× 設計パラメーター（DP：設計で決めるもの）」。● はその設計パラメーターがその要求機能に効くこと。
+// 公理的設計(N. P. スー)を、蒸気機関の例で見せる図。
+// 左: ニューコメン機関(1712年)。一つのシリンダーを、蒸気で温めては冷水で冷やす → 干渉設計
+// 右: ワット機関(1769年の特許)。冷やす役を別の容器(復水器)に分けた → 独立設計
+// 下の表は「要求機能(FR: やりたいこと)× 設計パラメーター(DP: 設計で決めるもの)」。● はその設計パラメーターがその要求機能に効くこと。
 // FR1 はスーの原文では「蒸気でピストンを押し出す」だが、ニューコメン機関の蒸気は大気圧に近く、ピストンを押すのは大気の圧力なので、
-// 「シリンダーを蒸気で満たす」と言い換えている（表の形は変わらない）。
-// 判定はスーの教科書の草稿（Example 1.3, 1996）による。ワットの改良のうち、ここで描くのは「復水器を分けたこと」だけ。
+// 「シリンダーを蒸気で満たす」と言い換えている(表の形は変わらない)。
+// 判定はスーの教科書の草稿(Example 1.3, 1996)による。ワットの改良のうち、ここで描くのは「復水器を分けたこと」だけ。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -18,18 +18,18 @@ const muted = "var(--color-muted)";
 const hot = "var(--color-accent-strong)";
 const cold = "var(--color-link)";
 
-// 表の行（要求機能）と、それぞれの機関の列（設計パラメーター）と、効くかどうか
+// 表の行(要求機能)と、それぞれの機関の列(設計パラメーター)と、効くかどうか
 const frs = [
-  ["FR1：シリンダーを", "蒸気で満たす"],
-  ["FR2：蒸気を凝縮して", "真空をつくる"],
+  ["FR1: シリンダーを", "蒸気で満たす"],
+  ["FR2: 蒸気を凝縮して", "真空をつくる"],
 ];
 const engines = [
   {
     x: 20,
-    title: "ニューコメン機関（1712年）",
+    title: "ニューコメン機関(1712年)",
     dps: [
-      ["DP1：", "蒸気を入れる"],
-      ["DP2：冷やす", "（シリンダー）"],
+      ["DP1:", "蒸気を入れる"],
+      ["DP2: 冷やす", "(シリンダー)"],
     ],
     // 行 = FR、列 = DP
     matrix: [
@@ -43,10 +43,10 @@ const engines = [
   },
   {
     x: 400,
-    title: "ワット機関（1769年の特許）",
+    title: "ワット機関(1769年の特許)",
     dps: [
-      ["DP1：", "蒸気を入れる"],
-      ["DP2：冷やす", "（復水器）"],
+      ["DP1:", "蒸気を入れる"],
+      ["DP2: 冷やす", "(復水器)"],
     ],
     matrix: [
       [true, false],
@@ -58,7 +58,7 @@ const engines = [
     color: cold,
   },
 ];
-// 表の位置（各機関の左端からの距離）
+// 表の位置(各機関の左端からの距離)
 const table = { top: 274, labelW: 146, colW: 94, headH: 42, rowH: 46 };
 ---
 
@@ -66,8 +66,8 @@ const table = { top: 274, labelW: 146, colW: 94, headH: 42, rowH: 46 };
   number={Astro.props.number}
   compact={Astro.props.compact}
   title="冷やす場所を分けた、ワットの蒸気機関"
-  caption="表の行は要求機能（やりたいこと）、列は設計パラメーター（設計で決めるもの）。● はその設計パラメーターがその要求機能に効くことを表す。ニューコメン機関は一つのシリンダーを温めては冷やすので、どちらの設計パラメーターも両方の要求機能に効く（干渉設計）。ワットは冷やす役を復水器に分け、● を斜めにそろえた（独立設計）。表が三角の形でも、決める順番を守れば独立は保てる（準独立設計）。"
-  source="[N. P. Suh, Axiomatic Design 第1章 Example 1.3](https://web.mit.edu/2.882/www/chapter1/chapter1.htm)（MIT 2.882 の教科書草稿, 1996）の判定と、[Science Museum Group の解説](https://collection.sciencemuseumgroup.org.uk/objects/co50928/watts-second-separate-condenser-1765-condensers)をもとに作図"
+  caption="表の行は要求機能(やりたいこと)、列は設計パラメーター(設計で決めるもの)。● はその設計パラメーターがその要求機能に効くことを表す。ニューコメン機関は一つのシリンダーを温めては冷やすので、どちらの設計パラメーターも両方の要求機能に効く(干渉設計)。ワットは冷やす役を復水器に分け、● を斜めにそろえた(独立設計)。表が三角の形でも、決める順番を守れば独立は保てる(準独立設計)。"
+  source="[N. P. Suh, Axiomatic Design 第1章 Example 1.3](https://web.mit.edu/2.882/www/chapter1/chapter1.htm)(MIT 2.882 の教科書草稿, 1996)の判定と、[Science Museum Group の解説](https://collection.sciencemuseumgroup.org.uk/objects/co50928/watts-second-separate-condenser-1765-condensers)を基に作図。ニューコメン機関(最初の機関は1712年)は [Science Museum Group の記録](https://collection.sciencemuseumgroup.org.uk/objects/co50900/newcomen-atmospheric-engine-atmospheric-steam-engine) による"
   scroll
   wide
 >
@@ -90,11 +90,11 @@ const table = { top: 274, labelW: 146, colW: 94, headH: 42, rowH: 46 };
       </text>
     ))}
 
-    <!-- ── ニューコメン機関：シリンダー一つ。蒸気を入れては、同じシリンダーに冷水を噴射する ── -->
+    <!-- ── ニューコメン機関: シリンダー一つ。蒸気を入れては、同じシリンダーに冷水を噴射する ── -->
     <g>
       <line x1="175" x2="175" y1="102" y2="52" stroke={ink} stroke-width="3" />
       <text x="185" y="58" font-size="13" fill={muted}>
-        てこ（ビーム）へ → 鉱山の排水ポンプ
+        てこ(ビーム)へ → 鉱山の排水ポンプ
       </text>
       <rect
         x="130"
@@ -107,7 +107,7 @@ const table = { top: 274, labelW: 146, colW: 94, headH: 42, rowH: 46 };
         stroke-width="2"
       />
       <rect x="132" y="100" width="86" height="10" fill={ink} />
-      <!-- 蒸気（ボイラーから） -->
+      <!-- 蒸気(ボイラーから) -->
       <line x1="40" x2="124" y1="198" y2="198" stroke={hot} stroke-width="3" />
       <polygon points="130,198 120,192 120,204" fill={hot} />
       <text x="40" y="188" font-size="13" font-weight="700" fill={hot}>
@@ -127,7 +127,7 @@ const table = { top: 274, labelW: 146, colW: 94, headH: 42, rowH: 46 };
       </text>
     </g>
 
-    <!-- ── ワット機関：熱いままのシリンダーと、冷たいままの復水器を弁でつなぐ ── -->
+    <!-- ── ワット機関: 熱いままのシリンダーと、冷たいままの復水器を弁でつなぐ ── -->
     <g>
       <line x1="495" x2="495" y1="102" y2="52" stroke={ink} stroke-width="3" />
       <text x="505" y="58" font-size="13" fill={muted}>
@@ -260,7 +260,7 @@ const table = { top: 274, labelW: 146, colW: 94, headH: 42, rowH: 46 };
     <!-- 読み方 -->
     <line x1="20" x2="740" y1="502" y2="502" stroke={ink} stroke-opacity="0.15" />
     <text x="20" y="526" font-size="13" fill={ink}>
-      行＝要求機能（FR：やりたいこと）　列＝設計パラメーター（DP：決めるもの）　●＝効く
+      行=要求機能(FR: やりたいこと)  /  列=設計パラメーター(DP: 決めるもの)  /  ●=効く
     </text>
     <text x="20" y="546" font-size="13" fill={ink}>
       独立公理「要求機能どうしの独立を保て」。● が斜めだけに並べば、一つずつ調節できる

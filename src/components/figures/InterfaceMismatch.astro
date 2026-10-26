@@ -1,7 +1,7 @@
 ---
 // 2024年7月の CrowdStrike の障害を、受け渡すデータの「数の食い違い」として描く図。
 // 設定の側は 21 項目を読む前提、渡すプログラムの側は 20 項目しか渡していなかった。21 番目を読もうとして止まった。
-// 数字は CrowdStrike の原因分析（2024年8月）と Microsoft の発表による。
+// 数字は CrowdStrike の原因分析(2024年8月)と Microsoft の発表による。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -29,7 +29,7 @@ const bottom = Array.from({ length: 20 }, (_, i) => i + 1);
     viewBox="0 0 680 220"
     class="w-full"
     role="img"
-    aria-label="読む側は21項目、渡す側は20項目を前提にしていた。21番目を読もうとして停止し、約850万台のWindows端末が起動しなくなった。"
+    aria-label="読む側は21項目、渡す側は20項目を前提にしていた。21番目を読もうとして止まり、約850万台のWindows端末が停止した。"
   >
     <text x="12" y="54" font-size="13" font-weight="700" fill={ink}>
       読む側
@@ -108,10 +108,10 @@ const bottom = Array.from({ length: 20 }, (_, i) => i + 1);
       端末が停止
     </text>
     <text x="552" y="140" font-size="12" fill={ink}>
-      空港・銀行・病院
+      多くの企業の
     </text>
     <text x="552" y="158" font-size="12" fill={ink}>
-      の仕事が止まる
+      仕事が止まる
     </text>
   </svg>
 </FigureFrame>

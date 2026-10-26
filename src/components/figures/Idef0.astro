@@ -1,10 +1,10 @@
 ---
-// IDEF0（機能モデルの図）。YAML の「type: idef0」から描く。
-// 箱が「機能（何をするか）」で、矢印は向きで意味が決まっている：
-//   左から入る … 入力（機能が変えるもの）　　右へ出る … 出力（機能が生むもの）
-//   上から入る … 制御（決まりや条件）　　　　下から入る … 機構（人や道具）
-// steps を書くと、その機能をいくつかの機能に分けた図（分解図）も下に描く。
-// 分解図は、入力から出力へのつながりだけを描く（制御と機構は全体図だけに描く）。
+// IDEF0(機能モデルの図)。YAML の「type: idef0」から描く。
+// 箱が「機能(何をするか)」で、矢印は向きで意味が決まっている:
+//   左から入る … 入力(機能が変えるもの)  右へ出る … 出力(機能が生むもの)
+//   上から入る … 制御(決まりや条件)  下から入る … 機構(人や道具)
+// steps を書くと、その機能をいくつかの機能に分けた図(分解図)も下に描く。
+// 分解図は、入力から出力へのつながりだけを描く(制御と機構は全体図だけに描く)。
 import FigureFrame from "./FigureFrame.astro";
 
 interface Props {
@@ -24,13 +24,13 @@ const { number, title, caption, fn, inputs, controls, outputs, mechanisms, steps
 // 文字の大きさと、行の間隔
 const fs = 13;
 const row = 28;
-// 長い名前を、決まった文字数で折り返す（日本語は 1 文字がほぼ正方形なので、文字数で幅を見積もれる）
+// 長い名前を、決まった文字数で折り返す(日本語は 1 文字がほぼ正方形なので、文字数で幅を見積もれる)
 const wrap = (text: string, per: number) => {
   const lines: string[] = [];
   for (let i = 0; i < text.length; i += per) lines.push(text.slice(i, i + per));
   return lines;
 };
-// 矢じり（三角形）。dir は矢印の向き
+// 矢じり(三角形)。dir は矢印の向き
 const head = (x: number, y: number, dir: "right" | "down" | "up") => {
   const s = 6;
   if (dir === "right") return `${x},${y} ${x - s * 1.6},${y - s} ${x - s * 1.6},${y + s}`;
@@ -38,12 +38,12 @@ const head = (x: number, y: number, dir: "right" | "down" | "up") => {
   return `${x},${y} ${x - s},${y + s * 1.6} ${x + s},${y + s * 1.6}`;
 };
 
-// ── 全体図（A-0） ──
+// ── 全体図(A-0) ──
 const W = 720;
 const box = { x: 230, w: 240, h: 120, y: 24 + row * Math.max(controls.length, 1) };
 const boxBottom = box.y + box.h;
 const H = boxBottom + row * Math.max(mechanisms.length, 1) + 16;
-// 上（制御）と下（機構）の矢印は、ラベルを左にそろえ、直角に曲げて箱に入れる。線が交わらないように、
+// 上(制御)と下(機構)の矢印は、ラベルを左にそろえ、直角に曲げて箱に入れる。線が交わらないように、
 // 箱から遠いラベルほど右の位置に入れる
 const ctrl = controls.map((label, i) => ({
   label,
@@ -59,7 +59,7 @@ const ins = inputs.map((label, i) => ({ label, y: box.y + (box.h * (i + 1)) / (i
 const outs = outputs.map((label, i) => ({ label, y: box.y + (box.h * (i + 1)) / (outputs.length + 1) }));
 const fnLines = wrap(fn, 12);
 
-// ── 分解図（A0）：箱を階段のように並べ、前の機能の出力が次の機能の入力になる ──
+// ── 分解図(A0): 箱を階段のように並べ、前の機能の出力が次の機能の入力になる ──
 const sb = { w: 136, h: 64, gap: 48, dy: 84, left: 196 };
 const SW = sb.left + (steps?.length ?? 0) * sb.w + Math.max((steps?.length ?? 1) - 1, 0) * sb.gap + 196;
 const SH = 28 + Math.max((steps?.length ?? 1) - 1, 0) * sb.dy + sb.h + 24;
@@ -79,10 +79,10 @@ const accent = "var(--color-accent-strong)";
   number={number}
   title={title}
   caption={caption}
-  source="[IDEF0（FIPS PUB 183, 1993）](https://doi.org/10.6028/NIST.FIPS.183) の書き方にならって作図"
+  source="[IDEF0(FIPS PUB 183, 1993)](https://doi.org/10.6028/NIST.FIPS.183) の書き方にならって作図"
   scroll
 >
-  <p class="annotation mb-2 text-muted normal-case">全体図（A-0）：「{fn}」という機能</p>
+  <p class="annotation mb-2 text-muted normal-case">全体図(A-0): 「{fn}」という機能</p>
   <svg
     viewBox={`0 0 ${W} ${H}`}
     class="w-full"
@@ -159,22 +159,22 @@ const accent = "var(--color-accent-strong)";
   </svg>
   <ul class="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-muted">
     <li>
-      <span class="font-bold text-ink">左→</span> 入力（変えるもの）
+      <span class="font-bold text-ink">左→</span> 入力(変えるもの)
     </li>
     <li>
-      <span class="font-bold text-ink">→右</span> 出力（生まれるもの）
+      <span class="font-bold text-ink">→右</span> 出力(生まれるもの)
     </li>
     <li>
-      <span class="font-bold text-link">上↓</span> 制御（決まり・条件）
+      <span class="font-bold text-link">上↓</span> 制御(決まり・条件)
     </li>
     <li>
-      <span class="font-bold text-accent-strong">下↑</span> 機構（人・道具）
+      <span class="font-bold text-accent-strong">下↑</span> 機構(人・道具)
     </li>
   </ul>
 
   {stepBoxes.length > 0 && (
     <>
-      <p class="annotation mt-8 mb-2 text-muted normal-case">分解図（A0）：「{fn}」を、さらに細かい機能に分ける</p>
+      <p class="annotation mt-8 mb-2 text-muted normal-case">分解図(A0): 「{fn}」を、さらに細かい機能に分ける</p>
       <svg
         viewBox={`0 0 ${SW} ${SH}`}
         class="w-full"

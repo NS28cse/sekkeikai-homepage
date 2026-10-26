@@ -1,6 +1,6 @@
 ---
-// 名前（YAML の「type: figure」の name）から図のコンポーネントを選んで表示する。
-// 図を足すときは：figures/ にコンポーネントをつくる → src/lib/figures.ts に名前を足す → ここの map に登録する
+// 名前(YAML の「type: figure」の name)から図のコンポーネントを選んで表示する。
+// 図を足すときは: figures/ にコンポーネントをつくる → src/lib/figures.ts に名前を足す → ここの map に登録する
 import type { FigureName } from "../lib/figures";
 import DesignProcess from "./figures/DesignProcess.astro";
 import CostEscalation from "./figures/CostEscalation.astro";
@@ -43,7 +43,7 @@ import SteamEngineAxiomatic from "./figures/SteamEngineAxiomatic.astro";
 interface Props {
   name: FigureName;
   number?: number;
-  // true にすると番号・題・説明を出さない（トップページの章の中で使う。出典は出す）
+  // true にすると番号・題・説明を出さない(トップページの章の中で使う。出典は出す)
   compact?: boolean;
 }
 

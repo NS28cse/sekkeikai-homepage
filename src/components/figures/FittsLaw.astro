@@ -1,6 +1,6 @@
 ---
-// フィッツの法則を、スマートフォンの2つのボタンで比べる図（動かない版。体験できるデモは FittsDemo.astro）。
-// 難しさ（ID）＝ log2(距離 ÷ 大きさ ＋ 1)。押すのにかかる時間は、この難しさにほぼ比例して増える。
+// フィッツの法則を、スマートフォンの2つのボタンで比べる図(動かない版。体験できるデモは FittsDemo.astro)。
+// 難しさ(ID)= log2(距離 ÷ 大きさ + 1)。押すのにかかる時間は、この難しさにほぼ比例して増える。
 // 数字はこのファイルの中で計算しているので、距離や大きさを変えれば図も変わる。
 import FigureFrame from "./FigureFrame.astro";
 
@@ -9,16 +9,16 @@ interface Props {
   compact?: boolean;
 }
 
-// 1cm を何ピクセルで描くか（図の中の長さをそろえるため）
+// 1cm を何ピクセルで描くか(図の中の長さをそろえるため)
 const cm = 20;
 const cases = [
-  { label: "A：すみの小さなボタン", d: 9, w: 0.6, tx: 130, ty: 108 },
-  { label: "B：手元の大きなボタン", d: 4, w: 1.6, tx: 85, ty: 200 },
+  { label: "A: すみの小さなボタン", d: 9, w: 0.6, tx: 130, ty: 108 },
+  { label: "B: 手元の大きなボタン", d: 4, w: 1.6, tx: 85, ty: 200 },
 ].map((c) => ({ ...c, id: Math.log2(c.d / c.w + 1) }));
 const fmt = (n: number) => (Math.round(n * 10) / 10).toFixed(1);
 const ink = "var(--color-ink)";
 const muted = "var(--color-muted)";
-// 親指を置いている場所（画面の下のほう）
+// 親指を置いている場所(画面の下のほう)
 const start = { x: 85, y: 288 };
 ---
 
@@ -37,7 +37,7 @@ const start = { x: 85, y: 288 };
     aria-label={`フィッツの法則の比較。${cases.map((c) => `${c.label}は距離${c.d}cm、大きさ${c.w}cmで、難しさは${fmt(c.id)}`).join("。")}。`}
   >
     <text x="320" y="22" text-anchor="middle" font-size="16" font-weight="700" fill={ink}>
-      難しさ ＝ log₂（距離 ÷ 大きさ ＋ 1）
+      難しさ = log₂(距離 ÷ 大きさ + 1)
     </text>
     {cases.map((c, i) => {
       const ox = i * 320;

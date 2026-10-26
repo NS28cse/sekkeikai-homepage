@@ -1,6 +1,6 @@
-// 図（src/components/figures/）の名前の一覧。
-// 文章（YAML）の「type: figure」の name にはここにある名前だけを書ける。ほかの名前を書くとビルドが止まる。
-// 図を足すときは：figures/ にコンポーネントを作る → ここに名前を足す → src/components/Figure.astro に登録する
+// 図(src/components/figures/)の名前の一覧。
+// 文章(YAML)の「type: figure」の name にはここにある名前だけを書ける。他の名前を書くとビルドが止まる。
+// 図を足すときは: figures/ にコンポーネントを作る → ここに名前を足す → src/components/Figure.astro に登録する
 export const figureNames = [
   "design-process",
   "cost-escalation",
