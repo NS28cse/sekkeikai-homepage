@@ -1,2 +1,2 @@
 # sekkeikai-homepage
-設計会のホームページです。
+設計会のwebサイトヴィジュアル案を作るためのWorkspaceRepoです。
